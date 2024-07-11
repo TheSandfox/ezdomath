@@ -49,7 +49,7 @@ export function SubjectDetail() {
 		<SubjectScene>
 			{}
 			{controllerJSX}
-			<Suspense>
+			<Suspense fallback={null}>
 				{sceneJSX}
 			</Suspense>
 		</SubjectScene>
