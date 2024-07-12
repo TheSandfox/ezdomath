@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { subjects } from '/src/datas/subjects';
 import { SubjectScene } from './SubjectScene';
@@ -44,6 +44,10 @@ export function SubjectDetail() {
 			subjectState:subjectState
 		});
 	},[adjustJSX]);
+	//디버그용
+	useEffect(()=>{
+		console.log(subjectState);
+	},[subjectState])
 	//리턴JSX
 	return <>
 		<SubjectScene>
