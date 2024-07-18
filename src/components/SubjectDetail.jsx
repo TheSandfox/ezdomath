@@ -4,8 +4,8 @@ import { subjects } from '/src/datas/subjects';
 import { SubjectScene } from './SubjectScene';
 import React from 'react';
 
-export function SubjectDetail() {
-	const { subjectId } = useParams();
+export function SubjectDetail({subjectId}) {
+	// const { subjectId } = useParams();
 	const [subjectState,setSubjectState] = useState(null);
 	const [answer,setAnswer] = useState(null);
 	//핸들러
