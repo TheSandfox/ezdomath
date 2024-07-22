@@ -1,0 +1,156 @@
+/* 전체레이아웃 */
+#pageMy {
+	position: relative;
+	width: 100%;
+	/* min-height: calc( 
+		100dvh - 
+		var(--header-height) - 
+		var(--footer-height) 
+	); */
+	display: flex;
+	flex-direction: column;
+	min-height: 100dvh;
+	background-color: var(--color_white);
+	/* 컨텐츠영역 */
+	&>.mainContents {
+		height: 100%;
+		padding-top: 4rem;
+		padding-bottom: 8rem;
+		/* 모바일모드 */
+		@media screen and (max-width:800px) {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+		/* 이너박스 (좌우분할)*/
+		&>.innerbox {
+			width: 1440px;
+			display: flex;
+			margin: 0 auto;
+			gap: 2rem;
+			/* 정비례스케일링 */
+			@media screen and (min-width:1921px) {
+				width: calc( 100vw * (1440/1920));
+			}
+			/* 탭 */
+			@media screen and (max-width:1440px) {
+				width: 100%;
+				padding: 0 2rem;
+			}
+			/* 모바일 */
+			@media screen and (max-width:800px) {
+				padding: 0;
+				flex-direction: column;
+			}
+			/* 좌측(or상단) */
+			&>.first {
+				width: 15rem;
+				/* 탭 */
+				@media screen and (max-width:1440px) {
+					width: 14rem;
+				}
+				/* 모바일 */
+				@media screen and (max-width:800px) {
+					padding: 1rem;
+					background-color: var(--color_background_sub);
+					width: 100%;
+				}
+			}
+			/* 우측(or하단) */
+			&>.second {
+				flex: 1;
+				gap: 3rem;
+				display: flex;
+				flex-direction: column;
+				&>.contents {
+					display: flex;
+					flex-direction: column;
+					gap: 2rem;
+					/* 모바일 */
+					@media screen and (max-width:800px) {
+						padding: 0 1rem;
+					}
+				}
+
+			}
+		}
+	}
+}
+
+/* 상탭(탭) */
+#pageMy .myTabs {
+	display: none;
+	width: 100%;
+	/* 1440이내 */
+	@media screen and (max-width:1440px) {
+		display: flex;
+	}
+	@media screen and (max-width:800px) {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 1444;;
+	}
+	&>a {
+		flex: 1;
+		margin-left: -1px;
+	}
+}
+
+/* 상탭(데탑only) */
+#pageMy .myTabsDesktop {
+	display: flex;
+	/* 1024이내 */
+	@media screen and (max-width:1440px) {
+		display: none;
+	}
+	&>a {
+		flex: 1;
+		margin-left: -1px;
+	}
+}
+
+/* 탭 */
+.myTabButton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 0;
+	color: var(--color_darkest);
+	background-color: var(--color_background_sub);
+	border: 1px solid var(--color_border);
+	&>.icon {
+		aspect-ratio: 1;
+		width: 1rem;
+	}
+	&.disableIcon {
+		&>.icon {
+			display: none;
+		}
+	}
+	/* &>.text {
+
+	} */
+	&.active {
+		color: var(--color_sub);
+		background-color: var(--color_main);
+		border-color: rgba(0, 0, 0, 0);
+	}
+	@media screen and (max-width:800px) {
+		flex-direction: column;
+	}
+}
+
+/* 마이타이틀 */
+.myTitle {
+	width:100%;
+	padding-bottom:0.25rem;
+	border-bottom: 2px solid var(--color_black);
+	display: flex;
+	font-weight: bold;
+	&::before {
+		display: block;
+		content: '・';
+	}
+}

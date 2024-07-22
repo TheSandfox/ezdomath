@@ -1,0 +1,51 @@
+.myInfo {
+	/* 회원정보 뭉탱이 */
+	&>.table{
+		border-radius: 0.5rem;
+		border: 1px solid var(--color_border);
+		overflow: hidden;
+		&>table {
+			border-collapse: collapse;
+			border-style: hidden;
+			width: 100%;
+			& td {
+				border: 1px solid var(--color_border);
+				padding: 1rem;
+				&.label {
+					width: 8rem;
+					background-color: var(--color_background_sub);
+				}
+				@media screen and (max-width:1440px) {
+					padding: 0.75rem;
+				}
+			}
+			& .schoolRow {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+		}
+	}
+	/* 버튼두개(비번변경,로그아웃) */
+	&>.bottom {
+		display: flex;
+		gap: 1rem;
+		justify-content: flex-end;
+		@media screen and (max-width:800px) {
+			&>* {
+				flex:1;
+			}
+		}
+	}
+	/* 회탈영역 */
+	&>.unlink {
+		justify-content: flex-end;
+		display: flex;
+		text-decoration: underline;
+		color: var(--color_darkest);
+		&>p {
+			user-select: none;
+			cursor: pointer;
+		}
+	}
+}
