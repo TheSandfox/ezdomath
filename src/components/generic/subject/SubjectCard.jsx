@@ -1,16 +1,24 @@
 import './subjectcard.css';
 import { SUBJECTS } from '/src/datas/subjects';
 import { ACTS } from '/src/datas/acts';
-import { useMemo } from 'react';
-import { ButtonMedium } from '../Buttons';
+import { useContext, useMemo } from 'react';
+import { ButtonIcon, ButtonMedium } from '../Buttons';
 import { BsBookmarkStarFill } from 'react-icons/bs';
+import { FaRegEdit } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa6";
+import { RiCloseLargeFill } from "react-icons/ri";
+import { FaMinus } from "react-icons/fa6";
+import { userContext } from '../../../App';
 
 export function Bookmark({active,handleBookmark}) {
 	return <BsBookmarkStarFill className={`bookmark${active?' active':''}`} onClick={()=>{if(handleBookmark){handleBookmark.toggle()}}}>
 	</BsBookmarkStarFill>
 }
 
-export function SubjectCard({subjectId,type,bookmarkActive}) {
+export function SubjectCard({subjectId,type,achievement}) {
+	const { user } = useContext(userContext);
+	// subjectId로 subject가져오기
 	const subject = useMemo(()=>{
 		if (SUBJECTS[subjectId]) {
 			return SUBJECTS[subjectId];
@@ -18,15 +26,17 @@ export function SubjectCard({subjectId,type,bookmarkActive}) {
 			return null;
 		}
 	},[subjectId]);
+	// 단원데이터 가져오기
 	const act = useMemo(()=>{
 		if (subject) {
 			return ACTS[subject.actId];
 		} else {
-			return 0;
+			return null;
 		}
 	},[subject]);
 	const typeValue = !type?0:type
 	let jsx = <></>
+	let newClass = null;
 	switch (typeValue) {
 	case 0 :
 		// 북마크용
@@ -37,21 +47,51 @@ export function SubjectCard({subjectId,type,bookmarkActive}) {
 		break;
 	case 1 :
 		// 진척도용
+		jsx = <>
+			<div className='dateField'>
+				{achievement
+					?(JSON.parse(achievement.correct)
+						// 체크
+						?<FaCheck className='check'/>
+						// X
+						:<RiCloseLargeFill className='check'/>
+					)
+					// -
+					:<FaMinus className='check'/>
+				}
+				<div className='font_small'>
+					{achievement?achievement.date:'-'}
+				</div>
+			</div>
+			<div className='buttons'>
+				<ButtonIcon to={''} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>
+				<ButtonIcon to={''} icon={<FaChevronRight className={'icon'}/>}></ButtonIcon>
+			</div>
+		</>
+		if (!achievement) {
+			newClass = 'disabled';
+		} else {
+			if (JSON.parse(achievement.correct)) {
+				newClass = 'correct';
+			} else {
+				newClass = 'incorrect';
+			}
+		}
 		break;
 	case 2 :
 		break;
 	}
 	return <>
-		<div className='subjectCard'>
-			<Bookmark active={bookmarkActive} handleBookmark={null}/>
+		<div className={`subjectCard${newClass?' '+newClass:''}`}>
+			<Bookmark active={true} handleBookmark={null}/>
 			<div className='top'>
 				<div className='actName font_small'>
-					{act.name}
+					{act?act.name:''}
 				</div>
 				<div className='subjectName font_main'>
-					{subject.name}
+					{subject?subject.name:''}
 				</div>
-				<img src='/ezdomath/profile/dummy2.png' alt={subject.name}/>
+				<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
 			</div>
 			<div className={`bottom type${typeValue}`}>
 				{jsx}

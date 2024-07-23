@@ -1,14 +1,16 @@
 import './myinfo.css';
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { MyTitle } from "./PageMy"
 import * as User from '/src/utils/User'
 import { ButtonLarge, ButtonSmall, ButtonMedium } from '/src/components/generic/Buttons';
+import { userContext } from '../../../App';
 
 export function Left({}) {
 	return <></>
 }
 
-export function Main({handleTabIndex,index,user}) {
+export function Main({handleTabIndex,index}) {
+	const { user } = useContext(userContext);
 	useEffect(()=>{
 		handleTabIndex.set(index);
 	},[])
@@ -20,20 +22,20 @@ export function Main({handleTabIndex,index,user}) {
 			<tr>
 				<td className='label'>이름</td>
 				<td>
-					{user.name}
+					{user?user.name:''}
 				</td>
 			</tr>
 			<tr>
 				<td className='label'>회원유형</td>
 				<td>
-					{User.getUserTypeName(parseInt(user.userType))}
+					{user?User.getUserTypeName(parseInt(user.userTypeId)):''}
 				</td>
 			</tr>
 			<tr>
 				<td className='label'>학교</td>
 				<td>
 					<div className='schoolRow'>
-					{user.schoolName}
+					{user?user.schoolName:''}
 						<ButtonSmall>변경하기</ButtonSmall>
 					</div>
 				</td>
@@ -41,13 +43,13 @@ export function Main({handleTabIndex,index,user}) {
 			<tr>
 				<td className='label'>식별코드</td>
 				<td>
-					{User.getUserIdString(user.userId)}
+					{user?User.getUserIdString(user.userId):''}
 				</td>
 			</tr>
 			<tr>
 				<td className='label'>로그인ID</td>
 				<td>
-					{user.stringId}
+					{user?user.stringId:''}
 				</td>
 			</tr>
 		</tbody></table></div>

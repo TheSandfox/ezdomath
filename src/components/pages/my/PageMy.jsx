@@ -16,13 +16,14 @@ import { Link, Route, Routes } from 'react-router-dom';
 import { ProfileCard } from "./ProfileCard";
 import * as MyInfo from './MyInfo';
 import * as MyBookmark from './MyBookmark';
-import * as MyAchieve from './MyAchieve';
+import * as MyAchievement from './MyAchievement';
 import * as MyCommunity from './MyCommunity';
 import * as MyQNA from './MyQNA';
 
 //utils
 import * as User from '/src/utils/User';
 import { userContext } from '../../../App';
+import { ButtonTab } from '../../generic/Buttons';
 
 // 수평제목
 export function MyTitle({title}) {
@@ -34,13 +35,12 @@ export function MyTitle({title}) {
 }
 
 // 탭버튼
-function MyTabButton({to,title,icon,active}) {
-	return <Link to={to} className={`myTabButton${active?' active':''}`}>
-		{icon}
+export function MyTabButton({to,title,icon,active}) {
+	return <ButtonTab to={to} icon={icon} className={active?'active':''}>
 		<div className='title font_main'>
 			{title}
 		</div>
-	</Link>
+	</ButtonTab>
 }
 
 // 탭버튼컨테이너
@@ -52,12 +52,12 @@ function MyTabs({flag,tabIndex}) {
 			title={'회원정보'} active={tabIndex===0}
 		/>
 		<MyTabButton 
-			to={'/my/bookmark'} 
+			to={'/my/bookmark/all'} 
 			icon={<BsBookmarkStarFill className='icon'/>} 
 			title={'북마크'} active={tabIndex===1}
 		/>
 		<MyTabButton 
-			to={'/my/achieve'} 
+			to={'/my/achievement/0'} 
 			icon={<BsBarChartFill className='icon'/>} 
 			title={'진척도'} active={tabIndex===2}
 		/>
@@ -97,21 +97,25 @@ export function PageMy({}) {
 		<div className='mainContents'>
 			{/* 이너박스(좌우분할) */}
 			<div className='innerbox'>
+				{/* 좌측 */}
 				<div className='first'>
 					<ProfileCard user={user}/>
 					{/* 라우트별 컨텐츠 */}
 					<Routes>
-						<Route path='info' element={<MyInfo.Left/>} handleTrigger={handleTrigger}/>
+						<Route path='info' element={<MyInfo.Left handleTrigger={handleTrigger}/>}/>
+						<Route path='bookmark/:actId' element={<MyBookmark.Left handleTrigger={handleTrigger}/>}/>
+						<Route path='achievement/:actId' element={<MyAchievement.Left handleTrigger={handleTrigger}/>}/>
 					</Routes>
 				</div>
+				{/* 우측 */}
 				<div className='second'>
 					{/* 상탭(데탑only) */}
 					<MyTabs flag={false} tabIndex={tabIndex}/>
 					{/* 라우트별 컨텐츠 */}
 					<Routes>
 						<Route path='info' element={<MyInfo.Main handleTabIndex={handleTabIndex} index={0} user={user}/>}/>
-						<Route path='bookmark' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1} trigger={trigger}/>}/>
-						<Route path='achieve' element={<MyAchieve.Main handleTabIndex={handleTabIndex} index={2}/>}/>
+						<Route path='bookmark/:actId' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1} trigger={trigger}/>}/>
+						<Route path='achievement/:actId' element={<MyAchievement.Main handleTabIndex={handleTabIndex} index={2} trigger={trigger}/>}/>
 						<Route path='community' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3}/>}/>
 						<Route path='qna' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
 					</Routes>

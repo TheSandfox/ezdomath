@@ -432,6 +432,10 @@ a {
     border-radius: 0 0 1rem 1rem;
     height: 7.5rem;
 }
+.discorver_wave,.spotlight_wave{
+    display: block;
+    width: 100%;
+}
 
 @media screen and (max-width: 1140px) {
     .card_footer>.card_check:first-child {
@@ -442,7 +446,7 @@ a {
     }
 }
 
-/* 화면 너비가 최대 1024px일 때 */
+/* 화면 너비가 최대 1440px일 때 */
 @media screen and (max-width: 1440px) {
     .font_small {
         font-size: 0.875rem;
@@ -487,7 +491,7 @@ a {
     }
 }
 
-/* 화면 너비가 최대 480px일 때 */
+/* 화면 너비가 최대 800px일 때 */
 @media (max-width:800px) {
     .font_small {
         font-size: 0.875rem;
