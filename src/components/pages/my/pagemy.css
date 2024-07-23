@@ -44,9 +44,14 @@
 			/* 좌측(or상단) */
 			&>.first {
 				width: 15rem;
+				min-width: 15rem;
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
 				/* 탭 */
 				@media screen and (max-width:1440px) {
 					width: 14rem;
+					min-width: 14rem;
 				}
 				/* 모바일 */
 				@media screen and (max-width:800px) {
@@ -108,38 +113,6 @@
 	&>a {
 		flex: 1;
 		margin-left: -1px;
-	}
-}
-
-/* 탭 */
-.myTabButton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 0.5rem;
-	padding: 0.75rem 0;
-	color: var(--color_darkest);
-	background-color: var(--color_background_sub);
-	border: 1px solid var(--color_border);
-	&>.icon {
-		aspect-ratio: 1;
-		width: 1rem;
-	}
-	&.disableIcon {
-		&>.icon {
-			display: none;
-		}
-	}
-	/* &>.text {
-
-	} */
-	&.active {
-		color: var(--color_sub);
-		background-color: var(--color_main);
-		border-color: rgba(0, 0, 0, 0);
-	}
-	@media screen and (max-width:800px) {
-		flex-direction: column;
 	}
 }
 

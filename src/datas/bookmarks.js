@@ -1,38 +1,45 @@
-const bookmarkDefault = [
-	{
-		userId:123,
-		subjectId:0
-	},
-	{
-		userId:123,
-		subjectId:1
-	},
-	{
-		userId:123,
-		subjectId:2
-	}
-]
+const bookmarksDefault = localStorage.getItem('bookmarks')
+	?localStorage.getItem('bookmarks')
+	:[
+		{
+			userId:0,
+			subjectId:0
+		},
+		{
+			userId:0,
+			subjectId:1
+		},
+		{
+			userId:0,
+			subjectId:2
+		}
+	];
 
-const bookmarkReducer = (state,action)=>{
+const bookmarksReducer = (state,action)=>{
 	let { userId, subjectId } = action;
+	let newState;
 	switch (action.type) {
 	case 'add':
-		return [
+		newState = [
 			...state,
 			{
 				userId,
 				subjectId
 			}
-		]
+		];
+		localStorage.setItem('bookmarks',newState);
+		return newState;
 	case 'remove':
-		return state.filter((item)=>{
+		newState = state.filter((item)=>{
 			return (parseInt(item.userId)!==parseInt(userId))
 				&& (parseInt(item.subjectId)!==parseInt(subjectId))
-		})
+		});
+		localStorage.setItem('bookmarks',newState);
+		return newState;
 	}
 }
 
 export {
-	bookmarkDefault,
-	bookmarkReducer,
+	bookmarksDefault,
+	bookmarksReducer,
 }

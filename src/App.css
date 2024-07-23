@@ -442,7 +442,7 @@ a {
     }
 }
 
-/* 화면 너비가 최대 1024px일 때 */
+/* 화면 너비가 최대 1440px일 때 */
 @media screen and (max-width: 1440px) {
     .font_small {
         font-size: 0.875rem;
@@ -487,7 +487,7 @@ a {
     }
 }
 
-/* 화면 너비가 최대 480px일 때 */
+/* 화면 너비가 최대 800px일 때 */
 @media (max-width:800px) {
     .font_small {
         font-size: 0.875rem;

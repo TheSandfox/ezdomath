@@ -3,37 +3,47 @@ import { MyTitle } from "./PageMy"
 import { SubjectCard } from "../../generic/subject/SubjectCard"
 import './mybookmark.css';
 import { userContext } from "../../../App";
-import { bookmarkDefault, bookmarkReducer } from "../../../datas/bookmarks";
 import { SUBJECTS } from "../../../datas/subjects";
+import { ButtonTab } from "../../generic/Buttons";
+import { useParams } from "react-router-dom";
 
 export function Left({handleTrigger}) {
-	const [actIndex,setActIndex] = useState(-1);
+	const params = useParams();
+	const actId = params.actId?params.actId:'all';
 	useEffect(()=>{
+		let newActId = actId?actId:'all';
 		handleTrigger.trigger({
 			target:'bookmark',
-			actIndex:actIndex
+			actId:newActId
 		})
-	},[actIndex]);
-	return <>
-	</>
+	},[actId]);
+	return <div className="myBookmarkActSelector">
+		<MyTitle title={'단원별 분류'}/>
+		<div className="tabs">
+			<ButtonTab icon={<></>} to={'/my/bookmark/all'} active={actId==='all'}>전체</ButtonTab>
+			<ButtonTab icon={<></>} to={'/my/bookmark/0'} active={parseInt(actId)===0}>1단원</ButtonTab>
+			<ButtonTab icon={<></>} to={'/my/bookmark/1'} active={parseInt(actId)===1}>2단원</ButtonTab>
+			<ButtonTab icon={<></>} to={'/my/bookmark/2'} active={parseInt(actId)===2}>3단원</ButtonTab>
+			<ButtonTab icon={<></>} to={'/my/bookmark/3'} active={parseInt(actId)===3}>4단원</ButtonTab>
+		</div>
+	</div>
 }
 
 export function Main({handleTabIndex,index,trigger}) {
-	const [ bookmark,dispatchBookmark ] = useReducer(bookmarkReducer,bookmarkDefault);
-	const { user } = useContext(userContext);
+	const { user, bookmarks, dispatchBookmarks } = useContext(userContext);
 	const cards = useMemo(()=>{
 		if (!user) {
 			return [];
 		}
-		return bookmark
+		return bookmarks
 		.filter((item)=>{
 			// 북마크에 존재
 			return parseInt(item.userId) === parseInt(user.userId);
 		})
 		.filter((item)=>{
 			// 액트인덱스 검증
-			return (!trigger.actIndex||trigger.actIndex<0) 
-				|| parseInt(SUBJECTS[item.subjectId].actId) === parseInt(trigger.actIndex);
+			return (!trigger.actId||trigger.actId==='all') 
+				|| parseInt(SUBJECTS[item.subjectId].actId) === parseInt(trigger.actId);
 		})
 		.map((item)=>{
 			return item.subjectId;
@@ -46,7 +56,7 @@ export function Main({handleTabIndex,index,trigger}) {
 		<MyTitle title={'북마크'}/>
 		<div className="myBookmarkCardContainer">
 			{cards.map((subjectId)=>{
-				return <SubjectCard key={subjectId} type={0} subjectId={subjectId} bookmarkActive={true}/>
+				return <SubjectCard key={subjectId} type={0} subjectId={subjectId}/>
 			})}
 		</div>
 	</div>
