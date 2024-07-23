@@ -9,7 +9,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
 
 //hooks
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
 //external components
@@ -22,6 +22,7 @@ import * as MyQNA from './MyQNA';
 
 //utils
 import * as User from '/src/utils/User';
+import { userContext } from '../../../App';
 
 // 수평제목
 export function MyTitle({title}) {
@@ -75,11 +76,17 @@ function MyTabs({flag,tabIndex}) {
 
 // 페이지
 export function PageMy({}) {
-	const [user,setUser] = useState(User.getUser());
+	const { user } = useContext(userContext);
 	const [tabIndex,setTabIndex] = useState(0);
 	const handleTabIndex = {
 		set:(newVal)=>{
 			setTabIndex(newVal);
+		}
+	}
+	const [trigger,setTrigger] = useState({});
+	const handleTrigger = {
+		trigger:(newVal)=>{
+			setTrigger(newVal);
 		}
 	}
 	return <div id={'pageMy'}>
@@ -94,7 +101,7 @@ export function PageMy({}) {
 					<ProfileCard user={user}/>
 					{/* 라우트별 컨텐츠 */}
 					<Routes>
-						<Route path='info' element={<MyInfo.Left/>}/>
+						<Route path='info' element={<MyInfo.Left/>} handleTrigger={handleTrigger}/>
 					</Routes>
 				</div>
 				<div className='second'>
@@ -103,7 +110,7 @@ export function PageMy({}) {
 					{/* 라우트별 컨텐츠 */}
 					<Routes>
 						<Route path='info' element={<MyInfo.Main handleTabIndex={handleTabIndex} index={0} user={user}/>}/>
-						<Route path='bookmark' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1}/>}/>
+						<Route path='bookmark' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1} trigger={trigger}/>}/>
 						<Route path='achieve' element={<MyAchieve.Main handleTabIndex={handleTabIndex} index={2}/>}/>
 						<Route path='community' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3}/>}/>
 						<Route path='qna' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>

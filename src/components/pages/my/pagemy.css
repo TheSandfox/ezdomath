@@ -53,6 +53,7 @@
 					padding: 1rem;
 					background-color: var(--color_background_sub);
 					width: 100%;
+					box-shadow: var(--shadow_sticky_down);
 				}
 			}
 			/* 우측(or하단) */

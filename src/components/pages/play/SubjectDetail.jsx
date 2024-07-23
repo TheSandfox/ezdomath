@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { subjects } from '/src/datas/subjects';
+import { SUBJECTS } from '/src/datas/subjects';
 import { SubjectScene } from './SubjectScene';
 import React from 'react';
 
@@ -21,16 +21,16 @@ export function SubjectDetail({subjectId}) {
 	}
 	//컨트롤러
 	const controllerJSX = useMemo(()=>{
-		if (!subjects[subjectId]) {return <></>;}
-		return React.cloneElement(subjects[subjectId].controller,{
+		if (!SUBJECTS[subjectId]) {return <></>;}
+		return React.cloneElement(SUBJECTS[subjectId].controller,{
 			handleSubjectState:handleSubjectState
 		});
 	},[subjectId,handleSubjectState]);
 	//정답계산로직
 	const adjustJSX = useMemo(()=>{
-		if (!subjects[subjectId]) {return <></>;}
+		if (!SUBJECTS[subjectId]) {return <></>;}
 		if(subjectState===null) {return <></>;}
-		return React.cloneElement(subjects[subjectId].adjust,{
+		return React.cloneElement(SUBJECTS[subjectId].adjust,{
 			subjectState:subjectState,
 			answer:answer,
 			handleAnswer:handleAnswer
@@ -38,9 +38,9 @@ export function SubjectDetail({subjectId}) {
 	},[controllerJSX])
 	//Scene
 	const sceneJSX = useMemo(()=>{
-		if (!subjects[subjectId]) {return <></>;}
+		if (!SUBJECTS[subjectId]) {return <></>;}
 		if(subjectState===null) {return <></>;}
-		return React.cloneElement(subjects[subjectId].scene,{
+		return React.cloneElement(SUBJECTS[subjectId].scene,{
 			subjectState:subjectState
 		});
 	},[adjustJSX]);

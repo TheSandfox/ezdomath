@@ -8,7 +8,7 @@
 
 :root {
     --color_darkest: #1A3659;
-    --color_dark: #0C576C;
+    --color_dark: #4E42CA;
     --color_main: #67B3EA;
     --color_sub: #FFEF26;
     --color_background: #FEF8ED;
@@ -26,6 +26,10 @@
     --shadow_sticky_down: 0 1rem 1rem rgba(0, 0, 0, 0.15);
     --shadow_sticky_up: 0 -1rem 1rem rgba(0, 0, 0, 0.15);
     --font_family_sans: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	@media screen and (min-width:1921px) {
+		font-size: calc( 100dvw * (16 / 1920) );
+	}
 }
 
 body {
