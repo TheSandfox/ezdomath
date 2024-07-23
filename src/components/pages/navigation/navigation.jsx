@@ -108,7 +108,7 @@ export default function navigation() {
             <p>안녕하세요 000님</p>
             {/* 마이페이지는 로그인 된 유저의 마이페이지로 이동되게 라우터 설정 */}
             <div className="button_wrapper">
-              <div className="small_btn font_small">마이페이지</div>
+              <ButtonMedium className="small_btn font_small">마이페이지</ButtonMedium>
             </div>
           </div>
           <ButtonSmall className="close" onClick={onCloseMyPage}>
@@ -171,16 +171,16 @@ export default function navigation() {
         className={isMenuPageVisible ? "menu_page flex" : "menu_page hidden"}
       >
         <div className="close_wrap">
+          <ButtonSmall onClick={onCloseMenuPage} className="close">
           <img
-            className="close"
             src="ezdomath/public/img/Multiply.webp"
             alt="닫기 버튼"
-            onClick={onCloseMenuPage}
           />
+          </ButtonSmall>
         </div>
         <div className="login_wrap">
           <div className="button_wrapper">
-            <div className="small_btn font_small Login">로그인</div>
+            <ButtonMedium className="small_btn font_small Login">로그인</ButtonMedium>
             <div className="Sign_up">회원가입</div>
           </div>
         </div>

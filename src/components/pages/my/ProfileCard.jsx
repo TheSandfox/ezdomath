@@ -8,7 +8,7 @@ export function ProfileCard({user}) {
 			</div>
 			<div className='bottom'>
 				<div className='font_main'>
-					{user.name+' #'+String(user.userId)}
+					{user?(user.name+' #'+String(user.userId)):''}
 				</div>
 			</div>
 		</div>
