@@ -1,6 +1,16 @@
 .page-intro {
     width: 100%;
-    /* margin: 0 auto; */
+    background-color: var(--color_background);
+}
+
+.intro_100_white {
+    width: 100%;
+    background-color: white;
+}
+
+.intro_basic_font {
+    font-size: 16px;
+    color: #0C576C;
 }
 
 .intro_top_banner {
@@ -11,7 +21,7 @@
     align-items: center;
 }
 
-.intro_content_inner {
+.intro_content_inner{
     max-width: 1190px;
     margin: 0 auto;
 }
@@ -21,11 +31,12 @@
     justify-content: space-between;
 }
 
-.intro_Headline_b{
+.intro_Headline_b {
     font-size: 40px;
     color: var(--color_darkest);
 }
-.intro_small_p{
+
+.intro_small_p {
     color: var(--color_darkest);
     margin: 20px 0 45px 0;
 }
@@ -36,7 +47,8 @@
     gap: 20px;
 }
 
-.intro_buttons button {
+.intro_buttons button,
+.intro_two_button button {
     width: 233px;
     height: 50px;
     font-size: 18px;
@@ -45,13 +57,15 @@
     color: #fff;
     border-radius: 5px;
 }
-.intro_buttons button:hover {
+
+.intro_buttons button:hover,
+.intro_two_button button:hover {
     background-color: #075C67;
 }
 
 
 /* svg 애니메이션 */
-.svg_animation{
+.svg_animation {
     width: 493px;
     height: auto;
     background-image: url(/ezdomath/public/img/svganim.svg);
@@ -103,7 +117,259 @@
     margin: 0 10px;
 }
 
-@media screen and (max-width: 480px) {
+/* 여기부터 두번째 섹션 */
+
+.intro_two_wrap {
+    padding: 65px 0 65px 0;
+    background-color: var(--color_background);
+}
+
+.intro_two_content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1190px;
+    padding: 65px 0 65px 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.intro_two_headline {
+    font-size: 30px;
+    color: #0C576C;
+    margin-bottom: 60px;
+}
+
+.intro_two_item_wrap {
+    justify-content: space-between;
+}
+
+.intro_box {
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.intro_item1 {
+    background-image: url(/img/intro_item1.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+}
+
+.intro_item2 {
+    background-image: url(/img/intro_item2.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+}
+
+.intro_item3 {
+    background-image: url(/img/intro_item3.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+}
+
+.intro_two_colorbox {
+    width: 100%;
+    height: 325px;
+    background-image: url(/img/introColorBox1.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro_two_colorbox_inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.colorbox_little_font {
+    font-size: 13px;
+    color: var(--color_subtitle);
+    margin-bottom: 24px;
+}
+
+.colorbox_big_font {
+    font-size: 24px;
+    color: var(--color_dark)
+}
+.intro_list_top{
+    margin: 72px 0 80px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.intro_list_top_p{
+    font-size: 30px;
+    color: var(--color_darkest);
+}
+.intro_list_wrap {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro_list_box {
+    display: flex;
+    justify-content: space-between;
+    width: 666px;
+    margin-bottom: 170px
+}
+.intro_list_box_revers {
+    display: flex;
+    justify-content: space-between;
+    width: 666px;
+    margin-bottom: 170px;
+    flex-direction: row-reverse;
+}
+
+.intro_list_imagebox {
+    width: 243px;
+    height: 243px;
+}
+
+.intro_list_box_left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.intro_list_box_small_p{
+    font-size: 13px;
+    color: var(--color_darkest);
+}
+.intro_list_box_title_p{
+    font-size: 30px;
+    color: var(--color_darkest);
+    margin-bottom: 30px;
+}
+.intro_list_box_detail_p{
+    position: relative;
+    font-size: 16px;
+    color: var(--color_darkest);
+    margin-left: 30px;
+}
+.intro_list_box_detail_p::after{
+    height: 100%;
+    width: 4px;
+    display: block;
+    background: #8298ed;
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 0px;
+}
+
+.intro_list_item1,
+.intro_list_item2,
+.intro_list_item3,
+.intro_list_item4 {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.intro_list_item1{
+    background-image: url(/img/intro_list_item1.png);
+}
+.intro_list_item2{
+    background-image: url(/img/intro_list_item2.png);
+}
+.intro_list_item3{
+    background-image: url(/img/intro_list_item3.png);
+}
+.intro_list_item4{
+    background-image: url(/img/intro_list_item4.png);
+}
+.intro_list_box_link{
+    font-size: 16px;
+    color: #008080;
+}
+
+/* 여기서부터 반응형 */
+@media screen and (max-width: 1440px) {
+    .intro_message {
+        justify-content: space-around;
+        padding: 35px 15px 35px 15px;
+    }
+
+    .intro_Headline_b {
+        font-size: 32px;
+    }
+
+    .intro_two_colorbox {
+        width: 545px;
+        height: 500px;
+        background-image: url(/img/introColorBox2.webp);
+        background-size: cover;
+    }
+
+    .intro_box {
+        width: 326px;
+    }
+
+    .svg_animation {
+        width: 350px
+    }
+    .intro_small_p{
+        font-size: 14px;
+    }
+    .intro_buttons button,
+    .intro_two_button button {
+        width: 200px;
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .intro_message {
+        flex-direction: column-reverse;
+        padding: 65px 15px 65px 15px;
+    }
+
+    .intro_Headline_b {
+        margin-top: 24px;
+        font-size: 24px;
+    }
+
+    .intro_mobie_flex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .intro_small_p {
+        font-size: 14px;
+        margin: 20px 20px 45px 20px;
+    }
+
+    .svg_animation_wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .svg_animation {
+        max-width: 300px;
+    }
+
     .intro_top_banner {
         height: 64px;
     }
@@ -123,5 +389,28 @@
 
     .intro_footer {
         flex-direction: column;
+    }
+
+    .intro_two_headline {
+        font-size: 18px;
+    }
+
+    .intro_two_item_wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .intro_two_content {
+        padding: 30px 0 30px 0;
+    }
+
+    .intro_two_wrap {
+        padding: 30px 0 30px 0;
+    }
+
+    .intro_two_colorbox {
+        width: 300px;
+        height: 450px;
+        background-image: url(/ezdomath/img/introColorBox3.webp);
     }
 }
