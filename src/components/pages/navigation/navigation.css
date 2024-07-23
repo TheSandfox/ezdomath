@@ -1,0 +1,346 @@
+/* px 단위 전부 rem으로 치환할 것 */
+
+* {
+    list-style: none;
+    text-decoration: none;
+}
+
+.navi_bar {
+    width: 100%;
+    height: 4.38em;
+    border-bottom: 1px solid var(--color_gray);
+    justify-content: space-between;
+    padding: 0.63em 5em;
+    position: fixed;
+    z-index: 10000;
+    background-color: var(--color_white);
+}
+
+.navi_bar>ul {
+    align-items: center;
+}
+
+.navi_bar>.navi_left_cont {
+    gap: 3.5em;
+}
+
+.navi_bar>.navi_left_cont .logo_btn{
+    border: none;
+    background-color: transparent;
+}
+
+.navi_bar>.navi_left_cont>li>.button_wrapper>.small_btn {
+    width: 6.25em;
+    height: 2.19em;
+    line-height: 1.1rem;
+    border: 2px solid var(--color_main);
+}
+
+.navi_bar>.navi_left_cont>li>.button_wrapper>.small_btn:hover {
+    background-color: var(--color_main);
+    color: var(--color_white);
+}
+
+.navi_bar>.navi_right_cont {
+    gap: 1.75em;
+    position: relative;
+}
+
+.navi_bar>.navi_right_cont>li:nth-child(3) {
+    display: none;
+}
+
+.navi_bar .user_btn {
+    width: 3.75em;
+    height: 2.19em;
+    border: 2px solid var(--color_main);
+    border-radius: 1.25em;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.navi_bar .Alarm_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navi_bar .Alarm_wrap>.Alarm_active {
+    content: '';
+    display: inline-block;
+    width: 0.25em;
+    height: 0.25em;
+    background-color: var(--color_sub);
+    border-radius: 50%;
+    position: absolute;
+    top: 0.31em;
+    right: 0.63em;
+}
+
+.navi_bar .User_wrap>.User_profile {
+    width: 1.88em;
+    height: 1.56em;
+}
+
+.navi_bar .User_wrap>.Up_arrow {
+    width: 0.94em;
+    height: 0.94em;
+    margin-right: 0.31em;
+}
+
+.navi_bar .User_wrap:hover {}
+
+.navi_bar .User_wrap:hover>.Up_arrow {
+    transform: translateY(3px);
+    transition: 0.3s ease-in-out;
+}
+
+.Total_menu_wrap {
+    padding: 0.63em 0;
+    position: relative;
+}
+
+/* -------------------------마이페이지------------------------------ */
+
+.myPage {
+    max-width: 30em;
+    width: 25.63em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color_darkest);
+    border-radius: 1.25em;
+    position: fixed;
+    top: 5.25em;
+    right: 5em;
+    gap: 1.75em;
+    padding: 1.25em 0;
+    background-color: var(--color_white);
+    z-index: 100;
+}
+
+.myPage>.User_info_wrap,
+.myPage>.User_info_wrap>.User_info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.myPage>.User_info_wrap>.User_info>p {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--color_darkest);
+}
+
+.myPage>.User_info_wrap>.User_info>.user_profile {
+    width: 6.25em;
+    height: 6.25em;
+}
+
+.myPage>.User_info_wrap>.User_info>.button_wrapper>.small_btn {
+    width: 100%;
+    border: 2px solid var(--color_main);
+    font-weight: bold;
+    margin-top: 0.88em;
+}
+
+.myPage>.User_info_wrap>.User_info>.button_wrapper>.small_btn:hover {
+    background-color: var(--color_main);
+    color: var(--color_white);
+}
+
+.myPage>.User_info_wrap>.close {
+    position: absolute;
+    top: -0.25em;
+    right: -5.25em;
+    border: none;
+    color: transparent;
+}
+
+.accordion_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75em;
+}
+
+.accordion_menu {
+    width: 19.38em;
+    height: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accordion_menu>.accordion_arrow {
+    width: 1.25em;
+    height: 1.25em;
+    transform: rotate(-90deg);
+}
+
+.User_etc {
+    width: 19.38em;
+    justify-content: flex-end;
+    gap: 1.75em;
+}
+
+/* -------------------------- 전체메뉴 페이지 ------------------------ */
+
+.menu_page {
+    max-width: 600px;
+    width: 100%;
+    position: fixed;
+    top: 4.38em; left: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color_darkest);
+    border-radius: 0 0 20px 20px;
+    padding: 1.75em 0 1.75em;
+    gap: 28px;
+    background-color: var(--color_white);
+    z-index: 100;
+}
+
+.menu_page>.close_wrap{
+    width: 23.75em;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+    margin-right: 50px;
+}
+
+.menu_page>.close_wrap>.close{
+    border: none;
+    color: transparent;
+}
+
+.menu_page>.login_wrap .Sign_up{
+    color: var(--color_main);
+}
+
+.menu_page>.login_wrap .small_btn{
+    width: 23.75em; height: 2.5em;
+    font-weight: bold;
+    border: 2px solid var(--color_main);
+}
+
+.menu_page>.login_wrap .small_btn:hover{
+    background-color: var(--color_main);
+    color: var(--color_white);
+}
+
+.menu_page>.page_wrap{
+    text-align: center;
+}
+
+.menu_page>.page_wrap>.page_btn{
+    display: flex;
+    flex-direction: column;
+    gap: 1.75em;
+}
+
+.menu_page>.page_wrap>.page_btn>.accordion_menu{
+    width: 23.75em;
+}
+
+.menu_page>.User_etc{
+    width: 23.75em;
+    margin-top: 14px;
+}
+
+
+/* --------------- */
+
+.hidden {
+    display: none;
+}
+
+/* --------------- */
+
+.bug_report,
+.logout{
+    font-size: 0.75em;
+}
+
+/* ------------------------- 반응형 --------------------- */
+
+@media screen and (max-width : 800px) {
+    .navi_bar {
+        padding: 0.63em 20px;
+    }
+
+    .navi_bar>.navi_left_cont {
+        gap: 1.75em;
+    }
+
+    .myPage{
+        right: 20px;
+    }
+}
+
+@media screen and (max-width : 600px) {
+    .navi_bar>.navi_left_cont>li:not(:first-child) {
+        display: none;
+    }
+
+    .navi_bar>.navi_right_cont>li:nth-child(1) {
+        display: none;
+    }
+
+    .navi_bar>.navi_right_cont>li:nth-child(3) {
+        display: block;
+    }
+}
+
+@media screen and (max-width : 480px) {
+    .myPage{
+        width: 100%;
+        top: 4.38em; right: 0;
+        border-radius: 0 0 20px 20px;
+    }
+}
+
+@media screen and (max-width : 400px) {
+    .menu_page>.login_wrap .small_btn{
+        width: 21.25em;
+    }
+    .menu_page>.page_wrap>.page_btn>.accordion_menu{
+        width: 19.38em;
+    }
+    .menu_page>.User_etc{
+        width: 19.38em;
+    }
+}
+
+@media screen and (max-width : 360px) {
+    .myPage>.User_info_wrap>.close {
+        right: -2.25em;
+    }
+    .accordion_menu {
+        width: 12.5em;
+    }
+    .User_etc {
+        width: 12.5em;
+    }
+
+    .menu_page>.close_wrap{
+        width: 19.38em;
+    }
+    .menu_page>.login_wrap .small_btn{
+        width: 16.25em;
+    }
+    .menu_page>.page_wrap>.page_btn>.accordion_menu{
+        width: 12.5em;
+    }
+    .menu_page>.User_etc{
+        width: 12.5em;
+    }
+}
+
+@media screen and (max-width : 300px) {
+    .navi_bar>.navi_right_cont {
+        gap: 1.25em;
+    }
+}

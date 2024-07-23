@@ -13,7 +13,7 @@
     --color_sub: #FFEF26;
     --color_background: #FEF8ED;
     --color_background_sub: #F8FAFF;
-    --color_subtitle: #F16D36;
+    --color_subtitle: #FF8900;
     --color_black: #252525;
     --color_gray: #CCC;
     --color_white: #FAFAFA;
@@ -172,7 +172,7 @@ a {
 .large_btn,
 .medium_btn,
 .small_btn {
-    /* width: 20rem; */
+    width: 320px;
     color: var(--color_main);
     text-align: center;
     border-radius: 0.3125rem;

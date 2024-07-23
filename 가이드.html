@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Example</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+
+<body>
+    <!-- 공용 버튼 -->
+    <div class="button_wrapper">
+        <div class="tab_btn font_main flex" onclick="toggleActive(this)">
+            <div class="tap_icon">📱</div>
+            <div>탭버튼</div>
+        </div>
+        <div class="large_btn font_main" onclick="toggleActive(this)">공용버튼대형(데탑)</div>
+        <div class="medium_btn font_small" onclick="toggleActive(this)">공용버튼소형(데탑)</div>
+        <div class="small_btn font_small" onclick="toggleActive(this)">공용버튼소형(데탑)</div>
+
+        <!-- 드롭다운 대형 -->
+        <div class="dropdown">
+            <div class="dropdown_btn font_main flex" onclick="toggleDropdown(this)">
+                드롭다운대형(데탑)
+                <span class="chevron"></span>
+            </div>
+            <div class="dropdown_content" id="dropdown_content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+
+        <!-- 드롭다운 소형 -->
+        <div class="dropdown">
+            <div class="dropdown_btn_small font_small flex" onclick="toggleDropdown(this)">
+                드롭다운소형(데탑)
+                <span class="chevron"></span>
+            </div>
+            <div class="dropdown_content" id="dropdown_content_small">
+                <a href="#" class="font_small">Link 1</a>
+                <a href="#" class="font_small">Link 2</a>
+                <a href="#" class="font_small">Link 3</a>
+            </div>
+        </div>
+
+        <!-- 진척도 버튼 -->
+        <div class="progress_btn font_main" onclick="toggleActive(this)">
+            <div class="progress_title">
+                <span>#01: 차시이름</span>
+                <span>0/24</span>
+            </div>
+            <div class="progress_bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+        <div class="progress_btn active font_main" onclick="toggleActive(this)">
+            <div class="progress_title">
+                <span>#02: 차시이름</span>
+                <span>24/24</span>
+            </div>
+            <div class="progress_bar">
+                <div class="progress" style="width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 북마크 페이지용 그리드 -->
+    <div class="card_container">
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="card_button">질문하기</div>
+                <div class="card_button">바로가기</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star active"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="card_button">질문하기</div>
+                <div class="card_button">바로가기</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="card_button">질문하기</div>
+                <div class="card_button">바로가기</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="card_button">질문하기</div>
+                <div class="card_button">바로가기</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="card_button">질문하기</div>
+                <div class="card_button">바로가기</div>
+            </div>
+        </div>
+        <!-- 추가적인 card을 여기에 추가 -->
+    </div>
+    <!-- 여기서부터 아이콘 그리드 -->
+    <div class="card_container">
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="flex card_check">
+                    <div class="card_check_icon active"></div>
+                    <div class="date font_small">2024-07-16</div>
+                </div>
+                <div class="flex card_check">
+                    <div class="card_icon_border">
+                        <div class="card_write_icon"></div>
+                    </div>
+                    <div class="card_icon_border">
+                        <div class="card_move_icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="flex card_check">
+                    <div class="card_check_icon active"></div>
+                    <div class="date font_small">2024-07-16</div>
+                </div>
+                <div class="flex card_check">
+                    <div class="card_icon_border">
+                        <div class="card_write_icon"></div>
+                    </div>
+                    <div class="card_icon_border">
+                        <div class="card_move_icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="flex card_check">
+                    <div class="card_check_icon active"></div>
+                    <div class="date font_small">2024-07-16</div>
+                </div>
+                <div class="flex card_check">
+                    <div class="card_icon_border">
+                        <div class="card_write_icon"></div>
+                    </div>
+                    <div class="card_icon_border">
+                        <div class="card_move_icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="flex card_check">
+                    <div class="card_check_icon active"></div>
+                    <div class="date font_small">2024-07-16</div>
+                </div>
+                <div class="flex card_check">
+                    <div class="card_icon_border">
+                        <div class="card_write_icon"></div>
+                    </div>
+                    <div class="card_icon_border">
+                        <div class="card_move_icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card opacity">
+            <div class="card_star"></div>
+            <div class="card_content">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+            <div class="card_footer">
+                <div class="flex card_check">
+                    <div class="card_check_icon"></div>
+                    <div class="date font_small">2024-07-16</div>
+                </div>
+                <div class="flex card_check">
+                    <div class="card_icon_border">
+                        <div class="card_write_icon"></div>
+                    </div>
+                    <div class="card_icon_border">
+                        <div class="card_move_icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 여기부터 모달 문제선택 그리드 -->
+    <div class="card_container">
+        <div class="card">
+            <div class="card_star active"></div>
+            <div class="card_content_top_modal">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+            </div>
+            <div class="card_content_modal">
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content_top_modal">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+            </div>
+            <div class="card_content_modal">
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content_top_modal">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+            </div>
+            <div class="card_content_modal">
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_star"></div>
+            <div class="card_content_top_modal">
+                <div class="card_title font_small">00: 차시이름 차시이름</div>
+                <div class="font_main">문제이름</div>
+            </div>
+            <div class="card_content_modal">
+                <img src="https://via.placeholder.com/300x150" alt="Example Image" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 드롭다운 버튼을 클릭했을때 display block을 받는 함수
+        function toggleActive(element) {
+            element.classList.toggle('active');
+        }
+
+        function toggleDropdown(element) {
+            var dropdownContent = element.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+                element.classList.remove('active');
+            } else {
+                dropdownContent.style.display = "block";
+                element.classList.add('active');
+            }
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropdown_btn') && !event.target.matches('.dropdown_btn_small')) {
+                var dropdowns = document.getElementsByClassName("dropdown_content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+                var dropdownBtns = document.getElementsByClassName("dropdown_btn");
+                for (var j = 0; j < dropdownBtns.length; j++) {
+                    dropdownBtns[j].classList.remove('active');
+                }
+                var dropdownBtnsSmall = document.getElementsByClassName("dropdown_btn_small");
+                for (var k = 0; k < dropdownBtnsSmall.length; k++) {
+                    dropdownBtnsSmall[k].classList.remove('active');
+                }
+            }
+        }
+        // 마우스가 아이콘 겉면에 마우스가 호버되면 active클레스명을 받는 함수
+        document.addEventListener('DOMContentLoaded', function () {
+            var iconBorders = document.querySelectorAll('.card_icon_border');
+
+            iconBorders.forEach(function (border) {
+                border.addEventListener('mouseover', function () {
+                    var writeIcon = border.querySelector('.card_write_icon');
+                    var moveIcon = border.querySelector('.card_move_icon');
+                    if (writeIcon) {
+                        writeIcon.classList.add('active');
+                    }
+                    if (moveIcon) {
+                        moveIcon.classList.add('active');
+                    }
+                });
+
+                border.addEventListener('mouseout', function () {
+                    var writeIcon = border.querySelector('.card_write_icon');
+                    var moveIcon = border.querySelector('.card_move_icon');
+                    if (writeIcon) {
+                        writeIcon.classList.remove('active');
+                    }
+                    if (moveIcon) {
+                        moveIcon.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // 카드 스타를 클릭하면 active 클래스를 토글하는 함수
+        document.addEventListener('DOMContentLoaded', function () {
+            var cardStars = document.querySelectorAll('.card_star');
+
+            cardStars.forEach(function (star) {
+                star.addEventListener('click', function () {
+                    star.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
