@@ -46,7 +46,7 @@ export default function navigation() {
       <div className="navi_bar flex">
         <ul className="flex navi_left_cont">
           <li>
-            <ButtonSmall className='logo_btn'>
+            <ButtonSmall to={'/'} className='logo_btn'>
             <img src="img/logo.webp" alt="사이트 로고" />
             </ButtonSmall>
           </li>

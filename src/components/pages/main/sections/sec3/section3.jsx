@@ -1,6 +1,12 @@
 import "./section3.css";
 
+import React, { useRef } from "react";
+
 export function Section3() {
+
+  const circle_cont = useRef([]);
+  const circle_deco_cont = useRef([]);
+
   return (
     <section className="flex section sec3">
       <article className="flex sec3_inner">
@@ -14,9 +20,9 @@ export function Section3() {
                 </tr>
             </thead>
             <tbody className="flex sec3_act_cont_wrap">
-              <tr className="flex sec3_act1 sec3_act">
+              <tr className="flex sec3_act1 sec3_act" ref={circle_cont}>
                 <td className="sec3_cont_deco">
-                  <img id="horizontal" src="img/sec3_deco1.svg" />
+                  <img id="horizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
@@ -31,9 +37,9 @@ export function Section3() {
                   </div>
                 </td>
               </tr>
-              <tr className="flex sec3_act2 sec3_act">
+              <tr className="flex sec3_act2 sec3_act" ref={circle_cont}>
                 <td className="sec3_cont_deco">
-                  <img id="not_hotizontal" src="img/sec3_deco1.svg" />
+                  <img id="not_hotizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
@@ -48,9 +54,9 @@ export function Section3() {
                   </div>
                 </td>
               </tr>
-              <tr className="flex sec3_act3 sec3_act">
+              <tr className="flex sec3_act3 sec3_act" ref={circle_cont}>
                 <td className="sec3_cont_deco">
-                  <img id="horizontal" src="img/sec3_deco1.svg" />
+                  <img id="horizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
@@ -65,9 +71,9 @@ export function Section3() {
                   </div>
                 </td>
               </tr>
-              <tr className="flex sec3_act4 sec3_act">
+              <tr className="flex sec3_act4 sec3_act" ref={circle_cont}>
                 <td className="sec3_cont_deco">
-                  <img id="not_hotizontal" src="img/sec3_deco1.svg" />
+                  <img id="not_hotizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">

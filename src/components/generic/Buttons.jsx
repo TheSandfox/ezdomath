@@ -1,4 +1,5 @@
 import './buttons.css';
+import { Link } from 'react-router-dom';
 
 export function Button({to,onClick,children,className}) {
 	return <>
