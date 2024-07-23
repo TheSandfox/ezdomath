@@ -1,11 +1,51 @@
 import "./section3.css";
+import React, { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import React, { useRef } from "react";
+gsap.registerPlugin(ScrollTrigger);
 
 export function Section3() {
-
   const circle_cont = useRef([]);
   const circle_deco_cont = useRef([]);
+
+  useEffect(() => {
+    gsap.utils.toArray(circle_cont.current).forEach((element, index) => {
+      gsap.fromTo(
+        element,
+        { y: 50 },
+        {
+          y: -50,
+          scrollTrigger: {
+            trigger: element,
+            start: "top 10%", // 시작 위치
+            end: "bottom 90%", // 끝나는 위치
+            scrub: true, // 스크롤에 따라 애니메이션이 연속적으로 움직이도록 설정
+            markers: true,
+            duration: 0.3,
+            ease: "power2.out",
+            stagger: 0.2,
+          },
+        }
+      );
+    });
+
+    gsap.utils.toArray(circle_deco_cont.current).forEach((element, index) => {
+      gsap.fromTo(
+        element,
+        { y: 50 },
+        {
+          y: -50,
+          scrollTrigger: {
+            trigger: element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+  }, []);
 
   return (
     <section className="flex main_page_section main_page_sec3">
@@ -14,15 +54,15 @@ export function Section3() {
         <div className="sec3_act_cont_wrap">
           <table className="flex">
             <thead>
-                <tr className="flex">
-                    <th className="sec3_tit_main">이런 서비스를 제공합니다</th>
-                    <th className="sec3_tit_sub">“사이트에서 제공하는 기능을 활용해보세요!”</th>
-                </tr>
+              <tr className="flex">
+                <th className="sec3_tit_main">이런 서비스를 제공합니다</th>
+                <th className="sec3_tit_sub">“사이트에서 제공하는 기능을 활용해보세요!”</th>
+              </tr>
             </thead>
             <tbody className="flex sec3_act_cont_wrap">
-              <tr className="flex sec3_act1 sec3_act" ref={circle_cont}>
+              <tr className="flex sec3_act1 sec3_act" ref={(el) => (circle_cont.current[0] = el)}>
                 <td className="sec3_cont_deco">
-                  <img id="horizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
+                  <img id="horizontal" src="img/sec3_deco1.svg" ref={(el) => (circle_deco_cont.current[0] = el)} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
@@ -37,9 +77,9 @@ export function Section3() {
                   </div>
                 </td>
               </tr>
-              <tr className="flex sec3_act2 sec3_act" ref={circle_cont}>
+              <tr className="flex sec3_act2 sec3_act" ref={(el) => (circle_cont.current[1] = el)}>
                 <td className="sec3_cont_deco">
-                  <img id="not_hotizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
+                  <img id="not_hotizontal" src="img/sec3_deco1.svg" ref={(el) => (circle_deco_cont.current[1] = el)} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
@@ -54,9 +94,9 @@ export function Section3() {
                   </div>
                 </td>
               </tr>
-              <tr className="flex sec3_act3 sec3_act" ref={circle_cont}>
+              <tr className="flex sec3_act3 sec3_act" ref={(el) => (circle_cont.current[2] = el)}>
                 <td className="sec3_cont_deco">
-                  <img id="horizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
+                  <img id="horizontal" src="img/sec3_deco1.svg" ref={(el) => (circle_deco_cont.current[2] = el)} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
@@ -71,9 +111,9 @@ export function Section3() {
                   </div>
                 </td>
               </tr>
-              <tr className="flex sec3_act4 sec3_act" ref={circle_cont}>
+              <tr className="flex sec3_act4 sec3_act" ref={(el) => (circle_cont.current[3] = el)}>
                 <td className="sec3_cont_deco">
-                  <img id="not_hotizontal" src="img/sec3_deco1.svg" ref={circle_deco_cont} />
+                  <img id="not_hotizontal" src="img/sec3_deco1.svg" ref={(el) => (circle_deco_cont.current[3] = el)} />
                 </td>
                 <td className="flex sec3_act_cont">
                   <div className="sec3_act_cont_img">
