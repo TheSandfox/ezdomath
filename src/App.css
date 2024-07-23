@@ -19,17 +19,28 @@
     --color_white: #FAFAFA;
     --color_green: #00B050;
     --color_red: #C00000;
+    --color_border: rgba(0, 0, 0, 0.25);
     --shadow_404: 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
     --shadow_303: 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.25);
     --shadow_202: 0.125rem 0.125rem 0 rgba(0, 0, 0, 0.25);
     --shadow_sticky_down: 0 1rem 1rem rgba(0, 0, 0, 0.15);
     --shadow_sticky_up: 0 -1rem 1rem rgba(0, 0, 0, 0.15);
-    --color_border: rgba(0, 0, 0, 0.25);
     --font_family_sans: 'Noto Sans KR', sans-serif;
 }
 
 body {
     font-family: var(--font_family_sans);
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	&:visited {
+		color: inherit;
+	}
+	&:active {
+		color: inherit;
+	}
 }
 
 .flex {
@@ -157,7 +168,7 @@ body {
 .large_btn,
 .medium_btn,
 .small_btn {
-    width: 20rem;
+    width: 320px;
     color: var(--color_main);
     text-align: center;
     border-radius: 0.3125rem;
@@ -428,7 +439,7 @@ body {
 }
 
 /* 화면 너비가 최대 1024px일 때 */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1440px) {
     .font_small {
         font-size: 0.875rem;
         line-height: 0.875rem;
@@ -473,7 +484,7 @@ body {
 }
 
 /* 화면 너비가 최대 480px일 때 */
-@media (max-width: 480px) {
+@media (max-width:800px) {
     .font_small {
         font-size: 0.875rem;
         line-height: 0.875rem;

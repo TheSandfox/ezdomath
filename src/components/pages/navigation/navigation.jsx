@@ -1,5 +1,6 @@
 import "./navigation.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ButtonSmall, ButtonMedium } from "../../generic/Buttons";
 
 export default function navigation() {
   const [isMyPageVisible, setIsMyPageVisible] = useState(false);
@@ -27,12 +28,27 @@ export default function navigation() {
     setIsMenuPageVisible(false);
   }
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth > 600 && isMenuPageVisible) {
+        setIsMenuPageVisible(false);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMenuPageVisible]);
+
   return (
     <>
       <div className="navi_bar flex">
         <ul className="flex navi_left_cont">
           <li>
+            <ButtonSmall className='logo_btn'>
             <img src="ezdomath/public/img/logo.webp" alt="사이트 로고" />
+            </ButtonSmall>
           </li>
           <li>EZDOMATH</li>
           <li>공지사항</li>
@@ -95,12 +111,12 @@ export default function navigation() {
               <div className="small_btn font_small">마이페이지</div>
             </div>
           </div>
+          <ButtonSmall className="close" onClick={onCloseMyPage}>
           <img
-            className="close"
             src="ezdomath/public/img/Multiply.webp"
             alt="닫기 버튼"
-            onClick={onCloseMyPage}
           />
+          </ButtonSmall>
         </div>
         <div>
           <ul className="accordion_wrap">

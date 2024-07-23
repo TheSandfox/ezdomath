@@ -1,0 +1,31 @@
+*{
+    margin: 0 auto;
+}
+
+.sec1_inner{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 56px;
+}
+
+/* --------- sec1 font css ---------- */
+
+.sec1_font_main{
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--color_subtitle);
+}
+
+.act_cont_wrap .sec1_font_main{
+    font-size: 2em;
+}
+
+.sec1_font_sub{
+    font-size: 1.5em;
+    color: var(--color_darkest);
+}
+
+.act_cont_wrap .sec1_font_sub{
+    font-size: 1em;
+}

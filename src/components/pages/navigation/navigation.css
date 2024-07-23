@@ -22,6 +22,11 @@
     gap: 56px;
 }
 
+.navi_bar>.navi_left_cont .logo_btn{
+    border: none;
+    background-color: transparent;
+}
+
 .navi_bar>.navi_left_cont>li>.button_wrapper>.small_btn {
     width: 100px;
     height: 35px;
@@ -147,6 +152,8 @@
     position: absolute;
     top: 0;
     right: -84px;
+    border: none;
+    color: transparent;
 }
 
 .accordion_wrap {

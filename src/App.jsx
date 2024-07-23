@@ -20,15 +20,15 @@ function App() {
 			{/* 문제풀이페이지 */}
 			<Route path={'/play/:actId/:subjectId'} element={<PagePlay/>}/>
 			{/* 사이트소개 */}
-			<Route path={'/intro'} element={<PageIntro/>}/>
+			<Route path={'/intro/*'} element={<PageIntro/>}/>
 			{/* 공지리스트 */}
-			<Route path={'/notice'} element={<PageNotice/>}/>
+			<Route path={'/notice/*'} element={<PageNotice/>}/>
 			{/* 마이페이지 */}
-			<Route path={'/my'} element={<PageMy/>}/>
+			<Route path={'/my/*'} element={<PageMy/>}/>
 			{/* 로그인 선택 */}
-			<Route path={'/login'} element={<PageLogin/>}/>
+			<Route path={'/login/*'} element={<PageLogin/>}/>
 			{/* 회원가입 */}
-			<Route path={'/register'} element={<PageRegister/>}/>
+			<Route path={'/register/*'} element={<PageRegister/>}/>
 		</Routes>
 	</>
 }
