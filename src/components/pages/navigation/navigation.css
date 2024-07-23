@@ -11,7 +11,9 @@
     border-bottom: 1px solid var(--color_gray);
     justify-content: space-between;
     padding: 0.63em 5em;
-    position: relative;
+    position: fixed;
+    z-index: 10000;
+    background-color: var(--color_white);
 }
 
 .navi_bar>ul {
@@ -109,11 +111,13 @@
     justify-content: center;
     border: 2px solid var(--color_darkest);
     border-radius: 1.25em;
-    position: absolute;
+    position: fixed;
     top: 5.25em;
     right: 5em;
     gap: 1.75em;
     padding: 1.25em 0;
+    background-color: var(--color_white);
+    z-index: 100;
 }
 
 .myPage>.User_info_wrap,
@@ -126,7 +130,7 @@
 }
 
 .myPage>.User_info_wrap>.User_info>p {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: 700;
     color: var(--color_darkest);
 }
@@ -186,8 +190,8 @@
 .menu_page {
     max-width: 600px;
     width: 100%;
-    position: absolute;
-    left: 0;
+    position: fixed;
+    top: 4.38em; left: 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -195,6 +199,8 @@
     border-radius: 0 0 20px 20px;
     padding: 1.75em 0 1.75em;
     gap: 28px;
+    background-color: var(--color_white);
+    z-index: 100;
 }
 
 .menu_page>.close_wrap{
@@ -261,10 +267,6 @@
 /* ------------------------- 반응형 --------------------- */
 
 @media screen and (max-width : 800px) {
-
-    /* .navi_bar>.navi_left_cont>li:not(:first-child){
-        display: none;
-    } */
     .navi_bar {
         padding: 0.63em 20px;
     }

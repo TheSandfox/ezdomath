@@ -12,8 +12,6 @@ import { getUser } from './utils/User'
 
 export const userContext = createContext(null);
 
-import Navigation from './components/pages/navigation/navigation'
-
 function App() {
 	const [userContextValue,setUserContextValue] = useState({
 		user:null,	
@@ -37,7 +35,6 @@ function App() {
 			...userContextValue,
 			handleUserContext:handleUserContext
 		}}>
-		    <Navigation/>
 			<Routes>
 				{/* 메인 */}
 				<Route path={'*'} element={<PageMain/>}/>

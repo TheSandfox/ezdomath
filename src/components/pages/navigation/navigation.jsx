@@ -47,7 +47,7 @@ export default function navigation() {
         <ul className="flex navi_left_cont">
           <li>
             <ButtonSmall className='logo_btn'>
-            <img src="ezdomath/public/img/logo.webp" alt="사이트 로고" />
+            <img src="img/logo.webp" alt="사이트 로고" />
             </ButtonSmall>
           </li>
           <li>EZDOMATH</li>
@@ -63,7 +63,7 @@ export default function navigation() {
             <div className="Alarm_wrap user_btn">
               <div className="Alarm_active"></div>
               <img
-                src="ezdomath/public/img/Alarm_icon_30.webp"
+                src="img/Alarm_icon_30.webp"
                 alt="알림 아이콘"
               />
               {/* <div className="alarm"></div> */}
@@ -76,11 +76,11 @@ export default function navigation() {
             >
               <img
                 className="User_profile"
-                src="ezdomath/public/img/MyPage_icon_30.webp"
+                src="img/MyPage_icon_30.webp"
               />
               <img
                 className="Up_arrow"
-                src="ezdomath/public/img/Arrow_main.webp"
+                src="img/Arrow_main.webp"
               />
             </div>
           </li>
@@ -88,7 +88,7 @@ export default function navigation() {
             <div className="Total_menu_wrap" onClick={toggleMenuPageVisibility}>
               <img
                 className="Total_menu"
-                src="ezdomath/public/img/Circled Menu.webp"
+                src="img/Circled Menu.webp"
               />
             </div>
           </li>
@@ -101,7 +101,7 @@ export default function navigation() {
             {/* 카카오 회원의 경우 이미지에 카카오 프로필이 들어옴 */}
             <img
               className="user_profile"
-              src="ezdomath/public/img/Male _User_100.webp"
+              src="img/Male _User_100.webp"
               alt="프로필 이미지"
             />
             {/* 나중에 유저 정보 중 이름 값이 들어옴 */}
@@ -113,7 +113,7 @@ export default function navigation() {
           </div>
           <ButtonSmall className="close" onClick={onCloseMyPage}>
           <img
-            src="ezdomath/public/img/Multiply.webp"
+            src="img/Multiply.webp"
             alt="닫기 버튼"
           />
           </ButtonSmall>
@@ -124,7 +124,7 @@ export default function navigation() {
               <p>내정보</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -132,7 +132,7 @@ export default function navigation() {
               <p>커뮤니티</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -140,7 +140,7 @@ export default function navigation() {
               <p>진척도</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -148,7 +148,7 @@ export default function navigation() {
               <p>QnA</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -156,7 +156,7 @@ export default function navigation() {
               <p>북마크</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -173,7 +173,7 @@ export default function navigation() {
         <div className="close_wrap">
           <ButtonSmall onClick={onCloseMenuPage} className="close">
           <img
-            src="ezdomath/public/img/Multiply.webp"
+            src="img/Multiply.webp"
             alt="닫기 버튼"
           />
           </ButtonSmall>
@@ -190,7 +190,7 @@ export default function navigation() {
               <p>EZDOMATH</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -198,7 +198,7 @@ export default function navigation() {
               <p>공지사항</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
@@ -206,7 +206,7 @@ export default function navigation() {
               <p>학습시작</p>
               <img
                 className="accordion_arrow"
-                src="ezdomath/public/img/Arrow_darkest.webp"
+                src="img/Arrow_darkest.webp"
                 alt="마이페이지 화살표"
               />
             </li>
