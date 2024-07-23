@@ -27,8 +27,8 @@ export function Section1() {
   ];
 
   return (
-    <section className='flex section sec1'>
-      <article className='flex sec1_inner'>
+    <section className='flex main_page_section main_page_sec1'>
+      <article className='flex main_page_sec1_inner'>
         <div>
           <h2 className="sec1_font_main">도형 학습의 재미를 느껴보세요!</h2>
           <p className="sec1_font_sub">

@@ -8,8 +8,8 @@ export function Section3() {
   const circle_deco_cont = useRef([]);
 
   return (
-    <section className="flex section sec3">
-      <article className="flex sec3_inner">
+    <section className="flex main_page_section main_page_sec3">
+      <article className="flex main_page_sec3_inner">
         <div className="background_"></div>
         <div className="sec3_act_cont_wrap">
           <table className="flex">
