@@ -62,7 +62,7 @@ function MyTabs({flag,tabIndex}) {
 			title={'진척도'} active={tabIndex===2}
 		/>
 		<MyTabButton 
-			to={'/my/community'} 
+			to={'/my/community/students'} 
 			icon={<HiUserGroup className='icon'/>} 
 			title={'커뮤니티'} active={tabIndex===3}
 		/>
@@ -105,6 +105,7 @@ export function PageMy({}) {
 						<Route path='info' element={<MyInfo.Left handleTrigger={handleTrigger}/>}/>
 						<Route path='bookmark/:actId' element={<MyBookmark.Left handleTrigger={handleTrigger}/>}/>
 						<Route path='achievement/:actId' element={<MyAchievement.Left handleTrigger={handleTrigger}/>}/>
+						<Route path='community/:tabId' element={<MyCommunity.Left handleTrigger={handleTrigger}/>}/>
 					</Routes>
 				</div>
 				{/* 우측 */}
@@ -116,7 +117,7 @@ export function PageMy({}) {
 						<Route path='info' element={<MyInfo.Main handleTabIndex={handleTabIndex} index={0} user={user}/>}/>
 						<Route path='bookmark/:actId' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1} trigger={trigger}/>}/>
 						<Route path='achievement/:actId' element={<MyAchievement.Main handleTabIndex={handleTabIndex} index={2} trigger={trigger}/>}/>
-						<Route path='community' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3}/>}/>
+						<Route path='community/:tabId' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3} trigger={trigger}/>}/>
 						<Route path='qna' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
 					</Routes>
 				</div>

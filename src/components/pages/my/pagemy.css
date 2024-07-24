@@ -74,6 +74,7 @@
 					/* 모바일 */
 					@media screen and (max-width:800px) {
 						padding: 0 1rem;
+						padding-bottom: 8rem;
 					}
 				}
 

@@ -6,7 +6,7 @@ import { ACTS } from '/src/datas/acts';
 
 import './actprogress.css'
 
-export function ActProgress({to,onClick,active,actId}) {
+export function ActProgress({to,onClick,active,actId,dropdown}) {
 	const { user, achievements } = useContext(userContext);
 	// 단원이름 가져오기
 	const actName = useMemo(()=>{
@@ -42,7 +42,9 @@ export function ActProgress({to,onClick,active,actId}) {
 		return parseFloat(counts)/parseFloat(subjects.length)
 	},[user,subjects,counts]);
 	//클래스이름&JSX
-	let className = 'actProgress'+(active?' active':'');
+	let className = 'actProgress'
+		+(active?' active':'')
+		+(dropdown?' dropdown':'');
 	let jsx = <>
 		<div className='top'>
 			<div className='actName font_main'>

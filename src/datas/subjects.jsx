@@ -12,7 +12,7 @@ const SUBJECTS = [
 	},
 	{
 		//0
-		//subjectId:0
+		//subjectId:1
 		controller:<Subject1_1.Controller/>,
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
@@ -21,7 +21,7 @@ const SUBJECTS = [
 	},
 	{
 		//0
-		//subjectId:0
+		//subjectId:2
 		controller:<Subject1_1.Controller/>,
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
@@ -30,7 +30,7 @@ const SUBJECTS = [
 	},
 	{
 		//0
-		//subjectId:0
+		//subjectId:3
 		controller:<Subject1_1.Controller/>,
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
@@ -39,7 +39,7 @@ const SUBJECTS = [
 	},
 	{
 		//0
-		//subjectId:0
+		//subjectId:4
 		controller:<Subject1_1.Controller/>,
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
@@ -48,7 +48,7 @@ const SUBJECTS = [
 	},
 	{
 		//0
-		//subjectId:0
+		//subjectId:5
 		controller:<Subject1_1.Controller/>,
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,

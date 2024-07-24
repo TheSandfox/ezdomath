@@ -9,7 +9,8 @@ const usersDefault = localStorage.getItem('users')
 			userTypeId: USER_TYPE_TEACHER,
 			schoolName: '노도초등학교',
 			stringId: 'abcd1234',
-			password: '1q2w3e4r$'
+			password: '1q2w3e4r$',
+			profile: '/ezdomath/profile/dummy.png',
 		},
 		{
 			name:'김순탁',
@@ -17,7 +18,8 @@ const usersDefault = localStorage.getItem('users')
 			userTypeId: USER_TYPE_STUDENT,
 			schoolName: '노도초등학교',
 			stringId: 'abcd1235',
-			password: '1q2w3e4r$'
+			password: '1q2w3e4r$',
+			profile: '/ezdomath/profile/dummy.png',
 		},
 	]
 

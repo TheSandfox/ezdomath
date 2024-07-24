@@ -10,17 +10,16 @@ import { PageRegister } from '/src/components/pages/register/PageRegister'
 import { createContext, useEffect, useReducer, useState } from 'react'
 import { bookmarksDefault, bookmarksReducer } from './datas/bookmarks'
 import { usersDefault, usersReducer } from './datas/users'
+import { friendsDefault, friendsReducer } from './datas/friends'
 import { achievementsDefault, achievementsReducer } from './datas/achievements'
 
 export const userContext = createContext(null);
 
 function App() {
+	// 앱 전반적인 설정&핸들러
 	const [userContextValue,setUserContextValue] = useState({
 		user:null,	
 	});
-	const [bookmarks,dispatchBookmarks] = useReducer(bookmarksReducer,bookmarksDefault);
-	const [achievements,dispatchAchievements] = useReducer(achievementsReducer,achievementsDefault);
-	const [users,dispatchUsers] = useReducer(usersReducer,usersDefault);
 	const handleUserContext = {
 		setUser:(newUser)=>{
 			// 유저객체 변경
@@ -40,9 +39,19 @@ function App() {
 			})
 		}
 	}
+	// 동적데이터들
+	const [bookmarks,dispatchBookmarks] = useReducer(bookmarksReducer,bookmarksDefault);
+	const [achievements,dispatchAchievements] = useReducer(achievementsReducer,achievementsDefault);
+	const [users,dispatchUsers] = useReducer(usersReducer,usersDefault);
+	const [friends,dispatchFriends] = useReducer(friendsReducer,friendsDefault);
+	
+	// 로그인유저 설정(임시)
 	useEffect(()=>{
-		handleUserContext.setUser(users[0]);
+		handleUserContext.setUser(users.find((item)=>{
+			return parseInt(item.userId) === 0;
+		}));
 	},[])
+	// 리턴 JSX
    	return <>
 		<userContext.Provider value={{
 			...userContextValue,
@@ -53,6 +62,8 @@ function App() {
 			dispatchAchievements:dispatchAchievements,
 			users:users,
 			dispatchUsers:dispatchUsers,
+			friends:friends,
+			dispatchFriends:dispatchFriends,
 		}}>
 			<Routes>
 				{/* 메인 */}
