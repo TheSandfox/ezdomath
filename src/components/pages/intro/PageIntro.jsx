@@ -2,13 +2,12 @@ import './PageIntro.css';
 import SAnimation from '/img/SAnimation.svg'
 import DiscoverWave from '/img/discoverWave.webp'
 import SpotlightWave from '/img/spotlightWave.webp'
+import TopBanner from '../../generic/Topbanner';
 
 export function PageIntro() {
   return (
     <div className="page-intro">
-      <div className="intro_top_banner">
-        <h1>헤더이미지</h1>
-      </div>
+      <TopBanner pageName="EZDOMATH"/>
       <div className='intro_100_white'>
       <div className="intro_content_inner">
         <section className="intro_message flex">
@@ -91,7 +90,7 @@ export function PageIntro() {
       <div className='intro_100_white'>
         <img src={SpotlightWave} alt="SpotlightWave" className='Spotlight_wave' />
         <div className='intro_list_top'>
-          <b className='intro_list_top_p'>모든 학습 목표를 달성할 수 있는 솔루션을 만나보세요!</b>
+          <b className='intro_list_top_p'>모든 학습 목표를 달성할 수 있는 <span className='intro_list_moile_block'>솔루션을 만나보세요!</span></b>
         </div>
         <section className='intro_list_wrap'>
             <div className='intro_list_box'>

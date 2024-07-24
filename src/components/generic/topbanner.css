@@ -1,0 +1,26 @@
+.top-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color_background_sub);
+    color: var(--color_darkest);
+    text-align: center;
+    width: 100%;
+    max-width: 1920px;
+    height: 128px;
+    box-sizing: border-box;
+  }
+  
+  @media (max-width: 1024px) {
+    .top-banner {
+      max-width: 1024px;
+      height: 128px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .top-banner {
+      max-width: 480px;
+      height: 64px;
+    }
+  }
