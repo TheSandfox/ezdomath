@@ -29,6 +29,10 @@
     background-color: transparent;
 }
 
+.navi_bar>.navi_left_cont .logo_btn:hover{
+    background-color: transparent;
+}
+
 .navi_bar>.navi_left_cont>li>.button_wrapper>.small_btn {
     width: 6.25em;
     height: 2.19em;
@@ -76,6 +80,19 @@
     position: absolute;
     top: 0.31em;
     right: 0.63em;
+}
+
+.navi_bar .Alarm_wrap .Alarm{
+    width: 1.88em;
+    height: 1.56em;
+}
+
+.navi_bar .Alarm_wrap>.navi_btn_icon{
+    border: none;
+}
+
+.navi_bar .Alarm_wrap>.navi_btn_icon:hover{
+    background-color: transparent;
 }
 
 .navi_bar .User_wrap>.User_profile {
@@ -157,7 +174,7 @@
     top: -0.25em;
     right: -5.25em;
     border: none;
-    color: transparent;
+    background-color: transparent;
 }
 
 .accordion_wrap {
@@ -173,16 +190,38 @@
     justify-content: space-between;
 }
 
-.accordion_menu>.accordion_arrow {
+.accordion_menu>.genericButton.menu_page_btn{
+    width: 100%;
+    justify-content: space-between;
+    padding: 0;
+    border: none;
+}
+
+.accordion_menu>.genericButton.menu_page_btn:hover{
+    background-color: var(--color_main);
+    color: var(--color_darkest);
+}
+
+.accordion_menu>.genericButton.menu_page_btn>.accordion_arrow {
     width: 1.25em;
     height: 1.25em;
     transform: rotate(-90deg);
 }
 
-.User_etc {
+.myPage>.User_etc {
     width: 19.38em;
     justify-content: flex-end;
+    align-items: center;
     gap: 1.75em;
+}
+
+.myPage>.User_etc>.logout{
+    border: none;
+}
+
+.myPage>.User_etc>.logout:hover{
+    background-color: transparent;
+    color: var(--color_main);
 }
 
 /* -------------------------- 전체메뉴 페이지 ------------------------ */
@@ -241,10 +280,6 @@
     gap: 1.75em;
 }
 
-.menu_page>.page_wrap>.page_btn>.accordion_menu{
-    width: 23.75em;
-}
-
 .menu_page>.User_etc{
     width: 23.75em;
     margin-top: 14px;
@@ -285,7 +320,11 @@
         display: none;
     }
 
-    .navi_bar>.navi_right_cont>li:nth-child(1) {
+    .navi_bar>.navi_right_cont>.Before_login {
+        display: none;
+    }
+
+    .navi_bar>.navi_right_cont>.After_login:nth-child(1) {
         display: none;
     }
 
