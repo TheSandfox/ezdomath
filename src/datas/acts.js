@@ -1,27 +1,33 @@
+
+
 const ACTS = [
 	{
-		//actId
-		name: '1단원',
+	  actId: 0,
+	  name: '1단원',
+	  title: "01 : 선의 종류",
+	  items: [
+		
+	  ],
 	},
 	{
-		name: '2단원',
+	  actId: 1,
+	  name: '2단원',
+	  title: "02 : 도형의 종류",
+	  items: [],
 	},
 	{
-		name: '3단원',
+	  actId: 2,
+	  name: '3단원',
+	  title: "03 : 색의 종류",
+	  items: [],
 	},
 	{
-		name: '4단원',
-	},
-	{
-		name: '5단원',
+	  actId: 3,
+	  name: '4단원',
+	  title: "04 : 질감의 종류",
+	  items: [],
 	}
-]
-
-//id인덱싱
-ACTS.forEach((item,index)=>{
-	item.actId = index;
-})
-
-export {
-	ACTS
-}
+  ];
+  
+  export { ACTS };
+  

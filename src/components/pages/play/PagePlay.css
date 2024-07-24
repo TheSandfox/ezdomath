@@ -1,0 +1,36 @@
+.play_page_background{
+    background-color: var(--color_background);
+}
+.play_container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar,
+.right-sidebar {
+    width: 515px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.sidebar>.actProgress{
+    width: 230px;
+}
+
+.content {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* 가운데 영역만 스크롤 가능하게 설정 */
+}
+
+.scrollable-content {
+    height: 100%;
+    overflow-y: auto;
+    /* 이 클래스가 적용된 요소를 스크롤 가능하게 설정 */
+}
