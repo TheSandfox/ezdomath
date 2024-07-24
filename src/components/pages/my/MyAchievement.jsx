@@ -20,7 +20,7 @@ export function Left({handleTrigger}) {
 			actId:newActId
 		})
 	},[actId]);
-	return <div className="myAchievementActSelector">
+	return <div className="myAchievementActSelector myLeftBox">
 		<MyTitle title={'단원별 진척도'}/>
 		<div className="tabs">
 			<ActProgress to={'/my/achievement/0'} active={parseInt(actId)===0} actId={0}>1단원</ActProgress>
@@ -61,7 +61,7 @@ export function Main({handleTabIndex,index,trigger}) {
 	},[]);
 	return <div className="contents">
 		<MyTitle title={`진척도 - ${ACTS[actId]?ACTS[actId].name:''}`}/>
-		<div className="myBookmarkCardContainer">
+		<div className="myCardContainer">
 			{cards.map((item)=>{
 				return <SubjectCard key={item.subjectId} type={1} subjectId={item.subjectId} achievement={item.achievement}/>
 			})}

@@ -91,7 +91,9 @@ export function SubjectCard({subjectId,type,achievement}) {
 				<div className='subjectName font_main'>
 					{subject?subject.name:''}
 				</div>
-				<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+				<div className='imgWrapper'>
+					<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+				</div>
 			</div>
 			<div className={`bottom type${typeValue}`}>
 				{jsx}

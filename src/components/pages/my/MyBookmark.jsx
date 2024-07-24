@@ -17,7 +17,7 @@ export function Left({handleTrigger}) {
 			actId:newActId
 		})
 	},[actId]);
-	return <div className="myBookmarkActSelector">
+	return <div className="myBookmarkActSelector myLeftBox">
 		<MyTitle title={'단원별 분류'}/>
 		<div className="tabs">
 			<ButtonTab icon={<></>} to={'/my/bookmark/all'} active={actId==='all'}>전체</ButtonTab>
@@ -54,7 +54,7 @@ export function Main({handleTabIndex,index,trigger}) {
 	},[]);
 	return <div className="contents myBookmark">
 		<MyTitle title={'북마크'}/>
-		<div className="myBookmarkCardContainer">
+		<div className="myCardContainer">
 			{cards.map((subjectId)=>{
 				return <SubjectCard key={subjectId} type={0} subjectId={subjectId}/>
 			})}
