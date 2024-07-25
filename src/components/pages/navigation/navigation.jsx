@@ -7,7 +7,6 @@ export default function Navigation() {
   const [isMenuPageVisible, setIsMenuPageVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 상태 변경 핸들러
   const handleLogin = () => {
     setIsLoggedIn(true);
     setIsMenuPageVisible(false);
@@ -26,7 +25,6 @@ export default function Navigation() {
   };
 
   const onCloseMyPage = () => setIsMyPageVisible(false);
-
   const onCloseMenuPage = () => setIsMenuPageVisible(false);
 
   // 전체메뉴 버튼을 위한 윈도우 리사이즈 핸들러
@@ -71,6 +69,7 @@ export default function Navigation() {
         isMenuPageVisible={isMenuPageVisible}
         onCloseMenuPage={onCloseMenuPage}
         handleLogin={handleLogin}
+        isLoggedIn={isLoggedIn}
         naviMenuPageAccordionContent={naviMenuPageAccordionContent}
       />
     </>
@@ -175,14 +174,14 @@ const MyPage = ({ isMyPageVisible, onCloseMyPage, naviMyPageAccordionContent, ha
   </div>
 );
 
-const MenuPage = ({ isMenuPageVisible, onCloseMenuPage, naviMenuPageAccordionContent, handleLogin }) => (
+const MenuPage = ({ isMenuPageVisible, onCloseMenuPage, naviMenuPageAccordionContent, handleLogin, isLoggedIn }) => (
   <div className={isMenuPageVisible ? "menu_page flex" : "menu_page hidden"}>
     <div className="close_wrap">
       <ButtonIcon onClick={onCloseMenuPage} className="close">
         <img src="img/Multiply.webp" alt="닫기 버튼" />
       </ButtonIcon>
     </div>
-    <div className="login_wrap">
+    <div className={isLoggedIn ? "login_wrap hidden" : "login_wrap visible"}>
       <div className="button_wrapper">
         <ButtonMedium className="small_btn font_small Login" onClick={handleLogin}>로그인</ButtonMedium>
         <div className="Sign_up">회원가입</div>
@@ -201,7 +200,7 @@ const MenuPage = ({ isMenuPageVisible, onCloseMenuPage, naviMenuPageAccordionCon
       </ul>
     </div>
     <div className="flex User_etc">
-      <span className="bug_report">문의사항</span>
+      <span className="flex bug_report">문의사항</span>
     </div>
   </div>
 );

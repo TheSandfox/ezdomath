@@ -1,0 +1,78 @@
+footer{
+    width: 100%; height: 100vh;
+    background-color: var(--color_main);
+    padding-top: 4.38em;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.foot_cont_wrap{
+    flex-direction: column;
+    align-items: center;
+    gap: 7em;
+}
+
+.foot_cont_wrap .main_font{
+    font-size: 5em;
+    font-weight: bold;
+    color: #FFE68D;
+}
+
+.stripe{
+    display: block;
+    width: 80em; height: 5px;
+    background-color: var(--color_subtitle);
+}
+
+.scrollTop_btn_wrap{
+    cursor: pointer;
+    width: 12.5em; height: 12.5em;
+    position: relative;
+    overflow: hidden;
+    background-color: #FFE68D;
+    border-radius: 50%;
+}
+
+.scrollTop_btn_wrap>.scrollTop_btn_fill{
+    background: var(--color_subtitle);
+    position: absolute;
+    width: 12.5em; height: 12.5em;
+    border-radius: 100%;
+    top: 0; left: 0;
+    transform: translate3d(0, 100%, 0);
+}
+
+.foot_cont_wrap .scrollTop_btn{
+    width: 100%; height: 100%;
+    border: none;
+}
+
+.foot_cont_wrap .scrollTop_btn:hover{
+    color: var(--color_main);
+    background-color: #FFE68D;
+}
+
+.scrollTop_btn_txt{
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 100;
+    gap: 0.88em;
+}
+
+.scrollTop_btn_txt>span{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.foot_cont_wrap .foot_cont_btn .foot_btn{
+    color: var(--color_darkest);
+    border: 2px solid var(--color_subtitle);
+    border-radius: 50px;
+    padding: 1.25em 5em;
+}
+
+.foot_cont_wrap .foot_cont_btn .foot_btn:hover{
+    background-color: #FFE68D;
+}

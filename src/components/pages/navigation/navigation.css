@@ -208,7 +208,7 @@
     transform: rotate(-90deg);
 }
 
-.myPage>.User_etc {
+.myPage>.User_etc{
     width: 19.38em;
     justify-content: flex-end;
     align-items: center;
@@ -281,8 +281,9 @@
 }
 
 .menu_page>.User_etc{
-    width: 23.75em;
+    width: 19.38em;
     margin-top: 14px;
+    justify-content: flex-end;
 }
 
 
@@ -290,6 +291,10 @@
 
 .hidden {
     display: none;
+}
+
+.visible {
+    display: block;
 }
 
 /* --------------- */
@@ -301,15 +306,19 @@
 
 /* ------------------------- 반응형 --------------------- */
 
+@media screen and (max-width : 900px) {
+    .navi_bar>.navi_right_cont {
+        gap: 0.88em;
+    }
+}
+
 @media screen and (max-width : 800px) {
     .navi_bar {
         padding: 0.63em 20px;
     }
-
     .navi_bar>.navi_left_cont {
         gap: 1.75em;
     }
-
     .myPage{
         right: 20px;
     }
