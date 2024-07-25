@@ -1,7 +1,7 @@
 import "./footer.css";
 import React, { useRef, useEffect } from "react";
 import { ButtonLarge } from "../../../../generic/Buttons";
-import gsap from 'gsap';
+import gsap from "gsap";
 
 export const Footer = () => {
   const scrollTopBtnWrapRef = useRef(null);
@@ -20,35 +20,35 @@ export const Footer = () => {
       const centerY = wrap.offsetHeight / 2;
       const moveX = (offsetX - centerX) / 5;
       const moveY = (offsetY - centerY) / 5;
-      
-      gsap.to(fill, { y: '0%', duration: 0.3, ease: 'power1.out' });
+
+      gsap.to(fill, { y: "0%", duration: 0.3, ease: "power1.out" });
       gsap.to([txt, wrap], {
         x: moveX,
         y: moveY,
         duration: 0.3,
-        ease: 'power1.out'
+        ease: "power1.out",
       });
     };
 
     const handleMouseLeave = () => {
       gsap.to(fill, {
-        y: '-100%',
+        y: "-100%",
         duration: 0.3,
-        ease: 'power1.in',
-        onComplete: () => gsap.set(fill, { y: '100%' })
+        ease: "power1.in",
+        onComplete: () => gsap.set(fill, { y: "100%" }),
       });
       gsap.to([txt, wrap], { x: 0, y: 0, duration: 0.3 }); // Reset text position
     };
 
-    wrap.addEventListener('mousemove', handleMouseMove);
-    wrap.addEventListener('mouseleave', handleMouseLeave);
+    wrap.addEventListener("mousemove", handleMouseMove);
+    wrap.addEventListener("mouseleave", handleMouseLeave);
 
     // 컴포넌트 언마운트 시 이벤트 리스너 제거 및 초기 위치로 복구
     return () => {
-      wrap.removeEventListener('mousemove', handleMouseMove);
-      wrap.removeEventListener('mouseleave', handleMouseLeave);
+      wrap.removeEventListener("mousemove", handleMouseMove);
+      wrap.removeEventListener("mouseleave", handleMouseLeave);
       gsap.set([txt, wrap], { x: 0, y: 0 });
-      gsap.set(fill, { y: '100%' });
+      gsap.set(fill, { y: "100%" });
     };
   }, []);
 
@@ -56,33 +56,44 @@ export const Footer = () => {
     <footer className="flex">
       <div className="flex foot_cont_wrap">
         <div className="foot_cont_txt">
-          <div className="flex">
+          <div className="flex main_font_wrap">
             <div className="main_font">EZDOMATH</div>
           </div>
         </div>
         <div className="foot_cont_main">
-          <div className="flex">
-            <div className="stripe"></div>
-            <div className="scrollTop_btn_wrap" ref={scrollTopBtnWrapRef}>
-              <div className="scrollTop_btn_fill" ref={scrollTopBtnFillRef}></div>
-              <ButtonLarge className="flex scrollTop_btn">
-                <p className="flex scrollTop_btn_txt" ref={scrollTopBtnTxtRef}>
-                  <span>SCROLL</span>
-                  <span>TO</span>
-                  <span>TOP</span>
-                </p>
-              </ButtonLarge>
+          <div className="flex foot_cont_main_inner">
+            <div className="stripe">
+              <div className="scrollTop_btn_wrap" ref={scrollTopBtnWrapRef}>
+                <div
+                  className="scrollTop_btn_fill"
+                  ref={scrollTopBtnFillRef}
+                ></div>
+                <ButtonLarge className="flex scrollTop_btn">
+                  <p
+                    className="flex scrollTop_btn_txt"
+                    ref={scrollTopBtnTxtRef}
+                  >
+                    <span>SCROLL</span>
+                    <span>TO</span>
+                    <span>TOP</span>
+                  </p>
+                </ButtonLarge>
+              </div>
             </div>
           </div>
         </div>
-        <div className="foot_cont_btn">
-          <div className="flex">
-            <ButtonLarge className="foot_btn" to="https://github.com/TheSandfox/ezdomath">
+        <div className="flex foot_cont_btn">
+            <ButtonLarge
+              className="foot_btn"
+              to="https://github.com/TheSandfox/ezdomath"
+            >
               https://github.com/TheSandfox/ezdomath
             </ButtonLarge>
             <ButtonLarge className="foot_btn">문의사항</ButtonLarge>
-          </div>
         </div>
+      </div>
+      <div>
+        <div className="copyright">COPYRIGHT 2024 EZDOMATH ALL RIGHTS RESERVED</div>
       </div>
     </footer>
   );

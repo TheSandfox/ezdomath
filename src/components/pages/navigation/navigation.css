@@ -5,6 +5,12 @@
     text-decoration: none;
 }
 
+.navi_dom{
+    width: 100%;
+    height: 4.38em;
+    position: relative;
+}
+
 .navi_bar {
     width: 100%;
     height: 4.38em;

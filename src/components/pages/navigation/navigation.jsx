@@ -80,63 +80,72 @@ const NavigationBar = ({
   isLoggedIn,
   handleLogin,
   toggleMyPageVisibility,
-  toggleMenuPageVisibility
+  toggleMenuPageVisibility,
 }) => (
-  <div className="navi_bar flex">
-    <ul className="flex navi_left_cont">
-      <li>
-        <ButtonIcon to="/" className="logo_btn navi_btn_icon">
-          <img src="img/logo.webp" alt="사이트 로고" />
-        </ButtonIcon>
-      </li>
-      <li>EZDOMATH</li>
-      <li>공지사항</li>
-      <li>
-        <div className="button_wrapper">
-          <ButtonSmall className="small_btn font_small">학습시작</ButtonSmall>
-        </div>
-      </li>
-    </ul>
-    <ul className="flex navi_right_cont">
-      {!isLoggedIn ? (
-        <>
-          <li className="Before_login">
-            <div>
-              <ButtonSmall className="Sign_up">회원가입</ButtonSmall>
-            </div>
-          </li>
-          <li className="Before_login">
-            <div>
-              <ButtonSmall className="Login" onClick={handleLogin}>
-                로그인
-              </ButtonSmall>
-            </div>
-          </li>
-        </>
-      ) : (
-        <>
-          <li className="After_login">
-            <div className="Alarm_wrap user_btn">
-              <div className="Alarm_active"></div>
-              <ButtonIcon className="navi_btn_icon">
-                <img className="Alarm" src="img/Alarm_icon_30.webp" alt="알림 아이콘" />
-              </ButtonIcon>
-            </div>
-          </li>
-          <li className="After_login">
-            <div className="flex User_wrap user_btn" onClick={toggleMyPageVisibility}>
-              <img className="User_profile" src="img/MyPage_icon_30.webp" />
-              <img className="Up_arrow" src="img/Arrow_main.webp" />
-            </div>
-          </li>
-        </>
-      )}
-      <li>
-        <div className="Total_menu_wrap" onClick={toggleMenuPageVisibility}>
-          <img className="Total_menu" src="img/Circled Menu.webp" />
-        </div>
-      </li>
-    </ul>
+  <div className="navi_dom">
+    <div className="navi_bar flex">
+      <ul className="flex navi_left_cont">
+        <li>
+          <ButtonIcon to="/" className="logo_btn navi_btn_icon">
+            <img src="img/logo.webp" alt="사이트 로고" />
+          </ButtonIcon>
+        </li>
+        <li>EZDOMATH</li>
+        <li>공지사항</li>
+        <li>
+          <div className="button_wrapper">
+            <ButtonSmall className="small_btn font_small">학습시작</ButtonSmall>
+          </div>
+        </li>
+      </ul>
+      <ul className="flex navi_right_cont">
+        {!isLoggedIn ? (
+          <>
+            <li className="Before_login">
+              <div>
+                <ButtonSmall className="Sign_up">회원가입</ButtonSmall>
+              </div>
+            </li>
+            <li className="Before_login">
+              <div>
+                <ButtonSmall className="Login" onClick={handleLogin}>
+                  로그인
+                </ButtonSmall>
+              </div>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="After_login">
+              <div className="Alarm_wrap user_btn">
+                <div className="Alarm_active"></div>
+                <ButtonIcon className="navi_btn_icon">
+                  <img
+                    className="Alarm"
+                    src="img/Alarm_icon_30.webp"
+                    alt="알림 아이콘"
+                  />
+                </ButtonIcon>
+              </div>
+            </li>
+            <li className="After_login">
+              <div
+                className="flex User_wrap user_btn"
+                onClick={toggleMyPageVisibility}
+              >
+                <img className="User_profile" src="img/MyPage_icon_30.webp" />
+                <img className="Up_arrow" src="img/Arrow_main.webp" />
+              </div>
+            </li>
+          </>
+        )}
+        <li>
+          <div className="Total_menu_wrap" onClick={toggleMenuPageVisibility}>
+            <img className="Total_menu" src="img/Circled Menu.webp" />
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 );
 
