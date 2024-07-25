@@ -1,14 +1,14 @@
-.myAchievementActSelector {
-	display: flex;
-	flex-direction: column;
-	border-radius: 0.5rem;
-	border: 1px solid var(--color_border);
-	padding: 1rem;
-	gap: 1rem;
+.myAchievement.myLeftBox {
 	&>.tabs {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 		gap: 0.5rem;
+	}
+}
+
+.myAchievement.myLeftBoxAlter {
+	&>.dropdown {
+		width: 100%;
 	}
 }

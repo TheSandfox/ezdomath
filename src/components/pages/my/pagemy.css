@@ -74,6 +74,7 @@
 					/* 모바일 */
 					@media screen and (max-width:800px) {
 						padding: 0 1rem;
+						padding-bottom: 8rem;
 					}
 				}
 
@@ -126,5 +127,44 @@
 	&::before {
 		display: block;
 		content: '・';
+	}
+}
+
+/* 카드콘테이너 */
+.myCardContainer {
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	gap: 1rem;
+	/* 3줄 */
+	@media screen and (max-width:1440px) {
+		grid-template-columns: repeat(3,1fr);
+	}
+	/* 2줄 */
+	@media screen and (max-width:1024px) {
+		grid-template-columns: repeat(2,1fr);
+	}
+	/* 1줄 */
+	@media screen and (max-width:800px) {
+		grid-template-columns: repeat(1,1fr);
+	}
+}
+
+/* 레프트박스 */
+.myLeftBox {
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.5rem;
+	border: 1px solid var(--color_border);
+	padding: 1rem;
+	gap: 1rem;
+	@media screen and (max-width:800px) {
+		display: none;
+	}
+}
+
+.myLeftBoxAlter {
+	display: none;
+	@media screen and (max-width:800px) {
+		display: flex;
 	}
 }

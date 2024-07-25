@@ -15,13 +15,19 @@
 			color: var(--color_darkest);
 		}
 		/* 문제썸네일 */
-		&>img {
+		&>.imgWrapper {
 			width: 100%;
 			height: 8rem;
 			border-radius: 0.5rem 0.5rem 0 0;
-			object-fit: cover;
+			font-size: 0;
+			background-color: var(--color_black);
 			@media screen and (max-width:800px) {
-				height: 10rem;
+				height: 15rem;
+			}
+			&>img {
+				object-fit: contain;
+				width: 100%;
+				height: 100%;
 			}
 		}
 	}

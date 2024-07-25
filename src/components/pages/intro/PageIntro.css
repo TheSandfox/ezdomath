@@ -68,9 +68,8 @@
 .svg_animation {
     width: 493px;
     height: auto;
-    background-image: url(/ezdomath/public/img/svganim.svg);
+    /* background-image: url(/ezdomath/public/img/svganim.svg); */
 }
-
 
 
 .features {
@@ -216,6 +215,7 @@
 .intro_list_top_p{
     font-size: 30px;
     color: var(--color_darkest);
+    text-align: center;
 }
 .intro_list_wrap {
     margin: 0 auto;
@@ -412,5 +412,29 @@
         width: 300px;
         height: 450px;
         background-image: url(/ezdomath/img/introColorBox3.webp);
+    }
+    .intro_list_top{
+        padding: 30px 15px 70px 15px;
+    }
+    .intro_list_top_p{
+        font-size: 20px;
+    }
+    .intro_list_moile_block{
+        display: block;
+    }
+    .intro_list_box{
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 100px;
+    }
+    .intro_list_box_revers{
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 100px;
+    }
+    .intro_list_box_bottop{
+        margin-top: 30px;
     }
 }

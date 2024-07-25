@@ -16,7 +16,11 @@ export function Bookmark({active,handleBookmark}) {
 	</BsBookmarkStarFill>
 }
 
-export function SubjectCard({subjectId,type,achievement}) {
+export function SubjectCard({
+	subjectId/*필수*/,
+	type/*0: 북마크 페이지에서, 1: 진척도페이지에서, 2:그외*/,
+	achievement/*진척도페이지에서만 사용(없어도됨)*/
+}) {
 	const { user } = useContext(userContext);
 	// subjectId로 subject가져오기
 	const subject = useMemo(()=>{
@@ -79,6 +83,7 @@ export function SubjectCard({subjectId,type,achievement}) {
 		}
 		break;
 	case 2 :
+		//단순표시
 		break;
 	}
 	return <>
@@ -91,7 +96,9 @@ export function SubjectCard({subjectId,type,achievement}) {
 				<div className='subjectName font_main'>
 					{subject?subject.name:''}
 				</div>
-				<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+				<div className='imgWrapper'>
+					<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+				</div>
 			</div>
 			<div className={`bottom type${typeValue}`}>
 				{jsx}

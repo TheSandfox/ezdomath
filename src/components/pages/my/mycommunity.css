@@ -1,4 +1,4 @@
-.myBookmark.myLeftBox {
+.myCommunity.myLeftBox {
 	&>.tabs {
 		display: flex;
 		flex-direction: column;
@@ -9,8 +9,14 @@
 	}
 }
 
-.myBookmark.myLeftBoxAlter {
+.myCommunity.myLeftBoxAlter {
 	&>.dropdown {
 		width: 100%;
 	}
+}
+
+.myCommunityCardContainer {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2,1fr);
 }

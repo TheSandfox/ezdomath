@@ -1,11 +1,12 @@
-import { useContext, useEffect, useMemo, useReducer, useState } from "react"
-import { MyTitle } from "./PageMy"
+import { act, useContext, useEffect, useMemo, useReducer, useState } from "react"
+import { MyTabButton, MyTitle } from "./PageMy"
 import { SubjectCard } from "../../generic/subject/SubjectCard"
 import './mybookmark.css';
 import { userContext } from "../../../App";
 import { SUBJECTS } from "../../../datas/subjects";
 import { ButtonTab } from "../../generic/Buttons";
 import { useParams } from "react-router-dom";
+import { DropdownItem, DropdownLarge } from "../../generic/Dropdown";
 
 export function Left({handleTrigger}) {
 	const params = useParams();
@@ -17,16 +18,33 @@ export function Left({handleTrigger}) {
 			actId:newActId
 		})
 	},[actId]);
-	return <div className="myBookmarkActSelector">
-		<MyTitle title={'단원별 분류'}/>
-		<div className="tabs">
-			<ButtonTab icon={<></>} to={'/my/bookmark/all'} active={actId==='all'}>전체</ButtonTab>
-			<ButtonTab icon={<></>} to={'/my/bookmark/0'} active={parseInt(actId)===0}>1단원</ButtonTab>
-			<ButtonTab icon={<></>} to={'/my/bookmark/1'} active={parseInt(actId)===1}>2단원</ButtonTab>
-			<ButtonTab icon={<></>} to={'/my/bookmark/2'} active={parseInt(actId)===2}>3단원</ButtonTab>
-			<ButtonTab icon={<></>} to={'/my/bookmark/3'} active={parseInt(actId)===3}>4단원</ButtonTab>
+	const displayIndex = useMemo(()=>{
+		if (actId==='all') {
+			return 0;
+		}
+		return parseInt(actId)+1;
+	},[actId])
+	return <>
+		<div className="myBookmark myLeftBox">
+			<MyTitle title={'단원별 분류'}/>
+			<div className="tabs">
+				<ButtonTab icon={<></>} to={'/my/bookmark/all'} active={actId==='all'}>전체</ButtonTab>
+				<ButtonTab icon={<></>} to={'/my/bookmark/0'} active={parseInt(actId)===0}>1단원</ButtonTab>
+				<ButtonTab icon={<></>} to={'/my/bookmark/1'} active={parseInt(actId)===1}>2단원</ButtonTab>
+				<ButtonTab icon={<></>} to={'/my/bookmark/2'} active={parseInt(actId)===2}>3단원</ButtonTab>
+				<ButtonTab icon={<></>} to={'/my/bookmark/3'} active={parseInt(actId)===3}>4단원</ButtonTab>
+			</div>
 		</div>
-	</div>
+		<div className="myBookmark myLeftBoxAlter">
+			<DropdownLarge displayIndex={displayIndex}>
+				<DropdownItem className={'large'} to={'/my/bookmark/all'}>전체</DropdownItem>
+				<DropdownItem className={'large'} to={'/my/bookmark/0'}>1단원</DropdownItem>
+				<DropdownItem className={'large'} to={'/my/bookmark/1'}>2단원</DropdownItem>
+				<DropdownItem className={'large'} to={'/my/bookmark/2'}>3단원</DropdownItem>
+				<DropdownItem className={'large'} to={'/my/bookmark/3'}>4단원</DropdownItem>
+			</DropdownLarge>
+		</div>
+	</>
 }
 
 export function Main({handleTabIndex,index,trigger}) {
@@ -54,7 +72,7 @@ export function Main({handleTabIndex,index,trigger}) {
 	},[]);
 	return <div className="contents myBookmark">
 		<MyTitle title={'북마크'}/>
-		<div className="myBookmarkCardContainer">
+		<div className="myCardContainer">
 			{cards.map((subjectId)=>{
 				return <SubjectCard key={subjectId} type={0} subjectId={subjectId}/>
 			})}

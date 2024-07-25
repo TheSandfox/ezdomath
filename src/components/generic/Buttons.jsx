@@ -5,7 +5,7 @@ export function Button({to,onClick,children,className}) {
 	return <>
 	{
 		to
-		?<Link to={to} className={className}>
+		?<Link to={to} className={className+" flex"}>
 			{children}
 		</Link>
 		:<div onClick={onClick} className={className}>
