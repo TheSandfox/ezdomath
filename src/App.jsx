@@ -59,6 +59,7 @@ function App() {
 				<Route path={'/*'} element={<PageMain/>}/>
 				<Route path={'/main'} element={<PageMain/>}/>
 				{/* 문제풀이페이지 */}
+				{/* <Route path={'/play/:actId/:subjectId/'}/> */}
 				<Route path={'/play/0'} element={<PagePlay/>}/>
 				{/* 사이트소개 */}
 				<Route path={'/intro/*'} element={<PageIntro/>}/>
