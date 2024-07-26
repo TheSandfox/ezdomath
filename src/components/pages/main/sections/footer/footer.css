@@ -81,7 +81,7 @@ footer{
 }
 
 .scrollTop_btn_txt>span{
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: bold;
 }
 
@@ -99,4 +99,10 @@ footer{
 .foot_cont_btn .foot_btn:hover{
     background-color: #FFE68D;
     color: var(--color_darkest);
+}
+
+@media screen and (max-width : 1440px) {
+    .foot_cont_wrap{
+        width: 57.5em;
+    }
 }

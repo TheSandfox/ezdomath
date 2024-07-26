@@ -1,0 +1,13 @@
+.main_page_sec2{
+    width: 100%; height: auto;
+    padding: 12.5em 0;
+    background-color: var(--color_background);
+}
+
+.main_page_sec2_inner{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5.25em;
+}

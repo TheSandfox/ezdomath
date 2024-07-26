@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ACTS } from "../../../datas/acts.js";
+import { ACTS } from "../../../datas/acts.jsx";
 import "./PagePlay.css";
 import { ActProgress } from "../../generic/act/ActProgress.jsx";
 import { ActList } from "../../generic/act/ActList.jsx";

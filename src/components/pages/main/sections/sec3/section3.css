@@ -71,23 +71,22 @@
 }
 
 .sec3_act_cont {
-    width: 31.25em;
-    height: 31.25em;
+    width: 25em;
+    height: 25em;
     border-radius: 50%;
     background-color: var(--color_main);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.75em;
 }
 
 .sec3_act_cont_img>img {
-    width: 9.38em;
-    height: 9.38em;
+    width: 8.75em;
+    height: 8.75em;
 }
 
 .sec3_act_cont_txt_wrap {
-    width: 18.75em;
+    width: 15em;
     flex-direction: column;
     gap: 0.75em;
 }
@@ -95,7 +94,7 @@
 /* --------sec3 font--------- */
 
 .sec3_font_main {
-    font-size: 2em;
+    font-size: 1.75em;
     font-weight: bold;
     color: var(--color_sub);
 }
