@@ -80,11 +80,15 @@ export function Left({handleTrigger}) {
 			tabId:newTabId
 		})
 	},[tabId]);
-	//회원유형 체크 후 튕기기
+	//회원유형 체크 후 접근할 수 없는 탭이면 강제이동
 	useEffect(()=>{
 		if (!user) {return;}
 		if (!displayItems) {return;}
-		
+		if (!displayItems.find((item)=>{
+			return item[0] === tabId;
+		})) {
+			navigate(`/my/community/${displayItems[0][0]}`);
+		}
 	},[tabId,displayItems,user]);
 	return <>
 		<div className="myCommunity myLeftBox">

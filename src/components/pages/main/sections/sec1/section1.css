@@ -1,5 +1,5 @@
 .main_page_section{
-    width: 100%; height: 100vh;
+    width: 100%; height: calc(100vh - 4.38em);
     position: relative;
     z-index: 99;
     text-align: center;
@@ -7,13 +7,14 @@
 
 .main_page_sec1{
     justify-content: center;
+    padding: 3.5em 0;
 }
 
 .main_page_sec1_inner{
     max-width: 1440px; width: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 7em;
 }
 
@@ -99,8 +100,13 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .main_page_section{
+        height: auto;
+        padding: 6.25em 0;
+    }
     .main_page_sec1_inner{
         max-width: 800px;
+        gap: 3.5em;
     }
     .act_cont_wrap>.act_cont:not(:last-child)::after{
         display: none;
@@ -120,9 +126,42 @@
     .act_cont{
         min-width: 10em; max-width: 15em; 
     }
+    .sec1_bot_wrap{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3.5em;
+    }
+    .sec1_bot_txt{
+        display: block;
+        width: 100%;
+    }
+    .sec1_font_main{
+        font-size: 2em;
+    }
+    .sec1_font_sub{
+        font-size: 1.25em;
+    }
 }
 
 
 @media screen and (max-width: 800px) {
     /* 480px 레이아웃~~~ */
+    .main_page_sec1_inner{
+        max-width: 800px;
+        gap: 3.5em;
+    }
+    .main_page_sec1_inner .act_cont_wrap {
+        gap: 3.5em;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .sec1_top_wrap, .sec1_bot_wrap{
+        max-width: 30em;
+        width: auto;
+    }
+    .main_page_sec1 .sec1_play_btn{
+        width: 9.38em;
+    }
 }

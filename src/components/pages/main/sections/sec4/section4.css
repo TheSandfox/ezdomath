@@ -1,14 +1,14 @@
 .main_page_sec4 {
-    width: 100%;
-    height: 100vh;
+    width: 100%; height: auto;
     background-color: var(--color_background);
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 5.25em 0;
 }
 
 .main_page_sec4_inner {
-    width: 100%;
+    width: 100%; height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -37,7 +37,8 @@
 }
 
 .sec4_cont_wrap {
-    max-width: 1280px;
+    max-width: 1920px;
+    padding: 0 calc(10vw + 1em);
     width: 100%;
     gap: 5%;
 }
@@ -47,7 +48,6 @@
     width: 17.5em;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 5%;
 }
 
 .intro_page_feature_btn_wrap>.intro_page_feature_btn_inner {
@@ -58,22 +58,40 @@
 .intro_page_feature_btn {
     flex-direction: column;
     border: 1px solid var(--color_darkest);
+    border: none;
 }
 
 .intro_page_route_feature_btn {
-    border: 1px solid var(--color_darkest);
+    
 }
 
 .intro_page_feature_btn_trigger {
     justify-content: space-between;
 }
 
+.intro_page_feature_btn_trigger.expanded {
+    border-radius: 0.3125rem 0.3125rem 0 0;
+    border-bottom: 0;
+}
+
 #sec4_plus {
     width: 1.5em;
     height: 1.5em;
+    transition: 0.3s ease-in-out;
+}
+
+.intro_page_feature_btn:hover .intro_page_feature_btn_trigger>#sec4_plus,
+.routing_btn:hover>#sec4_plus{
+    transform: rotate(45deg);
+}
+
+.intro_page_feature_btn_trigger.expanded>#sec4_plus{
+    transform: rotate(45deg);
 }
 
 .intro_page_feature_btn .intro_page_feature_btn_finger {
+    flex-direction: column;
+    gap: 0.88em;
     max-height: 0;
     overflow: hidden;
 }
@@ -82,6 +100,9 @@
     max-height: 400px;
     padding: 0.88em 0;
     animation: max-height 0.4s linear;
+    border: 1px solid var(--color_main);
+    border-radius: 0 0 0.3125rem 0.3125rem;
+    background-color: transparent;
 }
 
 @keyframes max-height {
@@ -109,8 +130,9 @@
 }
 
 .routing_btn {
+    width: 100%;
+    justify-content: space-between;
     align-items: center;
-    gap: 1.75em;
 }
 
 /* ------------------ */
@@ -121,14 +143,13 @@
     background-color: var(--color_main);
     position: relative;
     border-radius: 1.25em;
-    margin-right: 5%;
+    justify-content: center;
 }
 
 .intro_page_img_card_wrap::after {
     content: '';
     display: block;
-    width: 100%;
-    height: 36.25em;
+    width: 100%; height: 100%;
     position: absolute;
     top: 5%;
     left: 4%;
@@ -137,8 +158,27 @@
     z-index: -100;
 }
 
+.intro_page_img_card_wrap>.intro_page_img_card_inner{
+   
+}
+
+.intro_page_img_card_wrap>.intro_page_img_card_inner>.intro_page_img_card{
+    width: 100%; height: 100%;
+}
+
+.intro_page_img_card_wrap>.intro_page_img_card_inner>.intro_page_img_card>img{
+    width: 100%; height: 580px;
+    border-radius: 1.25em;
+    object-fit: fill;
+}
+
 .mobile_view {
     display: none;
+}
+
+.opacity{
+    display: none;
+    opacity: 0;
 }
 
 @media screen and (max-width : 1024px) {
@@ -150,5 +190,63 @@
     }
     .intro_page_feature_btn_wrap>.intro_page_feature_btn_inner {
         gap: 0.88em;
+    }
+}
+
+@media screen and (max-width : 800px) {
+    .sec4_cont_wrap {
+        max-width: 800px;
+        width: 100%;
+        justify-content: center;
+    }
+    .intro_page_feature_btn_wrap {
+        max-width: 400px;
+        width: 100%;
+        margin-left: 0;
+        gap: 3.5em;
+    }
+    .intro_page_img_card_wrap {
+        display: none;
+    }
+
+    /* 모바일 환경에서만 적용되는 css */
+    .intro_page_feature_btn_trigger.expanded{
+        background-color: var(--color_background_sub);
+    }
+    .intro_page_feature_btn .intro_page_feature_btn_finger.expanded {
+        border-top: 0;
+        padding-top: 0;
+    }
+    .intro_page_content_description {
+        display: block;
+        border-bottom: 1px solid var(--color_main);
+        background-color: var(--color_background_sub);
+        padding-bottom: 0.88em;
+    }
+    .intro_page_route_feature_btn .intro_page_content_description{
+        border-bottom: 0;
+        background-color: transparent;
+    }
+    .mobile_view {
+        display: block;
+        width: 100%; height: 12.5em;
+    }
+    .mobile_view .intro_page_img_card_wrap {
+        display: flex;
+        width: 100%; height: auto;
+        position: relative;
+        border-radius: 1.25em;
+        margin-right: 0;
+        justify-content: center;
+        background-color: transparent;
+    }
+    .mobile_view .intro_page_img_card_wrap::after {
+        content: '';
+        display: none;
+    }
+    .mobile_view .intro_page_img_card_wrap>.intro_page_img_card_inner>.intro_page_img_card>img{
+        width: 100%; height: 12.5em;
+        border-radius: 1.25em;
+        object-fit: fill;
     }
 }

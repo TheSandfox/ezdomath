@@ -29,13 +29,13 @@ export function Section1() {
   return (
     <section className='flex main_page_section main_page_sec1'>
       <article className='flex main_page_sec1_inner'>
-        <div>
+        <div className='sec1_top_wrap'>
           <h2 className="sec1_font_main">도형 학습의 재미를 느껴보세요!</h2>
           <p className="sec1_font_sub">
             시시한 문제풀이는 전면 금지한다! 도형과 친해야 수학을 잘할 수 있단다 꼬마야
           </p>
         </div>
-        <div>
+        <div className='sec1_middle_wrap'>
           <ul className="flex act_cont_wrap">
             {sec1_cont.map((item, index) => (
               <li key={index} className="flex act_cont">
@@ -50,7 +50,7 @@ export function Section1() {
             ))}
           </ul>
         </div>
-        <div>
+        <div className='flex sec1_bot_wrap'>
           <p className="sec1_font_sub sec1_bot_txt">
             이외에도 다양한 단원에 대한 설명과 예제를 확인하고 재미있는 학습과 함께 수학적 사고력을 키워보세요!
           </p>

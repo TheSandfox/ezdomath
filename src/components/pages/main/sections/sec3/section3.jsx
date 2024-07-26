@@ -81,7 +81,7 @@ export function Section3() {
     <section className="flex main_page_section main_page_sec3">
       <article className="flex main_page_sec3_inner">
         <div className="background_"></div>
-        <div className="sec3_act_cont_wrap">
+        <div className="flex sec3_act_cont_wrap">
           <table className="flex">
             <thead>
               <tr className="flex">

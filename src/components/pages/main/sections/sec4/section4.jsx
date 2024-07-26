@@ -1,13 +1,24 @@
 import "./section4.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ButtonMedium } from "../../../../generic/Buttons";
 
 export function Section4() {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(0);
+  const [opcityIndex, setOpcityIndex] = useState(0);
 
   const toggleExpand = (index) => {
     setExpandedIndex(index === expandedIndex ? null : index);
+    setOpcityIndex(index === opcityIndex ? null : index);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth === 800){}
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const sec4_cont = [
     {
@@ -17,6 +28,7 @@ export function Section4() {
         "‘교육 소개’ 페이지에서 학습 목표와 개념 설명을 포함한 다양한 문제를 학습하고 풀어보세요!",
       ],
       imgSrc: "img/Plus_Math.webp",
+      imgCardSrc: "img/intro_list_item1.png"
     },
     {
       title: "로그인 및 회원가입",
@@ -25,6 +37,7 @@ export function Section4() {
         "회원의 경우 ‘일반회원’ 과 ‘카카오 회원’ 으로 분류되며 카카오 회원의 경우 추가 정보를 입력해야 정상적인 서비스 이용이 가능합니다.",
       ],
       imgSrc: "img/Plus_Math.webp",
+      imgCardSrc: "img/intro_list_item2.png"
     },
     {
       title: "회원을 위한 특별 기능",
@@ -33,6 +46,7 @@ export function Section4() {
         "또한 '학생', '교사', '학부모' 회원 유형에 따라 맞춤형 학습관리 기능을 제공하고 있습니다.",
       ],
       imgSrc: "img/Plus_Math.webp",
+      imgCardSrc: "img/intro_list_item3.png"
     },
     {
       title: "문의사항 처리방법",
@@ -41,8 +55,26 @@ export function Section4() {
         "또한 자주 언급되거나 중요한 문의사항에 경우 공지사항 페이지에서 해당 문의에 대한 피드백 및 문제 해결 방안에 대해 답변드리고 있습니다.",
       ],
       imgSrc: "img/Plus_Math.webp",
+      imgCardSrc: "img/intro_list_item4.png"
     },
   ];
+
+  function Sec4ContImgCard({
+    features,
+    opcityIndex
+  }) {
+    return (
+      <div className="flex intro_page_img_card_wrap">
+        <div className="intro_page_img_card_inner">
+          {features.map((feature, index) => (
+            <div key={index} className={`intro_page_img_card ${opcityIndex === index ? '' : 'opacity'}`}>
+              <img className="img_card" src={feature.imgCardSrc}/>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   function Sec4ContComponent({
     features,
@@ -54,7 +86,7 @@ export function Section4() {
         {features.map((feature, index) => (
           <div key={index} className="flex intro_page_feature_btn">
             <ButtonMedium
-              className="flex intro_page_feature_btn_trigger"
+              className={`flex intro_page_feature_btn_trigger ${expandedIndex === index ? 'expanded' : ''}`}
               onClick={() => toggleExpand(index)}
             >
               <p>
@@ -63,7 +95,7 @@ export function Section4() {
               <img id="sec4_plus" src={feature.imgSrc} />
             </ButtonMedium>
             <div
-              className={`intro_page_feature_btn_finger ${expandedIndex === index ? 'expanded' : ''}`}
+              className={`flex intro_page_feature_btn_finger ${expandedIndex === index ? 'expanded' : ''}`}
             >
               <div className="flex intro_page_content_description">
                 {feature.descriptions.map((desc, idx) => (
@@ -71,7 +103,7 @@ export function Section4() {
                 ))}
               </div>
               <div className="mobile_view">
-                <img />
+                <Sec4ContImgCard features={sec4_cont} opcityIndex={opcityIndex}/>
               </div>
             </div>
           </div>
@@ -104,7 +136,7 @@ export function Section4() {
               <div>
                 <div
                   id="routing_btn"
-                  className="intro_page_content_description"
+                  className="flex intro_page_content_description"
                 >
                   <ButtonMedium>
                     <div className="flex routing_btn">
@@ -116,15 +148,7 @@ export function Section4() {
               </div>
             </div>
           </aside>
-          <div className="intro_page_img_card_wrap">
-            <div className="flex intro_page_img_card_inner">
-              <div className="intro_page_img_card"></div>
-              <div className="intro_page_img_card"></div>
-              <div className="intro_page_img_card"></div>
-              <div className="intro_page_img_card"></div>
-              <div className="intro_page_img_card"></div>
-            </div>
-          </div>
+          <Sec4ContImgCard features={sec4_cont} opcityIndex={opcityIndex}/>
         </div>
       </article>
     </section>

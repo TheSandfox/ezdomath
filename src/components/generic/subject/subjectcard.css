@@ -37,7 +37,9 @@
 		border-radius: 0 0 1rem 1rem;
 		border: 1px solid var(--color_border);
 		border-width: 0 1px 1px 1px;
-		&.type0 {
+	}
+	&.type0 {
+		&>.bottom {
 			/* 북마크용 */
 			display: flex;
 			gap: 1rem;
@@ -45,7 +47,9 @@
 				flex: 1;
 			}
 		}
-		&.type1 {
+	}
+	&.type1 {
+		&>.bottom {
 			/* 진척도용 */
 			display: flex;
 			justify-content: space-between;
@@ -61,9 +65,32 @@
 				gap: 0.75rem;
 			}
 		}
-		/* &.type2 {
-
-		} */
+	}
+	/* type2 단순표시 */
+	&.type2 {
+		&>.top {
+			padding: 1rem;
+			background-color: var(--color_background_sub);
+		}
+		&>.bottom {
+			padding: 0 1rem 1rem 1rem;
+			/* 하단문제썸네일 */
+			&>.imgWrapper {
+				width: 100%;
+				height: 8rem;
+				border-radius: 0 0 0.5rem 0.5rem;
+				font-size: 0;
+				background-color: var(--color_black);
+				@media screen and (max-width:800px) {
+					height: 15rem;
+				}
+				&>img {
+					object-fit: contain;
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
 	}
 	&>.bookmark {
 		position: absolute;
@@ -74,7 +101,7 @@
 		opacity: 0.55;
 		filter: brightness(0.95);
 		transition: opacity 0.15s, filter 0.15s;
-		&>.bottom.type1 {
+		&.type1>.bottom {
 			color: var(--color_gray);
 		}
 		&:hover {
@@ -82,13 +109,13 @@
 			filter:none;
 		}
 	}
-	&.correct {
-		&>.bottom.type1 {
+	&.correct.type1 {
+		&>.bottom {
 			color: var(--color_green);
 		}
 	}
-	&.incorrect {
-		&>.bottom.type1 {
+	&.incorrect.type1 {
+		&>.bottom {
 			color: var(--color_red);
 		}
 	}

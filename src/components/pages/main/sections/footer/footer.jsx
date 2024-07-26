@@ -53,47 +53,53 @@ export const Footer = () => {
   }, []);
 
   return (
-    <footer className="flex">
-      <div className="flex foot_cont_wrap">
-        <div className="foot_cont_txt">
-          <div className="flex main_font_wrap">
-            <div className="main_font">EZDOMATH</div>
+    <footer>
+      <div className="flex foot_inner">
+        <div className="flex foot_cont_wrap">
+          <div className="foot_cont_txt">
+            <div className="flex main_font_wrap">
+              <div className="main_font">EZDOMATH</div>
+            </div>
           </div>
-        </div>
-        <div className="foot_cont_main">
-          <div className="flex foot_cont_main_inner">
-            <div className="stripe">
-              <div className="scrollTop_btn_wrap" ref={scrollTopBtnWrapRef}>
-                <div
-                  className="scrollTop_btn_fill"
-                  ref={scrollTopBtnFillRef}
-                ></div>
-                <ButtonLarge className="flex scrollTop_btn">
-                  <p
-                    className="flex scrollTop_btn_txt"
-                    ref={scrollTopBtnTxtRef}
-                  >
-                    <span>SCROLL</span>
-                    <span>TO</span>
-                    <span>TOP</span>
-                  </p>
-                </ButtonLarge>
+          <div className="foot_cont_main">
+            <div className="flex foot_cont_main_inner">
+              <div className="stripe">
+                <div className="scrollTop_btn_wrap" ref={scrollTopBtnWrapRef}>
+                  <div
+                    className="scrollTop_btn_fill"
+                    ref={scrollTopBtnFillRef}
+                  ></div>
+                  <ButtonLarge className="flex scrollTop_btn">
+                    <p
+                      className="flex scrollTop_btn_txt"
+                      ref={scrollTopBtnTxtRef}
+                    >
+                      <span>SCROLL</span>
+                      <span>TO</span>
+                      <span>TOP</span>
+                    </p>
+                  </ButtonLarge>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex foot_cont_btn">
+          <div className="flex foot_cont_btn">
             <ButtonLarge
-              className="foot_btn"
+              className="foot_btn foot_btn_Link"
               to="https://github.com/TheSandfox/ezdomath"
             >
               https://github.com/TheSandfox/ezdomath
             </ButtonLarge>
-            <ButtonLarge className="foot_btn">문의사항</ButtonLarge>
+            <ButtonLarge className="foot_btn foot_btn_inquiry">
+              문의사항
+            </ButtonLarge>
+          </div>
         </div>
-      </div>
-      <div>
-        <div className="copyright">COPYRIGHT 2024 EZDOMATH ALL RIGHTS RESERVED</div>
+        <div className="flex foot_under_txt">
+          <div className="copyright">
+            COPYRIGHT 2024 EZDOMATH ALL RIGHTS RESERVED
+          </div>
+        </div>
       </div>
     </footer>
   );

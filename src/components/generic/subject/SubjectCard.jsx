@@ -38,7 +38,7 @@ export function SubjectCard({
 			return null;
 		}
 	},[subject]);
-	const typeValue = !type?0:type
+	const typeValue = !type?0:parseInt(type);
 	let jsx = <></>
 	let newClass = null;
 	switch (typeValue) {
@@ -84,11 +84,18 @@ export function SubjectCard({
 		break;
 	case 2 :
 		//단순표시
+		jsx = <div className='imgWrapper'>
+			<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+		</div>
 		break;
 	}
 	return <>
-		<div className={`subjectCard${newClass?' '+newClass:''}`}>
-			<Bookmark active={true} handleBookmark={null}/>
+		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`}>
+			{
+				typeValue!==2
+				?<Bookmark active={true} handleBookmark={null}/>
+				:<></>
+			}
 			<div className='top'>
 				<div className='actName font_small'>
 					{act?act.name:''}
@@ -96,11 +103,15 @@ export function SubjectCard({
 				<div className='subjectName font_main'>
 					{subject?subject.name:''}
 				</div>
-				<div className='imgWrapper'>
-					<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
-				</div>
+				{
+					typeValue!==2
+					?<div className='imgWrapper'>
+						<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+					</div>
+					:<></>
+				}
 			</div>
-			<div className={`bottom type${typeValue}`}>
+			<div className={`bottom`}>
 				{jsx}
 			</div>
 		</div>

@@ -116,6 +116,14 @@
     margin-top: 0.5em;
 }
 
+
+@media screen and (max-width : 1440px) {
+    .main_page_sec3 table {
+        flex-direction: column;
+        gap: 10em;
+    }
+}
+
 @media screen and (max-width : 1280px) {
     .main_page_sec3_inner {
         max-width: 800px;
@@ -153,6 +161,10 @@
     .sec3_act_cont_txt_wrap {
         width: 15em;
     }
+    .sec3_cont_deco {
+        width: 13em;
+        height: 13em;
+    }
 
     .sec3_font_main {
         font-size: 1.5em;
@@ -160,5 +172,18 @@
     .sec3_font_sub {
         font-size: 0.88em;
     }
-    
+}
+
+@media screen and (max-width : 800px) {
+    .sec3_act {
+        align-items: center;
+        justify-content: center;
+    }
+    .sec3_act_cont {
+        width: 18.75em;
+        height: 18.75em;
+    }
+    .sec3_cont_deco {
+        display: none;
+    }
 }

@@ -35,7 +35,6 @@ export default function Navigation() {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, [isMenuPageVisible]);
 
   // 내 정보 창에 들어갈 데이터 배열
