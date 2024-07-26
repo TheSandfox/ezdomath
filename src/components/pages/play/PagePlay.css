@@ -170,4 +170,11 @@
     .play_container{
         height: auto;
     }
+    .left_sidebar_container {
+        padding-top : 130px
+    }
+    .subject_list_wrap{
+    padding: 15px 20px;
+    margin: 0 auto;
+    }
 }
