@@ -13,14 +13,12 @@
   
   @media (max-width: 1024px) {
     .top-banner {
-      max-width: 1024px;
       height: 128px;
     }
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 800px) {
     .top-banner {
-      max-width: 480px;
       height: 64px;
     }
   }
