@@ -180,10 +180,16 @@
         justify-content: center;
     }
     .sec3_act_cont {
-        width: 18.75em;
-        height: 18.75em;
+        width: 21.25em;
+        height: 21.25em;
     }
     .sec3_cont_deco {
         display: none;
+    }
+    .sec3_act_cont_txt_wrap{
+        width: 12.5em;
+    }
+    .sec3_font_main {
+        font-size: 1.25em;
     }
 }

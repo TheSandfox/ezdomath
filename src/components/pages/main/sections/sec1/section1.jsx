@@ -2,7 +2,7 @@ import './section1.css';
 import { ButtonLarge } from "../../../../generic/Buttons";
 
 export function Section1() {
-  // 학습 내용 데이터 배열
+  
   const sec1_cont = [
     {
       imgSrc: "img/Sphere.webp",
@@ -35,7 +35,7 @@ export function Section1() {
             시시한 문제풀이는 전면 금지한다! 도형과 친해야 수학을 잘할 수 있단다 꼬마야
           </p>
         </div>
-        <div className='sec1_middle_wrap'>
+        <div className='sec1__wrap'>
           <ul className="flex act_cont_wrap">
             {sec1_cont.map((item, index) => (
               <li key={index} className="flex act_cont">
