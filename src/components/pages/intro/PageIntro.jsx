@@ -3,10 +3,13 @@ import SAnimation from '/img/SAnimation.svg'
 import DiscoverWave from '/img/discoverWave.webp'
 import SpotlightWave from '/img/spotlightWave.webp'
 import TopBanner from '../../generic/Topbanner';
+import Navigation from '../navigation/navigation';
+
 
 export function PageIntro() {
   return (
     <div className="page-intro">
+      <Navigation/>
       <TopBanner pageName="EZDOMATH"/>
       <div className='intro_100_white'>
       <div className="intro_content_inner">

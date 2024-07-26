@@ -1,0 +1,51 @@
+.act_list {
+    padding: 20px;
+    /* background-color: #f9f9f9; */
+    border-radius: 8px;
+  }
+  
+  .act_list h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .act_list p {
+    margin-bottom: 20px;
+  }
+  
+  .act_list img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+
+  /* 임시추가 */
+  /* styles.css */
+.act-list {
+    padding: 0 15px;
+  }
+  
+  /* .act {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  } */
+  
+  .act h2 {
+    margin: 48px 0 20px 0;
+    color: var(--color_darkest);
+  }
+  
+  .act p {
+    margin-bottom: 20px;
+    color: var(--color_darkest);
+  }
+  
+  .act img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+  }
+  
