@@ -1,9 +1,13 @@
 const friendsDefault = localStorage.getItem('friends')
-	?localStorage.getItem('friends')
+	?JSON.parse(localStorage.getItem('friends'))
 	:[
 		{
 			userId1:0,
 			userId2:1
+		},
+		{
+			userId1:2,
+			userId2:3
 		},
 		{
 			userId1:0,

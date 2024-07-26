@@ -109,7 +109,7 @@ export function Main({handleTabIndex,index,trigger}) {
 		<MyTitle title={`진척도 - ${ACTS[actId]?ACTS[actId].name:''}`}/>
 		<div className="myCardContainer">
 			{cards.map((item)=>{
-				return <SubjectCard key={item.subjectId} type={2} subjectId={item.subjectId} achievement={item.achievement}/>
+				return <SubjectCard key={item.subjectId} type={1} subjectId={item.subjectId} achievement={item.achievement}/>
 			})}
 		</div>
 	</div>

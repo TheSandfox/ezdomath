@@ -1,12 +1,14 @@
-import { useContext, useEffect, useMemo, useState } from "react"
+import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import { MyTitle } from "./PageMy"
 import './mycommunity.css';
 import { useNavigate, useParams } from "react-router-dom";
 import { userContext } from "../../../App";
 import { USER_TYPE_ADMIN, USER_TYPE_PARENT, USER_TYPE_STUDENT, USER_TYPE_TEACHER } from "../../../datas/usertypes";
-import { ButtonTab } from "../../generic/Buttons";
-import { DropdownItem, DropdownLarge } from "../../generic/Dropdown";
+import { ButtonMedium, ButtonTab } from "../../generic/Buttons";
+import { DropdownItem, DropdownLarge, SimpleDropdown } from "../../generic/Dropdown";
 import { UserCard } from "../../generic/user/UserCard";
+import { InputText } from "../../generic/Input";
+import * as User from '/src/utils/User';
 
 const tabs = [
 	['students','나의 학생들'],
@@ -110,7 +112,35 @@ export function Left({handleTrigger}) {
 }
 
 export function Main({handleTabIndex,index,trigger}) {
-	const { user, users, friends } = useContext(userContext);
+	const { user, users, friends, invitations } = useContext(userContext);
+	//검색창
+	const inputTextRef = useRef(null);
+	const [searchInput,setSearchInput] = useState('');
+	const [searchMode,setSearchMode] = useState(0);
+	const handleSearchInput = {
+		set:(e)=>{
+			if (e&&e.key) {
+				if (e.key ==='Enter') {
+					setSearchInput(inputTextRef.current.value);
+					return;
+				} else {
+					return;
+				}
+			}
+			setSearchInput(inputTextRef.current.value);
+		}
+	}
+	// 검색창 지우기
+	useEffect(()=>{
+		if (inputTextRef.current) {
+			inputTextRef.current.value = '';
+		}
+	},[searchMode]);
+	const handleSearchMode = {
+		set:(e)=>{
+			setSearchMode(parseInt(e.target.value));
+		}
+	}
 	//리스트구성
 	const targetUsers = useMemo(()=>{
 		if (!user||!users) {return null;}
@@ -124,49 +154,149 @@ export function Main({handleTabIndex,index,trigger}) {
 					|| parseInt(friendItem.userId2)===parseInt(user.userId)
 			})
 			.map((friendItem)=>{
-				return (parseInt(friendItem.userId1) === parseInt(user.userId))
+				let newUserId = (parseInt(friendItem.userId1) === parseInt(user.userId))
 					?parseInt(friendItem.userId2)
-					:parseInt(friendItem.userId1)
+					:parseInt(friendItem.userId1);
+				return newUserId;
 			})
 		case 'search' :
-			return;
+			// 학생검색
+			// 검색창 비어있으면 생략
+			if (searchInput.length<=0) {
+				return null;
+			}
+			// 유저리스트에서 필터링
+			return users.filter((userItem)=>{
+				let bool = true;
+				//자기 자신은 안뜸
+				if (parseInt(user.userId)===parseInt(userItem.userId)) {return false;}
+				//학생만 떠야함
+				if (parseInt(userItem.userTypeId)!==USER_TYPE_STUDENT) {return false;}
+				switch (parseInt(searchMode)) {
+				case 0:
+					// 이름으로
+					bool = userItem.name.includes(searchInput);
+					break;
+				case 1:
+					// 학교이름으로
+					bool = userItem.schoolName.includes(searchInput);
+					break;
+				case 2:
+					// 식별코드로
+					bool = User.evaluateId(searchInput,userItem.userId);
+					break;
+				}
+				return bool;
+			})
+			.map((userItem)=>{
+				return userItem.userId;
+			});
 		case 'mentor' :
-			return;
+			//부모님 선생님
+			return friends.filter((friendItem)=>{
+				return parseInt(friendItem.userId1)===parseInt(user.userId)
+					|| parseInt(friendItem.userId2)===parseInt(user.userId)
+			})
+			.map((friendItem)=>{
+				let newUserId = (parseInt(friendItem.userId1) === parseInt(user.userId))
+					?parseInt(friendItem.userId2)
+					:parseInt(friendItem.userId1)
+				return {
+					userId:newUserId,
+					userTypeId:users.filter((userItem)=>{
+							return parseInt(newUserId) === parseInt(userItem.userId);
+					})[0].userTypeId
+				}
+			});
 		case 'invitation' :
-			return;
+			//초대목록
+			return invitations.filter((invitationItem)=>{
+				return parseInt(invitationItem.userId1)===parseInt(user.userId)
+					|| parseInt(invitationItem.userId2)===parseInt(user.userId)
+			})
+			.map((invitationItem)=>{
+				let newUserId = (parseInt(invitationItem.userId1) === parseInt(user.userId))
+					?parseInt(invitationItem.userId2)
+					:parseInt(invitationItem.userId1)
+				return newUserId;
+			});
 		default : 
 			return <></>
 		}
-	},[trigger,user,users]);
+	},[trigger,user,users,searchInput,searchMode]);
 	// JSX 구성
 	const jsx = useMemo(()=>{
-		if (!targetUsers) {return <></>}
+		const newTargetUsers = targetUsers?targetUsers:[];
 		switch (trigger.tabId) {
 		case 'students' :
 			return <>
 				<MyTitle title={'나의 학생들'}/>
-				<div className="myCommunityCardContainer">
-					{targetUsers.map((targetUserId)=>{
-						return <UserCard key={targetUserId} userId={targetUserId}/>
+				<div className="myCommunity cardContainer">
+					{newTargetUsers.map((targetUserId)=>{
+						return <UserCard type={0} key={targetUserId} userId={targetUserId}/>
 					})}
 				</div>
 			</>
 		case 'search' :
 			return <>
 				<MyTitle title={'학생찾기'}/>
+				<div className="myCommunity searchAndCards">
+					{/* 서치필드 */}
+					<div className="searchField">
+						<SimpleDropdown onChange={handleSearchMode.set}>
+							<option className="font_main" value={'0'}>학생 이름</option>
+							<option className="font_main" value={'1'}>학교 이름</option>
+							<option className="font_main" value={'2'}>식별코드</option>
+						</SimpleDropdown>
+						<InputText outerRef={inputTextRef} value={searchInput} onKeyDown={handleSearchInput.set}/>
+						<ButtonMedium className={'buttonSearch'} onClick={handleSearchInput.set}>찾기</ButtonMedium>
+					</div>
+					{/* 리스트 */}
+					<div className="myCommunity cardContainer">
+					{newTargetUsers.map((targetUserId)=>{
+						return <UserCard type={1} key={targetUserId} userId={targetUserId}/>
+					})}
+					</div>
+				</div>
 			</>
 		case 'mentor' :
 			return <>
-				<MyTitle title={'나의 선생님/부모님'}/>
+				<MyTitle title={'나의 부모님'}/>
+				<div className="myCommunity cardContainer">
+					{newTargetUsers
+						.filter((targetObject)=>{
+							return parseInt(targetObject.userTypeId) === USER_TYPE_PARENT;
+						})
+						.map((targetObject)=>{
+							return <UserCard type={2} key={targetObject.userId} userId={targetObject.userId}/>
+						})
+					}
+				</div>
+				<MyTitle title={'나의 선생님'}/>
+				<div className="myCommunity cardContainer">
+					{newTargetUsers
+						.filter((targetObject)=>{
+							return parseInt(targetObject.userTypeId) === USER_TYPE_TEACHER;
+						})
+						.map((targetObject)=>{
+							return <UserCard type={2} key={targetObject.userId} userId={targetObject.userId}/>
+						})
+					}
+				</div>
 			</>
 		case 'invitation' :
 			return <>
 				<MyTitle title={'초대현황'}/>
+				<div className="myCommunity cardContainer">
+					{newTargetUsers.map((targetUserId)=>{
+						return <UserCard type={3} key={targetUserId} userId={targetUserId}/>
+					})}
+				</div>
 			</>
 		default : 
 			return <></>
 		}
-	},[targetUsers])
+	},[targetUsers,trigger])
 	useEffect(()=>{
 		handleTabIndex.set(index);
 	},[])

@@ -12,6 +12,8 @@ import { bookmarksDefault, bookmarksReducer } from './datas/bookmarks'
 import { usersDefault, usersReducer } from './datas/users'
 import { friendsDefault, friendsReducer } from './datas/friends'
 import { achievementsDefault, achievementsReducer } from './datas/achievements'
+import { invitationsDefault, invitationsReducer } from './datas/invitations'
+import { notificationsDefault, notificationsReducer } from './datas/notifications'
 
 export const userContext = createContext(null);
 
@@ -44,13 +46,17 @@ function App() {
 	const [achievements,dispatchAchievements] = useReducer(achievementsReducer,achievementsDefault);
 	const [users,dispatchUsers] = useReducer(usersReducer,usersDefault);
 	const [friends,dispatchFriends] = useReducer(friendsReducer,friendsDefault);
+	const [invitations,dispatchInvitations] = useReducer(invitationsReducer,invitationsDefault);
+	const [notifications,dispatchNotifications] = useReducer(notificationsReducer,notificationsDefault);
 	
 	// 로그인유저 설정(임시)
 	useEffect(()=>{
-		handleUserContext.setUser(users.find((item)=>{
-			return parseInt(item.userId) === 0;
-		}));
-	},[])
+		handleUserContext.setUser(
+			users.find((item)=>{
+				return parseInt(item.userId) === parseInt(2);
+			})
+		);
+	},[users]);
 	// 리턴 JSX
    	return <>
 		<userContext.Provider value={{
@@ -64,6 +70,10 @@ function App() {
 			dispatchUsers:dispatchUsers,
 			friends:friends,
 			dispatchFriends:dispatchFriends,
+			invitations:invitations,
+			dispatchInvitations:dispatchInvitations,
+			notifications:notifications,
+			dispatchNotifications:dispatchNotifications,
 		}}>
 			<Routes>
 				{/* 메인 */}

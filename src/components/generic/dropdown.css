@@ -72,3 +72,9 @@
 	}
 }
 
+.simpleDropdown {
+	padding: 0.5rem;
+	border: 1px solid var(--color_darkest);
+	background-color: var(--color_white);
+	text-align: left;
+}

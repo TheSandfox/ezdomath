@@ -1,5 +1,5 @@
 const bookmarksDefault = localStorage.getItem('bookmarks')
-	?localStorage.getItem('bookmarks')
+	?JSON.parse(localStorage.getItem('bookmarks'))
 	:[
 		{
 			userId:0,

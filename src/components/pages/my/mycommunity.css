@@ -15,8 +15,43 @@
 	}
 }
 
-.myCommunityCardContainer {
+.myCommunity.cardContainer {
 	display: grid;
 	gap: 1rem;
 	grid-template-columns: repeat(2,1fr);
+}
+
+.myCommunity.searchAndCards {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	&>.searchField {
+		display: flex;
+		gap: 1rem;
+		&>.simpleDropdown {
+			width: 8rem;
+		}
+		&>.inputText {
+			flex: 1;
+		}
+		&>.buttonSearch {
+			width: 8rem;
+		}
+		@media screen and (max-width:800px) {
+			padding: 1rem;
+			position: sticky;
+			bottom: 4rem;
+			left: 0;
+			order: 8192;
+			flex-direction: column;
+			background-color: var(--color_background_sub);
+			border-radius: 0.5rem;
+			border: 1px solid var(--color_border);
+			&>.simpleDropdown,
+			&>.inputText,
+			&>.buttonSearch {
+				width: initial;
+			}
+		}
+	}
 }

@@ -1,5 +1,5 @@
 const achievementsDefault = localStorage.getItem('achievements')
-	?localStorage.getItem('achievements')
+	?JSON.parse(localStorage.getItem('achievements'))
 	:[
 		{
 			userId:0,

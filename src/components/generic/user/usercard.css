@@ -4,6 +4,7 @@
 	border-radius: 0.5rem;
 	border: 1px solid var(--color_border);
 	display: flex;
+	/* 좌측프로필 */
 	&>.profile {
 		border-radius: 0.25rem;
 		aspect-ratio: 1;
@@ -12,6 +13,7 @@
 			width: 3rem;
 		}
 	}
+	/* 중단이름 */
 	&>.middle {
 		flex: 1;
 		display: flex;
@@ -25,6 +27,15 @@
 		}
 		@media screen and (max-width:800px) {
 			justify-content: space-between;
+		}
+	}
+	/* 버튼컨테이너 */
+	&>.buttons {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-end;
+		@media screen and (max-width:1440px) {
+			gap: 0.75rem;
 		}
 	}
 	@media screen and (max-width:1440px) {
