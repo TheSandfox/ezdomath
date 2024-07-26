@@ -25,6 +25,10 @@ const friendsDefault = localStorage.getItem('friends')
 			userId1:5,
 			userId2:0
 		},
+		{
+			userId1:5,
+			userId2:2
+		},
 	];
 
 const validate = (item,userId1,userId2)=>{

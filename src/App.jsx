@@ -14,6 +14,7 @@ import { friendsDefault, friendsReducer } from './datas/friends'
 import { achievementsDefault, achievementsReducer } from './datas/achievements'
 import { invitationsDefault, invitationsReducer } from './datas/invitations'
 import { notificationsDefault, notificationsReducer } from './datas/notifications'
+import { qnasDefault, qnasReducer } from './datas/qnas'
 
 export const userContext = createContext(null);
 
@@ -48,6 +49,7 @@ function App() {
 	const [friends,dispatchFriends] = useReducer(friendsReducer,friendsDefault);
 	const [invitations,dispatchInvitations] = useReducer(invitationsReducer,invitationsDefault);
 	const [notifications,dispatchNotifications] = useReducer(notificationsReducer,notificationsDefault);
+	const [qnas,dispatchQnas] = useReducer(qnasReducer,qnasDefault);
 	
 	// 로그인유저 설정(임시)
 	useEffect(()=>{
@@ -74,6 +76,8 @@ function App() {
 			dispatchInvitations:dispatchInvitations,
 			notifications:notifications,
 			dispatchNotifications:dispatchNotifications,
+			qnas:qnas,
+			dispatchQnas:dispatchQnas,
 		}}>
 			<Routes>
 				{/* 메인 */}
