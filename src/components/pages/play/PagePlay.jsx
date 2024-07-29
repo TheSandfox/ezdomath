@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ACTS } from "/src/datas/acts";
+import { ACTS } from "../../../datas/acts";
 import "./PagePlay.css";
 import { ActProgress } from "../../generic/act/ActProgress.jsx";
 import { ActList } from "../../generic/act/ActList.jsx";
@@ -14,7 +14,8 @@ export function PagePlay() {
   const [isRightSidebarVisible, setRightSidebarVisible] = useState(true);
   const [isSidebarOverlayVisible, setSidebarOverlayVisible] = useState(false);
   const [isRightSidebarOverlayVisible, setRightSidebarOverlayVisible] = useState(false);
-  const [isMenuVisible, setMenuVisible] = useState(false); // For play_page_menu visibility
+  const [isMenuVisible, setMenuVisible] = useState(false);
+  const [selectedAct, setSelectedAct] = useState(actId ? parseInt(actId) : 0); // Act 프로그레스바 적용을 위해 초기 값을 actId 또는 0으로 설정
 
   const toggleSidebar = () => {
     setSidebarOverlayVisible(!isSidebarOverlayVisible);
@@ -28,6 +29,11 @@ export function PagePlay() {
     if (!isRightSidebarOverlayVisible) {
       setSidebarOverlayVisible(false);
     }
+  };
+
+  const handleActClick = (actId) => {
+    setSelectedAct(actId);
+    setSidebarOverlayVisible(false); // ActProgress 클릭 시 sidebar_overlay를 끄도록 설정
   };
 
   useEffect(() => {
@@ -47,12 +53,18 @@ export function PagePlay() {
 
     window.addEventListener('resize', handleResize);
 
-    handleResize(); // Run once to set initial state based on current window size
+    handleResize(); // 사이즈 전환되었을때 현재 창 크기에 따라 초기 상태를 설정
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (actId) {
+      setSelectedAct(parseInt(actId));
+    }
+  }, [actId]);
 
   return (
     <>
@@ -76,7 +88,7 @@ export function PagePlay() {
                 <b>학습하기</b>
               </div>
               {ACTS.map((act) => (
-                <ActProgress key={act.actId} actId={act.actId} />
+                <ActProgress key={act.actId} actId={act.actId} onClick={() => handleActClick(act.actId)} active={selectedAct === act.actId} />
               ))}
             </div>
           </aside>
@@ -84,7 +96,7 @@ export function PagePlay() {
         <section className={`play_page_background ${!isRightSidebarVisible ? 'full-width' : ''}`}>
           <div className="content_wrap">
             <div className="act_and_subject_wrap">
-              <ActList actId={actId} />
+              <ActList actId={selectedAct} />
             </div>
             {isRightSidebarVisible && (
               <div className="subject_list_wrap">
@@ -107,7 +119,7 @@ export function PagePlay() {
                 <b>학습하기</b>
               </div>
               {ACTS.map((act) => (
-                <ActProgress key={act.actId} actId={act.actId} />
+                <ActProgress key={act.actId} actId={act.actId} onClick={() => handleActClick(act.actId)} active={selectedAct === act.actId} />
               ))}
             </div>
           </aside>
