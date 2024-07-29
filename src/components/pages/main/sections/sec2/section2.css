@@ -1,0 +1,34 @@
+.main_page_sec2{
+    min-height: 100vh;
+    width: 100%; height: auto;
+    padding: 7.5em calc(10vw + 1em);
+    background-color: var(--color_background);
+    justify-content: center;
+}
+
+.main_page_sec2_inner{
+    max-width: 1920px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3.5em;
+}
+
+.main_page_sec2 .myCardContainer{
+    width: 100%;
+    gap: 2em;
+}
+
+.sec2_btn_wrap{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.sec2_view_btn{
+    flex-direction: column;
+}
+
+.none{
+    visibility: hidden;
+}
