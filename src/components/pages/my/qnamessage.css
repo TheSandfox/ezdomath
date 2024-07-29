@@ -1,0 +1,65 @@
+.qnaMessageWrapper {
+	width: 100%;
+	display: flex;
+	gap: 1rem;
+	--balloon-color:var(--color_white);
+	&.my {
+		justify-content: flex-end;
+		--balloon-color:var(--color_sub);
+		&>.right {
+			align-items: flex-end;
+		}
+	}
+	/* 프사 */
+	&>.profile {
+		font-size: 0;
+		&>img {
+			width: 3rem;
+			height: 3rem;
+			border-radius: 8192px;
+		}
+	}
+	/* 우측컨텍스트(이름,내용,날짜) */
+	&>.right{
+		display: flex;
+		flex-direction: column;
+		color: var(--color_black);
+		gap: 0.5rem;
+		/* 말풍선 */
+		&>.balloon {
+			padding: 1rem;
+			border-radius: 0.5rem;
+			display: flex;
+			flex-direction: column;
+			background-color: var(--balloon-color);
+			border: 1px solid var(--color_border);
+			max-width: 22.5rem;
+			&>.subjectInfo {
+				padding-bottom: 0.5rem;
+				display: flex;
+				gap: 0.5rem;
+				border-bottom: 1px solid var(--color_border);
+				margin-bottom: 0.5rem;
+				&>.actName {
+					color: var(--color_darkest);
+				}
+				&>.subjectName {
+					color: var(--color_dark);
+				}
+			}
+			&>.bottom {
+				margin-top: 0.5rem;
+				border-top: 1px solid var(--color_border);
+				padding-top: 1rem;
+			}
+			@media screen and (max-width:800px) {
+				padding: 0.75rem;
+			}
+		}
+		/* 날짜 */
+		&>.date {
+			width: 100%;
+			text-align: right;
+		}
+	}
+}

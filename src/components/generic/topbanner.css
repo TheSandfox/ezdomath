@@ -19,6 +19,7 @@
   
   @media (max-width: 800px) {
     .top-banner {
+		display: none;
       height: 64px;
     }
   }

@@ -8,7 +8,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
-		name: '수학문제 1-1'
+		name: '수학문제 1-1',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -17,7 +18,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
-		name: '수학문제 1-2'
+		name: '수학문제 1-2',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -26,7 +28,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
-		name: '수학문제 1-3'
+		name: '수학문제 1-3',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -35,7 +38,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
-		name: '수학문제 1-4'
+		name: '수학문제 1-4',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -44,7 +48,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
-		name: '수학문제 1-5'
+		name: '수학문제 1-5',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -53,7 +58,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
-		name: '수학문제 2-1'
+		name: '수학문제 2-1',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -62,7 +68,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
-		name: '수학문제 2-2'
+		name: '수학문제 2-2',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -71,7 +78,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
-		name: '수학문제 2-3'
+		name: '수학문제 2-3',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -80,7 +88,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
-		name: '수학문제 2-4'
+		name: '수학문제 2-4',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 	{
 		//0
@@ -89,7 +98,8 @@ const SUBJECTS = [
 		adjust:<Subject1_1.Adjust/>,
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
-		name: '수학문제 2-5'
+		name: '수학문제 2-5',
+		thumb: '/ezdomath/profile/dummy2.png'
 	},
 ]
 

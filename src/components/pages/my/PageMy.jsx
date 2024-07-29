@@ -24,6 +24,8 @@ import * as MyQNA from './MyQNA';
 import * as User from '/src/utils/User';
 import { userContext } from '../../../App';
 import { ButtonTab } from '../../generic/Buttons';
+import Navigation from '../navigation/navigation';
+import TopBanner from '../../generic/Topbanner';
 
 // 수평제목
 export function MyTitle({title}) {
@@ -89,43 +91,46 @@ export function PageMy({}) {
 			setTrigger(newVal);
 		}
 	}
-	return <div id={'pageMy'}>
+	return <>
+		<Navigation/>
 		{/* <탑배너> */}
-		{/* 상탭(탭) */}
-		<MyTabs flag={true} tabIndex={tabIndex}/>
-		{/* 컨텐츠영역 */}
-		<div className='mainContents'>
-			{/* 이너박스(좌우분할) */}
-			<div className='innerbox'>
-				{/* 좌측 */}
-				<div className='first'>
-					<ProfileCard user={user}/>
-					{/* 라우트별 컨텐츠 */}
-					<Routes>
-						<Route path='info' element={<MyInfo.Left handleTrigger={handleTrigger}/>}/>
-						<Route path='bookmark/:actId' element={<MyBookmark.Left handleTrigger={handleTrigger}/>}/>
-						<Route path='achievement/:actId/*' element={<MyAchievement.Left handleTrigger={handleTrigger}/>}/>
-						<Route path='achievement/:actId/:targetUserId' element={<MyAchievement.Left handleTrigger={handleTrigger}/>}/>
-						<Route path='community/:tabId' element={<MyCommunity.Left handleTrigger={handleTrigger}/>}/>
-					</Routes>
-				</div>
-				{/* 우측 */}
-				<div className='second'>
-					{/* 상탭(데탑only) */}
-					<MyTabs flag={false} tabIndex={tabIndex}/>
-					{/* 라우트별 컨텐츠 */}
-					<Routes>
-						<Route path='info' element={<MyInfo.Main handleTabIndex={handleTabIndex} index={0} user={user}/>}/>
-						<Route path='bookmark/:actId' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1} trigger={trigger}/>}/>
-						<Route path='achievement/:actId/*' element={<MyAchievement.Main handleTabIndex={handleTabIndex} index={2} trigger={trigger}/>}/>
-						<Route path='achievement/:actId/:targetUserId' element={<MyAchievement.Main handleTabIndex={handleTabIndex} index={2} trigger={trigger}/>}/>
-						<Route path='community/:tabId' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3} trigger={trigger}/>}/>
-						<Route path='qna/*' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
-						<Route path='qna/:userId' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
-					</Routes>
+		<TopBanner pageName={'마이페이지'}/>
+		<div id={'pageMy'}>
+			{/* 상탭(탭) */}
+			<MyTabs flag={true} tabIndex={tabIndex}/>
+			{/* 컨텐츠영역 */}
+			<div className='mainContents'>
+				{/* 이너박스(좌우분할) */}
+				<div className='innerbox'>
+					{/* 좌측 */}
+					<div className='first'>
+						<ProfileCard user={user}/>
+						{/* 라우트별 컨텐츠 */}
+						<Routes>
+							<Route path='info' element={<MyInfo.Left handleTrigger={handleTrigger}/>}/>
+							<Route path='bookmark/:actId' element={<MyBookmark.Left handleTrigger={handleTrigger}/>}/>
+							<Route path='achievement/:actId/*' element={<MyAchievement.Left handleTrigger={handleTrigger}/>}/>
+							<Route path='achievement/:actId/:targetUserId' element={<MyAchievement.Left handleTrigger={handleTrigger}/>}/>
+							<Route path='community/:tabId' element={<MyCommunity.Left handleTrigger={handleTrigger}/>}/>
+						</Routes>
+					</div>
+					{/* 우측 */}
+					<div className='second'>
+						{/* 상탭(데탑only) */}
+						<MyTabs flag={false} tabIndex={tabIndex}/>
+						{/* 라우트별 컨텐츠 */}
+						<Routes>
+							<Route path='info' element={<MyInfo.Main handleTabIndex={handleTabIndex} index={0} user={user}/>}/>
+							<Route path='bookmark/:actId' element={<MyBookmark.Main handleTabIndex={handleTabIndex} index={1} trigger={trigger}/>}/>
+							<Route path='achievement/:actId/*' element={<MyAchievement.Main handleTabIndex={handleTabIndex} index={2} trigger={trigger}/>}/>
+							<Route path='achievement/:actId/:targetUserId' element={<MyAchievement.Main handleTabIndex={handleTabIndex} index={2} trigger={trigger}/>}/>
+							<Route path='community/:tabId' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3} trigger={trigger}/>}/>
+							<Route path='qna/*' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
+							<Route path='qna/:userId' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
+						</Routes>
+					</div>
 				</div>
 			</div>
 		</div>
-
-	</div>
+	</>
 }

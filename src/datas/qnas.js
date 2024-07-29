@@ -8,6 +8,8 @@ const qnasDefault = localStorage.getItem('qnas')
 			toUserId:2,
 			dateTime:'20240707112233',
 			subjectId:'',
+			content:'선생님, 문제가 너무 어렵습니다.',
+			written:false,
 		},
 		{
 			qnaId:counter++,
@@ -15,6 +17,8 @@ const qnasDefault = localStorage.getItem('qnas')
 			toUserId:2,
 			dateTime:'20240707112233',
 			subjectId:1,
+			content:'선생님, 문제가 너무 어렵습니다.',
+			written:false,
 		},
 		{
 			qnaId:counter++,
@@ -22,6 +26,17 @@ const qnasDefault = localStorage.getItem('qnas')
 			toUserId:2,
 			dateTime:'20240707112233',
 			subjectId:1,
+			content:'선생님, 문제가 너무 어렵습니다.',
+			written:false,
+		},
+		{
+			qnaId:counter++,
+			fromUserId:2,
+			toUserId:0,
+			dateTime:'20240707112233',
+			subjectId:2,
+			content:'한번 말 해보거라.',
+			written:false,
 		},
 		{
 			qnaId:counter++,
@@ -29,13 +44,17 @@ const qnasDefault = localStorage.getItem('qnas')
 			toUserId:2,
 			dateTime:'20240707112233',
 			subjectId:2,
+			content:'선생님, 문제가 너무 어렵습니다.',
+			written:false,
 		},
 		{
 			qnaId:counter++,
 			fromUserId:0,
 			toUserId:2,
-			dateTime:'20240707112233',
+			dateTime:'20240729112233',
 			subjectId:3,
+			content:'선생님, 문제가 너무 어렵습니다.',
+			written:false,
 		},
 	];
 
@@ -72,25 +91,25 @@ const get = (target,fromUserId,toUserId)=>{
 }
 
 const qnasReducer = (state,action)=>{
-	const { fromUserId, toUserId } = action;
+	const { fromUserId, toUserId, subjectId, content } = action;
 	let newState;
 	if (fromUserId==null||toUserId==null) {return state;}
 	if (fromUserId===toUserId) {return state;}
 	switch (action.type) {
 		case 'add' :
 		// QNA생성
-		newState = state.map((stateItem)=>{
-			if (validate(stateItem,fromUserId,toUserId)) {
-				return  {
-					fromUserId:fromUserId,
-					toUserId:toUserId,
-					dateTime: dateFormat(new Date())
-				};
-			} else {
-				return stateItem;
+		newState = [
+			...state,
+			{
+				fromUserId,
+				toUserId,
+				subjectId,
+				content,
+				qnaId:state.length,
+				written:false,
+				dateTime: dateFormat(new Date())
 			}
-		});
-		console.log(newState);
+		];
 		localStorage.setItem('qnas',JSON.stringify(newState));
 		return newState;
 	case 'remove' :

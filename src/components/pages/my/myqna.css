@@ -1,10 +1,12 @@
 .myQNA {
 	height: 40rem;
-	border-radius: 1rem;
+	border-radius: 1rem 1rem 1rem 1rem;
 	background-color: var(--color_background_sub);
 	position: relative;
 	border: 1px solid var(--color_border);
 	padding-top: 4rem;
+	display: flex;
+	flex-direction: column;
 	&>.header {
 		position: absolute;
 		top: 0;
@@ -17,24 +19,34 @@
 		display: flex;
 		align-items: center;
 		padding: 1rem;
+		gap: 1rem;
+		&>.btnBack {
+			aspect-ratio: 1;
+			width: 2rem;
+			font-size: 0;
+			&>.icon {
+				width: 100%;
+				height: 100%;
+			}
+		}
 	}
 	&>.middleWrapper {
-		width: 100%;
-		height: 100%;
+		flex: 1;
 		overflow-y: auto;
 		overflow-x: hidden;
 		&>.middleContents {
 		}
 	}
 	&>.bottom {
-		position: absolute;
+		/* position: absolute;
 		bottom: 0;
 		left: 0;
-		width: 100%;
+		width: 100%; */
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
 		border-radius: 0 0 1rem 1rem;
+		/* 검색창 */
 		&>.searchField {
 			padding: 1rem;
 			background-color: var(--color_darkest);
@@ -44,5 +56,69 @@
 				flex: 1;
 			}
 		}
+		/* 문제선택창 */
+		&>.subjectInfo {
+			padding: 1rem;
+			background-color: var(--color_black);
+			color: var(--color_white);
+			display: flex;
+			gap: 1rem;
+			justify-content: center;
+			align-items: center;
+			&.noSubject {
+				flex-direction: column;
+			}
+			&>.subjectImg {
+				font-size: 0;
+				width: 9rem;
+				height: 6rem;
+				&>img {
+					width: 100%;
+					height: 100%;
+					border-radius: 0.25rem;
+				}
+			}
+			&>.rightContext {
+				width: 12rem;
+				height: 6rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				&>.actNameAndSubjectName {
+					text-align: center;
+				}
+				&>.subjectButtons {
+					display: flex;
+					justify-content: center;
+					gap: 1rem;
+				}
+			}
+			&>.noSubjectInfo {
+				color: var(--color_gray);
+				text-align: center;
+			}
+		}
+		/* 메세지입력창 */
+		&>.chatField {
+			padding: 1rem;
+			background-color: var(--color_darkest);
+			display: flex;
+			gap: 1rem;
+			&>.inputText {
+				flex: 1;
+			}
+		}
 	}
+}
+
+.myQNAWidgets {
+	display: flex;
+	flex-direction: column;
+}
+
+.myQNAMessages {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	gap: 2rem;
 }

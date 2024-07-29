@@ -2,4 +2,6 @@
 	border: 1px solid var(--color_black);
 	border-radius: 0.25rem;
 	padding: 0.5rem;
+	resize: none;
+	overflow-y: auto;
 }
