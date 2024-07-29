@@ -12,6 +12,7 @@ import rhombus1 from "/img/Act3_rhombus.webp"
 import parallenlogram1 from "/img/Act3_parallelogram.jpg"
 import trapezoid1 from "/img/Act3_trapezoid.webp" 
 import box1 from "/img/Act4_box.webp"
+import boxname1 from "/img/Act4_name.png"
 
 const ACTS = [
 	{
@@ -163,6 +164,14 @@ const ACTS = [
 		{ type: "text", 
 		content: "직육면체는 우리가 일상에서 흔히 볼 수 있는 직사각형 모양의 상자예요.\n예를 들어, 택배 상자나 책 같은 것들이 직육면체에 해당한답니다.", 
 		  highlights: ["직육면체","직사각형 모양의 상자"]
+		},
+		{ type: "image", src: boxname1, alt: "boxname1" },
+		{ type: "text", 
+		content: "직육면체의 부분마다 각각의 이름이 정해져 있어요.", 
+		},
+		{ type: "text", 
+		content: "모서리와 모서리가 만나는 꼭짓점(Vertex)이 있어요.\n모서리(Edge)는 두 꼭짓점을 연결하는 선이에요.\n면(Face)은 여러 모서리가 모여서 만드는 넓은 평평한 부분이에요.", 
+		highlights: ["꼭짓점(Vertex)","모서리(Edge)","면(Face)"]
 		},
 		{ type: "text",
 		content: "직육면체는 6개의 평평한 면이 있어요. 이 면들은 모두 직사각형 모양이에요.\n\n직육면체에는 12개의 모서리가 있어요. 모서리는 면과 면이 만나는 선을 말해요.\n\n직육면체에는 8개의 꼭짓점이 있어요. 꼭짓점은 모서리들이 만나는 점이에요.",

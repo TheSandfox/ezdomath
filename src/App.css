@@ -149,15 +149,6 @@ a {
     grid-template-columns: repeat(4, 1fr);
 }
 
-.top_banner {
-    min-height: 15rem;
-    background-image: url('your-image-url.jpg');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    border-radius: 0.5rem;
-    margin: 1.25rem auto;
-}
-
 .tab_btn {
     width: 20rem;
     color: var(--color_darkest);
@@ -467,11 +458,6 @@ a {
         font-size: 0.875rem;
         line-height: 1.125rem;
     }
-
-    .top_banner {
-        min-height: 14rem;
-    }
-
     .card_container {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -512,11 +498,6 @@ a {
         font-size: 0.875rem;
         line-height: 1rem;
     }
-
-    .top_banner {
-        height: 4rem;
-    }
-
     .tab_btn {
         gap: 0.625rem;
         flex-direction: column;

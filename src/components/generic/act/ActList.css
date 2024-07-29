@@ -1,53 +1,44 @@
 .act_list {
-    padding: 20px;
-    /* background-color: #f9f9f9; */
-    border-radius: 8px;
-  }
-  
-  .act_list h2 {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .act_list p {
-    margin-bottom: 20px;
-  }
-  
-  .act_list img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
+  padding: 1.25rem;
+  /* background-color: #f9f9f9; */
+  border-radius: 0.5rem;
+}
 
-  /* 임시추가 */
-  /* styles.css */
+.act_list h2 {
+  font-weight: bold;
+  margin-bottom: 0.625rem;
+}
+
+.act_list p {
+  margin-bottom: 1.25rem;
+}
+
+.act_list img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+
+/* 임시추가 */
 .act-list {
-    padding: 0 15px;
-  }
-  
-  /* .act {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-  } */
-  
-  .act h2 {
-    margin: 48px 0 20px 0;
-    color: var(--color_darkest);
-  }
-  
-  .act p {
-    margin-bottom: 20px;
-    color: var(--color_darkest);
-  }
-  
-  .act img {
-    width: 180px;
-    height: 180px;
-    height: auto;
-    display: block;
-    margin: 20px 0;
-    border-radius: 20px;
-  }
-  
+  padding: 0 0.9375rem;
+}
+
+.act h2 {
+  margin: 3rem 0 1.25rem 0;
+  color: var(--color_darkest);
+}
+
+.act p {
+  margin-bottom: 1.25rem;
+  color: var(--color_darkest);
+}
+
+.act img {
+  width: 11.25rem;
+  height: auto;
+  display: block;
+  margin: 1.25rem 0;
+  border-radius: 1.25rem;
+}
