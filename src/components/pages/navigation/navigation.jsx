@@ -103,12 +103,13 @@ const NavigationBar = ({
           <>
             <li className="Before_login">
               <div>
-                <ButtonSmall className="Sign_up">회원가입</ButtonSmall>
+                <ButtonSmall className="Sign_up" to={'register'}>회원가입</ButtonSmall>
               </div>
             </li>
             <li className="Before_login">
               <div>
-                <ButtonSmall className="Login" onClick={handleLogin}>
+                {/* <ButtonSmall className="Login" onClick={handleLogin}> */}
+                <ButtonSmall className="Login_page_routing" to={'login'}>
                   로그인
                 </ButtonSmall>
               </div>

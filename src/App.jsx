@@ -97,6 +97,7 @@ function App() {
 				<Route path={'/login/*'} element={<PageLogin/>}/>
 				{/* 회원가입 */}
 				<Route path={'/register/*'} element={<PageRegister/>}/>
+				<Route path={'/login/register/*'} element={<PageRegister/>}/>
 			</Routes>
 		</userContext.Provider>
 	</>
