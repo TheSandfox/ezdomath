@@ -1,25 +1,24 @@
 .top-banner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: var(--color_background_sub);
-    color: var(--color_darkest);
-    text-align: center;
-    width: 100%;
-    max-width: 1920px;
-    height: 128px;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color_background_sub);
+  color: var(--color_darkest);
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  height: 8rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .top-banner {
+      height: 8rem;
   }
-  
-  @media (max-width: 1024px) {
-    .top-banner {
-      height: 128px;
-    }
+}
+
+@media (max-width: 800px) {
+  .top-banner {
+      height: 4rem;
   }
-  
-  @media (max-width: 800px) {
-    .top-banner {
-		display: none;
-      height: 64px;
-    }
-  }
+}
