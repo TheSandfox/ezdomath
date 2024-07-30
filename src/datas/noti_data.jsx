@@ -1,3 +1,4 @@
+// 날짜를 'YYYY.MM.DD' 형식으로 포맷팅하는 함수
 const formatDate = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -5,6 +6,7 @@ const formatDate = (date) => {
     return `${year}.${month}.${day}`;
 };
 
+// 초기 공지사항 데이터 배열
 const Noti = [
     {
         notiId: 0,
@@ -32,4 +34,25 @@ const Noti = [
     },
 ];
 
-export { Noti };
+// 다음 공지사항 ID를 설정하는 변수 (초기 공지사항 수로 설정)
+let nextNotiId = Noti.length;
+
+// 새로운 공지사항을 추가하는 함수
+const addNotice = (title, content, important) => {
+    const newNotice = {
+        notiId: nextNotiId++,  // 공지사항 ID 증가
+        title,
+        time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
+        important,
+        item: [
+            {
+                type: "text",
+                content,
+            },
+        ],
+    };
+    Noti.unshift(newNotice);  // 새로운 공지사항을 배열의 맨 앞에 추가
+};
+
+// Noti 배열과 addNotice 함수를 내보내기
+export { Noti, addNotice };
