@@ -44,11 +44,11 @@ export default function Navigation() {
 
   // 내 정보 창에 들어갈 데이터 배열
   const naviMyPageAccordionContent = [
-    { text: "내정보", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "커뮤니티", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "진척도", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "북마크", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
+    { text: "내정보", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
+    { text: "커뮤니티", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/community/students" },
+    { text: "진척도", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/achievement/0" },
+    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
+    { text: "북마크", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/qna" },
   ];
   const naviMenuPageAccordionContent = [
     { text: "EZDOMATH", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/" },
@@ -213,7 +213,7 @@ const MyPage = ({
       <ul className="accordion_wrap">
         {naviMyPageAccordionContent.map((item, index) => (
           <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn">
+            <ButtonMedium className="menu_page_btn" to={item.to}>
               <p>{item.text}</p>
               <img
                 className="accordion_arrow"
