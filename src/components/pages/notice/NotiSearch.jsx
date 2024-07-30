@@ -29,7 +29,7 @@ export function NotiSearch({ onSearch }) {
                         value={searchQuery} 
                         onChange={(e) => setSearchQuery(e.target.value)} 
                     />
-                    <button type="submit">검색하기</button>
+                    <button type="submit">검색</button>
                 </div>
             </form>
         </div>
