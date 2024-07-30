@@ -5,7 +5,8 @@ export function SubjectScene({children}) {
 	return <Canvas
 		className='subjectScene'
 		style={{
-			width:'75%',
+			width:'100%',
+			height:'50%',
 			
 		}}
 		orthographic	
