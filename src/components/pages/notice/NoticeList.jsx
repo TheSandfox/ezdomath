@@ -19,22 +19,22 @@ export function NoticeList() {
         navigate(`/notice/detail/${noticeId}`);
     };
 
-    // 공지사항을 중요도와 역순으로 정렬하는 함수
-    const sortNotices = (notices) => {
-        const importantNotices = notices.filter(notice => notice.important); // 중요한 공지사항 필터링
-        const regularNotices = notices.filter(notice => !notice.important).sort((a, b) => b.notiId - a.notiId); // 일반 공지사항 역순 정렬
-        return [...importantNotices, ...regularNotices]; // 정렬된 배열 반환
-    };
+// 공지사항을 중요도와 역순으로 정렬하는 함수
+const sortNotices = (notices) => {
+    const importantNotices = notices.filter(notice => notice.important); // 중요한 공지사항 필터링
+    const regularNotices = notices.filter(notice => !notice.important).sort((a, b) => b.notiId - a.notiId); // 일반 공지사항 역순 정렬
+    return [...importantNotices, ...regularNotices]; // 정렬된 배열 반환
+};
 
-    // 컴포넌트 마운트 시 공지사항 정렬 및 상태 업데이트
-    React.useEffect(() => {
-        setNotices(sortNotices(Noti));
-    }, []);
+// 컴포넌트 마운트 시 공지사항 정렬 및 상태 업데이트
+React.useEffect(() => {
+    setNotices(sortNotices(Noti));
+}, []);
 
-    // 공지사항 배열이 변경될 때마다 상태 업데이트
-    React.useEffect(() => {
-        setNotices(sortNotices(Noti));
-    }, [Noti]);
+// 공지사항 배열이 변경될 때마다 상태 업데이트
+React.useEffect(() => {
+    setNotices(sortNotices(Noti));
+}, [Noti]);
 
     return (
         <div className="notice_wrap">
