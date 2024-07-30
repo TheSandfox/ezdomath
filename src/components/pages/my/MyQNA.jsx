@@ -27,7 +27,7 @@ export function Main({handleTabIndex,index}) {
 	const inputChatRef = useRef(null);
 	const middleWrapperRef = useRef(null);
 	const { user, qnas, friends, users, dispatchQnas } = useContext(userContext);
-	const { userId } = useParams();
+	const { userId, subjectId } = useParams();
 	// 검색(리스트)
 	const [searchValue, setSearchValue] = useState('');
 	const handleSearchValue = {
@@ -50,25 +50,16 @@ export function Main({handleTabIndex,index}) {
 			type:'add',
 			fromUserId:user.userId,
 			toUserId:userId,
-			subjectId:parseInt(subjectIdInput)<0?'':String(subjectIdInput),
+			subjectId:subjectId||'',
 			content:inputChatRef.current.value,
 		});
 		inputChatRef.current.value = ''
 	}
-	// 문제id
-	const [subjectIdInput,setSubjectIdInput] = useState(-1);
-	const handleSubjectIdInput = {
-		set:(val)=>{
-			setSubjectIdInput(val);
-		},
-		reset:()=>{
-			setSubjectIdInput(-1);
-		}
-	}
 	const targetSubject = useMemo(()=>{
-		let newObj = SUBJECTS[parseInt(subjectIdInput)];
+		if (!subjectId) {return null;}
+		let newObj = SUBJECTS[parseInt(subjectId)];
 		return newObj?newObj:null;
-	},[subjectIdInput]);
+	},[subjectId]);
 	// 모드
 	const mode = useMemo(()=>{
 		// 상대 id가 없음
@@ -129,7 +120,7 @@ export function Main({handleTabIndex,index}) {
 									<ButtonIcon icon={
 										<FaSearch/>
 									}/>
-									<ButtonIcon onClick={handleSubjectIdInput.reset} icon={
+									<ButtonIcon icon={
 										<RiCloseLargeFill/>
 									}/>
 								</div>
@@ -195,7 +186,7 @@ export function Main({handleTabIndex,index}) {
 				</div>
 			</>
 		}
-	},[mode,subjectIdInput]);
+	},[mode,subjectId]);
 	// qna위젯들
 	const qnaWidgets = useMemo(()=>{
 		// 리스트 모드가 아님

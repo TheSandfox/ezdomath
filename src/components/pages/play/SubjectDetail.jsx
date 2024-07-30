@@ -50,7 +50,7 @@ export function SubjectDetail({subjectId}) {
 	//디버그용
 	useEffect(()=>{
 		console.log(subjectState);
-	},[subjectState])
+	},[subjectState]);
 	//리턴JSX
 	return <div className='subjectDetail'>
 		{/* 씬 래퍼 */}

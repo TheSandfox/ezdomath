@@ -11,7 +11,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
 
 export function UserCard({userId,type}) {
-	const { user, users, dispatchInvitations } = useContext(userContext);
+	const { user, users, dispatchInvitations, dispatchFriends } = useContext(userContext);
 	const targetUser = useMemo(()=>{
 		return users.find((item)=>{
 			return parseInt(item.userId)===parseInt(userId);
@@ -46,11 +46,30 @@ export function UserCard({userId,type}) {
 		// 초대: 수락, 거절
 		case 3:
 			return <>
-				<ButtonIcon icon={<FaCheck/>}/>
-				<ButtonIcon icon={<RiCloseLargeFill/>}/>
+				{/* 초대받기버튼 */}
+				<ButtonIcon icon={<FaCheck/>} onClick={()=>{
+					dispatchFriends({
+						type:'add',
+						userId1:user.userId,
+						userId2:userId
+					});
+					dispatchInvitations({
+						type:'remove',
+						fromUserId:userId,
+						toUserId:user.userId
+					});
+				}}/>
+				{/* 초대거절버튼 */}
+				<ButtonIcon icon={<RiCloseLargeFill/>} onClick={()=>{
+					dispatchInvitations({
+						type:'remove',
+						fromUserId:userId,
+						toUserId:user.userId
+					});
+				}}/>
 			</>
 		}
-	},[type]);
+	},[type,user]);
 	return <>
 		<div className='userCard'>
 			<img className='profile' src={`${targetUser?targetUser.profile:'/ezdomath/profile/dummy.png'}`}/>

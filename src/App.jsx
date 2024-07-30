@@ -59,19 +59,19 @@ function App() {
         }
 	}
 	// 동적데이터들
-	const [bookmarks,dispatchBookmarks] = useReducer(bookmarksReducer,bookmarksDefault);
-	const [achievements,dispatchAchievements] = useReducer(achievementsReducer,achievementsDefault);
-	const [users,dispatchUsers] = useReducer(usersReducer,usersDefault);
-	const [friends,dispatchFriends] = useReducer(friendsReducer,friendsDefault);
-	const [invitations,dispatchInvitations] = useReducer(invitationsReducer,invitationsDefault);
+	const [bookmarks,dispatchBookmarks] 		= useReducer(bookmarksReducer,bookmarksDefault);
+	const [achievements,dispatchAchievements] 	= useReducer(achievementsReducer,achievementsDefault);
+	const [users,dispatchUsers] 				= useReducer(usersReducer,usersDefault);
+	const [friends,dispatchFriends] 			= useReducer(friendsReducer,friendsDefault);
+	const [invitations,dispatchInvitations] 	= useReducer(invitationsReducer,invitationsDefault);
 	const [notifications,dispatchNotifications] = useReducer(notificationsReducer,notificationsDefault);
-	const [qnas,dispatchQnas] = useReducer(qnasReducer,qnasDefault);
+	const [qnas,dispatchQnas] 					= useReducer(qnasReducer,qnasDefault);
 	
 	// 로그인유저 설정(임시)
 	useEffect(()=>{
 		handleUserContext.setUser(
 			users.find((item)=>{
-				return parseInt(item.userId) === parseInt(2);
+				return parseInt(item.userId) === parseInt(8);
 			})
 		);
 	},[users]);

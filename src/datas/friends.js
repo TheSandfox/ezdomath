@@ -3,31 +3,38 @@ const friendsDefault = localStorage.getItem('friends')
 	:[
 		{
 			userId1:0,
-			userId2:1
+			userId2:1,
+			userTypeId:USER_TYPE_TEACHER
 		},
 		{
 			userId1:2,
-			userId2:3
+			userId2:3,
+			userTypeId:USER_TYPE_ADMIN
 		},
 		{
 			userId1:0,
-			userId2:2
+			userId2:2,
+			userTypeId:USER_TYPE_ADMIN
 		},
 		{
 			userId1:3,
-			userId2:0
+			userId2:0,
+			userTypeId:USER_TYPE_TEACHER
 		},
 		{
 			userId1:0,
-			userId2:4
+			userId2:4,
+			userTypeId:USER_TYPE_TEACHER
 		},
 		{
 			userId1:5,
-			userId2:0
+			userId2:0,
+			userTypeId:USER_TYPE_TEACHER
 		},
 		{
 			userId1:5,
-			userId2:2
+			userId2:2,
+			userTypeId:USER_TYPE_ADMIN
 		},
 	];
 
@@ -38,7 +45,7 @@ const validate = (item,userId1,userId2)=>{
 
 const get = (target,userId1,userId2)=>{
 	if ((userId1 === userId2)) {return null}
-	return target.find((item)=>{
+	return target.some((item)=>{
 		return validate(item,userId1,userId2);
 	})
 }
@@ -47,23 +54,28 @@ const friendsReducer = (state,action)=>{
 	const { userId1, userId2 } = action;
 	if (userId1==null||userId2==null) {return state;}
 	if (userId1===userId2) {return state;}
+	let newState;
 	switch (action.type) {
 	case 'add' :
-		if (get===null) {
-			return [
+		if (!get(state,userId1,userId2)) {
+			newState = [
 				...state,
 				{
 					userId1:userId1,
 					userId2:userId2
 				}
 			]
+			localStorage.setItem('friends',JSON.stringify(newState));
+			return newState;
 		} else {
-			return state
+			return state;
 		}
 	case 'remove' :
-		return state.filter((item)=>{
+		newState = state.filter((item)=>{
 			return !validate(item,userId1,userId2);
 		})
+		localStorage.setItem('friends',JSON.stringify(newState));
+		return newState;
  	}
 }
 

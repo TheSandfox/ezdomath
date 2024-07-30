@@ -14,7 +14,7 @@ const tabs = [
 	['students','나의 학생들'],
 	['search','학생찾기'],
 	['mentor','나의 선생님/부모님'],
-	['invitation','초대현황']
+	['invitation','받은 초대']
 ]
 
 export function Left({handleTrigger}) {
@@ -211,19 +211,15 @@ export function Main({handleTabIndex,index,trigger}) {
 		case 'invitation' :
 			//초대목록
 			return invitations.filter((invitationItem)=>{
-				return parseInt(invitationItem.userId1)===parseInt(user.userId)
-					|| parseInt(invitationItem.userId2)===parseInt(user.userId)
+				return parseInt(invitationItem.toUserId)===parseInt(user.userId)
 			})
 			.map((invitationItem)=>{
-				let newUserId = (parseInt(invitationItem.userId1) === parseInt(user.userId))
-					?parseInt(invitationItem.userId2)
-					:parseInt(invitationItem.userId1)
-				return newUserId;
+				return parseInt(invitationItem.fromUserId);
 			});
 		default : 
 			return <></>
 		}
-	},[trigger,user,users,searchInput,searchMode]);
+	},[trigger,user,users,searchInput,searchMode,friends,invitations]);
 	// JSX 구성
 	const jsx = useMemo(()=>{
 		const newTargetUsers = targetUsers?targetUsers:[];
@@ -265,7 +261,8 @@ export function Main({handleTabIndex,index,trigger}) {
 				<div className="myCommunity cardContainer">
 					{newTargetUsers
 						.filter((targetObject)=>{
-							return parseInt(targetObject.userTypeId) === USER_TYPE_PARENT;
+							return parseInt(targetObject.userTypeId) === USER_TYPE_PARENT
+								|| parseInt(targetObject.userTypeId) === USER_TYPE_ADMIN;
 						})
 						.map((targetObject)=>{
 							return <UserCard type={2} key={targetObject.userId} userId={targetObject.userId}/>
@@ -276,7 +273,8 @@ export function Main({handleTabIndex,index,trigger}) {
 				<div className="myCommunity cardContainer">
 					{newTargetUsers
 						.filter((targetObject)=>{
-							return parseInt(targetObject.userTypeId) === USER_TYPE_TEACHER;
+							return parseInt(targetObject.userTypeId) === USER_TYPE_TEACHER
+								|| parseInt(targetObject.userTypeId) === USER_TYPE_ADMIN;
 						})
 						.map((targetObject)=>{
 							return <UserCard type={2} key={targetObject.userId} userId={targetObject.userId}/>
@@ -286,7 +284,7 @@ export function Main({handleTabIndex,index,trigger}) {
 			</>
 		case 'invitation' :
 			return <>
-				<MyTitle title={'초대현황'}/>
+				<MyTitle title={'받은 초대'}/>
 				<div className="myCommunity cardContainer">
 					{newTargetUsers.map((targetUserId)=>{
 						return <UserCard type={3} key={targetUserId} userId={targetUserId}/>

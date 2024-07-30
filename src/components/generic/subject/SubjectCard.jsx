@@ -1,7 +1,7 @@
 import './subjectcard.css';
 import { SUBJECTS } from '/src/datas/subjects';
 import { ACTS } from '/src/datas/acts';
-import { useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { ButtonIcon, ButtonMedium } from '../Buttons';
 import { BsBookmarkStarFill } from 'react-icons/bs';
 import { FaRegEdit } from "react-icons/fa";
@@ -11,8 +11,38 @@ import { RiCloseLargeFill } from "react-icons/ri";
 import { FaMinus } from "react-icons/fa6";
 import { userContext } from '../../../App';
 
-export function Bookmark({active,handleBookmark}) {
-	return <BsBookmarkStarFill className={`bookmark${active?' active':''}`} onClick={()=>{if(handleBookmark){handleBookmark.toggle()}}}>
+export function Bookmark({subjectId}) {
+	const { bookmarks, dispatchBookmarks, user } = useContext(userContext);
+	// 액티브 판별
+	const active = useMemo(()=>{
+		if (!bookmarks) {return false;}
+		if (!user) {return false;}
+		if (isNaN(parseInt(subjectId))) {return false;}
+		return bookmarks.some((bookmarkItem)=>{
+			return (parseInt(bookmarkItem.userId)===parseInt(user.userId))
+				&& (parseInt(bookmarkItem.subjectId)===parseInt(subjectId))
+		})
+	},[bookmarks,user,subjectId]);
+	// 버튼상호작용
+	const toggleBookmark = useCallback(()=>{
+		if (!bookmarks) {return}
+		if (!user) {return}
+		if (isNaN(parseInt(subjectId))) {return}
+		if (active) {
+			dispatchBookmarks({
+				type:'remove',
+				userId:user.userId,
+				subjectId
+			})
+		} else {
+			dispatchBookmarks({
+				type:'add',
+				userId:user.userId,
+				subjectId
+			})
+		}
+	},[bookmarks,user,subjectId,active]);
+	return <BsBookmarkStarFill className={`bookmark${active?' active':''}`} onClick={toggleBookmark}>
 	</BsBookmarkStarFill>
 }
 
@@ -93,7 +123,7 @@ export function SubjectCard({
 		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`}>
 			{
 				typeValue!==2
-				?<Bookmark active={true} handleBookmark={null}/>
+				?<Bookmark subjectId={subject.subjectId}/>
 				:<></>
 			}
 			<div className='top'>
@@ -106,7 +136,7 @@ export function SubjectCard({
 				{
 					typeValue!==2
 					?<div className='imgWrapper'>
-						<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+						<img src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
 					</div>
 					:<></>
 				}

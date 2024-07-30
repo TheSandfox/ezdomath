@@ -27,14 +27,14 @@ const bookmarksReducer = (state,action)=>{
 				subjectId
 			}
 		];
-		localStorage.setItem('bookmarks',newState);
+		localStorage.setItem('bookmarks',JSON.stringify(newState));
 		return newState;
 	case 'remove':
 		newState = state.filter((item)=>{
 			return (parseInt(item.userId)!==parseInt(userId))
-				&& (parseInt(item.subjectId)!==parseInt(subjectId))
+				|| (parseInt(item.subjectId)!==parseInt(subjectId))
 		});
-		localStorage.setItem('bookmarks',newState);
+		localStorage.setItem('bookmarks',JSON.stringify(newState));
 		return newState;
 	}
 }

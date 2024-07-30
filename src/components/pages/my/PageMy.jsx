@@ -127,6 +127,8 @@ export function PageMy({}) {
 							<Route path='community/:tabId' element={<MyCommunity.Main handleTabIndex={handleTabIndex} index={3} trigger={trigger}/>}/>
 							<Route path='qna/*' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
 							<Route path='qna/:userId' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
+							<Route path='qna/:userId/*' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
+							<Route path='qna/:userId/:subjectId' element={<MyQNA.Main handleTabIndex={handleTabIndex} index={4}/>}/>
 						</Routes>
 					</div>
 				</div>
