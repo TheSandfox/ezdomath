@@ -1,3 +1,4 @@
+// 날짜를 'YYYY.MM.DD' 형식으로 포맷팅하는 함수
 const formatDate = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -5,6 +6,7 @@ const formatDate = (date) => {
     return `${year}.${month}.${day}`;
 };
 
+// 초기 공지사항 데이터 배열
 const Noti = [
     {
         notiId: 0,
@@ -32,4 +34,25 @@ const Noti = [
     },
 ];
 
-export { Noti };
+// 다음 공지사항 ID를 초기 공지사항 수로 설정
+let nextNotiId = Noti.length;
+
+// 새로운 공지사항을 추가하는 함수, unshift로 역순추가
+const addNotice = (title, content, important) => {
+    const newNotice = {
+        notiId: nextNotiId++,
+        title,
+        time: formatDate(new Date()),
+        important,
+        item: [
+            {
+                type: "text",
+                content,
+            },
+        ],
+    };
+    Noti.unshift(newNotice);
+};
+
+// addNotice=게시판 쓰기에 내보냄
+export { Noti, addNotice };

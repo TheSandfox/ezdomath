@@ -1,39 +1,30 @@
-import { Noti } from '../../../datas/noti_data';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addNotice } from '../../../datas/noti_data';
+import './NoticeWrite.css';
 
 export function NoticeWrite() {
     const navigate = useNavigate();
 
-    const formatDate = (date) => {
-		const year = date.getFullYear();
-		const month = date.getMonth() + 1;
-		const day = date.getDate();
-		return `${year}.${month}.${day}`;
-    };
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const newNotice = {
-            notiId: Noti.length,
-            title: formData.get('title'),
-            time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
-            important: formData.get('important') === 'true',
-            item: [
-                {
-                    type: "text",
-                    content: formData.get('content'),
-                },
-            ],
-        };
-        Noti.push(newNotice);
+        addNotice(
+            formData.get('title'),
+            formData.get('content'),
+            formData.get('important') === 'true'
+        );
+        navigate('/notice');
+    };
+
+    const handleCancel = () => {
         navigate('/notice');
     };
 
     return (
-        <div>
+        <div className="notice_wrap">
             <h2>공지사항 작성</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="notice_form" onSubmit={handleSubmit}>
                 <div>
                     <label>제목</label>
                     <input type="text" name="title" required />
@@ -49,7 +40,10 @@ export function NoticeWrite() {
                     <label>내용</label>
                     <textarea name="content" required></textarea>
                 </div>
-                <button type="submit">작성하기</button>
+                <div className="buttons">
+                    <button type="button" className="cancel_button" onClick={handleCancel}>취소</button>
+                    <button type="submit" className="submit_button">작성하기</button>
+                </div>
             </form>
         </div>
     );
