@@ -11,5 +11,9 @@
 }
 
 .register_inner{
-    max-width: 31.25em;
+    max-width: 48.75em;
+}
+
+.register_user_info_tap{
+    justify-content: space-between;
 }

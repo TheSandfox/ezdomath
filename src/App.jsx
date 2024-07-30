@@ -114,10 +114,10 @@ function App() {
 				{/* 회원가입 */}
 				<Route path={'/register/*'} element={<PageRegister/>}/>
 				{/* 회원 정보 입력 */}
-				<Route path={'/register/detail/*'} element={<PageRegisterDetail/>}/>
+				<Route path={'/detail/*'} element={<PageRegisterDetail/>}/>
 			</Routes>
 		</userContext.Provider>
 	</>
 }
 
-export default App
+export default App;

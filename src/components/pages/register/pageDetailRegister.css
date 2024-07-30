@@ -1,0 +1,15 @@
+.column_gap{
+    gap: 1.75em;
+    flex-direction: column;
+}
+
+.page_register_detail{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-top: 12.5em;
+}
+
+.register_detail_inner{
+    max-width: 60em;
+}

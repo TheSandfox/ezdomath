@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ACTS } from "../../../datas/acts";
 import "./PagePlay.css";
 import { ActProgress } from "../../generic/act/ActProgress.jsx";
@@ -7,9 +7,11 @@ import { ActList } from "../../generic/act/ActList.jsx";
 import Ham from '/img/HamMenu.svg'
 import RightG from '/img/rightG.svg'
 import Navigation from "../navigation/navigation.jsx";
+import { SubjectDetail } from "../play/SubjectDetail.jsx";
 
 export function PagePlay() {
   const { actId, subjectId } = useParams();
+  const navigate = useNavigate();
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isRightSidebarVisible, setRightSidebarVisible] = useState(true);
   const [isSidebarOverlayVisible, setSidebarOverlayVisible] = useState(false);
@@ -33,6 +35,7 @@ export function PagePlay() {
 
   const handleActClick = (actId) => {
     setSelectedAct(actId);
+    navigate(`/play/${actId}`); // URL을 업데이트하여 actId를 포함하도록 함
     setSidebarOverlayVisible(false); // ActProgress 클릭 시 sidebar_overlay를 끄도록 설정
   };
 
@@ -111,6 +114,7 @@ export function PagePlay() {
           </div>
         </section>
       </div>
+      {/* 여기부터 숨겨진 바 */}
       {isSidebarOverlayVisible && (
         <div className="sidebar_overlay">
           <aside className="left_sidebar_overlay">
@@ -130,7 +134,7 @@ export function PagePlay() {
           <div className="subject_list_wrap">
             <div className="subject_box">
               <p>문제목록</p>
-              <div className="subject_item">123</div>
+              <SubjectDetail subjectId={subjectId} />
             </div>
           </div>
         </div>

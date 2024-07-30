@@ -9,53 +9,52 @@
 }
 
 .intro_basic_font {
-    font-size: 16px;
+    font-size: 1rem;
     color: #0C576C;
 }
 
 .intro_top_banner {
     width: 100%;
-    height: 128px;
+    height: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.intro_content_inner{
-    max-width: 1190px;
+.intro_content_inner {
+    max-width: 74.375rem;
     margin: 0 auto;
 }
 
 .intro_message {
-    padding: 65px 0 65px 0;
+    padding: 4.0625rem 0;
     justify-content: space-between;
 }
 
 .intro_Headline_b {
-    font-size: 40px;
+    font-size: 2.5rem;
     color: var(--color_darkest);
 }
 
 .intro_small_p {
     color: var(--color_darkest);
-    margin: 20px 0 45px 0;
+    margin: 1.25rem 0 2.8125rem 0;
 }
-
 
 .intro_buttons {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .intro_buttons button,
 .intro_two_button button {
-    width: 233px;
-    height: 50px;
-    font-size: 18px;
+    width: 14.5625rem;
+    height: 3.125rem;
+    font-size: 1.125rem;
     cursor: pointer;
     background-color: #127E9B;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
 }
 
 .intro_buttons button:hover,
@@ -63,48 +62,46 @@
     background-color: #075C67;
 }
 
-
 /* svg 애니메이션 */
 .svg_animation {
-    width: 493px;
+    width: 30.8125rem;
     height: auto;
     /* background-image: url(/ezdomath/public/img/svganim.svg); */
 }
 
-
 .features {
     display: flex;
     justify-content: space-around;
-    margin-top: 40px;
+    margin-top: 2.5rem;
 }
 
 .feature_item {
     flex: 1;
-    margin: 0 10px;
+    margin: 0 0.625rem;
     text-align: center;
 }
 
 .extra_info {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 2.5rem;
 }
 
-.extra_info>div {
+.extra_info > div {
     flex: 1;
-    min-width: 250px;
-    margin: 10px;
-    padding: 20px;
+    min-width: 15.625rem;
+    margin: 0.625rem;
+    padding: 1.25rem;
     background-color: #f5f5f5;
     /* Example background color */
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 .intro_footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 20px;
+    padding: 1.25rem;
     background-color: #f0f0f0;
     /* Example footer color */
 }
@@ -113,30 +110,29 @@
     text-decoration: none;
     color: #00796b;
     /* Example link color */
-    margin: 0 10px;
+    margin: 0 0.625rem;
 }
 
 /* 여기부터 두번째 섹션 */
 
 .intro_two_wrap {
-    padding: 65px 0 65px 0;
+    padding: 4.0625rem 0;
     background-color: var(--color_background);
 }
 
 .intro_two_content {
     display: flex;
     flex-direction: column;
-    max-width: 1190px;
-    padding: 65px 0 65px 0;
+    max-width: 74.375rem;
+    padding: 4.0625rem 0;
     margin: 0 auto;
     text-align: center;
 }
 
-
 .intro_two_headline {
-    font-size: 30px;
+    font-size: 1.875rem;
     color: #0C576C;
-    margin-bottom: 60px;
+    margin-bottom: 3.75rem;
 }
 
 .intro_two_item_wrap {
@@ -144,42 +140,42 @@
 }
 
 .intro_box {
-    width: 390px;
+    width: 24.375rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 24px;
-    margin-bottom: 60px;
+    gap: 1.5rem;
+    margin-bottom: 3.75rem;
 }
 
 .intro_item1 {
     background-image: url(/img/intro_item1.png);
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
+    width: 9.375rem;
+    height: 9.375rem;
 }
 
 .intro_item2 {
     background-image: url(/img/intro_item2.png);
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
+    width: 9.375rem;
+    height: 9.375rem;
 }
 
 .intro_item3 {
     background-image: url(/img/intro_item3.png);
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
+    width: 9.375rem;
+    height: 9.375rem;
 }
 
 .intro_two_colorbox {
     width: 100%;
-    height: 325px;
+    height: 20.3125rem;
     background-image: url(/img/introColorBox1.png);
     background-size: 100%;
     background-repeat: no-repeat;
@@ -197,26 +193,29 @@
 }
 
 .colorbox_little_font {
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--color_subtitle);
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 }
 
 .colorbox_big_font {
-    font-size: 24px;
-    color: var(--color_dark)
+    font-size: 1.5rem;
+    color: var(--color_dark);
 }
-.intro_list_top{
-    margin: 72px 0 80px 0;
+
+.intro_list_top {
+    margin: 4.5rem 0 5rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.intro_list_top_p{
-    font-size: 30px;
+
+.intro_list_top_p {
+    font-size: 1.875rem;
     color: var(--color_darkest);
     text-align: center;
 }
+
 .intro_list_wrap {
     margin: 0 auto;
     width: 100%;
@@ -228,20 +227,21 @@
 .intro_list_box {
     display: flex;
     justify-content: space-between;
-    width: 666px;
-    margin-bottom: 170px
+    width: 41.625rem;
+    margin-bottom: 10.625rem;
 }
+
 .intro_list_box_revers {
     display: flex;
     justify-content: space-between;
-    width: 666px;
-    margin-bottom: 170px;
+    width: 41.625rem;
+    margin-bottom: 10.625rem;
     flex-direction: row-reverse;
 }
 
 .intro_list_imagebox {
-    width: 243px;
-    height: 243px;
+    width: 15.1875rem;
+    height: 15.1875rem;
 }
 
 .intro_list_box_left {
@@ -250,30 +250,38 @@
     justify-content: space-between;
 }
 
-.intro_list_box_small_p{
-    font-size: 13px;
+.intro_list_box_small_p {
+    font-size: 0.8125rem;
     color: var(--color_darkest);
 }
-.intro_list_box_title_p{
-    font-size: 30px;
+
+.intro_list_box_title_p {
+    font-size: 1.875rem;
     color: var(--color_darkest);
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
-.intro_list_box_detail_p{
+.intro_list_box_title_p2{
+    font-size: 1.875rem;
+    color: var(--color_darkest);
+    margin-bottom: 1rem;
+}
+
+.intro_list_box_detail_p {
     position: relative;
-    font-size: 16px;
+    font-size: 1rem;
     color: var(--color_darkest);
-    margin-left: 30px;
+    margin-left: 1.875rem;
 }
-.intro_list_box_detail_p::after{
+
+.intro_list_box_detail_p::after {
     height: 100%;
-    width: 4px;
+    width: 0.25rem;
     display: block;
     background: #8298ed;
     content: "";
     position: absolute;
-    left: -30px;
-    top: 0px;
+    left: -1.875rem;
+    top: 0;
 }
 
 .intro_list_item1,
@@ -285,68 +293,80 @@
     background-repeat: no-repeat;
     background-size: 100%;
 }
-.intro_list_item1{
+
+.intro_list_item1 {
     background-image: url(/img/intro_list_item1.png);
 }
-.intro_list_item2{
+
+.intro_list_item2 {
     background-image: url(/img/intro_list_item2.png);
 }
-.intro_list_item3{
+
+.intro_list_item3 {
     background-image: url(/img/intro_list_item3.png);
 }
-.intro_list_item4{
+
+.intro_list_item4 {
     background-image: url(/img/intro_list_item4.png);
 }
-.intro_list_box_link{
-    font-size: 16px;
+
+.intro_list_box_link {
+    font-size: 1rem;
     color: #008080;
+    display: inline;
+}
+.intro_list_box_link:hover{
+    border-bottom: 1px solid #008080;
+    display: inline;
 }
 
 /* 여기서부터 반응형 */
 @media screen and (max-width: 1440px) {
     .intro_message {
         justify-content: space-around;
-        padding: 35px 15px 35px 15px;
+        padding: 2.1875rem 0.9375rem;
     }
 
     .intro_Headline_b {
-        font-size: 32px;
+        font-size: 2rem;
     }
 
     .intro_two_colorbox {
-        width: 545px;
-        height: 500px;
+        width: 34.0625rem;
+        height: 31.25rem;
         background-image: url(/img/introColorBox2.webp);
         background-size: cover;
     }
 
     .intro_box {
-        width: 326px;
+        width: 20.375rem;
     }
 
     .svg_animation {
-        width: 350px
+        width: 21.875rem;
     }
-    .intro_small_p{
-        font-size: 14px;
+
+    .intro_small_p {
+        font-size: 0.875rem;
     }
+
     .intro_buttons button,
     .intro_two_button button {
-        width: 200px;
-        height: 50px;
-        font-size: 16px;
+        width: 12.5rem;
+        height: 3.125rem;
+        font-size: 1rem;
     }
 }
 
 @media screen and (max-width: 800px) {
     .intro_message {
         flex-direction: column-reverse;
-        padding: 65px 15px 65px 15px;
+        padding: 4.0625rem 0.9375rem;
     }
 
     .intro_Headline_b {
-        margin-top: 24px;
-        font-size: 24px;
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
     }
 
     .intro_mobie_flex {
@@ -356,8 +376,8 @@
     }
 
     .intro_small_p {
-        font-size: 14px;
-        margin: 20px 20px 45px 20px;
+        font-size: 0.875rem;
+        margin: 1.25rem 1.25rem 2.8125rem 1.25rem;
     }
 
     .svg_animation_wrap {
@@ -367,16 +387,16 @@
     }
 
     .svg_animation {
-        max-width: 300px;
+        max-width: 18.75rem;
     }
 
     .intro_top_banner {
-        height: 64px;
+        height: 4rem;
     }
 
     .intro_buttons {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
     }
 
     .features {
@@ -392,7 +412,7 @@
     }
 
     .intro_two_headline {
-        font-size: 18px;
+        font-size: 1.125rem;
     }
 
     .intro_two_item_wrap {
@@ -401,40 +421,46 @@
     }
 
     .intro_two_content {
-        padding: 30px 0 30px 0;
+        padding: 1.875rem 0;
     }
 
     .intro_two_wrap {
-        padding: 30px 0 30px 0;
+        padding: 1.875rem 0;
     }
 
     .intro_two_colorbox {
-        width: 300px;
-        height: 450px;
+        width: 18.75rem;
+        height: 28.125rem;
         background-image: url(/ezdomath/img/introColorBox3.webp);
     }
-    .intro_list_top{
-        padding: 30px 15px 70px 15px;
+
+    .intro_list_top {
+        padding: 1.875rem 0.9375rem 4.375rem 0.9375rem;
     }
-    .intro_list_top_p{
-        font-size: 20px;
+
+    .intro_list_top_p {
+        font-size: 1.25rem;
     }
-    .intro_list_moile_block{
+
+    .intro_list_moile_block {
         display: block;
     }
-    .intro_list_box{
+
+    .intro_list_box {
         flex-direction: column-reverse;
         align-items: center;
-        gap: 30px;
-        margin-bottom: 100px;
+        gap: 1.875rem;
+        margin-bottom: 6.25rem;
     }
-    .intro_list_box_revers{
+
+    .intro_list_box_revers {
         flex-direction: column-reverse;
         align-items: center;
-        gap: 30px;
-        margin-bottom: 100px;
+        gap: 1.875rem;
+        margin-bottom: 6.25rem;
     }
-    .intro_list_box_bottop{
-        margin-top: 30px;
+
+    .intro_list_box_bottop {
+        margin-top: 1.875rem;
     }
 }

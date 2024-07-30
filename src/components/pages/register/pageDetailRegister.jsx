@@ -1,3 +1,4 @@
+import "./pageDetailRegister.css";
 import Navigation from "../navigation/navigation";
 import { ButtonLarge, ButtonSmall } from "../../generic/Buttons";
 
@@ -5,9 +6,9 @@ export function PageRegisterDetail({}) {
   return (
     <>
       <Navigation/>
-      <div className="page_register_detail">
-        <div className="register_detail_inner">
-          <div className="register_detail_main_top">
+      <div className="flex page_register_detail">
+        <div className="flex column_gap register_detail_inner">
+          <div className="flex column_gap register_detail_main_top">
             <ul className="main_top_tit">
               <li>회원 정보입력</li>
               <li className="top_tit_deco"></li>
