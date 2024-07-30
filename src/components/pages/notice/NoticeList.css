@@ -17,16 +17,16 @@
 }
 
 .noti_table_head {
-    background-color: #f1f1f1;
+    background-color: var(--color_white);
 }
 
-th, td {
+.noti_table th, .noti_table td {
     padding: 16px 0;
     text-align: center;
     border-bottom: 1px solid #ccc;
 }
 
-th {
+.noti_table th {
     font-weight: bold;
 }
 
@@ -71,7 +71,7 @@ th {
 .no_results {
     text-align: center;
     font-size: 18px;
-    color: #777;
+    color: var(--color_black);
     padding: 20px 0;
 }
 
