@@ -20,11 +20,19 @@ export function PageLogin({}) {
     handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
   };
 
+  const clearInput = (inputType) => {
+    if (inputType === "id") {
+      setStringId("");
+    } else if (inputType === "password") {
+      setPassword("");
+    }
+  };
+
   return (
     <>
       <div className="flex page_login">
         <div className="flex column_gap login_inner">
-          <div className="flex column_gap login_main_top">
+          <div className="flex column_gap_half login_main_top">
             <ul className="flex main_top_tit">
               <li className="font_title">로그인</li>
               <li className="top_tit_deco"></li>
@@ -84,7 +92,10 @@ export function PageLogin({}) {
                       onChange={(e) => setStringId(e.target.value)} // 입력값을 stringId 상태로 설정
                     />
                   </div>
-                  <ButtonIcon className={"login_page_cancle"}>
+                  <ButtonIcon
+                    className={"login_page_cancle"}
+                    onClick={() => clearInput("id")}
+                  >
                     <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
@@ -98,7 +109,10 @@ export function PageLogin({}) {
                       onChange={(e) => setPassword(e.target.value)} // 입력값을 password 상태로 설정
                     />
                   </div>
-                  <ButtonIcon className={"login_page_cancle"}>
+                  <ButtonIcon
+                    className={"login_page_cancle"}
+                    onClick={() => clearInput("password")}
+                  >
                     <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>

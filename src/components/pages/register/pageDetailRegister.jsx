@@ -16,7 +16,7 @@ export function PageRegisterDetail({}) {
             <table>
                 <thead>
                     <tr>
-                        <th>회원유형</th>
+                        <th className="table_tit">회원유형</th>
                         <th>
                             <input type="radio"/>
                             <label>학생</label>
@@ -29,34 +29,34 @@ export function PageRegisterDetail({}) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>아이디</td>
+                        <td className="table_tit">아이디</td>
                         <td>
                             <input type="text" />
                             <label>6~12자의 영문 대소문자와 숫자 사용.</label>
                         </td>
                     </tr>
                     <tr>
-                        <td>비밀번호</td>
+                        <td className="table_tit">비밀번호</td>
                         <td>
                             <input type="text" />
                             <label>8~12자의 영문대소문자, 숫자, 특수문자 중 2종류 이상을 조합한 10자리 이상 또는 3종류이상을 조합한 8자리 이상 사용 가능.</label>
                         </td>
                     </tr>
                     <tr>
-                        <td>비밀번호 확인</td>
+                        <td className="table_tit">비밀번호 확인</td>
                         <td>
                             <input type="text" />
                             <label>비밀번호를 확인해주세요.</label>
                         </td>
                     </tr>
                     <tr>
-                        <td>이름</td>
+                        <td className="table_tit">이름</td>
                         <td>
                             <input type="text" />
                         </td>
                     </tr>
                     <tr>
-                        <td>학교</td>
+                        <td className="table_tit">학교</td>
                         <td>
                             <input type="text" />
                         </td>

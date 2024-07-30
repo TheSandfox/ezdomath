@@ -1,8 +1,3 @@
-.column_gap{
-    gap: 1.75em;
-    flex-direction: column;
-}
-
 .page_register{
     width: 100%; height: 100vh;
     align-items: center;
@@ -13,6 +8,54 @@
     max-width: 48.75em;
 }
 
+.register_main_top{
+    .main_top_cont{
+        .font_small{
+            span{
+                color: var(--color_subtitle);
+            }
+        }
+    }
+}
+
+.register_form{
+    background-color: var(--color_darkest);
+    border-radius: 20px;
+    padding: 3.13em 2.5em 2.13em;
+}
+
+.user_register_routing{
+    width: 18.75em; height: 18.75em;
+    background-color: var(--color_background_sub);
+    border-radius: 20px;
+    padding: 3.75em 2.88em 1.75em;
+    .registet_btn{
+        font-weight: 700;
+        width: 100%; height: 3.75em;
+    }
+}
+
 .register_user_info_tap{
     justify-content: space-between;
+    gap: 1.7em;
+}
+
+.user_register_explain{
+    align-items: center;
+    flex-direction: column;
+    gap: 0.44em;
+    span{
+        font-weight: 700;
+        font-size: 1.13em;
+        color: var(--color_darkest);
+    }
+}
+
+.user_register_explain>img{
+    width: 100px; height: 100px;
+}
+
+.register_form_deco{
+    color: var(--color_background_sub);
+    gap: 0.44;
 }
