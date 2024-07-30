@@ -1,3 +1,5 @@
+import { USER_TYPE_TEACHER, USER_TYPE_ADMIN, USER_TYPE_PARENT, USER_TYPE_STUDENT } from "./usertypes";
+
 const friendsDefault = localStorage.getItem('friends')
 	?JSON.parse(localStorage.getItem('friends'))
 	:[
