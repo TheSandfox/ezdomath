@@ -51,7 +51,10 @@ export function UserCard({userId,type}) {
 					dispatchFriends({
 						type:'add',
 						userId1:user.userId,
-						userId2:userId
+						userId2:userId,
+						userTypeId:Math.max(parseInt(user.userId),parseInt(
+							users.find(userItem=>parseInt(userItem.userId)===parseInt(userId)).userId
+						))
 					});
 					dispatchInvitations({
 						type:'remove',

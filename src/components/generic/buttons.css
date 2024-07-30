@@ -30,6 +30,9 @@
 	&.icon {
 		padding: 0.5rem;
 		border-width: 2px;
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
 		&>.icon {
 			aspect-ratio: 1;
 			width: 1.5rem;

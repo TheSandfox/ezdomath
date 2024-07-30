@@ -9,7 +9,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
 		name: '수학문제 1-1',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -19,7 +20,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
 		name: '수학문제 1-2',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -29,7 +31,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
 		name: '수학문제 1-3',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -39,7 +42,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
 		name: '수학문제 1-4',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -49,7 +53,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 0,
 		name: '수학문제 1-5',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -59,7 +64,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
 		name: '수학문제 2-1',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -69,7 +75,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
 		name: '수학문제 2-2',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -79,7 +86,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
 		name: '수학문제 2-3',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -89,7 +97,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
 		name: '수학문제 2-4',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 	{
 		//0
@@ -99,7 +108,8 @@ const SUBJECTS = [
 		scene:<Subject1_1.Scene/>,
 		actId: 1,
 		name: '수학문제 2-5',
-		thumb: '/ezdomath/profile/dummy2.png'
+		thumb: '/ezdomath/profile/dummy2.png',
+		zimoon: '수학문제 지문'
 	},
 ]
 

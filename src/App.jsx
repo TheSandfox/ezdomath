@@ -43,6 +43,16 @@ function App() {
                 }
             })
         },
+		setUserById: (userId)=>{
+			setUserContextValue((prev)=>{
+				return {
+					...prev,
+					user: users.find((item) => {
+						return parseInt(item.userId) === parseInt(userId);
+					})
+				}
+			})
+		},
         logout: () => {
             setUserContextValue(prev => ({
                 ...prev,
@@ -69,12 +79,20 @@ function App() {
     
     // 로그인유저 설정(임시)
     useEffect(() => {
-        handleUserContext.setUser(
-            users.find((item) => {
-                return parseInt(item.userId) === parseInt(2);
-            })
-        );
+        handleUserContext.setUserById(2);
     }, [users]);
+	// 유저바꿔치기 치트(임시)
+	useEffect(()=>{
+		const cheat = (e)=>{
+			if (!e.shiftKey) {return;}
+			if (!e.code.includes('Digit')) {return;}
+			handleUserContext.setUserById(e.code.substring(5));
+		}
+		window.addEventListener('keydown',cheat);
+		return ()=>{
+			window.removeEventListener('keydown',cheat);
+		}
+	},[])
 
     // 페이지가 변경될 때마다 스크롤 상태를 재설정
     const location = useLocation();

@@ -10,6 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { FaMinus } from "react-icons/fa6";
 import { userContext } from '../../../App';
+import { USER_TYPE_TEACHER } from '../../../datas/usertypes';
 
 export function Bookmark({subjectId}) {
 	const { bookmarks, dispatchBookmarks, user } = useContext(userContext);
@@ -51,7 +52,23 @@ export function SubjectCard({
 	type/*0: 북마크 페이지에서, 1: 진척도페이지에서, 2:그외*/,
 	achievement/*진척도페이지에서만 사용(없어도됨)*/
 }) {
-	const { user } = useContext(userContext);
+	const { user, friends, users } = useContext(userContext);
+	// 선생유저
+	const myTeacher = useMemo(()=>{
+		if (!user) {return null;}
+		if (!users) {return null;}
+		if (!friends) {return null;}
+		let newObj = users.find((userItem)=>{
+			return friends.find((friendItem)=>{
+				return (parseInt(friendItem.userId1)===parseInt(user.userId)
+					|| parseInt(friendItem.userId1)===parseInt(user.userId))
+					&& (parseInt(friendItem.userId2)===parseInt(userItem.userId)
+					|| parseInt(friendItem.userId2)===parseInt(userItem.userId))
+					&& parseInt(userItem.userTypeId) === USER_TYPE_TEACHER
+			})
+		})
+		return newObj?newObj:null;
+	},[user,friends,users])
 	// subjectId로 subject가져오기
 	const subject = useMemo(()=>{
 		if (SUBJECTS[subjectId]) {
@@ -75,8 +92,8 @@ export function SubjectCard({
 	case 0 :
 		// 북마크용
 		jsx = <>
-			<ButtonMedium to={''}>질문하기</ButtonMedium>
-			<ButtonMedium to={''}>바로가기</ButtonMedium>
+			<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>질문하기</ButtonMedium>
+			<ButtonMedium to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`}>바로가기</ButtonMedium>
 		</>
 		break;
 	case 1 :
@@ -98,8 +115,10 @@ export function SubjectCard({
 				</div>
 			</div>
 			<div className='buttons'>
-				<ButtonIcon to={''} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>
-				<ButtonIcon to={''} icon={<FaChevronRight className={'icon'}/>}></ButtonIcon>
+				{/* 질문하기 */}
+				<ButtonIcon to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>
+				{/* 바로가기 */}
+				<ButtonIcon to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaChevronRight className={'icon'}/>}></ButtonIcon>
 			</div>
 		</>
 		if (!achievement) {
