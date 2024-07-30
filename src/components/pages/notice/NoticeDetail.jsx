@@ -37,7 +37,8 @@ export function NoticeDetail() {
     return (
         <div className="notice_detail_wrap">
             <div className="notice_detail_header">
-                <h3>{notice.title}</h3>
+                <div></div>
+                <p className='notice_detail_title font_medium'>{notice.title}</p>
                 <p>{notice.time}</p>
             </div>
             <div className="notice_detail_content">
@@ -49,7 +50,7 @@ export function NoticeDetail() {
 				<div>
                 	<button onClick={handleListClick}>목록</button>
 				</div>
-				<div>
+				<div className='noti_detail_btn_box'>
                 	<button onClick={handleEditClick}>수정</button>
                 	<button onClick={handleDeleteClick}>삭제</button>
 				</div>
