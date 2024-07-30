@@ -78,7 +78,6 @@ const invitationsReducer = (state,action)=>{
 					dateTime: dateFormat(new Date())
 				}
 			]
-			console.log(newState);
 			localStorage.setItem('invitations',JSON.stringify(newState));
 			return newState;
 		} else {
@@ -93,7 +92,6 @@ const invitationsReducer = (state,action)=>{
 					return stateItem;
 				}
 			});
-			console.log(newState);
 			localStorage.setItem('invitations',JSON.stringify(newState));
 			return newState;
 		}
