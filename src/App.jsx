@@ -25,7 +25,7 @@ function App() {
 		user:null,	
 	});
 	// 0729 신효준 추가, 로그인 로직 테스트
-    const handleLogin = (userId, password) => {
+    const handleLogin = (stringId, password) => {
         // 로그인 로직, 성공 시:
         setIsLoggedIn(true);
     };
@@ -50,9 +50,9 @@ function App() {
             }));
         },
 		// 0729 신효준 추가, 로그인 로직 테스트
-        login: (userId, password) => {
+        login: (stringId, password) => {
             // Example: Validate user with dummy data
-            const isValid = users.find(user => user.id === userId && user.password === password);
+            const isValid = users.find(user => user.stringId === stringId && user.password === password);
             if (isValid) {
                 handleUserContext.setUser(isValid);
             }
@@ -114,7 +114,7 @@ function App() {
 				{/* 회원가입 */}
 				<Route path={'/register/*'} element={<PageRegister/>}/>
 				{/* 회원 정보 입력 */}
-				<Route path={'/register/detail/*'} element={<PageRegisterDetail/>}/>
+				<Route path={'/detail/*'} element={<PageRegisterDetail/>}/>
 			</Routes>
 		</userContext.Provider>
 	</>

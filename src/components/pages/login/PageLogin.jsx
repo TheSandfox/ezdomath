@@ -1,16 +1,23 @@
 import "./pageLogin.css";
 import { useContext, useState } from "react";
 import { userContext } from "../../../App";
-import { ButtonLarge, ButtonSmall, ButtonIcon, ButtonTab } from "../../generic/Buttons";
+import {
+  ButtonLarge,
+  ButtonSmall,
+  ButtonIcon,
+  ButtonTab,
+} from "../../generic/Buttons";
 
 export function PageLogin({}) {
   const { handleUserContext } = useContext(userContext); // userContext에서 로그인 함수를 불러옵니다.
-  const [userId, setUserId] = useState("");
+
+  const [stringId, setStringId] = useState("");
   const [password, setPassword] = useState("");
-  const [tabed, setTabed] = useState(false);  // 로그인 타입 선택 (false: 아이디 로그인, true: 카카오 로그인)
+
+  const [tabed, setTabed] = useState(false); // 로그인 타입 선택 (false: 아이디 로그인, true: 카카오 로그인)
 
   const login = () => {
-    handleUserContext.login(userId, password); // 아이디와 비밀번호를 이용해 로그인 시도
+    handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
   };
 
   return (
@@ -35,32 +42,54 @@ export function PageLogin({}) {
           </div>
           <div className="flex column_gap login_form">
             <div className="flex login_select_tap">
-              <ButtonTab className={`user_tap ${!tabed ? "active" : ""}`} onClick={() => setTabed(false)}>
-                <img alt="유저 이미지" />
+              <ButtonTab
+                className={`user_tap ${!tabed ? "active" : ""}`}
+                onClick={() => setTabed(false)}
+              >
+                <img
+                  className="icon"
+                  src={`${
+                    !tabed
+                      ? "/ezdomath/img/Male User.webp"
+                      : "/ezdomath/img/Male _User_100.webp"
+                  }`}
+                  alt="유저 이미지"
+                />
                 <span>아이디 로그인</span>
               </ButtonTab>
-              <ButtonTab className={`kakao_user_tap ${tabed ? "active" : ""}`} onClick={() => setTabed(true)}>
-                <img alt="카카오 이미지" />
+              <ButtonTab
+                className={`user_tap ${tabed ? "active" : ""}`}
+                onClick={() => setTabed(true)}
+              >
+                <img
+                  className="icon"
+                  src="/ezdomath/img/kakao_icon.webp"
+                  alt="카카오 이미지"
+                />
                 <span>카카오 로그인</span>
               </ButtonTab>
             </div>
-            <div className={`flex column_gap login_user_info_wrap ${!tabed ? "" : "invi"}`}>
+            <div
+              className={`flex column_gap login_user_info_wrap ${
+                !tabed ? "" : "invi"
+              }`}
+            >
               <div className="login_user_info_input">
                 <div className="flex user_id">
-                  <div>
+                  <div className="flex input_wrap">
                     <label>아이디</label>
                     <input
                       placeholder="아이디를 입력해주세요"
-                      value={userId}
-                      onChange={(e) => setUserId(e.target.value)} // 입력값을 userId 상태로 설정
+                      value={stringId}
+                      onChange={(e) => setStringId(e.target.value)} // 입력값을 stringId 상태로 설정
                     />
                   </div>
-                  <ButtonIcon>
-                    <img alt="cancel" />
+                  <ButtonIcon className={"login_page_cancle"}>
+                    <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
                 <div className="flex user_pw">
-                  <div>
+                  <div className="flex input_wrap">
                     <label>비밀번호</label>
                     <input
                       type="password" // 비밀번호 입력 필드의 보안을 위해 type을 password로 설정
@@ -69,8 +98,8 @@ export function PageLogin({}) {
                       onChange={(e) => setPassword(e.target.value)} // 입력값을 password 상태로 설정
                     />
                   </div>
-                  <ButtonIcon>
-                    <img alt="cancel" />
+                  <ButtonIcon className={"login_page_cancle"}>
+                    <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
               </div>
@@ -82,12 +111,16 @@ export function PageLogin({}) {
                 로그인
               </ButtonLarge>
             </div>
-            <div className={`flex column_gap kakao_login_user_wrap ${tabed ? "" : "invi"}`}>
+            <div
+              className={`flex column_gap kakao_login_user_wrap ${
+                tabed ? "" : "invi"
+              }`}
+            >
               <ButtonLarge>
                 <span>카카오로 로그인</span>
-			  </ButtonLarge>
+              </ButtonLarge>
             </div>
-            <div className="user_info_routing">
+            <div className="flex user_info_routing">
               <p>
                 아직 <span>회원</span>이 아니라면?
               </p>
@@ -104,4 +137,4 @@ export function PageLogin({}) {
       </div>
     </>
   );
-};
+}

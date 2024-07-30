@@ -50,15 +50,15 @@ export function NoticeList() {
         setNotices(sortNotices(results));
     };
 
-    // 컴포넌트 마운트 시 공지사항 정렬 및 상태 업데이트
-    React.useEffect(() => {
-        setNotices(sortNotices(Noti));
-    }, []);
+// 컴포넌트 마운트 시 공지사항 정렬 및 상태 업데이트
+React.useEffect(() => {
+    setNotices(sortNotices(Noti));
+}, []);
 
-    // 공지사항 배열이 변경될 때마다 상태 업데이트
-    React.useEffect(() => {
-        setNotices(sortNotices(Noti));
-    }, [Noti]);
+// 공지사항 배열이 변경될 때마다 상태 업데이트
+React.useEffect(() => {
+    setNotices(sortNotices(Noti));
+}, [Noti]);
 
     return (
         <div className="notice_wrap">
