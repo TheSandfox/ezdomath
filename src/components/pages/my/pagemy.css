@@ -21,7 +21,7 @@
 			padding-top: 0;
 			padding-bottom: 0;
 		}
-		/* 이너박스 (좌우분할)*/
+		/* 이너박스 (좌우분할) */
 		&>.innerbox {
 			width: 1440px;
 			display: flex;

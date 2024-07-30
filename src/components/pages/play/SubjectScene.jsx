@@ -4,11 +4,6 @@ import { OrbitControls } from '@react-three/drei';
 export function SubjectScene({children}) {
 	return <Canvas
 		className='subjectScene'
-		style={{
-			width:'100%',
-			height:'50%',
-			
-		}}
 		orthographic	
 		camera={{
 		near:0.05,
