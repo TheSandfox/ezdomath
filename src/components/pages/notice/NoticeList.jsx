@@ -3,10 +3,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NoticeList.css';
 import important from '/img/star.webp';
+import { NotiSearch } from './NotiSearch';
 
 export function NoticeList() {
     const [notices, setNotices] = React.useState([]);
-
     const navigate = useNavigate();
 
     // 글쓰기 버튼 클릭 핸들러
@@ -26,6 +26,30 @@ export function NoticeList() {
         return [...importantNotices, ...regularNotices]; // 정렬된 배열 반환
     };
 
+    // 검색 결과를 처리하는 함수
+    const handleSearch = (searchType, searchQuery) => {
+        if (searchQuery.trim() === '') {
+            setNotices(sortNotices(Noti)); // 공란으로 검색하면 모든 게시물을 다시 불러옴
+            return;
+        }
+
+        const query = searchQuery.toLowerCase();
+        let results = [];
+
+        if (searchType === 'all') {
+            results = Noti.filter(noti => 
+                noti.title.toLowerCase().includes(query) || 
+                noti.item[0].content.toLowerCase().includes(query)
+            );
+        } else if (searchType === 'title') {
+            results = Noti.filter(noti => noti.title.toLowerCase().includes(query));
+        } else if (searchType === 'content') {
+            results = Noti.filter(noti => noti.item[0].content.toLowerCase().includes(query));
+        }
+
+        setNotices(sortNotices(results));
+    };
+
     // 컴포넌트 마운트 시 공지사항 정렬 및 상태 업데이트
     React.useEffect(() => {
         setNotices(sortNotices(Noti));
@@ -38,19 +62,11 @@ export function NoticeList() {
 
     return (
         <div className="notice_wrap">
-            <div className="flex">
-                <div>
+            <div className="notice_list_top">
+                <div className='notice_post_count'>
                     <p>총 <span>{notices.length}</span> 건의 게시물이 있습니다.</p> {/* 공지사항 개수 표시 */}
                 </div>
-                <div>
-                    <select name="filter" id="filter">
-                        <option value="all">전체</option>
-                        <option value="important">중요</option>
-                        <option value="general">일반</option>
-                    </select>
-                    <input type="text" placeholder="검색어를 입력하세요" />
-                    <button>검색하기</button> {/* 검색 기능 (구현 필요) */}
-                </div>
+                <NotiSearch onSearch={handleSearch} />
             </div>
             <table className='noti_table'>
                 <thead className='noti_table_head'>
@@ -61,21 +77,27 @@ export function NoticeList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {notices.map((notice, index) => (
-                        <tr key={notice.notiId} className={notice.important ? 'important' : 'unimportant'}>
-                            <td className='flex_center'>{notice.important ? <img src={important} alt="중요 아이콘" /> : notices.length - index}</td> {/* 번호 및 중요 아이콘 표시 */}
-                            <td
-                                className={notice.important ? 'important_title' : 'unimportant_title'}
-                                onClick={() => handleTitleClick(notice.notiId)}
-                            >
-                                {notice.title} {/* 공지사항 제목 */}
-                            </td>
-                            <td>{notice.time}</td> {/* 작성일 */}
+                    {notices.length > 0 ? (
+                        notices.map((notice, index) => (
+                            <tr key={notice.notiId} className={notice.important ? 'important' : 'unimportant'}>
+                                <td className='noti_td'>{notice.important ? <img src={important} alt="중요 아이콘" /> : notices.length - index}</td> {/* 번호 및 중요 아이콘 표시 */}
+                                <td
+                                    className={notice.important ? 'important_title' : 'unimportant_title'}
+                                    onClick={() => handleTitleClick(notice.notiId)}
+                                >
+                                    {notice.title} {/* 공지사항 제목 */}
+                                </td>
+                                <td className={notice.important ? 'important_time' : 'unimportant_time'}>{notice.time}</td> {/* 작성일 */}
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3" className="no_results">검색 결과가 없습니다.</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
-            <div>
+            <div className='noti_write_btn'>
                 <button onClick={handleWriteClick}>작성하기</button> {/* 글쓰기 버튼 */}
             </div>
         </div>

@@ -1,12 +1,19 @@
-.notice_wrap{
+.notice_wrap {
     max-width: 1440px;
     padding: 64px 0 128px 0;
     margin: 0 auto;
 }
 
+.notice_list_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* 양옆에 붙이도록 설정 및 요소를 바닥에 정렬 */
+}
+
 .noti_table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 .noti_table_head {
@@ -16,23 +23,19 @@
 th, td {
     padding: 16px 0;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ccc;
 }
 
 th {
-    background-color: #f9f9f9;
     font-weight: bold;
 }
 
-/* tr:hover {
-    background-color: #f5f5f5;
-} */
-
-.important {
-    background-color: var(--color_background);
+.noti_table tbody tr.important td {
+    background-color: #fffbe5;
 }
-.unimportant{
-    background-color: var(--color_white);
+
+.noti_table tbody tr.unimportant td {
+    background-color: #fff;
 }
 
 .important_title {
@@ -40,17 +43,59 @@ th {
     font-weight: bold;
     cursor: pointer;
 }
-.unimportant_title{
+
+.unimportant_title {
     color: var(--color_black);
     cursor: pointer;
 }
+.important_time {
+    color: var(--color_dark);
+    font-weight: bold;
+}
 
-.flex_center{
+.unimportant_time {
+    color: var(--color_black);
+}
+
+.noti_td {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.flex_center>img{
+
+.noti_td > img {
     width: 24px;
     height: 24px;
+}
+
+.no_results {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    padding: 20px 0;
+}
+
+.notice_post_count {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* p 요소를 바닥에 붙이도록 설정 */
+}
+
+.notice_post_count p {
+    margin: 0;
+}
+
+.noti_write_btn{
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.noti_write_btn>button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color_main);
+    color: white;
+    cursor: pointer;
 }

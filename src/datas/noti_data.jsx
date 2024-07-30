@@ -34,15 +34,15 @@ const Noti = [
     },
 ];
 
-// 다음 공지사항 ID를 설정하는 변수 (초기 공지사항 수로 설정)
+// 다음 공지사항 ID를 초기 공지사항 수로 설정
 let nextNotiId = Noti.length;
 
-// 새로운 공지사항을 추가하는 함수
+// 새로운 공지사항을 추가하는 함수, unshift로 역순추가
 const addNotice = (title, content, important) => {
     const newNotice = {
-        notiId: nextNotiId++,  // 공지사항 ID 증가
+        notiId: nextNotiId++,
         title,
-        time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
+        time: formatDate(new Date()),
         important,
         item: [
             {
@@ -51,8 +51,8 @@ const addNotice = (title, content, important) => {
             },
         ],
     };
-    Noti.unshift(newNotice);  // 새로운 공지사항을 배열의 맨 앞에 추가
+    Noti.unshift(newNotice);
 };
 
-// Noti 배열과 addNotice 함수를 내보내기
+// addNotice=게시판 쓰기에 내보냄
 export { Noti, addNotice };
