@@ -2,7 +2,6 @@
 .noti_search_wrap {
     display: flex;
     align-items: center;
-    margin-left: auto;
 }
 
 .noti_search_form {
@@ -28,4 +27,16 @@
     background-color: var(--color_main);
     color: white;
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .notice_post_count{
+        display:none
+    }
+    .notice_list_top {
+        justify-content: end;
+    }
+    .search_bar select, .search_bar input {
+        margin-right:0;
+    }
 }

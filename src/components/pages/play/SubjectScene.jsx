@@ -5,8 +5,8 @@ export function SubjectScene({children}) {
 	return <Canvas
 		className='subjectScene'
 		style={{
-			width:'100dvw',
-			height:'100dvh'
+			width:'75%',
+			
 		}}
 		orthographic	
 		camera={{

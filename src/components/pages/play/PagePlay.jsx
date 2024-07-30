@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ACTS } from "../../../datas/acts";
+import { SUBJECTS } from "../../../datas/subjects";
 import "./PagePlay.css";
 import { ActProgress } from "../../generic/act/ActProgress.jsx";
 import { ActList } from "../../generic/act/ActList.jsx";
-import Ham from '/img/HamMenu.svg'
-import RightG from '/img/rightG.svg'
+import Ham from '/img/HamMenu.svg';
+import RightG from '/img/rightG.svg';
 import Navigation from "../navigation/navigation.jsx";
 import { SubjectDetail } from "../play/SubjectDetail.jsx";
 
@@ -17,7 +18,8 @@ export function PagePlay() {
   const [isSidebarOverlayVisible, setSidebarOverlayVisible] = useState(false);
   const [isRightSidebarOverlayVisible, setRightSidebarOverlayVisible] = useState(false);
   const [isMenuVisible, setMenuVisible] = useState(false);
-  const [selectedAct, setSelectedAct] = useState(actId ? parseInt(actId) : 0); // Act 프로그레스바 적용을 위해 초기 값을 actId 또는 0으로 설정
+  const [selectedAct, setSelectedAct] = useState(actId ? parseInt(actId) : 0);
+  const [selectedSubject, setSelectedSubject] = useState(subjectId ? parseInt(subjectId) : null);
 
   const toggleSidebar = () => {
     setSidebarOverlayVisible(!isSidebarOverlayVisible);
@@ -35,8 +37,15 @@ export function PagePlay() {
 
   const handleActClick = (actId) => {
     setSelectedAct(actId);
-    navigate(`/play/${actId}`); // URL을 업데이트하여 actId를 포함하도록 함
-    setSidebarOverlayVisible(false); // ActProgress 클릭 시 sidebar_overlay를 끄도록 설정
+    setSelectedSubject(null);
+    navigate(`/play/${actId}`);
+    setSidebarOverlayVisible(false);
+  };
+
+  const handleSubjectClick = (subjectId) => {
+    setSelectedSubject(subjectId);
+    setRightSidebarOverlayVisible(false); // 문제 선택 시 오버레이를 닫음
+    navigate(`/play/${selectedAct}/${subjectId}`);
   };
 
   useEffect(() => {
@@ -56,7 +65,7 @@ export function PagePlay() {
 
     window.addEventListener('resize', handleResize);
 
-    handleResize(); // 사이즈 전환되었을때 현재 창 크기에 따라 초기 상태를 설정
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -67,7 +76,20 @@ export function PagePlay() {
     if (actId) {
       setSelectedAct(parseInt(actId));
     }
-  }, [actId]);
+    if (subjectId) {
+      setSelectedSubject(parseInt(subjectId));
+    }
+  }, [actId, subjectId]);
+
+  useEffect(() => {
+    if (isRightSidebarOverlayVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isRightSidebarOverlayVisible]);
+
+  const filteredSubjects = SUBJECTS.filter(subject => subject.actId === selectedAct);
 
   return (
     <>
@@ -98,23 +120,30 @@ export function PagePlay() {
         )}
         <section className={`play_page_background ${!isRightSidebarVisible ? 'full-width' : ''}`}>
           <div className="content_wrap">
-            <div className="act_and_subject_wrap">
+            <div className={`act_and_subject_wrap ${selectedSubject !== null ? 'subject-mode' : ''}`}>
               <ActList actId={selectedAct} />
+              {selectedSubject !== null && (
+                <div className="subject_detail_wrap">
+                  <SubjectDetail subjectId={selectedSubject} />
+                </div>
+              )}
             </div>
             {isRightSidebarVisible && (
               <div className="subject_list_wrap">
                 <div className="subject_box">
                   <p>문제 목록</p>
-                  <div className="subject_item"></div>
-                  <div className="subject_item"></div>
-                  <div className="subject_item"></div>
+                  {filteredSubjects.map(subject => (
+                    <div key={subject.subjectId} className="subject_item" onClick={() => handleSubjectClick(subject.subjectId)}>
+                      <img src={subject.thumb} alt={subject.name} className="subject_thumb" />
+                      <span>{subject.name}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
           </div>
         </section>
       </div>
-      {/* 여기부터 숨겨진 바 */}
       {isSidebarOverlayVisible && (
         <div className="sidebar_overlay">
           <aside className="left_sidebar_overlay">
@@ -133,8 +162,13 @@ export function PagePlay() {
         <div className="right_sidebar_overlay">
           <div className="subject_list_wrap">
             <div className="subject_box">
-              <p>문제목록</p>
-              <SubjectDetail subjectId={subjectId} />
+              <p>문제 목록</p>
+              {filteredSubjects.map(subject => (
+                <div key={subject.subjectId} className="subject_item" onClick={() => handleSubjectClick(subject.subjectId)}>
+                  <img src={subject.thumb} alt={subject.name} className="subject_thumb" />
+                  <span>{subject.name}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
