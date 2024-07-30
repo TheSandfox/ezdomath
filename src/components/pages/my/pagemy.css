@@ -9,7 +9,7 @@
 	); */
 	display: flex;
 	flex-direction: column;
-	min-height: 100dvh;
+	/* min-height: 100dvh; */
 	background-color: var(--color_white);
 	/* 컨텐츠영역 */
 	&>.mainContents {
@@ -21,7 +21,7 @@
 			padding-top: 0;
 			padding-bottom: 0;
 		}
-		/* 이너박스 (좌우분할)*/
+		/* 이너박스 (좌우분할) */
 		&>.innerbox {
 			width: 1440px;
 			display: flex;
@@ -55,6 +55,9 @@
 				}
 				/* 모바일 */
 				@media screen and (max-width:800px) {
+					position: sticky;
+					top: 0;
+					left: 0;
 					padding: 1rem;
 					background-color: var(--color_background_sub);
 					width: 100%;

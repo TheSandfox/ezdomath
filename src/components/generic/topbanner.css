@@ -20,5 +20,6 @@
 @media (max-width: 800px) {
   .top-banner {
       height: 4rem;
+	  display: none;
   }
 }

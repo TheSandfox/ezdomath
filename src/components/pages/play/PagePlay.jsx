@@ -13,25 +13,25 @@ import { SubjectDetail } from "../play/SubjectDetail.jsx";
 export function PagePlay() {
   const { actId, subjectId } = useParams();
   const navigate = useNavigate();
-  const [isSidebarVisible, setSidebarVisible] = useState(true);
-  const [isRightSidebarVisible, setRightSidebarVisible] = useState(true);
-  const [isSidebarOverlayVisible, setSidebarOverlayVisible] = useState(false);
-  const [isRightSidebarOverlayVisible, setRightSidebarOverlayVisible] = useState(false);
-  const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(true);
+  const [isSidebarOverlayVisible, setIsSidebarOverlayVisible] = useState(false);
+  const [isRightSidebarOverlayVisible, setIsRightSidebarOverlayVisible] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [selectedAct, setSelectedAct] = useState(actId ? parseInt(actId) : 0);
   const [selectedSubject, setSelectedSubject] = useState(subjectId ? parseInt(subjectId) : null);
 
   const toggleSidebar = () => {
-    setSidebarOverlayVisible(!isSidebarOverlayVisible);
+    setIsSidebarOverlayVisible(!isSidebarOverlayVisible);
     if (!isSidebarOverlayVisible) {
-      setRightSidebarOverlayVisible(false);
+      setIsRightSidebarOverlayVisible(false);
     }
   };
 
   const toggleRightSidebar = () => {
-    setRightSidebarOverlayVisible(!isRightSidebarOverlayVisible);
+    setIsRightSidebarOverlayVisible(!isRightSidebarOverlayVisible);
     if (!isRightSidebarOverlayVisible) {
-      setSidebarOverlayVisible(false);
+      setIsSidebarOverlayVisible(false);
     }
   };
 
@@ -39,27 +39,27 @@ export function PagePlay() {
     setSelectedAct(actId);
     setSelectedSubject(null);
     navigate(`/play/${actId}`);
-    setSidebarOverlayVisible(false);
+    setIsSidebarOverlayVisible(false);
   };
 
   const handleSubjectClick = (subjectId) => {
     setSelectedSubject(subjectId);
-    setRightSidebarOverlayVisible(false); // 문제 선택 시 오버레이를 닫음
+    setIsRightSidebarOverlayVisible(false); // 문제 선택 시 오버레이를 닫음
     navigate(`/play/${selectedAct}/${subjectId}`);
   };
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 1024) {
-        setSidebarVisible(false);
-        setRightSidebarVisible(false);
-        setMenuVisible(true);
+        setIsSidebarVisible(false);
+        setIsRightSidebarVisible(false);
+        setIsMenuVisible(true);
       } else {
-        setSidebarVisible(true);
-        setRightSidebarVisible(true);
-        setSidebarOverlayVisible(false);
-        setRightSidebarOverlayVisible(false);
-        setMenuVisible(false);
+        setIsSidebarVisible(true);
+        setIsRightSidebarVisible(true);
+        setIsSidebarOverlayVisible(false);
+        setIsRightSidebarOverlayVisible(false);
+        setIsMenuVisible(false);
       }
     };
 
@@ -119,7 +119,7 @@ export function PagePlay() {
           </aside>
         )}
         <section className={`play_page_background ${!isRightSidebarVisible ? 'full-width' : ''}`}>
-          <div className="content_wrap">
+          <div className={`content_wrap ${selectedSubject !== null ? 'no-margin-left' : ''}`}>
             <div className={`act_and_subject_wrap ${selectedSubject !== null ? 'subject-mode' : ''}`}>
               <ActList actId={selectedAct} />
               {selectedSubject !== null && (

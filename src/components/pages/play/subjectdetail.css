@@ -1,8 +1,11 @@
 .subjectDetail {
+	height: calc( 100dvh - 2rem);
+	display: flex;
+	flex-direction: column;
 	&>.subjectSceneWrapper {
 		position: relative;
+		flex: 1;
 		&>.subjectScene {
-			height: 45rem;
 		}
 		&>.header {
 			position: absolute;
