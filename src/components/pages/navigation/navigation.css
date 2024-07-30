@@ -54,6 +54,10 @@
 .navi_bar>.navi_right_cont {
     gap: 1.75em;
     position: relative;
+    .After_login>.User_wrap{
+        gap: 0.22em;
+        cursor: pointer;
+    }
 }
 
 .navi_bar>.navi_right_cont>li:nth-child(3) {
@@ -102,14 +106,15 @@
 }
 
 .navi_bar .User_wrap>.User_profile {
-    width: 1.88em;
+    width: 1.56em;
     height: 1.56em;
+    border-radius: 20px;
 }
 
 .navi_bar .User_wrap>.Up_arrow {
     width: 0.94em;
     height: 0.94em;
-    margin-right: 0.31em;
+
 }
 
 .navi_bar .User_wrap:hover {}

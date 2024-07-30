@@ -7,17 +7,24 @@ import {
   ButtonIcon,
   ButtonTab,
 } from "../../generic/Buttons";
+import { useNavigate } from "react-router-dom";
 
 export function PageLogin({}) {
   const { handleUserContext } = useContext(userContext); // userContext에서 로그인 함수를 불러옵니다.
+  const navigate = useNavigate();
 
   const [stringId, setStringId] = useState("");
   const [password, setPassword] = useState("");
-
   const [tabed, setTabed] = useState(false); // 로그인 타입 선택 (false: 아이디 로그인, true: 카카오 로그인)
 
   const login = () => {
-    handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
+    const success = handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
+    if (success) {
+      alert('로그인 성공!');
+      navigate('/'); // 메인 페이지로 이동
+    } else {
+      alert('로그인 실패. 아이디와 비밀번호를 확인하세요.');
+    }
   };
 
   const clearInput = (inputType) => {
@@ -120,7 +127,6 @@ export function PageLogin({}) {
               <ButtonLarge
                 className={"user_login_btn"}
                 onClick={login}
-                to={"/"}
               >
                 로그인
               </ButtonLarge>
