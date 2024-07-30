@@ -1,5 +1,6 @@
 import "./navigation.css";
-import React, { useState, useEffect } from "react";
+import { userContext } from "../../../App";
+import React, { useState, useEffect, useContext } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
 
 export default function Navigation() {
@@ -39,16 +40,16 @@ export default function Navigation() {
 
   // 내 정보 창에 들어갈 데이터 배열
   const naviMyPageAccordionContent = [
-    { text: "내정보", imgSrc: "img/Arrow_darkest.webp" },
-    { text: "커뮤니티", imgSrc: "img/Arrow_darkest.webp" },
-    { text: "진척도", imgSrc: "img/Arrow_darkest.webp" },
-    { text: "QnA", imgSrc: "img/Arrow_darkest.webp" },
-    { text: "북마크", imgSrc: "img/Arrow_darkest.webp" },
+    { text: "내정보", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
+    { text: "커뮤니티", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
+    { text: "진척도", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
+    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
+    { text: "북마크", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
   ];
   const naviMenuPageAccordionContent = [
-    { text: "EZDOMATH", imgSrc: "img/Arrow_darkest.webp", to: "/" },
-    { text: "공지사항", imgSrc: "img/Arrow_darkest.webp", to: "/" },
-    { text: "학습시작", imgSrc: "img/Arrow_darkest.webp", to: "/" },
+    { text: "EZDOMATH", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/" },
+    { text: "공지사항", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/" },
+    { text: "학습시작", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/" },
   ];
 
   return (
@@ -103,12 +104,12 @@ const NavigationBar = ({
           <>
             <li className="Before_login">
               <div>
-                <ButtonSmall className="Sign_up">회원가입</ButtonSmall>
+                <ButtonSmall className="Sign_up" to={'/register'}>회원가입</ButtonSmall>
               </div>
             </li>
             <li className="Before_login">
               <div>
-                <ButtonSmall className="Login" onClick={handleLogin}>
+                <ButtonSmall className="Login_page_routing" onClick={handleLogin} to={'/login'}>
                   로그인
                 </ButtonSmall>
               </div>

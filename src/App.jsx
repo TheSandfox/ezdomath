@@ -7,6 +7,7 @@ import { PageNotice } from '/src/components/pages/notice/PageNotice'
 import { PageMy } from '/src/components/pages/my/PageMy'
 import { PageLogin } from '/src/components/pages/login/PageLogin'
 import { PageRegister } from '/src/components/pages/register/PageRegister'
+import { PageRegisterDetail } from './components/pages/register/pageDetailRegister'
 import { createContext, useEffect, useReducer, useState } from 'react'
 import { bookmarksDefault, bookmarksReducer } from './datas/bookmarks'
 import { usersDefault, usersReducer } from './datas/users'
@@ -23,6 +24,15 @@ function App() {
 	const [userContextValue,setUserContextValue] = useState({
 		user:null,	
 	});
+	// 0729 신효준 추가, 로그인 로직 테스트
+    const handleLogin = (userId, password) => {
+        // 로그인 로직, 성공 시:
+        setIsLoggedIn(true);
+    };
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+    };
+
 	const handleUserContext = {
 		setUser:(newUser)=>{
 			// 유저객체 변경
@@ -33,14 +43,20 @@ function App() {
 				}
 			})
 		},
-		logout:()=>{
-			setUserContextValue((prev)=>{
-				return {
-					...prev,
-					user:null
-				}
-			})
-		}
+		logout: () => {
+            setUserContextValue(prev => ({
+                ...prev,
+                user: null
+            }));
+        },
+		// 0729 신효준 추가, 로그인 로직 테스트
+        login: (userId, password) => {
+            // Example: Validate user with dummy data
+            const isValid = users.find(user => user.id === userId && user.password === password);
+            if (isValid) {
+                handleUserContext.setUser(isValid);
+            }
+        }
 	}
 	// 동적데이터들
 	const [bookmarks,dispatchBookmarks] = useReducer(bookmarksReducer,bookmarksDefault);
@@ -77,7 +93,7 @@ function App() {
 			notifications:notifications,
 			dispatchNotifications:dispatchNotifications,
 			qnas:qnas,
-			dispatchQnas:dispatchQnas,
+			dispatchQnas:dispatchQnas
 		}}>
 			<Routes>
 				{/* 메인 */}
@@ -97,6 +113,8 @@ function App() {
 				<Route path={'/login/*'} element={<PageLogin/>}/>
 				{/* 회원가입 */}
 				<Route path={'/register/*'} element={<PageRegister/>}/>
+				{/* 회원 정보 입력 */}
+				<Route path={'/register/detail/*'} element={<PageRegisterDetail/>}/>
 			</Routes>
 		</userContext.Provider>
 	</>

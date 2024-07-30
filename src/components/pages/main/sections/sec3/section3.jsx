@@ -50,26 +50,26 @@ export function Section3() {
 
   const sec3_cont = [
     {
-      decoSrc: "img/sec3_deco1.svg",
-      imgSrc: "img/3D_Object.webp",
+      decoSrc: "/ezdomath/img/sec3_deco1.svg",
+      imgSrc: "/ezdomath/img/3D_Object.webp",
       title: "3D 모델을 통한 예제",
       description: "Three.js를 통해 구현한 3D 모델을 통해 도형을 조작하여 수학에 대한 이해를 높이세요!",
     },
     {
-      decoSrc: "img/sec3_deco1.svg",
-      imgSrc: "img/Reading.webp",
+      decoSrc: "/ezdomath/img/sec3_deco1.svg",
+      imgSrc: "/ezdomath/img/Reading.webp",
       title: "오답관리",
       description: "틀린 문제는‘오답노트에 기록’을 통해 ‘마이페이지’에서 자신만의 오답노트를 제작해보세요.",
     },
     {
-      decoSrc: "img/sec3_deco1.svg",
-      imgSrc: "img/Show Property.webp",
+      decoSrc: "/ezdomath/img/sec3_deco1.svg",
+      imgSrc: "/ezdomath/img/Show Property.webp",
       title: "직관적인 학습관리",
       description: "자녀 및 학생 등록을 통해 현재 진도를 직관적으로 확인 가능합니다.",
     },
     {
-      decoSrc: "img/sec3_deco1.svg",
-      imgSrc: "img/Teacher.webp",
+      decoSrc: "/ezdomath/img/sec3_deco1.svg",
+      imgSrc: "/ezdomath/img/Teacher.webp",
       title: "피드백",
       description: "학생이 모르는 문제는 등록한 선생님을 통해 빠른 피드백을 받아볼 수 있습니다.",
     },

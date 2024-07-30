@@ -27,8 +27,8 @@ export function Section4() {
         "‘EZDOMATH’ 에서 제공하는 3D 모델을 이용한 도형 학습 기능은 회원가입 유/무에 상관없이 자유롭게 이용 가능합니다.",
         "‘교육 소개’ 페이지에서 학습 목표와 개념 설명을 포함한 다양한 문제를 학습하고 풀어보세요!",
       ],
-      imgSrc: "img/Plus_Math.webp",
-      imgCardSrc: "img/intro_list_item1.png"
+      imgSrc: "/ezdomath/img/Plus_Math.webp",
+      imgCardSrc: "/ezdomath/img/intro_list_item1.png"
     },
     {
       title: "로그인 및 회원가입",
@@ -36,8 +36,8 @@ export function Section4() {
         "‘EZDOMATH’ 에서 제공하는 학생 및 선생님을 대상으로 하는 학습 관리 시스템은 회원만 이용 가능합니다.",
         "회원의 경우 ‘일반회원’ 과 ‘카카오 회원’ 으로 분류되며 카카오 회원의 경우 추가 정보를 입력해야 정상적인 서비스 이용이 가능합니다.",
       ],
-      imgSrc: "img/Plus_Math.webp",
-      imgCardSrc: "img/intro_list_item2.png"
+      imgSrc: "/ezdomath/img/Plus_Math.webp",
+      imgCardSrc: "/ezdomath/img/intro_list_item2.png"
     },
     {
       title: "회원을 위한 특별 기능",
@@ -45,8 +45,8 @@ export function Section4() {
         "회원들에겐 공통적으로 마이페이지에서 내 정보 열람 및 진척도 확인이 가능합니다.",
         "또한 '학생', '교사', '학부모' 회원 유형에 따라 맞춤형 학습관리 기능을 제공하고 있습니다.",
       ],
-      imgSrc: "img/Plus_Math.webp",
-      imgCardSrc: "img/intro_list_item3.png"
+      imgSrc: "/ezdomath/img/Plus_Math.webp",
+      imgCardSrc: "/ezdomath/img/intro_list_item3.png"
     },
     {
       title: "문의사항 처리방법",
@@ -54,8 +54,8 @@ export function Section4() {
         "페이지 곳곳에 있는 '문의사항' 버튼을 누르시면 페이지 이용간 불편한 점 또는 개선할 부분을 작성하여 사이트 관리자에게 보낼 수 있습니다.",
         "또한 자주 언급되거나 중요한 문의사항에 경우 공지사항 페이지에서 해당 문의에 대한 피드백 및 문제 해결 방안에 대해 답변드리고 있습니다.",
       ],
-      imgSrc: "img/Plus_Math.webp",
-      imgCardSrc: "img/intro_list_item4.png"
+      imgSrc: "/ezdomath/img/Plus_Math.webp",
+      imgCardSrc: "/ezdomath/img/intro_list_item4.png"
     },
   ];
 
@@ -141,7 +141,7 @@ export function Section4() {
                   <ButtonMedium>
                     <div className="flex routing_btn">
                       <p>VIEW MORE</p>
-                      <img id="sec4_plus" src="img/Plus_Math.webp"></img>
+                      <img id="sec4_plus" src="/ezdomath/img/Plus_Math.webp"></img>
                     </div>
                   </ButtonMedium>
                 </div>
