@@ -3,7 +3,7 @@ import { ACTS } from "../../../datas/acts";
 import { SUBJECTS } from "../../../datas/subjects";
 import "./ReportAndError.css";
 
-export function ReportAndError({ onClose }) {
+export function ReportAndError({ onClose, onSubmit }) {
     const [unit, setUnit] = useState("");
     const [question, setQuestion] = useState("");
     const [content, setContent] = useState("");
@@ -49,7 +49,12 @@ export function ReportAndError({ onClose }) {
                 </div>
                 <div className="modal-footer">
                     <button className="cancel-button" onClick={onClose}>취소</button>
-                    <button className="submit-button">제보하기</button>
+                    <button className="submit-button" onClick={onSubmit?()=>{onSubmit({
+						type:type,
+						actId:unit,
+						subjectId:question,
+						content:content
+					});}:()=>{}}>제보하기</button>
                 </div>
             </div>
         </div>
