@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Noti } from '../../../datas/noti_data';
 import './NoticeList.css';
 import important from '/img/star.webp';
-import { NotiSearch } from '../../generic/play/NotiSearch';
-import  Pagination from '../../generic/play/Pagination';
+import { NotiSearch } from '../../generic/Notice/NotiSearch';
+import  Pagination from '../../generic/Notice/Pagination';
 
 export function NoticeList() {
     const [notices, setNotices] = useState([]);
