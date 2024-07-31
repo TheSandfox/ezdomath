@@ -15,21 +15,13 @@ function Adjust({subjectState,answer,handleCorrect}) {
 
 // Scene
 function Scene({subjectState}) {
-	return <group>
-		{/* {
-			// 점두개
-			vertexes
-			?vertexes.map((vertex,index)=>{
-				return <Fragment key={index}>
-					<Html position={vertex}>
-						<div className="subjectVertex">
-
-						</div>
-					</Html>
-				</Fragment>
-			})
-			:<></>
-		} */}
+	return <group position={[0, 0.5, 0]}>
+		<mesh>
+			<boxGeometry/>
+			<meshStandardMaterial 
+				color={Math.random()*0xdddddd}
+			/>
+		</mesh>
 	</group>
 }
 

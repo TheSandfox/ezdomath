@@ -21,7 +21,7 @@ function Scene({subjectState}) {
 			vertexes
 			?<Line
 				points={[...vertexes]} // 라인의 점들
-				color="red" // 라인의 색상
+				color="#1A3659" // 라인의 색상
 				lineWidth={2} // 라인의 두께
 		  	/>
 			:<></>

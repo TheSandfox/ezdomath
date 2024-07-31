@@ -21,7 +21,7 @@ function Scene({subjectState}) {
 			vertexes
 			?<Line
 				points={[...vertexes]} // 라인의 점들
-				color="red" // 라인의 색상
+				color="#1A3659" // 라인의 색상
 				lineWidth={2} // 라인의 두께
 		  	/>
 			:<></>
@@ -47,8 +47,8 @@ function Scene({subjectState}) {
 function Controller({handleSubjectState}) {
 	const vertexes = useMemo(()=>{
 		return [
-			[0,0,0],
-			[4,0,0]
+			[-2,0,0],
+			[2,0,0]
 		]
 	},[])
 	//핸들러 작동

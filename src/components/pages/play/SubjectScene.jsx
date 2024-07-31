@@ -31,47 +31,48 @@ function Helpers() {
 }
 
 export function SubjectScene({children}) {
-	return <Canvas
-		className='subjectScene'
-		style={{
-			width:'100%',
-			height:'100%'
+	return <div className='subjectScene'>
+		<Canvas
+			style={{
+				width:'100%',
+				height:'100%'
+			}}
+			orthographic	
+			camera={{
+			near:0.05,
+			far:400,
+			zoom:25,
+			position:[-25,25,25]
 		}}
-		orthographic	
-		camera={{
-		near:0.05,
-		far:400,
-		zoom:25,
-		position:[-25,25,25]
-	}}
-	>
-		{/* 앰비언트 */}
-		<ambientLight
-			intensity={0.3}
-		/>
-		{/* 주광 */}
-		<directionalLight
-			position={[-25,25,0]}
-			intensity={1.0}
-			// castShadow={false}
-			// shadow-mapSize-width={1024}
-			// shadow-mapSize-height={1024}
-		/>
-		{/* 보조광 */}
-		<directionalLight
-			position={[-25,25,25]}
-			intensity={0.3}
-			// castShadow={false}
-			// shadow-mapSize-width={1024}
-			// shadow-mapSize-height={1024}
-		/>
-		{/* 액시스 */}
-		{/* <axesHelper args={[48,48,48]} /> */}
-		{/* 그리드 */}
-		{/* <gridHelper args={[16, 16]} position={[0,-0.01,0]}/> */}
-		<Helpers/>
-		{/* 컨트롤 */}
-		<OrbitControls/>
-		{children}
-	</Canvas>
+		>
+			{/* 앰비언트 */}
+			<ambientLight
+				intensity={0.3}
+			/>
+			{/* 주광 */}
+			<directionalLight
+				position={[-25,25,0]}
+				intensity={1.0}
+				// castShadow={false}
+				// shadow-mapSize-width={1024}
+				// shadow-mapSize-height={1024}
+			/>
+			{/* 보조광 */}
+			<directionalLight
+				position={[-25,25,25]}
+				intensity={0.3}
+				// castShadow={false}
+				// shadow-mapSize-width={1024}
+				// shadow-mapSize-height={1024}
+			/>
+			{/* 액시스 */}
+			{/* <axesHelper args={[48,48,48]} /> */}
+			{/* 그리드 */}
+			{/* <gridHelper args={[16, 16]} position={[0,-0.01,0]}/> */}
+			<Helpers/>
+			{/* 컨트롤 */}
+			<OrbitControls/>
+			{children}
+		</Canvas>
+	</div>
 }

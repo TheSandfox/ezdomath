@@ -8,6 +8,7 @@ import { FiSend } from 'react-icons/fi';
 import { LuSiren } from "react-icons/lu";
 import { GoQuestion } from "react-icons/go";
 import { FaRegEdit } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 import React from 'react';
 import './subjectdetail.css';
 import { InputText } from '../../generic/Input';
@@ -16,7 +17,7 @@ import { ACTS } from '../../../datas/acts';
 import { userContext } from '../../../App';
 
 export function SubjectDetail({subjectId}) {
-	const { dispatchAchievements, user } = useContext(userContext);
+	const { dispatchAchievements, user, achievements } = useContext(userContext);
 	const answerInputRef = useRef(null);
 	const [subjectState,setSubjectState] = useState(null);
 	const [answer,setAnswer] = useState(null);
@@ -76,6 +77,17 @@ export function SubjectDetail({subjectId}) {
 			subjectState={subjectState}
 		/>
 	},[adjustJSX]);
+	//이미 푼 문제인지 표시
+	const achievementCorrect = useMemo(()=>{
+		if (!achievements) {return false}
+		if (!user) {return false}
+		if (!subject) {return false}
+		return achievements.some((achievementItem)=>{
+			return (parseInt(achievementItem.subjectId) === parseInt(subject.subjectId))
+				&& (parseInt(achievementItem.userId) === parseInt(user.userId))
+				&& achievementItem.correct;
+		})
+	},[achievements,user,subject])
 	//정답계산 후 처리
 	useEffect(()=>{
 		if (!user) {return;}
@@ -118,7 +130,10 @@ export function SubjectDetail({subjectId}) {
 			{/* 씬헤더 */}
 			<div className='header'>
 				<div className='actName font_main'>{subject?ACTS[subject.actId].name:''}</div>
-				<div className='subjectName font_medium'>{subject?subject.name:''}</div>
+				<div className={`subjectName font_medium${achievementCorrect?' green':''}`}>
+					{subject?subject.name:''}
+					{achievementCorrect?<FaCheck/>:null}
+				</div>
 				<div className='goBack'>
 					<FaChevronLeft className='icon'/>
 				</div>

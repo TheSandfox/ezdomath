@@ -12,7 +12,12 @@
 		background-color: var(--color_white);
 		&>.subjectScene {
 			position: relative;
+			width: 100%;
+			height: 100%;
 			z-index: 0;
+			& canvas {
+				max-width: 100%;
+			}
 		}
 		&>.header {
 			z-index: 1;
@@ -27,6 +32,14 @@
 			align-items: center;
 			background-color: rgba(0, 0, 0, 0.55);
 			color: var(--color_white);
+			&>.subjectName {
+				display: flex;
+				gap: 0.5rem;
+				align-items: center;
+				&.green {
+					color: var(--color_green);
+				}
+			}
 			&>.goBack {
 				position:absolute;
 				left: 1rem;
