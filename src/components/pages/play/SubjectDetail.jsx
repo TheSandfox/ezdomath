@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SUBJECTS } from '/src/datas/subjects';
 import { SubjectScene } from './SubjectScene';
@@ -8,16 +8,21 @@ import { FiSend } from 'react-icons/fi';
 import { LuSiren } from "react-icons/lu";
 import { GoQuestion } from "react-icons/go";
 import { FaRegEdit } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 import React from 'react';
 import './subjectdetail.css';
 import { InputText } from '../../generic/Input';
 import { ButtonIcon } from '../../generic/Buttons';
 import { ACTS } from '../../../datas/acts';
+import { userContext } from '../../../App';
 
 export function SubjectDetail({subjectId}) {
+	const { dispatchAchievements, user, achievements } = useContext(userContext);
+	const answerInputRef = useRef(null);
 	const [subjectState,setSubjectState] = useState(null);
 	const [answer,setAnswer] = useState(null);
 	const [hideZimoon,setHideZimoon] = useState(false);
+	const [correct,setCorrect] = useState([null]);
 	//핸들러
 	const handleSubjectState = {
 		set:(val)=>{
@@ -34,6 +39,11 @@ export function SubjectDetail({subjectId}) {
 			setHideZimoon(prev=>!prev);
 		}
 	}
+	const handleCorrect = {
+		set:(val)=>{
+			setCorrect([val]);
+		}
+	}
 	//타겟문제
 	const subject = useMemo(()=>{
 		if (SUBJECTS[subjectId]) {
@@ -45,39 +55,73 @@ export function SubjectDetail({subjectId}) {
 	//컨트롤러
 	const controllerJSX = useMemo(()=>{
 		if (!subject) {return <></>;}
-		return React.cloneElement(subject.controller,{
-			handleSubjectState:handleSubjectState
-		});
-	},[subject,handleSubjectState]);
+		return <subject.controller
+			handleSubjectState={handleSubjectState}
+		/>
+	},[subject,handleSubjectState,subjectState]);
 	//정답계산로직
 	const adjustJSX = useMemo(()=>{
 		if (!subject) {return <></>;}
 		if(subjectState===null) {return <></>;}
-		return React.cloneElement(subject.adjust,{
-			subjectState:subjectState,
-			answer:answer,
-			handleAnswer:handleAnswer
-		});
-	},[controllerJSX])
+		return <subject.adjust
+			subjectState={subjectState}
+			answer={answer}
+			handleCorrect={handleCorrect}
+		/>
+	},[subject,subjectState,answer])
 	//Scene
 	const sceneJSX = useMemo(()=>{
 		if (!subject) {return <></>;}
 		if(subjectState===null) {return <></>;}
-		return React.cloneElement(subject.scene,{
-			subjectState:subjectState
-		});
+		return <subject.scene
+			subjectState={subjectState}
+		/>
 	},[adjustJSX]);
-	//디버그용
+	//이미 푼 문제인지 표시
+	const achievementCorrect = useMemo(()=>{
+		if (!achievements) {return false}
+		if (!user) {return false}
+		if (!subject) {return false}
+		return achievements.some((achievementItem)=>{
+			return (parseInt(achievementItem.subjectId) === parseInt(subject.subjectId))
+				&& (parseInt(achievementItem.userId) === parseInt(user.userId))
+				&& achievementItem.correct;
+		})
+	},[achievements,user,subject])
+	//정답계산 후 처리
 	useEffect(()=>{
-		console.log(subjectState);
-	},[subjectState]);
+		if (!user) {return;}
+		if (!subject) {return;}
+		if (correct[0]===null) {return;}
+		if (correct[0]) {
+			alert('골든 정답이다.');
+		} else {
+			alert('형편없군, 오답이다.');
+		}
+
+		dispatchAchievements({
+			type:'add',
+			userId:user.userId,
+			subjectId:subject.subjectId,
+			correct:correct[0]
+		})
+		setAnswer(null);
+		setCorrect([null]);
+	},[correct,user,subject])
+	//답변제출함수
+	const sendAnswer = ()=>{
+		// document.body.focus();
+		// answerInputRef.current.focus();
+		setAnswer(answerInputRef.current.value);
+		answerInputRef.current.value = '';
+	}
 	//리턴JSX
 	return <div className='subjectDetail'>
 		{/* 씬 래퍼 */}
 		<div className='subjectSceneWrapper'>
 			{/* 씬 */}
 			<SubjectScene>
-				{}
+				{adjustJSX}
 				{controllerJSX}
 				<Suspense fallback={null}>
 					{sceneJSX}
@@ -86,7 +130,10 @@ export function SubjectDetail({subjectId}) {
 			{/* 씬헤더 */}
 			<div className='header'>
 				<div className='actName font_main'>{subject?ACTS[subject.actId].name:''}</div>
-				<div className='subjectName font_medium'>{subject?subject.name:''}</div>
+				<div className={`subjectName font_medium${achievementCorrect?' green':''}`}>
+					{subject?subject.name:''}
+					{achievementCorrect?<FaCheck/>:null}
+				</div>
 				<div className='goBack'>
 					<FaChevronLeft className='icon'/>
 				</div>
@@ -114,13 +161,19 @@ export function SubjectDetail({subjectId}) {
 				<div className='inputs'>
 					<div className='labelAndInput'>
 						<div className='label'>
-							정답1:
+							정답:
 						</div>
-						<InputText/>
+						<InputText outerRef={answerInputRef} onKeyDown={(e)=>{
+							if(e.code==='Enter') {
+								// sendAnswer();
+							}
+						}}/>
 					</div>
-				</div>
-				<div className='buttons'>
-					<ButtonIcon icon={<FiSend/>}>제출하기</ButtonIcon>
+					<div className='buttons'>
+						<ButtonIcon icon={<FiSend/>} onClick={()=>{
+							sendAnswer();
+						}}>제출하기</ButtonIcon>
+					</div>
 				</div>
 			</div>
 			{/* 하단-버튼들 */}

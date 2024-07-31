@@ -47,8 +47,9 @@ function Scene({subjectState}) {
 function Controller({handleSubjectState}) {
 	const vertexes = useMemo(()=>{
 		return [
-			[-2,0,0],
-			[2,0,0]
+			[0,0,0],
+			[2,0,2],
+			[4,0,0]
 		]
 	},[])
 	//핸들러 작동

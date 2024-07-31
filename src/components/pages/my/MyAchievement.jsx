@@ -88,7 +88,6 @@ export function Main({handleTabIndex,index,trigger}) {
 	const cards = useMemo(()=>{
 		if (!achievements||!targetUser) {return [];}
 		if (!actId&&parseInt(actId)!==0) {return [];}
-		console.log("얍");
 		return Subject.getSubjectsByActId(actId)
 		.map((subject)=>{
 			let achievement = achievements.find((item)=>{

@@ -35,7 +35,7 @@ export function ActProgress({ to, onClick, active, actId }) {
 			})
 			return achievement && JSON.parse(achievement.correct);
 		}).length
-	}, [subjects, user]);
+	}, [subjects, user, achievements]);
 	// 게이지 크기 계산
 	const gaugeWidth = useMemo(() => {
 		if (!user || !counts || !subjects || subjects.length <= 0) { return 0; }

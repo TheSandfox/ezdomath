@@ -19,7 +19,13 @@ export default function Navigation() {
   };
 
   const handleLogout = () => {
-    handleUserContext.logout();
+    const currentUser = handleUserContext.logout();
+    if (currentUser && confirm(`${currentUser.name}님 정말로 로그아웃 하시겠습니까?`)) {
+      // 실제 로그아웃 로직을 여기에 추가
+    } else {
+      // 로그아웃 취소 시 사용자 상태를 다시 설정
+      handleUserContext.setUser(currentUser);
+    }
     setIsMyPageVisible(false);
   };
 
@@ -36,7 +42,6 @@ export default function Navigation() {
   const onCloseMyPage = () => setIsMyPageVisible(false);
   const onCloseMenuPage = () => setIsMenuPageVisible(false);
 
-  // 전체메뉴 버튼을 위한 윈도우 리사이즈 핸들러
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 600 && isMenuPageVisible)
@@ -47,7 +52,6 @@ export default function Navigation() {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMenuPageVisible]);
 
-  // 내 정보 창에 들어갈 데이터 배열
   const naviMyPageAccordionContent = [
     {
       text: "내정보",
@@ -282,10 +286,16 @@ const MenuPage = ({
         <ButtonMedium
           className="small_btn font_small Login"
           onClick={handleLogin}
+          to={'/login'}
         >
           로그인
         </ButtonMedium>
-        <div className="Sign_up">회원가입</div>
+        <ButtonMedium
+          className="small_btn font_small register"
+          to={'/register'}
+        >
+          회원가입
+        </ButtonMedium>
       </div>
     </div>
     <div className="page_wrap">

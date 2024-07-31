@@ -49,13 +49,14 @@ const achievementsReducer = (state,action)=>{
 		// 진척도객체생성(중복시 덮어쓰기)
 		let target = get(state,userId,subjectId);
 		if (target===null) {
+			console.log(action);
 			newState = [
 				...state,
 				{
 					userId,
 					subjectId,
 					correct,
-					dateTime: dateFormat(new Date())
+					date: dateFormat(new Date())
 				}
 			]
 			localStorage.setItem('achievements',JSON.stringify(newState));
@@ -66,8 +67,8 @@ const achievementsReducer = (state,action)=>{
 					return  {
 						userId,
 						subjectId,
-						correct,
-						dateTime: dateFormat(new Date())
+						correct:stateItem.correct?stateItem.correct:correct,
+						dateTime:stateItem.correct?stateItem.dateTime:dateFormat(new Date())
 					};
 				} else {
 					return stateItem;

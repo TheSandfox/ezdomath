@@ -157,21 +157,21 @@ export function PageRegisterDetail({}) {
                   <th className="table_tit">회원유형</th>
                   <th className="flex table_cont radio_cont">
                     <div className="flex radio_group" ref={userTypeRef}>
-                      <input type="radio" id="student" name="userType" checked={userTypeId === USER_TYPE_STUDENT} onChange={() => {
+                      <input type="radio" id="student" className="radio" name="userType" checked={userTypeId === USER_TYPE_STUDENT} onChange={() => {
                         setUserTypeId(USER_TYPE_STUDENT);
                         setErrors(errors => ({ ...errors, userTypeId: "" })); // 오류 메시지 초기화
                       }} />
                       <label htmlFor="student">학생</label>
                     </div>
                     <div className="flex radio_group">
-                      <input type="radio" id="parent" name="userType" checked={userTypeId === USER_TYPE_PARENT} onChange={() => {
+                      <input type="radio" id="parent" className="radio" name="userType" checked={userTypeId === USER_TYPE_PARENT} onChange={() => {
                         setUserTypeId(USER_TYPE_PARENT);
                         setErrors(errors => ({ ...errors, userTypeId: "" }));
                       }} />
                       <label htmlFor="parent">학부모</label>
                     </div>
                     <div className="flex radio_group">
-                      <input type="radio" id="teacher" name="userType" checked={userTypeId === USER_TYPE_TEACHER} onChange={() => {
+                      <input type="radio" id="teacher" className="radio" name="userType" checked={userTypeId === USER_TYPE_TEACHER} onChange={() => {
                         setUserTypeId(USER_TYPE_TEACHER);
                         setErrors(errors => ({ ...errors, userTypeId: "" }));
                       }} />

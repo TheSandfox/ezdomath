@@ -5,11 +5,22 @@
 	position: relative;
 	&>.subjectSceneWrapper {
 		position: relative;
+		max-width: 100%;
+		max-height: 35rem;
+		z-index: 0;
 		flex: 1;
 		background-color: var(--color_white);
 		&>.subjectScene {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			& canvas {
+				max-width: 100%;
+			}
 		}
 		&>.header {
+			z-index: 1;
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -21,6 +32,14 @@
 			align-items: center;
 			background-color: rgba(0, 0, 0, 0.55);
 			color: var(--color_white);
+			&>.subjectName {
+				display: flex;
+				gap: 0.5rem;
+				align-items: center;
+				&.green {
+					color: var(--color_green);
+				}
+			}
 			&>.goBack {
 				position:absolute;
 				left: 1rem;
@@ -42,9 +61,9 @@
 		left: 0;
 		display: flex;
 		flex-direction: column;
+		z-index: 4;
 		&>.zimoonWrapper {
 			box-shadow: var(--shadow_sticky_up);
-			width: 100%;
 			height: 15rem;
 			max-height: 15rem;
 			overflow-y: auto;
@@ -111,7 +130,7 @@
 			}
 			&>.inputs {
 				display: flex;
-				gap: 2rem;
+				gap: 1rem;
 				&>.labelAndInput {
 					flex: 1;
 					display: flex;

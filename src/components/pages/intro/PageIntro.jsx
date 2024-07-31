@@ -5,7 +5,7 @@ import SpotlightWave from '/img/spotlightWave.webp'
 import TopBanner from '../../generic/Topbanner';
 import Navigation from '../navigation/navigation';
 import { Link } from 'react-router-dom'
-
+import { Footer } from '../main/sections/footer/footer';
 
 export function PageIntro() {
   return (
@@ -31,8 +31,7 @@ export function PageIntro() {
               문제를 구독하고, 나만의 노트를 만드세요!
             </p>
             <div className="intro_buttons">
-              <Link to="/play/0"><button>수업내용 보러 가기</button></Link>
-              <Link to="/"><button>문제풀이 하러 가기</button></Link>
+              <Link to="/play/0"><button>학습내용 보러 가기</button></Link>
             </div>
           </div>
           <aside className='svg_animation_wrap'>
@@ -94,7 +93,7 @@ export function PageIntro() {
         </section>
       </div>
       <div className='intro_100_white'>
-        <img src={SpotlightWave} alt="SpotlightWave" className='Spotlight_wave' />
+        <img src={SpotlightWave} alt="SpotlightWave" className='spotlight_wave' />
         <div className='intro_list_top'>
           <b className='intro_list_top_p'>모든 학습 목표를 달성할 수 있는 <span className='intro_list_moile_block'>솔루션을 만나보세요!</span></b>
         </div>
@@ -204,6 +203,10 @@ export function PageIntro() {
             </div>
         </section>
       </div>
+      <div className='intro_100_white'>
+        <img src={DiscoverWave} alt="discorverwave" className='discorver_wave' />
+      </div>
+      <Footer/>
     </div>
   );
 }

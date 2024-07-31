@@ -1,0 +1,38 @@
+.pageBtnWrap {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pageBtnWrap .buttonDown {
+    display: flex;
+    gap: 5px;
+}
+
+.pageBtnWrap button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--color_background);
+    color: var(--color_black);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pageBtnWrap button:hover:not(.disabled) {
+    background-color: var(--color_main);
+    color: var(--color_white);
+}
+
+.pageBtnWrap button:disabled,
+.pageBtnWrap button.disabled {
+    background-color: var(--color_background);
+    color: var(--color_black);
+    cursor: not-allowed;
+}
+
+.pageBtnWrap button.active {
+    background-color: var(--color_main);
+    color: var(--color_white);
+    border: 1px solid var(--color_main);
+}

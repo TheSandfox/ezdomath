@@ -50,7 +50,8 @@ export function Bookmark({subjectId}) {
 export function SubjectCard({
 	subjectId/*필수*/,
 	type/*0: 북마크 페이지에서, 1: 진척도페이지에서, 2:그외*/,
-	achievement/*진척도페이지에서만 사용(없어도됨)*/
+	achievement/*진척도페이지에서만 사용(없어도됨)*/,
+	onClick
 }) {
 	const { user, friends, users } = useContext(userContext);
 	// 선생유저
@@ -139,7 +140,7 @@ export function SubjectCard({
 		break;
 	}
 	return <>
-		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`}>
+		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`} onClick={typeValue === 2 ? onClick : undefined}>
 			{
 				typeValue!==2
 				?<Bookmark subjectId={subject.subjectId}/>

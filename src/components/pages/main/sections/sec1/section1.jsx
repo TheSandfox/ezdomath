@@ -6,22 +6,22 @@ export function Section1() {
   const sec1_cont = [
     {
       imgSrc: "/ezdomath/img/Sphere.webp",
-      title: "다각형의 성질",
+      title: "선의 종류",
       description: "삼각형, 사각형 등 다양한 다각형의 내각과 외각의 성질을 배워요."
     },
     {
       imgSrc: "/ezdomath/img/Reflection.webp",
-      title: "합동과 대칭",
+      title: "도형의 이동 회전",
       description: "도형의 합동 조건과 대칭축을 이해하고 활용할 수 있어요."
     },
     {
       imgSrc: "/ezdomath/img/Front View.webp",
-      title: "직육면체",
+      title: "넓이와 둘레",
       description: "직육면체의 표면적과 부피를 계산하는 방법을 학습해요."
     },
     {
       imgSrc: "/ezdomath/img/Query Outer Join Left.webp",
-      title: "원의 성질",
+      title: "직육면체",
       description: "원주율과 원의 둘레, 넓이를 구하는 방법을 배워요."
     }
   ];
@@ -54,7 +54,7 @@ export function Section1() {
           <p className="sec1_font_sub sec1_bot_txt">
             이외에도 다양한 단원에 대한 설명과 예제를 확인하고 재미있는 학습과 함께 수학적 사고력을 키워보세요!
           </p>
-          <ButtonLarge className='sec1_play_btn'>학습시작</ButtonLarge>
+          <ButtonLarge className='sec1_play_btn' to={'play/0'}>학습시작</ButtonLarge>
         </div>
       </article>
     </section>

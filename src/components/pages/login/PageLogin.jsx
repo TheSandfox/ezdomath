@@ -18,12 +18,12 @@ export function PageLogin({}) {
   const [tabed, setTabed] = useState(false); // 로그인 타입 선택 (false: 아이디 로그인, true: 카카오 로그인)
 
   const login = () => {
-    const success = handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
-    if (success) {
-      alert('로그인 성공!');
+    const user = handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
+    if (user) {
+      alert(`환영합니다. ${user.name}님!`);
       navigate('/'); // 메인 페이지로 이동
     } else {
-      alert('로그인 실패. 아이디와 비밀번호를 확인하세요.');
+      alert('아이디와 비밀번호를 다시 확인해주세요.');
     }
   };
 
@@ -58,7 +58,7 @@ export function PageLogin({}) {
           <div className="flex column_gap login_form">
             <div className="flex login_select_tap">
               <ButtonTab
-                className={`user_tap ${!tabed ? "active" : ""}`}
+                className={`user_tap common_user_tap ${!tabed ? "active" : ""}`}
                 onClick={() => setTabed(false)}
               >
                 <img
@@ -73,7 +73,7 @@ export function PageLogin({}) {
                 <span>아이디 로그인</span>
               </ButtonTab>
               <ButtonTab
-                className={`user_tap ${tabed ? "active" : ""}`}
+                className={`user_tap kakao_user_tap ${tabed ? "active" : ""}`}
                 onClick={() => setTabed(true)}
               >
                 <img

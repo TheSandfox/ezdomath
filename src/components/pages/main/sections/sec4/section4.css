@@ -52,7 +52,7 @@
 
 .intro_page_feature_btn_wrap>.intro_page_feature_btn_inner {
     flex-direction: column;
-    gap: 1.75em;
+    gap: 0.88em;
 }
 
 .intro_page_feature_btn {
@@ -62,11 +62,17 @@
 }
 
 .intro_page_route_feature_btn {
-    
+    margin-top: 0.88em;
 }
 
 .intro_page_feature_btn_trigger {
+    height: 4.38em;
     justify-content: space-between;
+    p{
+        font-size: 1em;
+        font-weight: 600;
+        color: var(--color_darkest);
+    }
 }
 
 .intro_page_feature_btn_trigger.expanded {
@@ -83,6 +89,10 @@
 .intro_page_feature_btn:hover .intro_page_feature_btn_trigger>#sec4_plus,
 .routing_btn:hover>#sec4_plus{
     transform: rotate(45deg);
+}
+
+.intro_page_feature_btn:hover .intro_page_feature_btn_trigger.expanded:hover>#sec4_plus{
+    transform: rotate(0deg);
 }
 
 .intro_page_feature_btn_trigger.expanded>#sec4_plus{
@@ -130,7 +140,7 @@
 }
 
 .routing_btn {
-    width: 100%;
+    width: 100%; height: 4.38em;
     justify-content: space-between;
     align-items: center;
 }
