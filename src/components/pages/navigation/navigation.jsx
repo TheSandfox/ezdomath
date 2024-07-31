@@ -2,7 +2,12 @@ import "./navigation.css";
 import { userContext } from "../../../App";
 import React, { useState, useEffect, useContext } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
-import { USER_TYPE_STUDENT, USER_TYPE_PARENT, USER_TYPE_TEACHER, USER_TYPE_ADMIN } from "../../../datas/usertypes";
+import {
+  USER_TYPE_STUDENT,
+  USER_TYPE_PARENT,
+  USER_TYPE_TEACHER,
+  USER_TYPE_ADMIN,
+} from "../../../datas/usertypes";
 
 export default function Navigation() {
   const { handleUserContext, user } = useContext(userContext);
@@ -12,7 +17,7 @@ export default function Navigation() {
   const handleLogin = () => {
     setIsMenuPageVisible(false);
   };
-  
+
   const handleLogout = () => {
     handleUserContext.logout();
     setIsMyPageVisible(false);
@@ -44,11 +49,27 @@ export default function Navigation() {
 
   // 내 정보 창에 들어갈 데이터 배열
   const naviMyPageAccordionContent = [
-    { text: "내정보", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
-    { text: "커뮤니티", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/community/students" },
-    { text: "진척도", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/achievement/0" },
+    {
+      text: "내정보",
+      imgSrc: "/ezdomath/img/Arrow_darkest.webp",
+      to: "/my/info",
+    },
+    {
+      text: "커뮤니티",
+      imgSrc: "/ezdomath/img/Arrow_darkest.webp",
+      to: "/my/community/students",
+    },
+    {
+      text: "진척도",
+      imgSrc: "/ezdomath/img/Arrow_darkest.webp",
+      to: "/my/achievement/0",
+    },
     { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
-    { text: "북마크", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/qna" },
+    {
+      text: "북마크",
+      imgSrc: "/ezdomath/img/Arrow_darkest.webp",
+      to: "/my/qna",
+    },
   ];
   const naviMenuPageAccordionContent = [
     { text: "EZDOMATH", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/" },
@@ -90,7 +111,7 @@ const NavigationBar = ({
   handleLogin,
   toggleMyPageVisibility,
   toggleMenuPageVisibility,
-  user // user 정보를 받아옴
+  user, // user 정보를 받아옴
 }) => (
   <div className="navi_dom">
     <div className="navi_bar flex">
@@ -100,15 +121,25 @@ const NavigationBar = ({
             <img src="/ezdomath/img/logo.webp" alt="사이트 로고" />
           </ButtonIcon>
         </li>
-        <li>EZDOMATH</li>
         <li>
           <div className="button_wrapper">
-            <ButtonSmall className="small_btn font_small" to={'/notice'}>공지사항</ButtonSmall>
+            <ButtonSmall className="small_btn font_small" to={"/intro"}>
+              EZDOMATH
+            </ButtonSmall>
           </div>
         </li>
         <li>
           <div className="button_wrapper">
-            <ButtonSmall className="small_btn font_small">학습시작</ButtonSmall>
+            <ButtonSmall className="small_btn font_small" to={"/notice"}>
+              공지사항
+            </ButtonSmall>
+          </div>
+        </li>
+        <li>
+          <div className="button_wrapper">
+            <ButtonSmall className="small_btn font_small" to={"/play/0"}>
+              학습시작
+            </ButtonSmall>
           </div>
         </li>
       </ul>
@@ -134,7 +165,8 @@ const NavigationBar = ({
               </div>
             </li>
           </>
-        ) : ( // 로그인되었을 때
+        ) : (
+          // 로그인되었을 때
           <>
             <li className="After_login">
               <div className="Alarm_wrap user_btn">
@@ -178,7 +210,7 @@ const MyPage = ({
   onCloseMyPage,
   naviMyPageAccordionContent,
   handleLogout,
-  user // user 정보를 받아옴
+  user, // user 정보를 받아옴
 }) => (
   <div className={isMyPageVisible ? "myPage flex" : "myPage hidden"}>
     <div className="User_info_wrap">

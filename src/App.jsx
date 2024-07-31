@@ -40,32 +40,65 @@ function App() {
     handleUserContext.setUser(null);
   };
 
-  const handleUserContext = {
-    setUser: (newUser) => {
-      setUserContextValue((prev) => ({
-        ...prev,
-        user: newUser
-      }));
-    },
-    logout: handleLogout,
-    login: handleLogin
-  };
-
-  // 동적데이터들
-  const [bookmarks, dispatchBookmarks] = useReducer(bookmarksReducer, bookmarksDefault);
-  const [achievements, dispatchAchievements] = useReducer(achievementsReducer, achievementsDefault);
-  const [users, dispatchUsers] = useReducer(usersReducer, usersDefault);
-  const [friends, dispatchFriends] = useReducer(friendsReducer, friendsDefault);
-  const [invitations, dispatchInvitations] = useReducer(invitationsReducer, invitationsDefault);
-  const [notifications, dispatchNotifications] = useReducer(notificationsReducer, notificationsDefault);
-  const [qnas, dispatchQnas] = useReducer(qnasReducer, qnasDefault);
-
-  // 로그인유저 설정(임시)
-  useEffect(() => {
-    handleUserContext.setUser(
-      users.find((item) => parseInt(item.userId) === parseInt(2))
-    );
-  }, [users]);
+    const handleUserContext = {
+        setUser: (newUser) => {
+            // 유저객체 변경
+            setUserContextValue((prev) => {
+                return {
+                    ...prev,
+                    user: newUser
+                }
+            })
+        },
+		setUserById: (userId)=>{
+			setUserContextValue((prev)=>{
+				return {
+					...prev,
+					user: users.find((item) => {
+						return parseInt(item.userId) === parseInt(userId);
+					})
+				}
+			})
+		},
+        logout: () => {
+            setUserContextValue(prev => ({
+                ...prev,
+                user: null
+            }));
+        },
+		// 0729 신효준 추가, 로그인 로직 테스트
+        login: (stringId, password) => {
+            const isValid = users.find(user => user.stringId === stringId && user.password === password);
+            if (isValid) {
+                handleUserContext.setUser(isValid);
+            }
+        }
+    }
+    // 동적데이터들
+    const [bookmarks, dispatchBookmarks] = useReducer(bookmarksReducer, bookmarksDefault);
+    const [achievements, dispatchAchievements] = useReducer(achievementsReducer, achievementsDefault);
+    const [users, dispatchUsers] = useReducer(usersReducer, usersDefault);
+    const [friends, dispatchFriends] = useReducer(friendsReducer, friendsDefault);
+    const [invitations, dispatchInvitations] = useReducer(invitationsReducer, invitationsDefault);
+    const [notifications, dispatchNotifications] = useReducer(notificationsReducer, notificationsDefault);
+    const [qnas, dispatchQnas] = useReducer(qnasReducer, qnasDefault);
+    
+    // 로그인유저 설정(임시)
+    useEffect(() => {
+        handleUserContext.setUserById(2);
+    }, [users]);
+	// 유저바꿔치기 치트(임시)
+	useEffect(()=>{
+		const cheat = (e)=>{
+			if (!e.shiftKey) {return;}
+			if (!e.code.includes('Digit')) {return;}
+			handleUserContext.setUserById(e.code.substring(5));
+		}
+		window.addEventListener('keydown',cheat);
+		return ()=>{
+			window.removeEventListener('keydown',cheat);
+		}
+	},[])
 
   // 페이지가 변경될 때마다 스크롤 상태를 재설정
   const location = useLocation();
