@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { PageMain } from '/src/components/pages/main/PageMain';
 import { PagePlay } from '/src/components/pages/play/PagePlay';
 import { PageIntro } from '/src/components/pages/intro/PageIntro';
@@ -25,13 +25,25 @@ function App() {
     user: null,
   });
 
+  // 동적데이터들
+  const [bookmarks, dispatchBookmarks] = useReducer(bookmarksReducer, bookmarksDefault);
+  const [achievements, dispatchAchievements] = useReducer(achievementsReducer, achievementsDefault);
+  const [users, dispatchUsers] = useReducer(usersReducer, usersDefault);
+  const [friends, dispatchFriends] = useReducer(friendsReducer, friendsDefault);
+  const [invitations, dispatchInvitations] = useReducer(invitationsReducer, invitationsDefault);
+  const [notifications, dispatchNotifications] = useReducer(notificationsReducer, notificationsDefault);
+  const [qnas, dispatchQnas] = useReducer(qnasReducer, qnasDefault);
+
   // 로그인 로직
   const handleLogin = (stringId, password) => {
-    const isValid = usersDefault.find(user => user.stringId === stringId && user.password === password);
+    const allUsers = [...usersDefault, ...users];
+    const isValid = allUsers.find(user => user.stringId === stringId && user.password === password);
     if (isValid) {
+      console.log(users);
       handleUserContext.setUser(isValid);
       return true; // 로그인 성공
     } else {
+      console.log(users); // allUsers 배열 출력
       return false; // 로그인 실패
     }
   };
@@ -40,66 +52,47 @@ function App() {
     handleUserContext.setUser(null);
   };
 
-    const handleUserContext = {
-        setUser: (newUser) => {
-            // 유저객체 변경
-            setUserContextValue((prev) => {
-                return {
-                    ...prev,
-                    user: newUser
-                }
-            })
-        },
-		setUserById: (userId)=>{
-			setUserContextValue((prev)=>{
-				return {
-					...prev,
-					user: users.find((item) => {
-						return parseInt(item.userId) === parseInt(userId);
-					})
-				}
-			})
-		},
-        logout: () => {
-            setUserContextValue(prev => ({
-                ...prev,
-                user: null
-            }));
-        },
-		// 0729 신효준 추가, 로그인 로직 테스트
-        login: (stringId, password) => {
-            // Example: Validate user with dummy data
-            const isValid = users.find(user => user.stringId === stringId && user.password === password);
-            if (isValid) {
-                handleUserContext.setUser(isValid);
-            }
-        }
+  const handleUserContext = {
+    setUser: (newUser) => {
+      setUserContextValue((prev) => ({
+        ...prev,
+        user: newUser
+      }));
+    },
+    setUserById: (userId) => {
+      const allUsers = [...usersDefault, ...users];
+      setUserContextValue((prev) => ({
+        ...prev,
+        user: allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
+      }));
+    },
+
+    logout: handleLogout,
+    login: handleLogin,
+    // dispatchUsers로 새 유저 저장
+    addUser: (user) => {
+      console.log('addUser 호출됨', user);
+      dispatchUsers({ type: 'add', ...user });
+    },
+    // dispatchUsers로 해당 유저 삭제 및 로그아웃
+    removeUser: (userId) => {
+      dispatchUsers({ type: 'remove', userId });
+      handleLogout();
     }
-    // 동적데이터들
-    const [bookmarks, dispatchBookmarks] = useReducer(bookmarksReducer, bookmarksDefault);
-    const [achievements, dispatchAchievements] = useReducer(achievementsReducer, achievementsDefault);
-    const [users, dispatchUsers] = useReducer(usersReducer, usersDefault);
-    const [friends, dispatchFriends] = useReducer(friendsReducer, friendsDefault);
-    const [invitations, dispatchInvitations] = useReducer(invitationsReducer, invitationsDefault);
-    const [notifications, dispatchNotifications] = useReducer(notificationsReducer, notificationsDefault);
-    const [qnas, dispatchQnas] = useReducer(qnasReducer, qnasDefault);
-    
-    // 로그인유저 설정(임시)
-    useEffect(() => {
-        handleUserContext.setUserById(2);
-    }, [users]);
-	// 유저바꿔치기 치트(임시)
-	useEffect(()=>{
-		const cheat = (e)=>{
-			if (!e.shiftKey) {return;}
-			if (!e.code.includes('Digit')) {return;}
-			handleUserContext.setUserById(e.code.substring(5));
-		}
-		window.addEventListener('keydown',cheat);
-		return ()=>{
-			window.removeEventListener('keydown',cheat);
-		}
-	},[])
+  };
+
+  // 유저 바꿔치기 치트(임시)
+  useEffect(() => {
+    const cheat = (e) => {
+      if (!e.shiftKey) { return; }
+      if (!e.code.includes('Digit')) { return; }
+      handleUserContext.setUserById(e.code.substring(5));
+    };
+    window.addEventListener('keydown', cheat);
+    return () => {
+      window.removeEventListener('keydown', cheat);
+    };
+  }, []);
 
     // 페이지가 변경될 때마다 스크롤 상태를 재설정
     const location = useLocation();
@@ -136,7 +129,6 @@ function App() {
           {/* 문제풀이페이지 */}
           <Route path={'/play/:actId/:subjectId/'} element={<PagePlay />} />
           <Route path={'/play/:actId/*'} element={<PagePlay />} />
-          {/* <Route path={'/play/0'} /> */}
           {/* 사이트소개 */}
           <Route path={'/intro/*'} element={<PageIntro />} />
           {/* 공지리스트 */}

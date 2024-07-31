@@ -56,8 +56,17 @@
 }
 
 .radio_cont{
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
+    .radio_group{
+        width: 33.333%;
+        gap: 0.44em;
+    }
+    .font_small{
+        color: var(--color_subtitle);
+        font-size: 0.75em;
+    }
 }
 
 .btn_wrap{
