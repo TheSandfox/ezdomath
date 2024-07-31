@@ -5,13 +5,13 @@ const achievementsDefault = localStorage.getItem('achievements')
 			userId:0,
 			subjectId:0,
 			date:'2024.11.11',
-			correct:'true',
+			correct:true,
 		},
 		{
 			userId:0,
 			subjectId:1,
 			date:'2024.11.11',
-			correct:'false',
+			correct:false,
 		},
 	];
 

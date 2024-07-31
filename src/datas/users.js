@@ -96,7 +96,7 @@ const usersReducer = (state, action) => {
         ...state,
         {
           name,
-		  userId: counter++,
+		//   userId: counter++,
           userTypeId,
           schoolName,
           stringId,

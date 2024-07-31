@@ -48,6 +48,7 @@
 				display: flex;
 				flex-direction: column;
 				gap: 2rem;
+				z-index: 991;
 				/* 탭 */
 				@media screen and (max-width:1440px) {
 					width: 14rem;
@@ -56,7 +57,7 @@
 				/* 모바일 */
 				@media screen and (max-width:800px) {
 					position: sticky;
-					top: 0;
+					top: var(--header-height);
 					left: 0;
 					padding: 1rem;
 					background-color: var(--color_background_sub);
@@ -167,6 +168,8 @@
 
 .myLeftBoxAlter {
 	display: none;
+	flex-direction: column;
+	gap: 1rem;
 	@media screen and (max-width:800px) {
 		display: flex;
 	}

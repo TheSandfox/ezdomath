@@ -54,6 +54,11 @@ function App() {
 
   const handleUserContext = {
     setUser: (newUser) => {
+		if (newUser) {
+			sessionStorage.setItem('currentUser',JSON.stringify(newUser));
+		} else {
+			sessionStorage.removeItem('currentUser');
+		}
       setUserContextValue((prev) => ({
         ...prev,
         user: newUser
@@ -61,10 +66,13 @@ function App() {
     },
     setUserById: (userId) => {
       const allUsers = [...usersDefault, ...users];
-      setUserContextValue((prev) => ({
-        ...prev,
-        user: allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
-      }));
+    //   setUserContextValue((prev) => ({
+    //     ...prev,
+    //     user: allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
+    //   }));
+		handleUserContext.setUser(
+			allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
+		)
     },
 
     logout: handleLogout,
@@ -93,6 +101,14 @@ function App() {
       window.removeEventListener('keydown', cheat);
     };
   }, []);
+  	// 유저정보가져오기
+	useEffect(()=>{
+		handleUserContext.setUser(
+			sessionStorage.getItem('currentUser')
+			?JSON.parse(sessionStorage.getItem('currentUser'))
+			:null
+		)
+	},[])
 
     // 페이지가 변경될 때마다 스크롤 상태를 재설정
     const location = useLocation();

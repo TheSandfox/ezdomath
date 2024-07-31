@@ -10,7 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { FaMinus } from "react-icons/fa6";
 import { userContext } from '../../../App';
-import { USER_TYPE_TEACHER } from '../../../datas/usertypes';
+import { USER_TYPE_PARENT, USER_TYPE_TEACHER } from '../../../datas/usertypes';
 
 export function Bookmark({subjectId}) {
 	const { bookmarks, dispatchBookmarks, user } = useContext(userContext);
@@ -85,6 +85,13 @@ export function SubjectCard({
 			return null;
 		}
 	},[subject]);
+	// QNA버튼 보임
+	const displayQNA = useMemo(()=>{
+		if(!user){return false}
+		if(parseInt(user.userTypeId)===USER_TYPE_TEACHER){return false}
+		if(parseInt(user.userTypeId)===USER_TYPE_PARENT){return false}
+		return true;
+	},[user])
 	const typeValue = !type?0:parseInt(type);
 	let jsx = <></>
 	let newClass = null;
@@ -92,7 +99,7 @@ export function SubjectCard({
 	case 0 :
 		// 북마크용
 		jsx = <>
-			<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>질문하기</ButtonMedium>
+			{displayQNA?<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>질문하기</ButtonMedium>:null}
 			<ButtonMedium to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`}>바로가기</ButtonMedium>
 		</>
 		break;
@@ -116,7 +123,7 @@ export function SubjectCard({
 			</div>
 			<div className='buttons'>
 				{/* 질문하기 */}
-				<ButtonIcon to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>
+				{displayQNA?<ButtonIcon to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>:null}
 				{/* 바로가기 */}
 				<ButtonIcon to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaChevronRight className={'icon'}/>}></ButtonIcon>
 			</div>

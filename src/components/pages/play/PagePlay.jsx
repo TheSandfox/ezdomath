@@ -19,7 +19,7 @@ export function PagePlay() {
   const [isSidebarOverlayVisible, setIsLeftSidebarOverlayVisible] = useState(false);
   const [isRightSidebarOverlayVisible, setIsRightSidebarOverlayVisible] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [selectedAct, setSelectedAct] = useState(actId ? parseInt(actId) : 0);
+  const [selectedAct, setSelectedAct] = useState(actId ? [parseInt(actId)] : [0]);
   const [selectedSubject, setSelectedSubject] = useState(subjectId ? parseInt(subjectId) : null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -41,7 +41,7 @@ export function PagePlay() {
 
   // act 클릭 시 처리 함수
   const handleActClick = (actId) => {
-    setSelectedAct(actId);
+    setSelectedAct([actId]);
     setSelectedSubject(null);
     navigate(`/play/${actId}`);
     setIsLeftSidebarOverlayVisible(false);
@@ -51,7 +51,7 @@ export function PagePlay() {
   const handleSubjectClick = (subjectId) => {
     setSelectedSubject(subjectId);
     setIsRightSidebarOverlayVisible(false);
-    navigate(`/play/${selectedAct}/${subjectId}`);
+    navigate(`/play/${selectedAct[0]}/${subjectId}`);
   };
 
   const handleOpenModal = () => {
@@ -88,12 +88,14 @@ export function PagePlay() {
   }, []);
 
   useEffect(() => {
-    if (actId) {
-      setSelectedAct(parseInt(actId));
-    }
+	if (actId) {
+     	setSelectedAct([parseInt(actId)]);
+	}
     if (subjectId) {
-      setSelectedSubject(parseInt(subjectId));
-    }
+      	setSelectedSubject(parseInt(subjectId));
+    } else {
+		setSelectedSubject(null);
+	}
   }, [actId, subjectId]);
 
   useEffect(() => {
@@ -106,7 +108,7 @@ export function PagePlay() {
   }, [isRightSidebarOverlayVisible]);
 
   const filteredSubjects = useMemo(
-    () => SUBJECTS.filter(subject => subject.actId === selectedAct), 
+    () => SUBJECTS.filter(subject => subject.actId === selectedAct[0]), 
     [selectedAct]
   ); // useMemo를 사용하여 불필요한 재계산 방지
 
@@ -140,7 +142,7 @@ export function PagePlay() {
                 <b>학습하기</b>
               </div>
               {ACTS.map((act) => (
-                <ActProgress key={act.actId} actId={act.actId} onClick={() => handleActClick(act.actId)} active={selectedAct === act.actId} />
+                <ActProgress key={act.actId} actId={act.actId} onClick={() => handleActClick(act.actId)} active={selectedAct[0] === act.actId} />
               ))}
             </div>
           </aside>
@@ -148,7 +150,7 @@ export function PagePlay() {
         <section className={`play_page_background ${!isRightSidebarVisible ? 'full-width' : ''}`}>
           <div className={`content_wrap ${selectedSubject !== null ? 'no-margin-left' : ''}`}>
             <div className={`act_and_subject_wrap ${selectedSubject !== null ? 'subject-mode' : ''}`}>
-              <ActList actId={selectedAct} />
+              <ActList actId={selectedAct[0]} />
               {selectedSubject !== null && (
                 <div className="subject_detail_wrap">
                   <SubjectDetail subjectId={selectedSubject} />
@@ -179,7 +181,7 @@ export function PagePlay() {
                 <b>학습하기</b>
               </div>
               {ACTS.map((act) => (
-                <ActProgress key={act.actId} actId={act.actId} onClick={() => handleActClick(act.actId)} active={selectedAct === act.actId} />
+                <ActProgress key={act.actId} actId={act.actId} onClick={() => handleActClick(act.actId)} active={selectedAct[0] === act.actId} />
               ))}
             </div>
           </aside>

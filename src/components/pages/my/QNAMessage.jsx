@@ -71,7 +71,7 @@ export function QNAMessage({qna,my,containerRef}) {
 				<div className='content'>{qna.content}</div>
 				{/* 답변버튼 */}
 				{subjectInfo&&!my
-					?<div className='bottom'><ButtonMedium className={'reply'}>
+					?<div className='bottom'><ButtonMedium className={'reply'} to={`/my/qna/${qna.fromUserId}/${qna.subjectId}`}>
 						답변하기
 					</ButtonMedium></div>
 					:<></>

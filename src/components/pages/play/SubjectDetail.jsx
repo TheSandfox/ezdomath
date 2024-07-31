@@ -1,5 +1,5 @@
 import { Suspense, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { SUBJECTS } from '/src/datas/subjects';
 import { SubjectScene } from './SubjectScene';
 import { FaChevronLeft } from "react-icons/fa6";
@@ -17,6 +17,7 @@ import { ACTS } from '../../../datas/acts';
 import { userContext } from '../../../App';
 
 export function SubjectDetail({subjectId}) {
+	const navigate = useNavigate();
 	const { dispatchAchievements, user, achievements } = useContext(userContext);
 	const answerInputRef = useRef(null);
 	const [subjectState,setSubjectState] = useState(null);
@@ -90,7 +91,6 @@ export function SubjectDetail({subjectId}) {
 	},[achievements,user,subject])
 	//정답계산 후 처리
 	useEffect(()=>{
-		if (!user) {return;}
 		if (!subject) {return;}
 		if (correct[0]===null) {return;}
 		if (correct[0]) {
@@ -98,15 +98,16 @@ export function SubjectDetail({subjectId}) {
 		} else {
 			alert('형편없군, 오답이다.');
 		}
-
+		let correctTemp = correct[0];
+		setAnswer(null);
+		setCorrect([null]);
+		if (!user) {return;}
 		dispatchAchievements({
 			type:'add',
 			userId:user.userId,
 			subjectId:subject.subjectId,
-			correct:correct[0]
+			correct:correctTemp
 		})
-		setAnswer(null);
-		setCorrect([null]);
 	},[correct,user,subject])
 	//답변제출함수
 	const sendAnswer = ()=>{
@@ -134,9 +135,9 @@ export function SubjectDetail({subjectId}) {
 					{subject?subject.name:''}
 					{achievementCorrect?<FaCheck/>:null}
 				</div>
-				<div className='goBack'>
+				<Link className='goBack' to={`/play/${subject?subject.actId:''}`}>
 					<FaChevronLeft className='icon'/>
-				</div>
+				</Link>
 			</div>
 		</div>
 		{/* 메인영역 */}
