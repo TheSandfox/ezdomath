@@ -41,7 +41,7 @@ export function Left({handleTrigger}) {
 			arr = [
 				tabs[0],
 				tabs[1],
-				tabs[3],
+				// tabs[3],
 			];
 			break;
 		// 교사
@@ -49,7 +49,7 @@ export function Left({handleTrigger}) {
 			arr = [
 				tabs[0],
 				tabs[1],
-				tabs[3]
+				// tabs[3]
 			];
 			break;
 		// 어드민
