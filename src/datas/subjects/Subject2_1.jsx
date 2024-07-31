@@ -15,11 +15,15 @@ function Adjust({subjectState,answer,handleCorrect}) {
 
 // Scene
 function Scene({subjectState}) {
+	const meshColor = useMemo(()=>{
+		const root = getComputedStyle(document.documentElement);
+		return root.getPropertyValue('--color_main').trim();
+	},[])
 	return <group position={[0, 0.5, 0]}>
 		<mesh>
 			<boxGeometry/>
 			<meshStandardMaterial 
-				color={Math.random()*0xdddddd}
+				color={meshColor}
 			/>
 		</mesh>
 	</group>
