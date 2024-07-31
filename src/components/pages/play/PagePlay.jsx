@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ACTS } from "../../../datas/acts";
 import { SUBJECTS } from "../../../datas/subjects";
@@ -9,46 +9,61 @@ import Ham from '/img/HamMenu.svg';
 import RightG from '/img/rightG.svg';
 import Navigation from "../navigation/navigation.jsx";
 import { SubjectDetail } from "../play/SubjectDetail.jsx";
+import { ReportAndError } from "../../generic/play/ReportAndError.jsx";
 
 export function PagePlay() {
   const { actId, subjectId } = useParams();
   const navigate = useNavigate();
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(true);
-  const [isSidebarOverlayVisible, setIsSidebarOverlayVisible] = useState(false);
+  const [isSidebarOverlayVisible, setIsLeftSidebarOverlayVisible] = useState(false);
   const [isRightSidebarOverlayVisible, setIsRightSidebarOverlayVisible] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [selectedAct, setSelectedAct] = useState(actId ? parseInt(actId) : 0);
   const [selectedSubject, setSelectedSubject] = useState(subjectId ? parseInt(subjectId) : null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // 좌측 사이드바 토글 함수
   const toggleSidebar = () => {
-    setIsSidebarOverlayVisible(!isSidebarOverlayVisible);
+    setIsLeftSidebarOverlayVisible(!isSidebarOverlayVisible);
     if (!isSidebarOverlayVisible) {
       setIsRightSidebarOverlayVisible(false);
     }
   };
 
+  // 우측 사이드바 토글 함수
   const toggleRightSidebar = () => {
     setIsRightSidebarOverlayVisible(!isRightSidebarOverlayVisible);
     if (!isRightSidebarOverlayVisible) {
-      setIsSidebarOverlayVisible(false);
+      setIsLeftSidebarOverlayVisible(false);
     }
   };
 
+  // act 클릭 시 처리 함수
   const handleActClick = (actId) => {
     setSelectedAct(actId);
     setSelectedSubject(null);
     navigate(`/play/${actId}`);
-    setIsSidebarOverlayVisible(false);
+    setIsLeftSidebarOverlayVisible(false);
   };
 
+  // subject 클릭 시 처리 함수
   const handleSubjectClick = (subjectId) => {
     setSelectedSubject(subjectId);
-    setIsRightSidebarOverlayVisible(false); // 문제 선택 시 오버레이를 닫음
+    setIsRightSidebarOverlayVisible(false);
     navigate(`/play/${selectedAct}/${subjectId}`);
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
+    // 화면 크기 조정에 따른 사이드바 및 메뉴 버튼 표시 상태 변경
     const handleResize = () => {
       if (window.innerWidth <= 1024) {
         setIsSidebarVisible(false);
@@ -57,7 +72,7 @@ export function PagePlay() {
       } else {
         setIsSidebarVisible(true);
         setIsRightSidebarVisible(true);
-        setIsSidebarOverlayVisible(false);
+        setIsLeftSidebarOverlayVisible(false);
         setIsRightSidebarOverlayVisible(false);
         setIsMenuVisible(false);
       }
@@ -82,6 +97,7 @@ export function PagePlay() {
   }, [actId, subjectId]);
 
   useEffect(() => {
+    // 우측 사이드바 오버레이가 표시될 때 스크롤 비활성화
     if (isRightSidebarOverlayVisible) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -89,7 +105,10 @@ export function PagePlay() {
     }
   }, [isRightSidebarOverlayVisible]);
 
-  const filteredSubjects = SUBJECTS.filter(subject => subject.actId === selectedAct);
+  const filteredSubjects = useMemo(
+    () => SUBJECTS.filter(subject => subject.actId === selectedAct), 
+    [selectedAct]
+  ); // useMemo를 사용하여 불필요한 재계산 방지
 
   return (
     <>
@@ -97,11 +116,19 @@ export function PagePlay() {
       {isMenuVisible && <div className="play_page_menu_placeholder" />}
       {isMenuVisible && (
         <div className="play_page_menu flex">
-          <button className="sidebar_toggle_button" onClick={toggleSidebar}>
-            <img src={Ham} alt="" /> 스터디 메뉴
+          <button 
+            className="sidebar_toggle_button" 
+            onClick={toggleSidebar} 
+            aria-label="스터디 메뉴 토글"
+          >
+            <img src={Ham} alt="Menu Icon" /> 스터디 메뉴
           </button>
-          <button className="right_sidebar_toggle_button" onClick={toggleRightSidebar}>
-            문제 보기 <img src={RightG} alt="" />
+          <button 
+            className="right_sidebar_toggle_button" 
+            onClick={toggleRightSidebar} 
+            aria-label="문제 보기 토글"
+          >
+            문제 보기 <img src={RightG} alt="Right Icon" />
           </button>
         </div>
       )}
@@ -173,6 +200,8 @@ export function PagePlay() {
           </div>
         </div>
       )}
+      <button onClick={handleOpenModal} className="report-button">오류 제보하기/질문하기</button>
+      {isModalOpen && <ReportAndError onClose={handleCloseModal} />}
     </>
   );
 }

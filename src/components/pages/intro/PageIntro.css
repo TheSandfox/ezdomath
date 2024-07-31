@@ -66,7 +66,6 @@
 .svg_animation {
     width: 30.8125rem;
     height: auto;
-    /* background-image: url(/ezdomath/public/img/svganim.svg); */
 }
 
 .features {
@@ -93,7 +92,6 @@
     margin: 0.625rem;
     padding: 1.25rem;
     background-color: #f5f5f5;
-    /* Example background color */
     border-radius: 0.5rem;
 }
 
@@ -103,13 +101,11 @@
     align-items: center;
     padding: 1.25rem;
     background-color: #f0f0f0;
-    /* Example footer color */
 }
 
 .intro_footer a {
     text-decoration: none;
     color: #00796b;
-    /* Example link color */
     margin: 0 0.625rem;
 }
 

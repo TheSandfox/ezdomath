@@ -1,15 +1,15 @@
 .notice_wrap {
-    max-width: 1440px;
+    max-width: 90rem; /* 1440px */
     margin: 0 auto;
-    padding: 20px;
+    padding: 1.25rem; /* 20px */
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.625rem; /* 10px */
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px */
 }
 
 .notice_wrap h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* 20px */
 }
 
 .notice_form {
@@ -18,12 +18,12 @@
 }
 
 .notice_form div {
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem; /* 15px */
 }
 
 .notice_form label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem; /* 5px */
     font-weight: bold;
 }
 
@@ -31,26 +31,27 @@
 .notice_form select,
 .notice_form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 0.625rem; /* 10px */
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* 5px */
+    box-sizing: border-box;
 }
 
 .notice_form textarea {
-    height: 200px;
+    height: 12.5rem; /* 200px */
     resize: none;
 }
 
 .notice_form .buttons {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 0.625rem; /* 10px */
 }
 
 .notice_form .buttons button {
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem; /* 10px 20px */
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* 5px */
     cursor: pointer;
 }
 
@@ -61,4 +62,10 @@
 .notice_form .buttons .submit_button {
     background-color: var(--color_main);
     color: white;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.3125rem; /* 5px */
 }

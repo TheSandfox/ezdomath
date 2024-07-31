@@ -28,32 +28,28 @@ export function NoticeDetail() {
         navigate('/notice');
     };
 
-    const formatContent = (content) => {
-        return content.split('\n').map((line, index) => (
-            <div key={index}>{line}<br /></div>
-        ));
-    };
-
     return (
         <div className="notice_detail_wrap">
             <div className="notice_detail_header">
                 <div></div>
                 <p className='notice_detail_title font_medium'>{notice.title}</p>
-                <p>{notice.time}</p>
+                <p className='font_small'>작성일 | {notice.time}</p>
             </div>
             <div className="notice_detail_content">
                 {notice.item.map((item, index) => (
-                    <div key={index}>{formatContent(item.content)}</div>
+                    <div key={index} className="notice_content font_main">
+                        {item.content}
+                    </div>
                 ))}
             </div>
             <div className="notice_detail_buttons">
-				<div>
-                	<button onClick={handleListClick}>목록</button>
-				</div>
-				<div className='noti_detail_btn_box'>
-                	<button onClick={handleEditClick}>수정</button>
-                	<button onClick={handleDeleteClick}>삭제</button>
-				</div>
+                <div>
+                    <button className='font_small' onClick={handleListClick}>목록</button>
+                </div>
+                <div className='noti_detail_btn_box'>
+                    <button className='font_small' onClick={handleEditClick}>수정</button>
+                    <button className='font_small' onClick={handleDeleteClick}>삭제</button>
+                </div>
             </div>
         </div>
     );

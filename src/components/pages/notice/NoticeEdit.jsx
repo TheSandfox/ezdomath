@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Noti } from "../../../datas/noti_data";
 import './NoticeWrite.css';
@@ -9,11 +9,13 @@ export function NoticeEdit() {
     const noticeIndex = Noti.findIndex(noti => noti.notiId === parseInt(noticeId));
     const notice = Noti[noticeIndex];
 
-    const [title, setTitle] = React.useState('');
-    const [important, setImportant] = React.useState(false);
-    const [content, setContent] = React.useState('');
+    const [title, setTitle] = useState('');
+    const [important, setImportant] = useState(false);
+    const [content, setContent] = useState('');
+    const [titleError, setTitleError] = useState('');
+    const [contentError, setContentError] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (notice) {
             setTitle(notice.title);
             setImportant(notice.important);
@@ -27,14 +29,48 @@ export function NoticeEdit() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const updatedNotice = {
-            ...notice,
-            title,
-            important,
-            item: [{ type: "text", content }],
-        };
-        Noti[noticeIndex] = updatedNotice;
-        navigate('/notice');
+        if (validateForm()) {
+            const confirmed = window.confirm('내용을 수정하여 등록하시겠습니까?');
+            if (confirmed) {
+                const updatedNotice = {
+                    ...notice,
+                    title,
+                    important,
+                    item: [{ type: "text", content }],
+                };
+                Noti[noticeIndex] = updatedNotice;
+                navigate('/notice');
+            }
+        }
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        if (title.length > 15) {
+            setTitleError('제목은 최대 15글자까지 가능합니다.');
+            valid = false;
+        } else {
+            setTitleError('');
+        }
+        if (content.length > 1500) {
+            setContentError('내용은 최대 1500자까지 가능합니다.');
+            valid = false;
+        } else {
+            setContentError('');
+        }
+        return valid;
+    };
+
+    const handleTitleChange = (e) => {
+        if (e.target.value.length <= 15) {
+            setTitle(e.target.value);
+        }
+    };
+
+    const handleContentChange = (e) => {
+        if (e.target.value.length <= 1500) {
+            setContent(e.target.value);
+        }
     };
 
     const handleCancel = () => {
@@ -51,9 +87,10 @@ export function NoticeEdit() {
                         type="text"
                         name="title"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={handleTitleChange}
                         required
                     />
+                    {titleError && <div className="error">{titleError}</div>}
                 </div>
                 <div>
                     <label>중요 여부</label>
@@ -72,9 +109,10 @@ export function NoticeEdit() {
                     <textarea
                         name="content"
                         value={content}
-                        onChange={(e) => setContent(e.target.value)}
+                        onChange={handleContentChange}
                         required
                     />
+                    {contentError && <div className="error">{contentError}</div>}
                 </div>
                 <div className="buttons">
                     <button type="button" className="cancel_button" onClick={handleCancel}>취소</button>
