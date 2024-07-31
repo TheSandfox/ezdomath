@@ -2,6 +2,7 @@
     max-width: 90rem; /* 1440px */
     padding: 4rem 0 8rem 0; /* 64px 0 128px 0 */
     margin: 0 auto;
+    margin-top: 1rem
 }
 
 .noti_table {

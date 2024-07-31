@@ -9,7 +9,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
 
 //hooks
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
 //external components
@@ -91,10 +91,11 @@ export function PageMy({}) {
 			setTrigger(newVal);
 		}
 	}
+
 	return <>
 		<Navigation/>
 		{/* <탑배너> */}
-		<TopBanner pageName={'마이페이지'}/>
+		<TopBanner pageName={'마이페이지'} className="mobile_none" />
 		<div id={'pageMy'}>
 			{/* 상탭(탭) */}
 			<MyTabs flag={true} tabIndex={tabIndex}/>

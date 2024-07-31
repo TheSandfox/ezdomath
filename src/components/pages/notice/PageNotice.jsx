@@ -1,8 +1,9 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { NoticeList } from './NoticeList';
-import { NoticeDetail } from './NoticeDetail';
-import { NoticeWrite } from './NoticeWrite';
-import { NoticeEdit } from './NoticeEdit';
+import { NoticeList } from '../../../components/generic/Notice/NoticeList';
+import { NoticeDetail } from '../../../components/generic/Notice/NoticeDetail';
+import { NoticeWrite } from '../../../components/generic/Notice/NoticeWrite';
+import { NoticeEdit } from '../../../components/generic/Notice/NoticeEdit';
 import Navigation from '../navigation/navigation';
 import TopBanner from '../../generic/Topbanner';
 
