@@ -6,7 +6,8 @@ function Adjust({subjectState,answer,handleCorrect}) {
 	useEffect(()=>{
 		if (!answer) {return;}
 		if (!handleCorrect) {return;}
-		handleCorrect.set(String(answer)===String(subjectState.vertexes.length))
+		console.log('회전 '+answer)
+		handleCorrect.set(String(answer)==='회전')
 	},[answer,handleCorrect]);
 	return <>
 	</>
@@ -14,19 +15,8 @@ function Adjust({subjectState,answer,handleCorrect}) {
 
 // Scene
 function Scene({subjectState}) {
-	const {vertexes} = subjectState;
 	return <group>
-		{
-			// 선
-			vertexes
-			?<Line
-				points={[...vertexes]} // 라인의 점들
-				color="red" // 라인의 색상
-				lineWidth={2} // 라인의 두께
-		  	/>
-			:<></>
-		}
-		{
+		{/* {
 			// 점두개
 			vertexes
 			?vertexes.map((vertex,index)=>{
@@ -39,26 +29,17 @@ function Scene({subjectState}) {
 				</Fragment>
 			})
 			:<></>
-		}
+		} */}
 	</group>
 }
 
 // Controller
 function Controller({handleSubjectState}) {
-	const vertexes = useMemo(()=>{
-		return [
-			[0,0,0],
-			[2,0,2],
-			[4,0,0]
-		]
-	},[])
 	//핸들러 작동
 	useEffect(()=>{
 		// console.log('핸들러작동');
-		handleSubjectState.set({
-			vertexes
-		});
-	},[vertexes]);
+		handleSubjectState.set({});
+	},[]);
 }
 
 export {

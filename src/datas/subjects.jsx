@@ -3,6 +3,7 @@ import * as Subject1_2 from "./subjects/Subject1_2";
 import * as Subject1_3 from "./subjects/Subject1_3";
 import * as Subject1_4 from "./subjects/Subject1_4";
 import * as Subject1_5 from "./subjects/Subject1_5";
+import * as Subject2_1 from "./subjects/Subject2_1";
 let counter = 0
 
 const SUBJECTS = [
@@ -58,9 +59,9 @@ const SUBJECTS = [
 	},
 	{
 		subjectId:counter++,
-		controller:Subject1_1.Controller,
-		adjust:Subject1_1.Adjust,
-		scene:Subject1_1.Scene,
+		controller:Subject2_1.Controller,
+		adjust:Subject2_1.Adjust,
+		scene:Subject2_1.Scene,
 		actId: 1,
 		name: '수학문제 2-1',
 		thumb: '/ezdomath/profile/dummy2.png',

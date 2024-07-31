@@ -6,7 +6,7 @@ function Adjust({subjectState,answer,handleCorrect}) {
 	useEffect(()=>{
 		if (!answer) {return;}
 		if (!handleCorrect) {return;}
-		handleCorrect.set(parseInt(answer)===subjectState.vertexes.length)
+		handleCorrect.set(String(answer)===String(subjectState.vertexes.length))
 	},[answer,handleCorrect]);
 	return <>
 	</>

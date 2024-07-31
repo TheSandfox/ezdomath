@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SUBJECTS } from '/src/datas/subjects';
 import { SubjectScene } from './SubjectScene';
@@ -13,8 +13,10 @@ import './subjectdetail.css';
 import { InputText } from '../../generic/Input';
 import { ButtonIcon } from '../../generic/Buttons';
 import { ACTS } from '../../../datas/acts';
+import { userContext } from '../../../App';
 
 export function SubjectDetail({subjectId}) {
+	const { dispatchAchievements, user } = useContext(userContext);
 	const answerInputRef = useRef(null);
 	const [subjectState,setSubjectState] = useState(null);
 	const [answer,setAnswer] = useState(null);
@@ -76,17 +78,29 @@ export function SubjectDetail({subjectId}) {
 	},[adjustJSX]);
 	//정답계산 후 처리
 	useEffect(()=>{
+		if (!user) {return;}
+		if (!subject) {return;}
 		if (correct[0]===null) {return;}
 		if (correct[0]) {
 			alert('골든 정답이다.');
 		} else {
 			alert('형편없군, 오답이다.');
 		}
+
+		dispatchAchievements({
+			type:'add',
+			userId:user.userId,
+			subjectId:subject.subjectId,
+			correct:correct[0]
+		})
 		setAnswer(null);
-	},[correct])
+		setCorrect([null]);
+	},[correct,user,subject])
 	//답변제출함수
 	const sendAnswer = ()=>{
-		handleAnswer.set(answerInputRef.current.value);
+		// document.body.focus();
+		// answerInputRef.current.focus();
+		setAnswer(answerInputRef.current.value);
 		answerInputRef.current.value = '';
 	}
 	//리턴JSX
@@ -136,15 +150,15 @@ export function SubjectDetail({subjectId}) {
 						</div>
 						<InputText outerRef={answerInputRef} onKeyDown={(e)=>{
 							if(e.code==='Enter') {
-								sendAnswer();
+								// sendAnswer();
 							}
 						}}/>
 					</div>
-				</div>
-				<div className='buttons'>
-					<ButtonIcon icon={<FiSend/>} onClick={()=>{
-						sendAnswer();
-					}}>제출하기</ButtonIcon>
+					<div className='buttons'>
+						<ButtonIcon icon={<FiSend/>} onClick={()=>{
+							sendAnswer();
+						}}>제출하기</ButtonIcon>
+					</div>
 				</div>
 			</div>
 			{/* 하단-버튼들 */}

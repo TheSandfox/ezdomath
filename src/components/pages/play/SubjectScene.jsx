@@ -33,11 +33,15 @@ function Helpers() {
 export function SubjectScene({children}) {
 	return <Canvas
 		className='subjectScene'
+		style={{
+			width:'100%',
+			height:'100%'
+		}}
 		orthographic	
 		camera={{
 		near:0.05,
 		far:400,
-		zoom:100,
+		zoom:25,
 		position:[-25,25,25]
 	}}
 	>
