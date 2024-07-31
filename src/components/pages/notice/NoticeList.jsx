@@ -1,35 +1,31 @@
-import { Noti } from '../../../datas/noti_data';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Noti } from '../../../datas/noti_data';
 import './NoticeList.css';
 import important from '/img/star.webp';
-import { NotiSearch } from './NotiSearch';
+import { NotiSearch } from '../../generic/play/NotiSearch';
+import  Pagination from '../../generic/play/Pagination';
 
 export function NoticeList() {
-    const [notices, setNotices] = React.useState([]);
+    const [notices, setNotices] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentGroup, setCurrentGroup] = useState(1);
     const navigate = useNavigate();
 
-    // 글쓰기 버튼 클릭 핸들러
-    const handleWriteClick = () => {
-        navigate('/notice/write');
-    };
+    const noticesPerPage = 5;
+    const pageGroupSize = 5;
 
-    // 디테일 페이지로 이동
-    const handleTitleClick = (noticeId) => {
-        navigate(`/notice/detail/${noticeId}`);
-    };
-
-    // 공지사항을 중요도와 역순으로 정렬하는 함수
     const sortNotices = (notices) => {
-        const importantNotices = notices.filter(notice => notice.important); // 중요한 공지사항 필터링
-        const regularNotices = notices.filter(notice => !notice.important).sort((a, b) => b.notiId - a.notiId); // 일반 공지사항 역순 정렬
-        return [...importantNotices, ...regularNotices]; // 정렬된 배열 반환
+        const importantNotices = notices.filter(notice => notice.important);
+        const regularNotices = notices.filter(notice => !notice.important).sort((a, b) => b.notiId - a.notiId);
+        return [...importantNotices, ...regularNotices];
     };
 
-    // 검색 결과를 처리하는 함수
     const handleSearch = (searchType, searchQuery) => {
         if (searchQuery.trim() === '') {
-            setNotices(sortNotices(Noti)); // 공란으로 검색하면 모든 게시물을 다시 불러옴
+            setNotices(sortNotices(Noti));
+            setCurrentPage(1);
+            setCurrentGroup(1);
             return;
         }
 
@@ -48,23 +44,50 @@ export function NoticeList() {
         }
 
         setNotices(sortNotices(results));
+        setCurrentPage(1);
+        setCurrentGroup(1);
     };
 
-    // 컴포넌트 마운트 시 공지사항 정렬 및 상태 업데이트
-    React.useEffect(() => {
+    useEffect(() => {
         setNotices(sortNotices(Noti));
     }, []);
 
-    // 공지사항 배열이 변경될 때마다 상태 업데이트
-    React.useEffect(() => {
+    useEffect(() => {
         setNotices(sortNotices(Noti));
     }, [Noti]);
 
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handlePreviousGroup = () => {
+        if (currentGroup > 1) {
+            setCurrentGroup(currentGroup - 1);
+            setCurrentPage((currentGroup - 2) * pageGroupSize + 1);
+        }
+    };
+
+    const handleNextGroup = () => {
+        const maxGroup = Math.ceil((notices.length - importantNotices.length) / noticesPerPage / pageGroupSize);
+        if (currentGroup < maxGroup) {
+            setCurrentGroup(currentGroup + 1);
+            setCurrentPage(currentGroup * pageGroupSize + 1);
+        }
+    };
+
+    const importantNotices = notices.filter(notice => notice.important);
+    const regularNotices = notices.filter(notice => !notice.important);
+
+    const totalPageCount = Math.ceil(regularNotices.length / noticesPerPage);
+    const startIndex = (currentPage - 1) * noticesPerPage;
+    const endIndex = startIndex + noticesPerPage;
+    const currentNotices = regularNotices.slice(startIndex, endIndex);
+
     return (
-        <div className="notice_wrap">
+        <div className="notice_content_wrap">
             <div className="notice_list_top">
                 <div className='notice_post_count'>
-                    <p>총 <span>{notices.length}</span> 건의 게시물이 있습니다.</p> {/* 공지사항 개수 표시 */}
+                    <p>총 <span>{notices.length}</span> 건의 게시물이 있습니다.</p>
                 </div>
                 <NotiSearch onSearch={handleSearch} />
             </div>
@@ -76,18 +99,32 @@ export function NoticeList() {
                         <th>작성일</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {notices.length > 0 ? (
-                        notices.map((notice, index) => (
-                            <tr key={notice.notiId} className={notice.important ? 'important' : 'unimportant'}>
-                                <td className='noti_td'>{notice.important ? <img src={important} alt="중요 아이콘" /> : notices.length - index}</td> {/* 번호 및 중요 아이콘 표시 */}
+                <tbody className='noti_table_box'>
+                    {importantNotices.length > 0 && (
+                        importantNotices.map((notice, index) => (
+                            <tr key={notice.notiId} className='important'>
+                                <td className='noti_td'><img src={important} alt="중요 아이콘" /></td>
                                 <td
-                                    className={notice.important ? 'important_title' : 'unimportant_title'}
-                                    onClick={() => handleTitleClick(notice.notiId)}
+                                    className='important_title'
+                                    onClick={() => navigate(`/notice/detail/${notice.notiId}`)}
                                 >
-                                    {notice.title} {/* 공지사항 제목 */}
+                                    {notice.title}
                                 </td>
-                                <td className={notice.important ? 'important_time' : 'unimportant_time'}>{notice.time}</td> {/* 작성일 */}
+                                <td className='important_time'>{notice.time}</td>
+                            </tr>
+                        ))
+                    )}
+                    {currentNotices.length > 0 ? (
+                        currentNotices.map((notice, index) => (
+                            <tr key={notice.notiId} className='unimportant'>
+                                <td className='noti_td'>{regularNotices.length - startIndex - index}</td>
+                                <td
+                                    className='unimportant_title'
+                                    onClick={() => navigate(`/notice/detail/${notice.notiId}`)}
+                                >
+                                    {notice.title}
+                                </td>
+                                <td className='unimportant_time'>{notice.time}</td>
                             </tr>
                         ))
                     ) : (
@@ -97,8 +134,17 @@ export function NoticeList() {
                     )}
                 </tbody>
             </table>
+            <Pagination
+                currentPage={currentPage}
+                totalPageCount={totalPageCount}
+                currentGroup={currentGroup}
+                pageGroupSize={pageGroupSize}
+                onPageChange={handlePageChange}
+                onPreviousGroup={handlePreviousGroup}
+                onNextGroup={handleNextGroup}
+            />
             <div className='noti_write_btn'>
-                <button onClick={handleWriteClick}>작성하기</button> {/* 글쓰기 버튼 */}
+                <button onClick={() => navigate('/notice/write')}>작성하기</button>
             </div>
         </div>
     );

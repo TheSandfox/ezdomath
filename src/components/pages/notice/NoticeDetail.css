@@ -1,26 +1,36 @@
 .notice_detail_wrap {
-    max-width: 1440px;
+    max-width: 90rem; /* 1440px */
     margin: 0 auto;
-    padding: 20px;
+    padding: 0.9375rem; /* 15px */
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(105, 69, 69, 0.1);
+    border-radius: 0.625rem; /* 10px */
+    box-shadow: 0 0 0.625rem rgba(105, 69, 69, 0.1); /* 10px */
 }
 
 .notice_detail_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-top: 1px solid var(--color_border);
+    border-bottom: 1px solid var(--color_border);
 }
-.notice_detail_title{
-    margin: 16px 0 16px 15px;
+.notice_detail_header>p:last-child {
+    margin-right: 0.9375rem; /* 15px */
 }
+
+.notice_content {
+    padding: 1.25rem 1.25rem; /* 20px 20px */
+}
+
+.notice_detail_title {
+    margin: 1.5625rem 0 1.5625rem 9.9375rem; /* 25px 0 25px 15px */
+}
+
 .notice_detail_content {
-    min-height: 500px;
-    margin-bottom: 20px;
+    height: 31.25rem; /* 500px */
+    margin-bottom: 1.25rem; /* 20px */
+    white-space: pre-wrap;
+    border-bottom: 1px solid var(--color_border);
 }
 
 .notice_detail_buttons {
@@ -29,18 +39,44 @@
 }
 
 .notice_detail_buttons button {
-    padding: 10px 30px;
+    padding: 0.625rem 1.875rem; /* 10px 30px */
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* 5px */
     background-color: var(--color_main);
     color: white;
-    cursor: pointer;;
+    cursor: pointer;
 }
 
-.noti_detail_btn_box{
+.noti_detail_btn_box {
     display: flex;
-    gap: 28px;
+    gap: 1.75rem; /* 28px */
 }
-/* .notice_detail_buttons button:hover {
-    background-color: #0056b3;
-} */
+
+@media (max-width: 1440px) { 
+    .notice_detail_wrap {
+        margin: 0.9375rem; /* 15px */
+    }
+}
+
+@media (max-width: 800px) { 
+    .notice_detail_header {
+        display: block;
+    }
+
+    .notice_detail_header>p:last-child {
+        text-align: end;
+        margin: 0.9375rem; /* 15px */
+    }
+
+    .notice_detail_title {
+        margin: 0.9375rem; /* 15px */
+    }
+
+    .notice_detail_content {
+        height: 18.75rem; /* 300px */
+    }
+
+    .noti_detail_btn_box {
+        gap: 0.625rem; /* 10px */
+    }
+}
