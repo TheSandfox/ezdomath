@@ -5,11 +5,16 @@
 	position: relative;
 	&>.subjectSceneWrapper {
 		position: relative;
+		max-height: 30rem;
+		z-index: 0;
 		flex: 1;
 		background-color: var(--color_white);
 		&>.subjectScene {
+			position: relative;
+			z-index: 0;
 		}
 		&>.header {
+			z-index: 1;
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -42,6 +47,7 @@
 		left: 0;
 		display: flex;
 		flex-direction: column;
+		z-index: 4;
 		&>.zimoonWrapper {
 			box-shadow: var(--shadow_sticky_up);
 			width: 100%;

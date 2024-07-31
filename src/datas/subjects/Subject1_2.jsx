@@ -48,6 +48,7 @@ function Controller({handleSubjectState}) {
 	const vertexes = useMemo(()=>{
 		return [
 			[0,0,0],
+			[2,0,0],
 			[4,0,0]
 		]
 	},[])

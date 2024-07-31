@@ -1,5 +1,34 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { useEffect } from 'react';
+import * as THREE from 'three';
+
+function Helpers() {
+	const { scene } = useThree();
+	useEffect(()=>{
+		if(!scene) {
+			return;
+		}
+		// AxesHelper 생성 및 투명도 설정
+		const axesHelper = new THREE.AxesHelper(48);
+		axesHelper.material.transparent = true;
+		axesHelper.material.opacity = 0.1; // 투명도 설정
+		scene.add(axesHelper);
+	
+		// GridHelper 생성 및 투명도 설정
+		const gridHelper = new THREE.GridHelper(16, 16);
+		gridHelper.material.transparent = true;
+		gridHelper.material.opacity = 0.25; // 투명도 설정
+		gridHelper.position.set(0, -0.01, 0);
+		scene.add(gridHelper);
+	
+		// Cleanup on unmount
+		return () => {
+			scene.remove(axesHelper);
+			scene.remove(gridHelper);
+		};
+	},[scene])
+}
 
 export function SubjectScene({children}) {
 	return <Canvas
@@ -33,9 +62,10 @@ export function SubjectScene({children}) {
 			// shadow-mapSize-height={1024}
 		/>
 		{/* 액시스 */}
-		<axesHelper args={[48,48,48]}/>
+		{/* <axesHelper args={[48,48,48]} /> */}
 		{/* 그리드 */}
-		<gridHelper args={[16, 16]}/>
+		{/* <gridHelper args={[16, 16]} position={[0,-0.01,0]}/> */}
+		<Helpers/>
 		{/* 컨트롤 */}
 		<OrbitControls/>
 		{children}
