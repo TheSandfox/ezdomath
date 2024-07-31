@@ -10,5 +10,61 @@
 }
 
 .register_detail_inner{
-    max-width: 60em;
+    max-width: 60em; width: 100%;
+}
+
+.register_detail_form{
+    width: 100%;
+    .user_info_detail{
+        width: 100%;
+        thead, tbody{
+            tr{
+                display: flex;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.table_tit{
+    width: 15em; height: auto;
+    border: 2px solid var(--color_gray);
+    color: var(--color_darkest);
+    font-weight: 700;
+    background-color: var(--color_background);
+    text-align: center;
+    line-height: 5em;
+}
+
+.table_cont{
+    width: 100%; height: auto;
+    border: 2px solid var(--color_gray);
+    padding: 1em 1.75em;
+    .text_group{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.44em;
+        .text{
+            width: 100%; height: 2.19em;
+        }
+        .font_small{
+            color: var(--color_subtitle);
+            font-size: 0.75em;
+        }
+    }
+}
+
+.radio_cont{
+    align-items: center;
+    justify-content: space-around;
+}
+
+.btn_wrap{
+    justify-content: flex-end;
+    gap: 1.75em;
+    margin-top: 1.75em;
+    .detailRegisterBtn{
+        width: 7.5em; height: 3.75em;
+    }
 }

@@ -2,24 +2,27 @@ import "./navigation.css";
 import { userContext } from "../../../App";
 import React, { useState, useEffect, useContext } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
+import { USER_TYPE_STUDENT, USER_TYPE_PARENT, USER_TYPE_TEACHER, USER_TYPE_ADMIN } from "../../../datas/usertypes";
 
 export default function Navigation() {
+  const { handleUserContext, user } = useContext(userContext);
   const [isMyPageVisible, setIsMyPageVisible] = useState(false);
   const [isMenuPageVisible, setIsMenuPageVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
     setIsMenuPageVisible(false);
   };
+  
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    handleUserContext.logout();
     setIsMyPageVisible(false);
   };
+
   const toggleMyPageVisibility = () => {
     if (isMenuPageVisible) setIsMenuPageVisible(false);
     setIsMyPageVisible(!isMyPageVisible);
   };
+
   const toggleMenuPageVisibility = () => {
     if (isMyPageVisible) setIsMyPageVisible(false);
     setIsMenuPageVisible(!isMenuPageVisible);
@@ -41,11 +44,11 @@ export default function Navigation() {
 
   // 내 정보 창에 들어갈 데이터 배열
   const naviMyPageAccordionContent = [
-    { text: "내정보", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "커뮤니티", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "진척도", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
-    { text: "북마크", imgSrc: "/ezdomath/img/Arrow_darkest.webp" },
+    { text: "내정보", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
+    { text: "커뮤니티", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/community/students" },
+    { text: "진척도", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/achievement/0" },
+    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
+    { text: "북마크", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/qna" },
   ];
   const naviMenuPageAccordionContent = [
     { text: "EZDOMATH", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/" },
@@ -56,22 +59,26 @@ export default function Navigation() {
   return (
     <>
       <NavigationBar
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={user !== null}
         handleLogin={handleLogin}
         toggleMyPageVisibility={toggleMyPageVisibility}
         toggleMenuPageVisibility={toggleMenuPageVisibility}
+        user={user} // user 정보를 NavigationBar 컴포넌트에 전달
       />
-      <MyPage
-        isMyPageVisible={isMyPageVisible}
-        onCloseMyPage={onCloseMyPage}
-        naviMyPageAccordionContent={naviMyPageAccordionContent}
-        handleLogout={handleLogout}
-      />
+      {user && ( // user가 있을 때만 MyPage 컴포넌트를 렌더링
+        <MyPage
+          isMyPageVisible={isMyPageVisible}
+          onCloseMyPage={onCloseMyPage}
+          naviMyPageAccordionContent={naviMyPageAccordionContent}
+          handleLogout={handleLogout}
+          user={user} // user 정보를 MyPage 컴포넌트에 전달
+        />
+      )}
       <MenuPage
         isMenuPageVisible={isMenuPageVisible}
         onCloseMenuPage={onCloseMenuPage}
         handleLogin={handleLogin}
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={user !== null}
         naviMenuPageAccordionContent={naviMenuPageAccordionContent}
       />
     </>
@@ -83,6 +90,7 @@ const NavigationBar = ({
   handleLogin,
   toggleMyPageVisibility,
   toggleMenuPageVisibility,
+  user // user 정보를 받아옴
 }) => (
   <div className="navi_dom">
     <div className="navi_bar flex">
@@ -105,7 +113,7 @@ const NavigationBar = ({
         </li>
       </ul>
       <ul className="flex navi_right_cont">
-        {!isLoggedIn ? (
+        {!isLoggedIn ? ( // 로그인되지 않았을 때
           <>
             <li className="Before_login">
               <div>
@@ -126,7 +134,7 @@ const NavigationBar = ({
               </div>
             </li>
           </>
-        ) : (
+        ) : ( // 로그인되었을 때
           <>
             <li className="After_login">
               <div className="Alarm_wrap user_btn">
@@ -134,7 +142,7 @@ const NavigationBar = ({
                 <ButtonIcon className="navi_btn_icon">
                   <img
                     className="Alarm"
-                    src="img/Alarm_icon_30.webp"
+                    src="/ezdomath/img/Alarm_icon_30.webp"
                     alt="알림 아이콘"
                   />
                 </ButtonIcon>
@@ -147,7 +155,8 @@ const NavigationBar = ({
               >
                 <img
                   className="User_profile"
-                  src="/ezdomath/img/MyPage_icon_30.webp"
+                  src={user?.profile} // user가 존재할 때만 profile에 접근
+                  alt="유저 프로필 이미지"
                 />
                 <img className="Up_arrow" src="/ezdomath/img/Arrow_main.webp" />
               </div>
@@ -169,17 +178,27 @@ const MyPage = ({
   onCloseMyPage,
   naviMyPageAccordionContent,
   handleLogout,
+  user // user 정보를 받아옴
 }) => (
   <div className={isMyPageVisible ? "myPage flex" : "myPage hidden"}>
     <div className="User_info_wrap">
       <div className="User_info">
-        <p>학생</p>
+        {/* userTypeId에 따라 표시되는 텍스트를 조건부로 설정 */}
+        <p>
+          {user?.userTypeId === USER_TYPE_STUDENT
+            ? "학생"
+            : user?.userTypeId === USER_TYPE_PARENT
+            ? "학부모"
+            : user?.userTypeId === USER_TYPE_TEACHER
+            ? "교사"
+            : "관리자"}
+        </p>
         <img
           className="user_profile"
-          src="/ezdomath/img/Male _User_100.webp"
+          src={user?.profile} // user가 존재할 때만 profile에 접근
           alt="프로필 이미지"
         />
-        <p>안녕하세요 000님</p>
+        <p>안녕하세요 {user?.name}님</p> {/* user가 존재할 때만 name에 접근 */}
         <div className="button_wrapper">
           <ButtonMedium className="small_btn font_small">
             마이페이지
@@ -194,7 +213,7 @@ const MyPage = ({
       <ul className="accordion_wrap">
         {naviMyPageAccordionContent.map((item, index) => (
           <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn">
+            <ButtonMedium className="menu_page_btn" to={item.to}>
               <p>{item.text}</p>
               <img
                 className="accordion_arrow"
