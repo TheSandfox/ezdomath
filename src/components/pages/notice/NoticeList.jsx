@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Noti } from '../../../datas/noti_data';
 import './NoticeList.css';
 import important from '/img/star.webp';
 import { NotiSearch } from '../../generic/Notice/NotiSearch';
-import  Pagination from '../../generic/Notice/Pagination';
+import Pagination from '../../generic/Notice/Pagination';
+import { userContext } from '../../../App'; // userContext 가져옴
+import { USER_TYPE_ADMIN } from '../../../datas/usertypes'; // 관리자 유저만 작성하기 쓸 수 있게 가져옴
 
 export function NoticeList() {
     const [notices, setNotices] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentGroup, setCurrentGroup] = useState(1);
     const navigate = useNavigate();
+    const { user } = useContext(userContext); // userContext 적용
 
     const noticesPerPage = 5;
     const pageGroupSize = 5;
@@ -143,9 +146,12 @@ export function NoticeList() {
                 onPreviousGroup={handlePreviousGroup}
                 onNextGroup={handleNextGroup}
             />
-            <div className='noti_write_btn'>
-                <button onClick={() => navigate('/notice/write')}>작성하기</button>
-            </div>
+            {/* 관리자 유형의 유저한테만 보임 */}
+            {user && user.userTypeId === USER_TYPE_ADMIN && (
+                <div className='noti_write_btn'>
+                    <button onClick={() => navigate('/notice/write')}>작성하기</button>
+                </div>
+            )}
         </div>
     );
 }
