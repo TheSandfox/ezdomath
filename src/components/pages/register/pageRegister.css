@@ -6,6 +6,12 @@
 
 .register_inner{
     max-width: 48.75em;
+    @media screen and (max-width : 800px) {
+        max-width: 37.5em;
+    }
+    @media screen and (max-width : 600px) {
+        max-width: 25em;
+    }
 }
 
 .register_main_top{
@@ -22,6 +28,9 @@
     background-color: var(--color_darkest);
     border-radius: 20px;
     padding: 3.13em 2.5em 2.13em;
+    @media screen and (max-width : 600px) {
+        padding: 3.13em 1.5em 2.13em;
+    }
 }
 
 .user_register_routing{
@@ -32,6 +41,15 @@
     .registet_btn{
         font-weight: 700;
         width: 100%; height: 3.75em;
+        @media screen and (max-width : 600px) {
+            font-size: 0.63em;
+            padding: 0.375rem 0.35rem;
+        }
+    }
+    @media screen and (max-width : 600px) {
+        width: 11.88em;
+        padding: 1.25em 1.88em;
+        justify-content: center;
     }
 }
 
@@ -58,4 +76,9 @@
 .register_form_deco{
     color: var(--color_background_sub);
     gap: 0.44;
+    .font_small{
+        @media screen and (max-width : 600px) {
+            font-size: 0.7em;
+        }
+    }
 }

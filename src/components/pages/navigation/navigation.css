@@ -31,7 +31,10 @@
 }
 
 .navi_bar>.navi_left_cont {
-    gap: 3.5em;
+    gap: 1.75em;
+    li:nth-child(2){
+        margin-left: 1.75em;
+    }
 }
 
 .navi_bar>.navi_left_cont .logo_btn{

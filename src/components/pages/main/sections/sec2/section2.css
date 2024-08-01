@@ -13,6 +13,11 @@
     align-items: center;
     justify-content: center;
     gap: 3.5em;
+    .myCardContainer{
+        .type2{
+            cursor: pointer;
+        }
+    }
 }
 
 .main_page_sec2 .myCardContainer{
@@ -22,7 +27,7 @@
 
 .sec2_btn_wrap{
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .sec2_view_btn{

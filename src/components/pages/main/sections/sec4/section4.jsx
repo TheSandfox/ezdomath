@@ -138,7 +138,7 @@ export function Section4() {
                   id="routing_btn"
                   className="flex intro_page_content_description"
                 >
-                  <ButtonMedium>
+                  <ButtonMedium to={'intro'}>
                     <div className="flex routing_btn">
                       <p>VIEW MORE</p>
                       <img id="sec4_plus" src="/ezdomath/img/Plus_Math.webp"></img>
