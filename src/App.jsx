@@ -134,7 +134,7 @@ function App() {
     const location = useLocation();
     useEffect(() => {
         document.body.style.overflow = 'auto';
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     }, [location]);
 
   // 리턴 JSX
