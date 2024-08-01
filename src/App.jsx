@@ -70,11 +70,17 @@ function App() {
       ...prev,
       user: null,
     }));
+    sessionStorage.removeItem('currentUser');
     return logoutSuccess;
   };
 
   const handleUserContext = {
     setUser: (newUser) => {
+      if (newUser) {
+        sessionStorage.setItem('currentUser', JSON.stringify(newUser));
+      } else {
+        sessionStorage.removeItem('currentUser');
+      }
       setUserContextValue((prev) => ({
         ...prev,
         user: newUser,
@@ -82,14 +88,10 @@ function App() {
     },
     setUserById: (userId) => {
       const allUsers = [...usersDefault, ...users];
-      setUserContextValue((prev) => ({
-        ...prev,
-        user: allUsers.find(
-          (item) => parseInt(item.userId) === parseInt(userId)
-        ),
-      }));
+      handleUserContext.setUser(
+        allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
+      );
     },
-
     logout: handleLogout,
     login: handleLogin,
     // dispatchUsers로 새 유저 저장
@@ -119,13 +121,21 @@ function App() {
       window.removeEventListener("keydown", cheat);
     };
   }, []);
+  	// 유저정보가져오기
+	useEffect(()=>{
+		handleUserContext.setUser(
+			sessionStorage.getItem('currentUser')
+			?JSON.parse(sessionStorage.getItem('currentUser'))
+			:null
+		)
+	},[])
 
-  // 페이지가 변경될 때마다 스크롤 상태를 재설정
-  const location = useLocation();
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-    window.scrollTo(0, 0);
-  }, [location]);
+    // 페이지가 변경될 때마다 스크롤 상태를 재설정
+    const location = useLocation();
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+        window.scrollTo(0, 0);
+    }, [location]);
 
   // 리턴 JSX
   return (
@@ -176,3 +186,4 @@ function App() {
 }
 
 export default App;
+

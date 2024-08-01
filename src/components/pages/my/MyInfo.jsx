@@ -75,8 +75,8 @@ export function Main({handleTabIndex, index}) {
         <ButtonMedium onClick={handleUserContext.logout}>로그아웃</ButtonMedium>
       </div>
       {/* 회탈 */}
-      <div className='unlink font_small' onClick={handleUnlink}>
-        <p>회원탈퇴</p>
+      <div className='unlink font_small'>
+        <p onClick={handleUnlink}>회원탈퇴</p>
       </div>
     </div>
   );
