@@ -58,13 +58,14 @@
 		}
 		/* 문제선택창 */
 		&>.subjectInfo {
-			padding: 1rem;
+			/* padding: 1rem; */
 			background-color: var(--color_black);
 			color: var(--color_white);
 			display: flex;
 			gap: 1rem;
 			justify-content: center;
 			align-items: center;
+			height: 7.5rem;
 			&.noSubject {
 				flex-direction: column;
 			}

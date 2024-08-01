@@ -13,8 +13,9 @@
 		border-radius: 0.3125rem;
 		background-color: transparent;
 		&.active, &:hover {
-			background-color: var(--color_main);
-			color: var(--color_sub);
+			border-color: var(--color_main) !important;
+			background-color: var(--color_main) !important;
+			color: var(--color_sub) !important;
 		}
 	}
 	&.large {

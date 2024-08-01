@@ -17,19 +17,34 @@
 		}
 		/* 문제썸네일 */
 		&>.imgWrapper {
-			width: 100%;
 			height: 8rem;
 			border-radius: 0.5rem 0.5rem 0 0;
-			font-size: 0;
-			background-color: var(--color_black);
 			@media screen and (max-width:800px) {
 				height: 15rem;
 			}
-			&>img {
-				object-fit: contain;
-				width: 100%;
-				height: 100%;
-			}
+		}
+	}
+	& .imgWrapper {
+		position: relative;
+		width: 100%;
+		font-size: 0;
+		background-color: var(--color_black);
+		overflow: hidden;
+		&>.blur {
+			object-fit: cover;
+			width: 125%;
+			height: 125%;
+			position: relative;
+			transform: translate(-12.5%,-12.5%);
+			filter: blur(2px) brightness(0.95);
+		}
+		&>.img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			object-fit: contain;
+			width: 100%;
+			height: 100%;
 		}
 	}
 	&>.bottom {
@@ -69,27 +84,38 @@
 	}
 	/* type2 단순표시 */
 	&.type2 {
+		cursor: pointer;
 		&>.top {
 			padding: 1rem;
 			background-color: var(--color_background_sub);
+			transition: 0.15s;
 		}
 		&>.bottom {
+			transition: 0.15s;
 			padding: 0 1rem 1rem 1rem;
 			/* 하단문제썸네일 */
 			&>.imgWrapper {
-				width: 100%;
 				height: 8rem;
 				border-radius: 0 0 0.5rem 0.5rem;
-				font-size: 0;
-				background-color: var(--color_black);
 				@media screen and (max-width:800px) {
 					height: 15rem;
 				}
-				&>img {
-					object-fit: contain;
-					width: 100%;
-					height: 100%;
+			}
+		}
+		&:hover, &.active {
+			&>.top {
+				border-color: var(--color_main);
+				background-color: var(--color_main);
+				&>.actName {
+					color: var(--color_sub);
 				}
+				&>.subjectName {
+					color: var(--color_sub);
+				}
+			}
+			&>.bottom {
+				border-color: var(--color_main);
+				background-color: var(--color_main);
 			}
 		}
 	}

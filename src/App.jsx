@@ -66,6 +66,7 @@ function App() {
 
   const handleLogout = () => {
     const currentUser = userContextValue.user;
+	sessionStorage.removeItem('currentUser');
     setUserContextValue((prev) => ({
       ...prev,
       user: null,
@@ -136,11 +137,11 @@ function App() {
 	},[])
 
     // 페이지가 변경될 때마다 스크롤 상태를 재설정
-    const location = useLocation();
-    useEffect(() => {
-        document.body.style.overflow = 'auto';
-        window.scrollTo(0, 0);
-    }, [location]);
+    // const location = useLocation();
+    // useEffect(() => {
+    //     document.body.style.overflow = 'auto';
+    //     window.scrollTo(0, 0);
+    // }, [location]);
 
   // 리턴 JSX
   return (

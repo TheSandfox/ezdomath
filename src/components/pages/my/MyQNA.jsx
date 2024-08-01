@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react"
 
 import './myqna.css';
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { InputText, InputTextArea } from "../../generic/Input";
 import { Button, ButtonIcon } from "../../generic/Buttons";
 
@@ -15,14 +15,18 @@ import { FiSend } from "react-icons/fi";
 import { FaSearch } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { FaExchangeAlt } from "react-icons/fa";
+
 import { SUBJECTS } from "../../../datas/subjects";
 import { ACTS } from "../../../datas/acts";
+import { SubjectSelector } from "../../generic/subject/SubjectSelector";
 
 export function Left({}) {
 	return <></>
 }
 
 export function Main({handleTabIndex,index}) {
+	const navigate = useNavigate();
 	const inputTextRef = useRef(null);
 	const inputChatRef = useRef(null);
 	const middleWrapperRef = useRef(null);
@@ -60,6 +64,10 @@ export function Main({handleTabIndex,index}) {
 		let newObj = SUBJECTS[parseInt(subjectId)];
 		return newObj?newObj:null;
 	},[subjectId]);
+	// 타겟문제 변경
+	const targetSubjectChange = (targetSubjectId)=>{
+		navigate(`/my/qna/${userId}/${targetSubjectId}`)
+	}
 	// 모드
 	const mode = useMemo(()=>{
 		// 상대 id가 없음
@@ -80,7 +88,17 @@ export function Main({handleTabIndex,index}) {
 			return 'dm';
 		}
 		
-	},[userId,user,friends])
+	},[userId,user,friends]);
+	// 모달 문제셀렉트
+	const [displaySubjectSelect,setDisplaySubjectSelect] = useState(false);
+	const handleDisplaySubjectSelect = {
+		close:()=>{
+			setDisplaySubjectSelect(false);
+		},
+		open:()=>{
+			setDisplaySubjectSelect(true);
+		}
+	}
 	// 상대유저
 	const targetUser = useMemo(()=>{
 		// 상대 id가 없음
@@ -117,12 +135,18 @@ export function Main({handleTabIndex,index}) {
 								</div>
 								{/* 찾기&초기화버튼 */}
 								<div className="subjectButtons">
-									<ButtonIcon icon={
-										<FaSearch/>
-									}/>
-									<ButtonIcon icon={
-										<RiCloseLargeFill/>
-									}/>
+									<ButtonIcon 
+										icon={<FaExchangeAlt/>}
+										onClick={
+											handleDisplaySubjectSelect.open
+										}
+									/>
+									<ButtonIcon 
+										icon={<RiCloseLargeFill/>}
+										onClick={()=>{
+											navigate(`/my/qna/${userId}`);
+										}}
+									/>
 								</div>
 							</div>
 						</>
@@ -133,9 +157,14 @@ export function Main({handleTabIndex,index}) {
 								메세지 작성 시 다이렉트 메세지가 전송됩니다.
 							</div>
 							{/* 문제찾기버튼 */}
-							<ButtonIcon icon={
-								<FaSearch/>
-							}/>
+							<ButtonIcon 
+								icon={
+									<FaExchangeAlt/>
+								}
+								onClick={
+									handleDisplaySubjectSelect.open
+								}
+							/>
 						</>
 					}
 				</div>
@@ -158,6 +187,14 @@ export function Main({handleTabIndex,index}) {
 						}}
 					/>
 				</div>
+				{/* 모달 문제셀렉트 */}
+				{displaySubjectSelect
+					?<SubjectSelector 
+						onClose={handleDisplaySubjectSelect.close} 
+						onSubmit={targetSubjectChange}
+					/>
+					:<></>
+				}
 			</>
 		case 'list':
 			// 채팅리스트
@@ -186,7 +223,7 @@ export function Main({handleTabIndex,index}) {
 				</div>
 			</>
 		}
-	},[mode,subjectId]);
+	},[mode,subjectId,displaySubjectSelect]);
 	// qna위젯들
 	const qnaWidgets = useMemo(()=>{
 		// 리스트 모드가 아님

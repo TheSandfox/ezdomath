@@ -202,8 +202,8 @@ export function PagePlay() {
           </div>
         </div>
       )}
-      <button onClick={handleOpenModal} className="report-button">오류 제보하기/질문하기</button>
-      {isModalOpen && <ReportAndError onClose={handleCloseModal} />}
+      {/* <button onClick={handleOpenModal} className="report-button">오류 제보하기/질문하기</button>
+      {isModalOpen && <ReportAndError onClose={handleCloseModal} />} */}
     </>
   );
 }
