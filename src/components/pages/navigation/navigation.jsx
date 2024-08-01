@@ -432,7 +432,7 @@ const MenuPage = ({
       <ul className="page_btn">
         {naviMenuPageAccordionContent.map((item, index) => (
           <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn">
+            <ButtonMedium className="menu_page_btn" to={item.to}>
               <p>{item.text}</p>
               <img
                 className="accordion_arrow"

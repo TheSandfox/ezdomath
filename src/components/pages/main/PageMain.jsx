@@ -4,11 +4,13 @@ import { Section2 } from "./sections/sec2/section2";
 import { Section3 } from "./sections/sec3/section3";
 import { Section4 } from "./sections/sec4/section4";
 import { Footer } from "./sections/footer/footer";
+import { Header } from "./sections/header/header";
 
 export function PageMain({}) {
   return (
     <>
       <Navigation />
+      <Header />
       <Section1 />
       <Section2 />
       <Section3 />

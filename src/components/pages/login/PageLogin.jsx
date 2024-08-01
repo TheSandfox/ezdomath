@@ -8,6 +8,7 @@ import {
   ButtonTab,
 } from "../../generic/Buttons";
 import { useNavigate } from "react-router-dom";
+import KakaoLogin from "./kakaoLogin";
 
 export function PageLogin({}) {
   const { handleUserContext } = useContext(userContext); // userContext에서 로그인 함수를 불러옵니다.
@@ -136,9 +137,7 @@ export function PageLogin({}) {
                 tabed ? "" : "invi"
               }`}
             >
-              <ButtonLarge>
-                <span>카카오로 로그인</span>
-              </ButtonLarge>
+              <KakaoLogin setUserInfo={handleUserContext.setUser} />
             </div>
             <div className="flex user_info_routing">
               <p>
