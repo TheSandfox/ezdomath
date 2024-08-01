@@ -52,35 +52,35 @@ function App() {
   // 로그인 로직
   const handleLogin = (stringId, password) => {
     const allUsers = [...usersDefault, ...users];
-    const isValid = allUsers.find(
+    const loginSuccess = allUsers.find(
       (user) => user.stringId === stringId && user.password === password
     );
-    if (isValid) {
+    if (loginSuccess) {
       console.log(users); // 확인 용
-      handleUserContext.setUser(isValid);
-      return isValid; // 로그인 성공 시 유저 정보를 반환
+      handleUserContext.setUser(loginSuccess);
+      return loginSuccess; // 로그인 성공 시 유저 정보를 반환
     } else {
       return null; // 로그인 실패
     }
   };
 
   const handleLogout = () => {
-    const currentUser = userContextValue.user;
-	sessionStorage.removeItem('currentUser');
+    const logoutSuccess = userContextValue.user;
     setUserContextValue((prev) => ({
       ...prev,
       user: null,
     }));
-    return currentUser;
+    sessionStorage.removeItem('currentUser');
+    return logoutSuccess;
   };
 
   const handleUserContext = {
     setUser: (newUser) => {
-		if (newUser) {
-			sessionStorage.setItem('currentUser',JSON.stringify(newUser));
-		} else {
-			sessionStorage.removeItem('currentUser');
-		}
+      if (newUser) {
+        sessionStorage.setItem('currentUser', JSON.stringify(newUser));
+      } else {
+        sessionStorage.removeItem('currentUser');
+      }
       setUserContextValue((prev) => ({
         ...prev,
         user: newUser,
@@ -88,20 +88,14 @@ function App() {
     },
     setUserById: (userId) => {
       const allUsers = [...usersDefault, ...users];
-    //   setUserContextValue((prev) => ({
-    //     ...prev,
-    //     user: allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
-    //   }));
-		handleUserContext.setUser(
-			allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
-		)
+      handleUserContext.setUser(
+        allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
+      );
     },
-
     logout: handleLogout,
     login: handleLogin,
     // dispatchUsers로 새 유저 저장
     addUser: (user) => {
-      console.log("addUser 호출됨", user);
       dispatchUsers({ type: "add", ...user });
     },
     // dispatchUsers로 해당 유저 삭제 및 로그아웃
@@ -137,11 +131,11 @@ function App() {
 	},[])
 
     // 페이지가 변경될 때마다 스크롤 상태를 재설정
-    // const location = useLocation();
-    // useEffect(() => {
-    //     document.body.style.overflow = 'auto';
-    //     window.scrollTo(0, 0);
-    // }, [location]);
+    const location = useLocation();
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+        window.scrollTo(0, 0);
+    }, [location]);
 
   // 리턴 JSX
   return (
@@ -192,3 +186,4 @@ function App() {
 }
 
 export default App;
+
