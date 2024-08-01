@@ -87,11 +87,10 @@ export function SubjectDetail({subjectId}) {
 	},[user,users,friends]);
 	//타겟문제
 	const subject = useMemo(()=>{
-		if (SUBJECTS[subjectId]) {
-			return SUBJECTS[subjectId];
-		} else {
-			return null;
-		}
+		let newObj = SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(subjectId)
+		})
+		return newObj||null;
 	},[subjectId]);
 	//컨트롤러
 	const controllerJSX = useMemo(()=>{

@@ -61,7 +61,9 @@ export function Main({handleTabIndex,index}) {
 	}
 	const targetSubject = useMemo(()=>{
 		if (!subjectId) {return null;}
-		let newObj = SUBJECTS[parseInt(subjectId)];
+		let newObj = SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId)===parseInt(subjectId)
+		})
 		return newObj?newObj:null;
 	},[subjectId]);
 	// 타겟문제 변경

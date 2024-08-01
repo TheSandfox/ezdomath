@@ -73,11 +73,10 @@ export function SubjectCard({
 	},[user,friends,users])
 	// subjectId로 subject가져오기
 	const subject = useMemo(()=>{
-		if (SUBJECTS[subjectId]) {
-			return SUBJECTS[subjectId];
-		} else {
-			return null;
-		}
+		let newSubject = SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(subjectId)
+		})
+		return newSubject?newSubject:null;
 	},[subjectId]);
 	// 단원데이터 가져오기
 	const act = useMemo(()=>{
@@ -152,7 +151,7 @@ export function SubjectCard({
 	return <>
 		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`} onClick={typeValue === 2 ? onClick : undefined}>
 			{
-				typeValue!==2
+				typeValue!==2&&subject
 				?<Bookmark subjectId={subject.subjectId}/>
 				:<></>
 			}
