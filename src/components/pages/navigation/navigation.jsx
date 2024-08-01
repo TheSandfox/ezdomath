@@ -1,6 +1,6 @@
 import "./navigation.css";
 import { userContext } from "../../../App";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
 import {
   USER_TYPE_STUDENT,
@@ -105,7 +105,12 @@ export default function Navigation() {
     setIsCallMessageVisible(false);
   };
   const toggleCallMessageVisibility = () =>
-    setIsCallMessageVisible(!isCallMessageVisible);
+    setIsCallMessageVisible((prev) => {
+      if (!prev && callMessageContents.length > 0) {
+        return true;
+      }
+      return false;
+    });
 
   // 닫기 함수
   const onCloseMyPage = () => setIsMyPageVisible(false);
@@ -122,6 +127,9 @@ export default function Navigation() {
   };
 
   useEffect(() => {
+    setDismissedMessages([]); 
+    setCallMessageContents([]); 
+
     if (user) {
       const userInvitations = invitations.filter(
         (invite) => invite.toUserId === user.userId
@@ -142,19 +150,14 @@ export default function Navigation() {
         setCallMessageContents(messages);
         setIsCallMessageVisible(messages.length > 0);
       } else {
-        setCallMessageContents([]); // 추가: 메시지가 없으면 callMessageContents 초기화
         setIsCallMessageVisible(false);
       }
-    } else {
-      setCallMessageContents([]); // 추가: user가 없으면 callMessageContents 초기화
-      setIsCallMessageVisible(false);
     }
-  }, [invitations, user, dismissedMessages]);
+  }, [invitations, user, users]);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 600 && isMenuPageVisible)
-        setIsMenuPageVisible(false);
+      if (window.innerWidth > 600 && isMenuPageVisible) setIsMenuPageVisible(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -163,17 +166,14 @@ export default function Navigation() {
   useEffect(() => {
     setIsCallMessageVisible(false);
     if (location.pathname === "/" && user) {
-      setIsCallMessageVisible(true);
+      const userInvitations = invitations.filter(
+        (invite) => invite.toUserId === user.userId
+      );
+      if (userInvitations.length > 0) {
+        setIsCallMessageVisible(true);
+      }
     }
-  }, [location, user]);
-
-  useEffect(() => {
-    setDismissedMessages([]); // 추가: user 변경 시 dismissedMessages 초기화
-    if (isCallMessageVisible) {
-      setIsCallMessageVisible(false);
-      setTimeout(() => setIsCallMessageVisible(true), 0);
-    }
-  }, [user]);
+  }, [location, user, invitations]);
 
   return (
     <>
