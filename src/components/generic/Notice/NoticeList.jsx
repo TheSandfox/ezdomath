@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Noti } from '../../../datas/noti_data';
+import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
 import './NoticeList.css';
 import important from '/img/star.webp';
-import { NotiSearch } from '../../generic/Notice/NotiSearch';
-import  Pagination from '../../generic/Notice/Pagination';
+import { NotiSearch } from './NotiSearch';
+import Pagination from './Pagination';
 
 export function NoticeList() {
     const [notices, setNotices] = useState([]);
@@ -102,7 +102,7 @@ export function NoticeList() {
                 <tbody className='noti_table_box'>
                     {importantNotices.length > 0 && (
                         importantNotices.map((notice, index) => (
-                            <tr key={notice.notiId} className='important'>
+                            <tr key={`important-${notice.notiId}-${index}`} className='important'>
                                 <td className='noti_td'><img src={important} alt="중요 아이콘" /></td>
                                 <td
                                     className='important_title'
@@ -116,7 +116,7 @@ export function NoticeList() {
                     )}
                     {currentNotices.length > 0 ? (
                         currentNotices.map((notice, index) => (
-                            <tr key={notice.notiId} className='unimportant'>
+                            <tr key={`regular-${notice.notiId}-${index}`} className='unimportant'>
                                 <td className='noti_td'>{regularNotices.length - startIndex - index}</td>
                                 <td
                                     className='unimportant_title'

@@ -27,7 +27,7 @@
 }
 
 .notice_detail_content {
-    height: 31.25rem; /* 500px */
+    min-height: 31.25rem; /* 500px */
     margin-bottom: 1.25rem; /* 20px */
     white-space: pre-wrap;
     border-bottom: 1px solid var(--color_border);
@@ -73,7 +73,7 @@
     }
 
     .notice_detail_content {
-        height: 18.75rem; /* 300px */
+        min-height: 18.75rem; /* 300px */
     }
 
     .noti_detail_btn_box {

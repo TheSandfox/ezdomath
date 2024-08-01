@@ -101,7 +101,7 @@ export function PageMy({}) {
 	return <>
 		<Navigation/>
 		{/* <탑배너> */}
-		<TopBanner pageName={'마이페이지'}/>
+		<TopBanner pageName={'마이페이지'} className="mobile_none" />
 		<div id={'pageMy'}>
 			{/* 상탭(탭) */}
 			<MyTabs flag={true} tabIndex={tabIndex}/>

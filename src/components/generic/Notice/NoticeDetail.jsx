@@ -1,5 +1,6 @@
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Noti } from '../../../datas/noti_data';
+import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
 import "./NoticeDetail.css"
 
 export function NoticeDetail() {
@@ -20,6 +21,7 @@ export function NoticeDetail() {
         if (confirmed) {
             const index = Noti.findIndex(noti => noti.notiId === parseInt(noticeId));
             Noti.splice(index, 1);
+            saveNoticesToLocalStorage(Noti);  // 로컬스토리지에 변경사항 저장
             navigate('/notice');
         }
     };

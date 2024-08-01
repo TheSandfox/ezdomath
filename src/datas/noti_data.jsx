@@ -7,7 +7,7 @@ const formatDate = (date) => {
 };
 
 // 초기 공지사항 데이터 배열
-const Noti = [
+const initialNotices = [
     {
         notiId: 0,
         title: '중요 공지사항입니다.',
@@ -17,6 +17,18 @@ const Noti = [
             {
                 type: "text",
                 content: "홈페이지에 방문시 반드시 상단의 EZDOMATH를 먼저 눌러주세요!\n\n홈페이지에서 사용할 수 있는 컨텐츠와\n사용할 수 있는 기능들을 설명하고 있습니다.",
+            },
+        ],
+    },
+    {
+        notiId: 1,
+        title: '중요하지 않은 공지상입니다.',
+        time: formatDate(new Date()),
+        important: false,
+        item: [
+            {
+                type: "text",
+                content: "다양한 선의 종류에 대해 배워볼 거예요.\n선에는 여러 종류가 있는데, 직선, 반직선, 그리고 선분이 있어요.\n각각의 선이 어떤 특징을 가지고 있는지 알아보고, 예제를 통해 이해해볼까요?",
             },
         ],
     },
@@ -404,63 +416,42 @@ const Noti = [
             },
         ],
     },
-    {
-        notiId: 2,
-        title: '중요하지 않은 공지상입니다.',
-        time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
-        important: false,
-        item: [
-            {
-                type: "text",
-                content: "다양한 선의 종류에 대해 배워볼 거예요.\n선에는 여러 종류가 있는데, 직선, 반직선, 그리고 선분이 있어요.\n각각의 선이 어떤 특징을 가지고 있는지 알아보고, 예제를 통해 이해해볼까요?",
-            },
-        ],
-    },
-    {
-        notiId: 3,
-        title: '중요하지 않은 공지상입니다.',
-        time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
-        important: false,
-        item: [
-            {
-                type: "text",
-                content: "다양한 선의 종류에 대해 배워볼 거예요.\n선에는 여러 종류가 있는데, 직선, 반직선, 그리고 선분이 있어요.\n각각의 선이 어떤 특징을 가지고 있는지 알아보고, 예제를 통해 이해해볼까요?",
-            },
-        ],
-    },
-    {
-        notiId: 4,
-        title: '중요하지 않은 공지상입니다.',
-        time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
-        important: false,
-        item: [
-            {
-                type: "text",
-                content: "다양한 선의 종류에 대해 배워볼 거예요.\n선에는 여러 종류가 있는데, 직선, 반직선, 그리고 선분이 있어요.\n각각의 선이 어떤 특징을 가지고 있는지 알아보고, 예제를 통해 이해해볼까요?",
-            },
-        ],
-    },
-    {
-        notiId: 5,
-        title: '중요하지 않은 공지상입니다.',
-        time: formatDate(new Date()),  // 현재 날짜와 시간으로 설정
-        important: false,
-        item: [
-            {
-                type: "text",
-                content: "다양한 선의 종류에 대해 배워볼 거예요.\n선에는 여러 종류가 있는데, 직선, 반직선, 그리고 선분이 있어요.\n각각의 선이 어떤 특징을 가지고 있는지 알아보고, 예제를 통해 이해해볼까요?",
-            },
-        ],
-    },
 ];
 
-// 다음 공지사항 ID를 초기 공지사항 수로 설정
-let nextNotiId = Noti.length;
+// 로컬스토리지에서 공지사항 데이터를 불러오는 함수
+const loadNoticesFromLocalStorage = () => {
+    const storedNotices = localStorage.getItem('notices');
+    return storedNotices ? JSON.parse(storedNotices) : [];
+};
+
+// 로컬스토리지에 초기 공지사항 데이터를 저장하는 함수
+const initializeLocalStorage = () => {
+    if (!localStorage.getItem('notices')) {
+        localStorage.setItem('notices', JSON.stringify(initialNotices));
+    }
+};
+
+// 초기화 로직 실행
+initializeLocalStorage();
+
+// 초기 공지사항 데이터 배열
+const Noti = loadNoticesFromLocalStorage();
+
+// 로컬스토리지에 공지사항 데이터를 저장하는 함수
+const saveNoticesToLocalStorage = (notices) => {
+    localStorage.setItem('notices', JSON.stringify(notices));
+};
+
+// 최고 notiId 값을 계산하는 함수
+const getNextNotiId = () => {
+    const ids = Noti.map(noti => noti.notiId);
+    return ids.length ? Math.max(...ids) + 1 : 0;
+};
 
 // 새로운 공지사항을 추가하는 함수, unshift로 역순추가
 const addNotice = (title, content, important) => {
     const newNotice = {
-        notiId: nextNotiId++,
+        notiId: getNextNotiId(),
         title,
         time: formatDate(new Date()),
         important,
@@ -472,7 +463,7 @@ const addNotice = (title, content, important) => {
         ],
     };
     Noti.unshift(newNotice);
+    saveNoticesToLocalStorage(Noti);
 };
 
-// addNotice=게시판 쓰기에 내보냄
-export { Noti, addNotice };
+export { Noti, addNotice, saveNoticesToLocalStorage };
