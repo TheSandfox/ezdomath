@@ -87,14 +87,42 @@ function App() {
   };
 
   const handleLogout = () => {
-    const logoutSuccess = userContextValue.user;
-    setUserContextValue((prev) => ({
-      ...prev,
-      user: null,
-    }));
-    sessionStorage.removeItem('currentUser');
-    localStorage.removeItem('kakao_token'); // 로그아웃 시 Kakao 토큰 삭제
-    return logoutSuccess;
+    const currentUser = userContextValue.user;
+
+    if (currentUser) {
+      if (currentUser.stringId.startsWith('kakao_')) {
+        const token = localStorage.getItem('kakao_token');
+        if (token) {
+          fetch('https://kapi.kakao.com/v1/user/unlink', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.status === 200) {
+              localStorage.removeItem('kakao_token');
+              localStorage.removeItem('kakao_user_info');
+              alert('로그아웃 되었습니다.');
+            } else {
+              console.error('연결 해제 실패');
+            }
+          })
+          .catch(error => {
+            console.error('연결 해제 실패', error);
+          });
+        }
+      }
+
+      setUserContextValue((prev) => ({
+        ...prev,
+        user: null,
+      }));
+      sessionStorage.removeItem('currentUser');
+    }
+
+    return currentUser;
   };
 
   const handleUserContext = {
@@ -128,7 +156,6 @@ function App() {
     },
   };
 
-
   // 유저 바꿔치기 치트(임시)
   useEffect(() => {
     const cheat = (e) => {
@@ -145,21 +172,22 @@ function App() {
       window.removeEventListener("keydown", cheat);
     };
   }, []);
-  	// 유저정보가져오기
-	useEffect(()=>{
-		handleUserContext.setUser(
-			sessionStorage.getItem('currentUser')
-			?JSON.parse(sessionStorage.getItem('currentUser'))
-			:null
-		)
-	},[])
 
-    // 페이지가 변경될 때마다 스크롤 상태를 재설정
-    const location = useLocation();
-    useEffect(() => {
-        document.body.style.overflow = 'auto';
-        // window.scrollTo(0, 0);
-    }, [location]);
+  // 유저정보가져오기
+  useEffect(() => {
+    handleUserContext.setUser(
+      sessionStorage.getItem('currentUser')
+        ? JSON.parse(sessionStorage.getItem('currentUser'))
+        : null
+    );
+  }, []);
+
+  // 페이지가 변경될 때마다 스크롤 상태를 재설정
+  const location = useLocation();
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+    window.scrollTo(0, 0);
+  }, [location]);
 
   // 리턴 JSX
   return (
@@ -213,4 +241,3 @@ function App() {
 }
 
 export default App;
-
