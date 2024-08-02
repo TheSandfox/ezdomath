@@ -11,12 +11,23 @@ import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
 
 export function UserCard({userId,type}) {
-	const { user, users, dispatchInvitations, dispatchFriends } = useContext(userContext);
+	const { user, users, dispatchInvitations, dispatchFriends, invitations } = useContext(userContext);
 	const targetUser = useMemo(()=>{
 		return users.find((item)=>{
 			return parseInt(item.userId)===parseInt(userId);
 		});
 	},[userId]);
+	const inviteExists = useMemo(()=>{
+		if (!type) {return false;}
+		if (parseInt(type)!==1) {return false;}
+		if (!user) {return false;}
+		if (isNaN(parseInt(userId))) {return false;}
+		let bool = invitations.some((invitationItem)=>{
+			return parseInt(invitationItem.fromUserId)===parseInt(user.userId)
+				&& parseInt(invitationItem.toUserId)===parseInt(userId);
+		})
+		return bool;
+	},[user,invitations,userId,type]);
 	const buttonsJSX = useMemo(()=>{
 		if (!user) {return <></>;}
 		switch (parseInt(type)) {
@@ -34,14 +45,18 @@ export function UserCard({userId,type}) {
 		case 1:
 			return <>
 				{/* 초대버튼 */}
-				<ButtonIcon icon={<FaPlus/>} onClick={()=>{
-					console.log(user.userId+' '+userId);
-					dispatchInvitations({
-						type:'add',
-						fromUserId:user.userId,
-						toUserId:userId,
-					})
-				}}/>
+				{!inviteExists
+					?<ButtonIcon icon={<FaPlus/>} onClick={()=>{
+						dispatchInvitations({
+							type:'add',
+							fromUserId:user.userId,
+							toUserId:userId,
+						})
+					}}/>
+					:<div className='invitationExists font_main'>
+						학생 초대를 보냈습니다.
+					</div>
+				}
 			</>
 		// 멘토: 더보기
 		case 2:
@@ -77,7 +92,7 @@ export function UserCard({userId,type}) {
 				}}/>
 			</>
 		}
-	},[type,user]);
+	},[type,user,inviteExists]);
 	return <>
 		<div className='userCard'>
 			<img className='profile' src={`${targetUser?targetUser.profile:'/ezdomath/profile/dummy.png'}`}/>

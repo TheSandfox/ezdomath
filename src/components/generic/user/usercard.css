@@ -34,6 +34,9 @@
 		display: flex;
 		gap: 1rem;
 		align-items: flex-end;
+		&>.invitationExists {
+			color: var(--color_gray);
+		}
 		@media screen and (max-width:1440px) {
 			gap: 0.75rem;
 		}

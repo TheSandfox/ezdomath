@@ -262,7 +262,7 @@ export function Main({handleTabIndex,index,trigger}) {
 					{newTargetUsers
 						.filter((targetObject)=>{
 							return parseInt(targetObject.userTypeId) === USER_TYPE_PARENT
-								|| parseInt(targetObject.userTypeId) === USER_TYPE_ADMIN;
+								// || parseInt(targetObject.userTypeId) === USER_TYPE_ADMIN;
 						})
 						.map((targetObject)=>{
 							return <UserCard type={2} key={targetObject.userId} userId={targetObject.userId}/>
@@ -274,7 +274,7 @@ export function Main({handleTabIndex,index,trigger}) {
 					{newTargetUsers
 						.filter((targetObject)=>{
 							return parseInt(targetObject.userTypeId) === USER_TYPE_TEACHER
-								|| parseInt(targetObject.userTypeId) === USER_TYPE_ADMIN;
+								// || parseInt(targetObject.userTypeId) === USER_TYPE_ADMIN;
 						})
 						.map((targetObject)=>{
 							return <UserCard type={2} key={targetObject.userId} userId={targetObject.userId}/>

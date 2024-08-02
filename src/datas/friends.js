@@ -29,11 +29,6 @@ const friendsDefault = localStorage.getItem('friends')
 			userTypeId:USER_TYPE_PARENT
 		},
 		{
-			userId1:0,
-			userId2:4,
-			userTypeId:USER_TYPE_TEACHER
-		},
-		{
 			userId1:5,
 			userId2:0,
 			userTypeId:USER_TYPE_TEACHER
@@ -64,6 +59,7 @@ const friendsReducer = (state,action)=>{
 	let newState;
 	switch (action.type) {
 	case 'add' :
+		// 친추(중복불허)
 		if (!get(state,userId1,userId2)) {
 			newState = [
 				...state,
