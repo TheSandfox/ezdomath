@@ -300,7 +300,7 @@ export function Main({handleTabIndex,index}) {
 				<div className="font_medium">
 					{mode==='dm'
 						?(targetUser?targetUser.name+User.getUserIdString(targetUser.userId):'')
-						:'선생님/부모님 목록'
+						:'Q&A(묻고 답하기)'
 					}
 				</div>
 			</div>
