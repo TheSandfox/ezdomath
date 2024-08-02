@@ -120,12 +120,17 @@ export function SubjectDetail({subjectId}) {
 	},[adjustJSX]);
 	//이미 푼 문제인지 표시
 	const achievementCorrect = useMemo(()=>{
+		let checkId;
 		if (!achievements) {return false}
-		if (!user) {return false}
+		if (user) {
+			checkId = user.userId;
+		} else {
+			checkId = -1;
+		}
 		if (!subject) {return false}
 		return achievements.some((achievementItem)=>{
 			return (parseInt(achievementItem.subjectId) === parseInt(subject.subjectId))
-				&& (parseInt(achievementItem.userId) === parseInt(user.userId))
+				&& (parseInt(achievementItem.userId) === parseInt(checkId))
 				&& achievementItem.correct;
 		})
 	},[achievements,user,subject])
@@ -141,11 +146,10 @@ export function SubjectDetail({subjectId}) {
 		let correctTemp = correct[0];
 		setAnswer(null);
 		setCorrect([null]);
-		if (!user) {return;}
 		// 진척도에 기록
 		dispatchAchievements({
 			type:'add',
-			userId:user.userId,
+			userId:user?user.userId:-1,
 			subjectId:subject.subjectId,
 			correct:correctTemp
 		})
