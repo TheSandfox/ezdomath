@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ACTS } from "../../../datas/acts";
 import { SUBJECTS } from "../../../datas/subjects";
@@ -9,7 +9,6 @@ import Ham from '/img/HamMenu.svg';
 import RightG from '/img/rightG.svg';
 import Navigation from "../navigation/navigation.jsx";
 import { SubjectDetail } from "../play/SubjectDetail.jsx";
-import { ReportAndError } from "../../generic/play/ReportAndError.jsx";
 
 export function PagePlay() {
   const { actId, subjectId } = useParams();
@@ -21,7 +20,7 @@ export function PagePlay() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [selectedAct, setSelectedAct] = useState(actId ? [parseInt(actId)] : [0]);
   const [selectedSubject, setSelectedSubject] = useState(subjectId ? parseInt(subjectId) : null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const contentRef = useRef(null);
 
   // 좌측 사이드바 토글 함수
   const toggleSidebar = () => {
@@ -45,6 +44,7 @@ export function PagePlay() {
     setSelectedSubject(null);
     navigate(`/play/${actId}`);
     setIsLeftSidebarOverlayVisible(false);
+    window.location.reload();  // 페이지 새로고침
   };
 
   // subject 클릭 시 처리 함수
@@ -52,14 +52,6 @@ export function PagePlay() {
     setSelectedSubject(subjectId);
     setIsRightSidebarOverlayVisible(false);
     navigate(`/play/${selectedAct[0]}/${subjectId}`);
-  };
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -148,7 +140,7 @@ export function PagePlay() {
           </aside>
         )}
         <section className={`play_page_background ${!isRightSidebarVisible ? 'full-width' : ''}`}>
-          <div className={`content_wrap ${selectedSubject !== null ? 'no-margin-left' : ''}`}>
+          <div ref={contentRef} className={`content_wrap ${selectedSubject !== null ? 'no-margin-left' : ''}`}>
             <div className={`act_and_subject_wrap ${selectedSubject !== null ? 'subject-mode' : ''}`}>
               <ActList actId={selectedAct[0]} />
               {selectedSubject !== null && (
@@ -202,8 +194,6 @@ export function PagePlay() {
           </div>
         </div>
       )}
-      {/* <button onClick={handleOpenModal} className="report-button">오류 제보하기/질문하기</button>
-      {isModalOpen && <ReportAndError onClose={handleCloseModal} />} */}
     </>
   );
 }
