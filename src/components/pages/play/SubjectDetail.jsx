@@ -84,7 +84,12 @@ export function SubjectDetail({subjectId}) {
 	}
 	//선생유저
 	const myTeacher = useMemo(()=>{
-		return User.getUserTeacher(user,users,friends);
+		if (!user) {return null;}
+		if (!users) {return null;}
+		if (!friends) {return null;}
+		let newObj = User.getUserTeacher(user,users,friends)
+		console.log(newObj);
+		return newObj;
 	},[user,users,friends]);
 	//타겟문제
 	const subject = useMemo(()=>{
@@ -243,7 +248,7 @@ export function SubjectDetail({subjectId}) {
 							icon={<FaRegEdit/>}
 							onClick={()=>{setDisplayModalQNA(true)}}
 						>
-							질문하기
+							Q&A
 						</ButtonIcon>
 						:<></>
 					}

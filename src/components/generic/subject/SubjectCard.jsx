@@ -100,7 +100,7 @@ export function SubjectCard({
 	case 0 :
 		// 북마크용
 		jsx = <>
-			{displayQNA?<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>질문하기</ButtonMedium>:null}
+			{displayQNA?<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>Q&A</ButtonMedium>:null}
 			<ButtonMedium to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`}>바로가기</ButtonMedium>
 		</>
 		break;
