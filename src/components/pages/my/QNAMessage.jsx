@@ -17,7 +17,9 @@ export function QNAMessage({qna,my,containerRef}) {
 		if (qna.subjectId === '') {
 			return null;
 		}
-		return SUBJECTS[parseInt(qna.subjectId)]
+		return SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(qna.subjectId)
+		})
 	},[qna])
 	const dateString = useMemo(()=>{
 		let today = new Date();

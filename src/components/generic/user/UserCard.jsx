@@ -23,12 +23,17 @@ export function UserCard({userId,type}) {
 		// 학생: 진척도, 더보기
 		case 0:
 			return <>
-				<ButtonIcon icon={<BsBarChartFill/>}/>
+				{/* 진척도페이지 */}
+				<ButtonIcon 
+					to={`/my/achievement/0/${userId}`}
+					icon={<BsBarChartFill/>}
+				/>
 				<ButtonIcon icon={<TfiMoreAlt/>}/>
 			</>
 		// 검색: 추가하기(초대생성)
 		case 1:
 			return <>
+				{/* 초대버튼 */}
 				<ButtonIcon icon={<FaPlus/>} onClick={()=>{
 					console.log(user.userId+' '+userId);
 					dispatchInvitations({

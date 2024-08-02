@@ -1,0 +1,59 @@
+.modalBox {
+	width: calc(100dvw - 2rem);
+	height: calc(100dvh - 2rem);
+	max-width: 60rem;
+	max-height: 45rem;
+	border-radius: 1rem;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	&>.header {
+		font-weight: bold;
+		color: var(--color_darkest);
+		background-color: var(--color_background_sub);
+		border-bottom: 1px solid var(--color_border);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		&>.close {
+			border-color: var(--color_subtitle);
+			color: var(--color_subtitle);
+		}
+	}
+	&>.top {
+		background-color: var(--color_background);
+		border-bottom: 1px solid var(--color_border);
+	}
+	&>.middle {
+		flex: 1;
+		overflow-y: auto;
+		background-color: var(--color_background_sub);
+	}
+	&>.bottom {
+		border-top: 1px solid var(--color_border);
+		background-color: var(--color_background);
+	}
+	&>* {
+		padding: 1rem;
+	}
+	@media screen and (max-width:1440px) {
+		
+	}
+	@media screen and (max-width:800px) {
+		max-height: initial;
+	}
+}
+
+.modalBoxBackdrop {
+	position: fixed;
+	width: 100dvw;
+	height: 100dvh;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.25);
+	z-index: 99999;
+}

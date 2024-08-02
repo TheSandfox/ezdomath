@@ -1,26 +1,58 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ACTS } from "../../../datas/acts";
 import { SUBJECTS } from "../../../datas/subjects";
 import "./ReportAndError.css";
 
-export function ReportAndError({ onClose, onSubmit }) {
-    const [unit, setUnit] = useState("");
-    const [question, setQuestion] = useState("");
+export function ReportAndError({ 
+	type,
+	title,
+	onClose,
+	onSubmit,
+	user,
+	teacherUser,
+	subjectId,
+	actId
+}) {
+    const [act, setAct] = useState(isNaN(parseInt(actId))?"":actId);
+    const [subject, setSubject] = useState(isNaN(parseInt(subjectId))?"":subjectId);
     const [content, setContent] = useState("");
 
-    const filteredQuestions = unit ? SUBJECTS.filter(subject => subject.actId === parseInt(unit)) : [];
+    const filteredQuestions = useMemo(()=>{
+		return !isNaN(parseInt(act)) ? SUBJECTS.filter(subjectItem => subjectItem.actId === parseInt(act)) : [];
+	},[act])
+
+	const closeCallback = ()=>{
+		if (onClose) {
+			onClose({
+				type:type,
+			})
+		}
+	}
+
+	const submitCallback = ()=>{
+		if (onSubmit) {
+			onSubmit({
+				type:type,
+				fromUserId:user.userId,
+				toUserId:teacherUser.userId,
+				subjectId:subject,
+				content:content
+			});
+			closeCallback();
+		}
+	}
 
     return (
         <div className="modal-overlay">
             <div className="modal-content">
                 <div className="modal-header">
-                    <p className="font_title">오류 제보하기/질문하기</p>
-                    <button className="close-button" onClick={onClose}>X</button>
+                    <p className="font_title">{title}</p>
+                    <button className="close-button" onClick={closeCallback}>X</button>
                 </div>
                 <div className="modal-body">
                     <div className="modal-row">
                         <label className="font_main">단원</label>
-                        <select id="unit-select" value={unit} onChange={(e) => setUnit(e.target.value)}>
+                        <select id="unit-select" value={act} onChange={(e) => setAct(e.target.value)}>
                             <option className="font_small" value="">단원을 선택하세요</option>
                             {ACTS.map(act => (
                                 <option className="font_small" key={act.actId} value={act.actId}>{act.title}</option>
@@ -29,7 +61,7 @@ export function ReportAndError({ onClose, onSubmit }) {
                     </div>
                     <div className="modal-row">
                         <label className="font_main">문제</label>
-                        <select id="question-select" value={question} onChange={(e) => setQuestion(e.target.value)} disabled={!unit}>
+                        <select id="question-select" value={subject} onChange={(e) => setSubject(e.target.value)} disabled={!act}>
                             <option value="">문제를 선택하세요</option>
                             {filteredQuestions.map(subject => (
                                 <option className="font_small" key={subject.subjectId} value={subject.subjectId}>{subject.name}</option>
@@ -48,13 +80,8 @@ export function ReportAndError({ onClose, onSubmit }) {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button className="cancel-button" onClick={onClose}>취소</button>
-                    <button className="submit-button" onClick={onSubmit?()=>{onSubmit({
-						type:type,
-						actId:unit,
-						subjectId:question,
-						content:content
-					});}:()=>{}}>제보하기</button>
+                    <button className="cancel-button" onClick={closeCallback}>취소</button>
+                    <button className="submit-button" onClick={submitCallback}>제보하기</button>
                 </div>
             </div>
         </div>

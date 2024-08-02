@@ -1,10 +1,14 @@
+import React, { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Noti } from '../../../datas/noti_data';
+import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
+import { userContext } from '../../../App'; // userContext 가져옴
+import { USER_TYPE_ADMIN } from '../../../datas/usertypes'; // 관리자 유저만 작성하기 쓸 수 있게 가져옴
 import "./NoticeDetail.css"
 
 export function NoticeDetail() {
     const { noticeId } = useParams();
     const navigate = useNavigate();
+    const { user } = useContext(userContext); // userContext 적용
     const notice = Noti.find(noti => noti.notiId === parseInt(noticeId));
 
     if (!notice) {
@@ -20,6 +24,7 @@ export function NoticeDetail() {
         if (confirmed) {
             const index = Noti.findIndex(noti => noti.notiId === parseInt(noticeId));
             Noti.splice(index, 1);
+            saveNoticesToLocalStorage(Noti);  // 로컬스토리지에 변경사항 저장
             navigate('/notice');
         }
     };
@@ -46,10 +51,12 @@ export function NoticeDetail() {
                 <div>
                     <button className='font_small' onClick={handleListClick}>목록</button>
                 </div>
-                <div className='noti_detail_btn_box'>
-                    <button className='font_small' onClick={handleEditClick}>수정</button>
-                    <button className='font_small' onClick={handleDeleteClick}>삭제</button>
-                </div>
+                {user && user.userTypeId === USER_TYPE_ADMIN && (
+                    <div className='noti_detail_btn_box'>
+                        <button className='font_small' onClick={handleEditClick}>수정</button>
+                        <button className='font_small' onClick={handleDeleteClick}>삭제</button>
+                    </div>
+                )}
             </div>
         </div>
     );

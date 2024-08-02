@@ -24,6 +24,16 @@
 	}
 }
 
+.subjectText {
+	z-index: 1;
+	position: relative;
+	transform: translateY(-150%);
+	color: var(--color_darkest);
+	font-weight: bold;
+	user-select: none;
+	filter: drop-shadow(1px 1px 0 var(--color_main));
+}
+
 @keyframes subjectVertexEffect {
 	0% {
 		transform: scale(1);

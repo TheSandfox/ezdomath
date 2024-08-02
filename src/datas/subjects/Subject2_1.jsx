@@ -1,12 +1,12 @@
-import { useEffect,useMemo,Fragment } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Html, Line } from '@react-three/drei';
 import '/src/components/generic/subject/subject.css';
+import { useFrame } from "@react-three/fiber";
 
 function Adjust({subjectState,answer,handleCorrect}) {
 	useEffect(()=>{
 		if (!answer) {return;}
 		if (!handleCorrect) {return;}
-		console.log('회전 '+answer)
 		handleCorrect.set(String(answer)==='회전')
 	},[answer,handleCorrect]);
 	return <>
@@ -15,13 +15,17 @@ function Adjust({subjectState,answer,handleCorrect}) {
 
 // Scene
 function Scene({subjectState}) {
+	const groupRef = useRef(null);
 	const meshColor = useMemo(()=>{
 		const root = getComputedStyle(document.documentElement);
 		return root.getPropertyValue('--color_main').trim();
-	},[])
-	return <group position={[0, 0.5, 0]}>
+	},[]);
+	useFrame((state,delta)=>{
+		groupRef.current.rotation.y += 0.01;
+	})
+	return <group ref={groupRef} position={[0, 1, 0]}>
 		<mesh>
-			<boxGeometry/>
+			<boxGeometry args={[2,2,2]}/>
 			<meshStandardMaterial 
 				color={meshColor}
 			/>

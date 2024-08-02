@@ -3,13 +3,13 @@ const achievementsDefault = localStorage.getItem('achievements')
 	:[
 		{
 			userId:0,
-			subjectId:0,
+			subjectId:100,
 			date:'2024.11.11',
 			correct:true,
 		},
 		{
 			userId:0,
-			subjectId:1,
+			subjectId:101,
 			date:'2024.11.11',
 			correct:false,
 		},
@@ -68,7 +68,7 @@ const achievementsReducer = (state,action)=>{
 						userId,
 						subjectId,
 						correct:stateItem.correct?stateItem.correct:correct,
-						dateTime:stateItem.correct?stateItem.dateTime:dateFormat(new Date())
+						date:stateItem.correct?stateItem.date:dateFormat(new Date())
 					};
 				} else {
 					return stateItem;

@@ -15,10 +15,13 @@ import { InputText } from '../../generic/Input';
 import { ButtonIcon } from '../../generic/Buttons';
 import { ACTS } from '../../../datas/acts';
 import { userContext } from '../../../App';
+import { Bookmark } from '../../generic/subject/SubjectCard';
+import * as User from '/src/utils/User'
+import { ReportAndError } from '../../generic/play/ReportAndError';
 
 export function SubjectDetail({subjectId}) {
 	const navigate = useNavigate();
-	const { dispatchAchievements, user, achievements } = useContext(userContext);
+	const { dispatchAchievements, user, achievements, dispatchQnas, users, friends } = useContext(userContext);
 	const answerInputRef = useRef(null);
 	const [subjectState,setSubjectState] = useState(null);
 	const [answer,setAnswer] = useState(null);
@@ -45,13 +48,49 @@ export function SubjectDetail({subjectId}) {
 			setCorrect([val]);
 		}
 	}
+	//모달 질문 표시
+	const [displayModalQNA,setDisplayModalQNA] = useState(false);
+	const [displayModalReport,setDisplayModalReport] = useState(false);
+	const modalSubmit = (obj)=>{
+		const { type, fromUserId, toUserId, subjectId, content } = obj;
+		switch (type) {
+		case 'qna':
+			dispatchQnas({
+				type:'add',
+				fromUserId,
+				toUserId,
+				subjectId,
+				content,
+			});
+			return;
+		case 'report':
+			// dispathQnas({
+
+			// });
+			return;
+		}
+	}
+	const modalClose = (obj)=>{
+		const { type } = obj;
+		switch (type) {
+		case 'qna':
+			setDisplayModalQNA(false);
+			return;
+		case 'report':
+			setDisplayModalReport(false);
+			return;
+		}
+	}
+	//선생유저
+	const myTeacher = useMemo(()=>{
+		return User.getUserTeacher(user,users,friends);
+	},[user,users,friends]);
 	//타겟문제
 	const subject = useMemo(()=>{
-		if (SUBJECTS[subjectId]) {
-			return SUBJECTS[subjectId];
-		} else {
-			return null;
-		}
+		let newObj = SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(subjectId)
+		})
+		return newObj||null;
 	},[subjectId]);
 	//컨트롤러
 	const controllerJSX = useMemo(()=>{
@@ -102,6 +141,7 @@ export function SubjectDetail({subjectId}) {
 		setAnswer(null);
 		setCorrect([null]);
 		if (!user) {return;}
+		// 진척도에 기록
 		dispatchAchievements({
 			type:'add',
 			userId:user.userId,
@@ -138,6 +178,7 @@ export function SubjectDetail({subjectId}) {
 				<Link className='goBack' to={`/play/${subject?subject.actId:''}`}>
 					<FaChevronLeft className='icon'/>
 				</Link>
+				<Bookmark subjectId={subject?subject.subjectId:undefined}></Bookmark>
 			</div>
 		</div>
 		{/* 메인영역 */}
@@ -185,9 +226,31 @@ export function SubjectDetail({subjectId}) {
 					{/* 힌트버튼 */}
 					<ButtonIcon className={'hint'} icon={<GoQuestion/>}>힌트보기</ButtonIcon>
 					{/* QNA */}
-					<ButtonIcon className={'qna'} icon={<FaRegEdit/>}>질문하기</ButtonIcon>
+					{myTeacher
+						?<ButtonIcon 
+							className={'qna'} 
+							icon={<FaRegEdit/>}
+							onClick={()=>{setDisplayModalQNA(true)}}
+						>
+							질문하기
+						</ButtonIcon>
+						:<></>
+					}
 				</div>
 			</div>
 		</div>
+		{displayModalQNA
+			?<ReportAndError
+				title={'질문하기'}
+				type={'qna'}
+				user={user}
+				teacherUser={myTeacher}
+				onClose={modalClose}
+				onSubmit={modalSubmit}
+				actId={subject.actId||0}
+				subjectId={subject.subjectId||0}
+			/>
+			:<></>
+		}
 	</div>
 }

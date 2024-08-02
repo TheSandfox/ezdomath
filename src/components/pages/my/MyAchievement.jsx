@@ -4,6 +4,7 @@ import { SubjectCard } from "../../generic/subject/SubjectCard";
 import { useParams } from "react-router-dom";
 import * as Subject from '/src/utils/Subject'
 import * as Friend from '/src/utils/Friend'
+import * as User from '/src/utils/User'
 import { userContext } from "../../../App";
 import { ACTS } from "../../../datas/acts";
 import { ButtonTab } from "../../generic/Buttons";
@@ -57,16 +58,15 @@ export function Left({handleTrigger}) {
 				userId:opponentId,
 				name:users.find((userItem)=>{
 					return parseInt(userItem.userId) === parseInt(opponentId)
-				}).name
+				}).name+User.getUserIdString(opponentId)
 			}
 		})
-		console.log(newObj);
 		return [
 			{
 				userId:user.userId,
 				name:users.find((userItem)=>{
 					return parseInt(userItem.userId) === parseInt(user.userId)
-				}).name
+				}).name+User.getUserIdString(user.userId)
 			},
 			...newObj];
 	},[user,users,friends,targetUserId]);
@@ -111,10 +111,10 @@ export function Left({handleTrigger}) {
 			}
 			<MyTitle title={'단원별 진척도'}/>
 			<div className="tabs">
-				<ActProgress to={'/my/achievement/0'} active={parseInt(actId)===0} actId={0} userId={targetUserId}>1단원</ActProgress>
-				<ActProgress to={'/my/achievement/1'} active={parseInt(actId)===1} actId={1} userId={targetUserId}>2단원</ActProgress>
-				<ActProgress to={'/my/achievement/2'} active={parseInt(actId)===2} actId={2} userId={targetUserId}>3단원</ActProgress>
-				<ActProgress to={'/my/achievement/3'} active={parseInt(actId)===3} actId={3} userId={targetUserId}>4단원</ActProgress>
+				<ActProgress to={`/my/achievement/0/${targetUserId}`} active={parseInt(actId)===0} actId={0} userId={targetUserId}>1단원</ActProgress>
+				<ActProgress to={`/my/achievement/1/${targetUserId}`} active={parseInt(actId)===1} actId={1} userId={targetUserId}>2단원</ActProgress>
+				<ActProgress to={`/my/achievement/2/${targetUserId}`} active={parseInt(actId)===2} actId={2} userId={targetUserId}>3단원</ActProgress>
+				<ActProgress to={`/my/achievement/3/${targetUserId}`} active={parseInt(actId)===3} actId={3} userId={targetUserId}>4단원</ActProgress>
 			</div>
 		</div>
 		<div className="myAchievement myLeftBoxAlter">
@@ -131,17 +131,17 @@ export function Left({handleTrigger}) {
 				:<></>
 			}
 			<Dropdown displayIndex={displayIndex}>
-				<ActProgress to={'/my/achievement/0'} dropdown active={parseInt(actId)===0} actId={0} userId={targetUserId}>1단원</ActProgress>
-				<ActProgress to={'/my/achievement/1'} dropdown active={parseInt(actId)===1} actId={1} userId={targetUserId}>2단원</ActProgress>
-				<ActProgress to={'/my/achievement/2'} dropdown active={parseInt(actId)===2} actId={2} userId={targetUserId}>3단원</ActProgress>
-				<ActProgress to={'/my/achievement/3'} dropdown active={parseInt(actId)===3} actId={3} userId={targetUserId}>4단원</ActProgress>
+				<ActProgress to={`/my/achievement/0/${targetUserId}`} dropdown active={parseInt(actId)===0} actId={0} userId={targetUserId}>1단원</ActProgress>
+				<ActProgress to={`/my/achievement/1/${targetUserId}`} dropdown active={parseInt(actId)===1} actId={1} userId={targetUserId}>2단원</ActProgress>
+				<ActProgress to={`/my/achievement/2/${targetUserId}`} dropdown active={parseInt(actId)===2} actId={2} userId={targetUserId}>3단원</ActProgress>
+				<ActProgress to={`/my/achievement/3/${targetUserId}`} dropdown active={parseInt(actId)===3} actId={3} userId={targetUserId}>4단원</ActProgress>
 			</Dropdown>
 		</div>
 	</>
 }
 
 export function Main({handleTabIndex,index,trigger}) {
-	const { achievements, user, friends } = useContext(userContext);
+	const { achievements, user, friends, users } = useContext(userContext);
 	const params = useParams();
 	const targetUserId = useMemo(()=>{
 		// 로그인 안됐음
@@ -164,6 +164,15 @@ export function Main({handleTabIndex,index,trigger}) {
 		}
 		return params.targetUserId;
 	},[params.targetUserId,user,friends]);
+	const targetUserName = useMemo(()=>{
+		if (!user) {return null;}
+		if (isNaN(parseInt(targetUserId))) {return null;}
+		if (parseInt(user.userId)===parseInt(targetUserId)) {return null;}
+		let targetUser = users.find((userItem)=>{
+			return parseInt(userItem.userId) === parseInt(targetUserId)
+		})
+		return targetUser?targetUser.name:null;
+	},[targetUserId,user]);
 	const actId = useMemo(()=>{
 		if (!trigger||!trigger.actId) {
 			return 0;
@@ -191,7 +200,7 @@ export function Main({handleTabIndex,index,trigger}) {
 		handleTabIndex.set(index);
 	},[]);
 	return <div className="contents">
-		<MyTitle title={`진척도 - ${ACTS[actId]?ACTS[actId].name:''}`}/>
+		<MyTitle title={`진척도${targetUserName?'('+targetUserName+')':''} - ${ACTS[actId]?ACTS[actId].name:''}`}/>
 		<div className="myCardContainer">
 			{cards.map((item)=>{
 				return <SubjectCard key={item.subjectId} type={1} subjectId={item.subjectId} achievement={item.achievement}/>

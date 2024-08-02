@@ -51,7 +51,8 @@ export function SubjectCard({
 	subjectId/*필수*/,
 	type/*0: 북마크 페이지에서, 1: 진척도페이지에서, 2:그외*/,
 	achievement/*진척도페이지에서만 사용(없어도됨)*/,
-	onClick
+	onClick,
+	active
 }) {
 	const { user, friends, users } = useContext(userContext);
 	// 선생유저
@@ -72,11 +73,10 @@ export function SubjectCard({
 	},[user,friends,users])
 	// subjectId로 subject가져오기
 	const subject = useMemo(()=>{
-		if (SUBJECTS[subjectId]) {
-			return SUBJECTS[subjectId];
-		} else {
-			return null;
-		}
+		let newSubject = SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(subjectId)
+		})
+		return newSubject?newSubject:null;
 	},[subjectId]);
 	// 단원데이터 가져오기
 	const act = useMemo(()=>{
@@ -142,14 +142,16 @@ export function SubjectCard({
 	case 2 :
 		//단순표시
 		jsx = <div className='imgWrapper'>
-			<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+			<img className='blur' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
+			<img className='img' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
 		</div>
+		newClass = active?'active':'';
 		break;
 	}
 	return <>
 		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`} onClick={typeValue === 2 ? onClick : undefined}>
 			{
-				typeValue!==2
+				typeValue!==2&&subject
 				?<Bookmark subjectId={subject.subjectId}/>
 				:<></>
 			}
@@ -163,7 +165,8 @@ export function SubjectCard({
 				{
 					typeValue!==2
 					?<div className='imgWrapper'>
-						<img src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
+						<img className='blur' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
+						<img className='img' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
 					</div>
 					:<></>
 				}

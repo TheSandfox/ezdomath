@@ -1,0 +1,28 @@
+.subjectSelector {
+	&>.top {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		&>.labelAndDropdown {
+			color: var(--color_darkest);
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			text-align: center;
+		}
+	}
+	&>.middle {
+		&>.subjectCards {
+			display: grid;
+			grid-template-columns: repeat(4,1fr);
+			gap: 1rem;
+		}
+	}
+	&>.bottom {
+		&>.buttons {
+			display: flex;
+			justify-content: flex-end;
+			gap: 1rem;
+		}
+	}
+}

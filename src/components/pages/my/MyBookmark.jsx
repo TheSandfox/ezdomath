@@ -61,7 +61,10 @@ export function Main({handleTabIndex,index,trigger}) {
 		.filter((item)=>{
 			// 액트인덱스 검증
 			return (!trigger.actId||trigger.actId==='all') 
-				|| parseInt(SUBJECTS[item.subjectId].actId) === parseInt(trigger.actId);
+				|| parseInt(SUBJECTS.find(
+					subjectItem=>
+					parseInt(subjectItem.subjectId)===parseInt(item.subjectId)).actId
+				) === parseInt(trigger.actId);
 		})
 		.map((item)=>{
 			return item.subjectId;

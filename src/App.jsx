@@ -8,6 +8,7 @@ import { PageMy } from "/src/components/pages/my/PageMy";
 import { PageLogin } from "/src/components/pages/login/PageLogin";
 import { PageRegister } from "/src/components/pages/register/PageRegister";
 import { PageRegisterDetail } from "./components/pages/register/pageDetailRegister";
+import { PageKakaoRegisterDetail } from "./components/pages/register/PageKakaoRegisterDetail";
 import { createContext, useEffect, useReducer, useState } from "react";
 import { bookmarksDefault, bookmarksReducer } from "./datas/bookmarks";
 import { usersDefault, usersReducer } from "./datas/users";
@@ -27,6 +28,9 @@ function App() {
   const [userContextValue, setUserContextValue] = useState({
     user: null,
   });
+
+  // Kakao 사용자 정보 상태
+  const [kakaoUserInfo, setKakaoUserInfo] = useState(null);
 
   // 동적데이터들
   const [bookmarks, dispatchBookmarks] = useReducer(
@@ -56,11 +60,29 @@ function App() {
       (user) => user.stringId === stringId && user.password === password
     );
     if (loginSuccess) {
-      console.log(users); // 확인 용
       handleUserContext.setUser(loginSuccess);
       return loginSuccess; // 로그인 성공 시 유저 정보를 반환
     } else {
       return null; // 로그인 실패
+    }
+  };
+
+  // 카카오 로그인 로직
+  const handleKakaoLogin = () => {
+    const kakaoUserInfo = JSON.parse(localStorage.getItem('kakao_user_info'));
+    if (kakaoUserInfo) {
+      const kakaoUserId = `kakao_${kakaoUserInfo.id}`;
+      const existingUser = users.find(user => user.stringId === kakaoUserId);
+      const kakaoUser = existingUser || {
+        stringId: kakaoUserId,
+        name: kakaoUserInfo.nickname,
+        profile: kakaoUserInfo.profile_image,
+        userTypeId: 0, // 기본 회원 유형
+      };
+      handleUserContext.setUser(kakaoUser);
+      return kakaoUser;
+    } else {
+      return null;
     }
   };
 
@@ -71,6 +93,7 @@ function App() {
       user: null,
     }));
     sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('kakao_token'); // 로그아웃 시 Kakao 토큰 삭제
     return logoutSuccess;
   };
 
@@ -92,18 +115,19 @@ function App() {
         allUsers.find((item) => parseInt(item.userId) === parseInt(userId))
       );
     },
+    setKakaoUserInfo: setKakaoUserInfo, // Kakao 사용자 정보 설정 함수
     logout: handleLogout,
     login: handleLogin,
-    // dispatchUsers로 새 유저 저장
+    kakaoLogin: handleKakaoLogin, // Kakao 로그인 함수 추가
     addUser: (user) => {
       dispatchUsers({ type: "add", ...user });
     },
-    // dispatchUsers로 해당 유저 삭제 및 로그아웃
     removeUser: (userId) => {
       dispatchUsers({ type: "remove", userId });
       handleLogout();
     },
   };
+
 
   // 유저 바꿔치기 치트(임시)
   useEffect(() => {
@@ -134,7 +158,7 @@ function App() {
     const location = useLocation();
     useEffect(() => {
         document.body.style.overflow = 'auto';
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     }, [location]);
 
   // 리턴 JSX
@@ -158,6 +182,7 @@ function App() {
           dispatchNotifications: dispatchNotifications,
           qnas: qnas,
           dispatchQnas: dispatchQnas,
+          kakaoUserInfo: kakaoUserInfo, // Kakao 사용자 정보 추가
         }}
       >
         <Routes>
@@ -179,6 +204,8 @@ function App() {
           <Route path={"/register/*"} element={<PageRegister />} />
           {/* 회원 정보 입력 */}
           <Route path={"/detail/*"} element={<PageRegisterDetail />} />
+          {/* 카카오 회원 정보 입력 */}
+          <Route path={"/kakao-detail/*"} element={<PageKakaoRegisterDetail />}/>
         </Routes>
       </userContext.Provider>
     </>
