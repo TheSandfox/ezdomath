@@ -65,7 +65,7 @@ const usersDefault = localStorage.getItem('users')
       schoolName: '백탁초등학교',
       stringId: 'zxcv0002',
       password: '1q2w3e4r$',
-      profile: '/ezdomath/profile/student0.png',
+      profile: '/ezdomath/profile/student1.png',
     },
     {
       name: '이학생',

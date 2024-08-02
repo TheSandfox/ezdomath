@@ -88,7 +88,6 @@ export function SubjectDetail({subjectId}) {
 		if (!users) {return null;}
 		if (!friends) {return null;}
 		let newObj = User.getUserTeacher(user,users,friends)
-		console.log(newObj);
 		return newObj;
 	},[user,users,friends]);
 	//타겟문제

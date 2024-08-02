@@ -9,6 +9,7 @@ import { TfiMoreAlt } from "react-icons/tfi";
 import { FaPlus } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { FaRegEdit } from 'react-icons/fa';
 
 export function UserCard({userId,type}) {
 	const { user, users, dispatchInvitations, dispatchFriends, invitations } = useContext(userContext);
@@ -58,9 +59,13 @@ export function UserCard({userId,type}) {
 					</div>
 				}
 			</>
-		// 멘토: 더보기
+		// 멘토: Q&A, 더보기
 		case 2:
 			return <>
+				<ButtonIcon 
+					icon={<FaRegEdit/>}
+					to={`/my/qna/${userId}`}
+				/>
 				<ButtonIcon icon={<TfiMoreAlt/>}/>
 			</>
 		// 초대: 수락, 거절

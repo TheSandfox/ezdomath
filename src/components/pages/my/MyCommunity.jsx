@@ -9,6 +9,7 @@ import { DropdownItem, DropdownLarge, SimpleDropdown } from "../../generic/Dropd
 import { UserCard } from "../../generic/user/UserCard";
 import { InputText } from "../../generic/Input";
 import * as User from '/src/utils/User';
+import * as Friend from '/src/utils/Friend';
 
 const tabs = [
 	['students','나의 학생들'],
@@ -152,6 +153,12 @@ export function Main({handleTabIndex,index,trigger}) {
 			return friends.filter((friendItem)=>{
 				return parseInt(friendItem.userId1)===parseInt(user.userId)
 					|| parseInt(friendItem.userId2)===parseInt(user.userId)
+			})
+			.filter((friendItem)=>{
+				let opponentId = Friend.getOpponent(friendItem,user.userId);
+				return parseInt(users.find((userItem)=>{
+					return parseInt(userItem.userId) === parseInt(opponentId)
+				}).userTypeId) === USER_TYPE_STUDENT
 			})
 			.map((friendItem)=>{
 				let newUserId = (parseInt(friendItem.userId1) === parseInt(user.userId))

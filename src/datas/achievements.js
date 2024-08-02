@@ -2,14 +2,14 @@ const achievementsDefault = localStorage.getItem('achievements')
 	?JSON.parse(localStorage.getItem('achievements'))
 	:[
 		{
-			userId:0,
+			userId:1,
 			subjectId:100,
 			date:'2024.11.11',
 			correct:true,
 		},
 		{
-			userId:0,
-			subjectId:101,
+			userId:1,
+			subjectId:102,
 			date:'2024.11.11',
 			correct:false,
 		},

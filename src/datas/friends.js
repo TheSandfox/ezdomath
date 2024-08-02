@@ -29,6 +29,11 @@ const friendsDefault = localStorage.getItem('friends')
 			userTypeId:USER_TYPE_PARENT
 		},
 		{
+			userId1:3,
+			userId2:6,
+			userTypeId:USER_TYPE_PARENT
+		},
+		{
 			userId1:5,
 			userId2:0,
 			userTypeId:USER_TYPE_TEACHER

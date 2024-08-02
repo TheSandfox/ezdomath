@@ -54,12 +54,17 @@ export function Left({handleTrigger}) {
 		})
 		.map((friendItem)=>{
 			let opponentId = Friend.getOpponent(friendItem,user.userId);
+			let opponentUser = users.find((userItem)=>{
+				return parseInt(userItem.userId) === parseInt(opponentId)
+			})
 			return {
+				userTypeId:opponentUser.userTypeId,
 				userId:opponentId,
-				name:users.find((userItem)=>{
-					return parseInt(userItem.userId) === parseInt(opponentId)
-				}).name+User.getUserIdString(opponentId)
+				name:opponentUser.name+User.getUserIdString(opponentId)
 			}
+		})
+		.filter((item)=>{
+			return parseInt(item.userTypeId)===USER_TYPE_STUDENT;
 		})
 		return [
 			{
