@@ -27,6 +27,7 @@ export function SubjectDetail({subjectId}) {
 	const [answer,setAnswer] = useState(null);
 	const [hideZimoon,setHideZimoon] = useState(false);
 	const [correct,setCorrect] = useState([null]);
+	const [displayHint,setDisplayHint] = useState(false);
 	//핸들러
 	const handleSubjectState = {
 		set:(val)=>{
@@ -133,9 +134,9 @@ export function SubjectDetail({subjectId}) {
 		if (!subject) {return;}
 		if (correct[0]===null) {return;}
 		if (correct[0]) {
-			alert('골든 정답이다.');
+			alert('정답입니다!');
 		} else {
-			alert('형편없군, 오답이다.');
+			alert('오답입니다.');
 		}
 		let correctTemp = correct[0];
 		setAnswer(null);
@@ -224,7 +225,13 @@ export function SubjectDetail({subjectId}) {
 					{/* 신고버튼 */}
 					<ButtonIcon className={'report'} icon={<LuSiren/>}></ButtonIcon>
 					{/* 힌트버튼 */}
-					<ButtonIcon className={'hint'} icon={<GoQuestion/>}>힌트보기</ButtonIcon>
+					<ButtonIcon 
+						className={'hint'} 
+						icon={<GoQuestion/>}
+						onClick={()=>setDisplayHint(!displayHint)}
+					>
+						힌트보기
+					</ButtonIcon>
 					{/* QNA */}
 					{myTeacher
 						?<ButtonIcon 
@@ -234,6 +241,16 @@ export function SubjectDetail({subjectId}) {
 						>
 							질문하기
 						</ButtonIcon>
+						:<></>
+					}
+					{/* 힌트글귀 */}
+					{displayHint
+						?<div className='fontMain'>
+							{subject
+								?<>{subject.hint}</>
+								:<></>
+							}
+						</div>
 						:<></>
 					}
 				</div>

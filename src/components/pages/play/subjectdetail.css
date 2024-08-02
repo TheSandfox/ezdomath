@@ -167,6 +167,7 @@
 				display: flex;
 				padding: 1rem;
 				gap: 1rem;
+				align-items: center;
 				&>.report:not(.active):not(:hover) {
 					color:var(--color_red);
 					border-color: var(--color_red);

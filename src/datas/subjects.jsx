@@ -23,7 +23,7 @@ const SUBJECTS = [
 		name: '점과 선 1',
 		thumb: '/ezdomath/thumb/subject1_1.png',
 		zimoon: '화면에 표시된 점의 갯수를 숫자로 입력하세요.',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:101,
@@ -34,7 +34,7 @@ const SUBJECTS = [
 		name: '점과 선 2',
 		thumb: '/ezdomath/thumb/subject1_2.png',
 		zimoon: '화면에 표시된 점의 갯수를 숫자로 입력하세요.',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:102,
@@ -45,7 +45,7 @@ const SUBJECTS = [
 		name: '점과 선 3',
 		thumb: '/ezdomath/thumb/subject1_3.png',
 		zimoon: '화면에 표시된 점의 갯수를 숫자로 입력하세요.',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:103,
@@ -56,7 +56,7 @@ const SUBJECTS = [
 		name: '점과 선 4',
 		thumb: '/ezdomath/thumb/subject1_4.png',
 		zimoon: '화면에 표시된 점의 갯수를 숫자로 입력하세요.',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:104,
@@ -67,7 +67,7 @@ const SUBJECTS = [
 		name: '점과 선 5',
 		thumb: '/ezdomath/thumb/subject1_5.png',
 		zimoon: '화면에 표시된 점의 갯수를 숫자로 입력하세요.',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	// 2단원=========================================================================
 	{
@@ -79,7 +79,7 @@ const SUBJECTS = [
 		name: '도형 변환1',
 		thumb: '/ezdomath/thumb/subject2_1.png',
 		zimoon: '화면상의 도형에 적용되고 있는 변환은 어떤 변환인가요? (이동, 회전, 축척)',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:201,
@@ -90,7 +90,7 @@ const SUBJECTS = [
 		name: '도형 변환2',
 		thumb: '/ezdomath/thumb/subject2_2.png',
 		zimoon: '화면상의 도형에 적용되고 있는 변환은 어떤 변환인가요? (이동, 회전, 축척)',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:202,
@@ -101,7 +101,7 @@ const SUBJECTS = [
 		name: '도형 변환3',
 		thumb: '/ezdomath/thumb/subject2_3.png',
 		zimoon: '화면상의 도형에 적용되고 있는 변환은 어떤 변환인가요? (이동, 회전, 축척)',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	// 3단원=========================================================================
 	{
@@ -111,9 +111,9 @@ const SUBJECTS = [
 		scene:Subject3_1.Scene,
 		actId: 2,
 		name: '정사각형의 둘레',
-		thumb: '/ezdomath/thumb/subject1_1.png',
+		thumb: '/ezdomath/thumb/subject3_1.png',
 		zimoon: '화면에 표시된 정사각형의 둘레를 입력하세요.',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:301,
@@ -122,9 +122,9 @@ const SUBJECTS = [
 		scene:Subject3_2.Scene,
 		actId: 2,
 		name: '직사각형의 넓이',
-		thumb: '/ezdomath/thumb/subject1_1.png',
+		thumb: '/ezdomath/thumb/subject3_2.png',
 		zimoon: '화면에 표시된 직사각형의 넓이를 입력하세요',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:302,
@@ -133,9 +133,9 @@ const SUBJECTS = [
 		scene:Subject3_3.Scene,
 		actId: 2,
 		name: '마름모의 넓이',
-		thumb: '/ezdomath/thumb/subject1_1.png',
+		thumb: '/ezdomath/thumb/subject3_3.png',
 		zimoon: '화면에 표시된 마름모의 넓이를 입력하세요',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	// 4단원=========================================================================
 	{
@@ -145,9 +145,9 @@ const SUBJECTS = [
 		scene:Subject4_1.Scene,
 		actId: 3,
 		name: '직육면체의 부피1',
-		thumb: '/ezdomath/thumb/subject1_1.png',
+		thumb: '/ezdomath/thumb/subject4_1.png',
 		zimoon: '화면에 표시된 직육면체의 부피를 입력하세요',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	{
 		subjectId:401,
@@ -156,9 +156,9 @@ const SUBJECTS = [
 		scene:Subject4_2.Scene,
 		actId: 3,
 		name: '직육면체의 부피2',
-		thumb: '/ezdomath/thumb/subject1_1.png',
+		thumb: '/ezdomath/thumb/subject4_2.png',
 		zimoon: '화면에 표시된 직육면체의 부피를 입력하세요',
-		hint:''
+		hint:'문제에 대한 힌트입니다.'
 	},
 	
 ]

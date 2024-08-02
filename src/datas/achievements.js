@@ -55,8 +55,8 @@ const achievementsReducer = (state,action)=>{
 				{
 					userId,
 					subjectId,
+					date: dateFormat(new Date()),
 					correct,
-					date: dateFormat(new Date())
 				}
 			]
 			localStorage.setItem('achievements',JSON.stringify(newState));
@@ -67,8 +67,8 @@ const achievementsReducer = (state,action)=>{
 					return  {
 						userId,
 						subjectId,
+						date:stateItem.correct?stateItem.date:dateFormat(new Date()),
 						correct:stateItem.correct?stateItem.correct:correct,
-						date:stateItem.correct?stateItem.date:dateFormat(new Date())
 					};
 				} else {
 					return stateItem;
