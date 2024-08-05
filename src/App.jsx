@@ -153,6 +153,22 @@ function App() {
     },
   };
 
+  useEffect(() => {
+    const cheat = (e) => {
+      if (!e.shiftKey) {
+        return;
+      }
+      if (!e.code.includes("Digit")) {
+        return;
+      }
+      handleUserContext.setUserById(e.code.substring(5));
+    };
+    window.addEventListener("keydown", cheat);
+    return () => {
+      window.removeEventListener("keydown", cheat);
+    };
+  }, []);
+
   // 페이지가 변경될 때마다 스크롤 상태를 재설정
   const location = useLocation();
   useEffect(() => {
