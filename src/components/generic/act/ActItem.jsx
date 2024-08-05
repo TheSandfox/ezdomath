@@ -1,20 +1,29 @@
-// ActItem.js
 import React from 'react';
 
 const ActItem = ({ item }) => {
   if (item.type === 'text') {
-    const { content, highlights = [] } = item; // highlights 기본값을 빈 배열로 설정
+    const { content, highlights = [] } = item;
+    if (highlights.length === 0) {
+      return <p className='font_main'>{content.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < content.split('\n').length - 1 && <br />}
+        </React.Fragment>
+      ))}</p>;
+    }
+
+    const regex = new RegExp(`(${highlights.join('|')})`);
 
     const textWithHighlights = content.split('\n').map((line, index) => (
       <React.Fragment key={index}>
-        {line.split(new RegExp(`(${highlights.join('|')})`)).map((part, partIndex) =>
+        {line.split(regex).map((part, partIndex) =>
           highlights.includes(part) ? (
             <span key={partIndex} style={{ color: '#FF8900' }}>{part}</span>
           ) : (
             part
           )
         )}
-        <br />
+        {index < content.split('\n').length - 1 && <br />}
       </React.Fragment>
     ));
 
