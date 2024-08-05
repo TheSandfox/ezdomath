@@ -149,3 +149,11 @@
         font-size: 0.7em;
     }
 }
+
+.login_user_info_input>.error_message{
+    color: var(--color_subtitle);
+}
+
+.login_user_info_input>.error_message:not(:last-child){
+    border-top: 1px solid var(--color_darkest);
+}

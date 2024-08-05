@@ -2,12 +2,7 @@ import "./navigation.css";
 import { userContext } from "../../../App";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
-import {
-  USER_TYPE_STUDENT,
-  USER_TYPE_PARENT,
-  USER_TYPE_TEACHER,
-  USER_TYPE_ADMIN,
-} from "../../../datas/usertypes";
+import { USER_TYPE_STUDENT, USER_TYPE_PARENT, USER_TYPE_TEACHER, USER_TYPE_ADMIN } from "../../../datas/usertypes";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const getUserTypeName = (userTypeId) => {
@@ -49,7 +44,6 @@ export default function Navigation() {
       to: "/my/bookmark/all",
     },
   ];
-
   const naviMenuPageAccordionContent = [
     {
       text: "EZDOMATH",
@@ -96,11 +90,11 @@ export default function Navigation() {
     setActiveComponent((prev) => (prev === component ? null : component));
   };
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (e) => {
     if (
-      myPageRef.current && !myPageRef.current.contains(event.target) &&
-      menuPageRef.current && !menuPageRef.current.contains(event.target) &&
-      callMessageRef.current && !callMessageRef.current.contains(event.target)
+      myPageRef.current && !myPageRef.current.contains(e.target) &&
+      menuPageRef.current && !menuPageRef.current.contains(e.target) &&
+      callMessageRef.current && !callMessageRef.current.contains(e.target)
     ) {
       setActiveComponent(null);
     }
@@ -303,7 +297,7 @@ const NavigationBar = ({
                       : "Alarm_active hidden"
                   }
                 ></div>
-                <ButtonIcon className="navi_btn_icon">
+                <ButtonIcon className={"navi_btn_icon"}>
                   <img
                     className="Alarm"
                     src="/ezdomath/img/Alarm_icon_30.webp"
@@ -332,148 +326,142 @@ const NavigationBar = ({
   </div>
 );
 
-const MyPage = React.forwardRef(({
-  isMyPageVisible,
-  onCloseMyPage,
-  naviMyPageAccordionContent,
-  naviMenuPageAccordionContent,
-  handleLogout,
-  user,
-}, ref) => (
-  <div ref={ref} className={isMyPageVisible ? "myPage flex" : "myPage hidden"}>
-    <div className="User_info_wrap">
-      <div className="User_info">
-        <p>
-          {user?.userTypeId === USER_TYPE_STUDENT
-            ? "학생"
-            : user?.userTypeId === USER_TYPE_PARENT
-            ? "학부모"
-            : user?.userTypeId === USER_TYPE_TEACHER
-            ? "교사"
-            : "관리자"}
-        </p>
-        <img className="user_profile" src={user?.profile} alt="프로필 이미지" />
-        <p>안녕하세요 {user?.name}님</p>
-      </div>
-      <ButtonIcon className="close navi_btn_icon" onClick={onCloseMyPage}>
-        <img src="/ezdomath/img/Multiply.webp" alt="닫기 버튼" />
-      </ButtonIcon>
-    </div>
-    <div>
-      <ul className="accordion_wrap">
-        {naviMyPageAccordionContent.map((item, index) => (
-          <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn" to={item.to}>
-              <p>{item.text}</p>
-              <img
-                className="accordion_arrow"
-                src={item.imgSrc}
-                alt="마이페이지 화살표"
-              />
-            </ButtonMedium>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div className="page_wrap">
-      <ul className="page_btn">
-        {naviMenuPageAccordionContent.map((item, index) => (
-          <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn" to={item.to}>
-              <p>{item.text}</p>
-              <img
-                className="accordion_arrow"
-                src={item.imgSrc}
-                alt="마이페이지 화살표"
-              />
-            </ButtonMedium>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div className="flex User_etc">
-      <span className="bug_report">문의사항</span>
-      <ButtonSmall className={"logout"} onClick={handleLogout}>
-        로그아웃
-      </ButtonSmall>
-    </div>
-  </div>
-));
+const MyPage = React.forwardRef((props, ref) => {
+  const { isMyPageVisible, onCloseMyPage, naviMyPageAccordionContent, naviMenuPageAccordionContent, handleLogout, user } = props;
 
-const MenuPage = React.forwardRef(({
-  isMenuPageVisible,
-  onCloseMenuPage,
-  naviMenuPageAccordionContent,
-  handleLogin,
-  isLoggedIn,
-}, ref) => (
-  <div ref={ref} className={isMenuPageVisible ? "menu_page flex" : "menu_page hidden"}>
-    <div className="close_wrap">
-      <ButtonIcon onClick={onCloseMenuPage} className="close">
-        <img src="/ezdomath/img/Multiply.webp" alt="닫기 버튼" />
-      </ButtonIcon>
-    </div>
-    <div className={isLoggedIn ? "login_wrap hidden" : "login_wrap visible"}>
-      <div className="button_wrapper">
-        <ButtonMedium
-          className="small_btn font_small Login"
-          onClick={handleLogin}
-          to={"/login"}
-        >
-          로그인
-        </ButtonMedium>
-        <ButtonMedium
-          className="small_btn font_small register"
-          to={"/register"}
-        >
-          회원가입
-        </ButtonMedium>
-      </div>
-    </div>
-    <div className="page_wrap">
-      <ul className="page_btn">
-        {naviMenuPageAccordionContent.map((item, index) => (
-          <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn" to={item.to}>
-              <p>{item.text}</p>
-              <img
-                className="accordion_arrow"
-                src={item.imgSrc}
-                alt="마이페이지 화살표"
-              />
-            </ButtonMedium>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div className="flex User_etc">
-      <span className="flex bug_report">문의사항</span>
-    </div>
-  </div>
-));
-
-const CallMessage = React.forwardRef(({
-  isCallMessageVisible,
-  callMessageContents,
-  onCloseMessage,
-  user
-}, ref) => (
-  <div ref={ref} className={isCallMessageVisible ? "callUser" : "hidden callUser"}>
-    {callMessageContents.map((content, index) => (
-      <div key={index} className={`flex call_message_wrap message${index}`}>
-        <ButtonMedium
-          className={"message_txt call_message"}
-          to={"/my/community/invitation"}
-        >
-          {content.content}
-        </ButtonMedium>
-        <ButtonIcon
-          className={"message_btn"}
-          onClick={() => onCloseMessage(content.index)}
-        >
+  return (
+    <div ref={ref} className={isMyPageVisible ? "myPage flex" : "myPage hidden"}>
+      <div className="User_info_wrap">
+        <div className="User_info">
+          <p>
+            {user?.userTypeId === USER_TYPE_STUDENT
+              ? "학생"
+              : user?.userTypeId === USER_TYPE_PARENT
+              ? "학부모"
+              : user?.userTypeId === USER_TYPE_TEACHER
+              ? "교사"
+              : "관리자"}
+          </p>
+          <img className="user_profile" src={user?.profile} alt="프로필 이미지" />
+          <p>안녕하세요 {user?.name}님</p>
+        </div>
+        <ButtonIcon className="close navi_btn_icon" onClick={onCloseMyPage}>
           <img src="/ezdomath/img/Multiply.webp" alt="닫기 버튼" />
         </ButtonIcon>
       </div>
-    ))}
-  </div>
-));
+      <div>
+        <ul className="accordion_wrap">
+          {naviMyPageAccordionContent.map((item, index) => (
+            <li key={index} className="accordion_menu flex">
+              <ButtonMedium className="menu_page_btn" to={item.to}>
+                <p>{item.text}</p>
+                <img
+                  className="accordion_arrow"
+                  src={item.imgSrc}
+                  alt="마이페이지 화살표"
+                />
+              </ButtonMedium>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="page_wrap">
+        <ul className="page_btn">
+          {naviMenuPageAccordionContent.map((item, index) => (
+            <li key={index} className="accordion_menu flex">
+              <ButtonMedium className="menu_page_btn" to={item.to}>
+                <p>{item.text}</p>
+                <img
+                  className="accordion_arrow"
+                  src={item.imgSrc}
+                  alt="마이페이지 화살표"
+                />
+              </ButtonMedium>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex User_etc">
+        <span className="bug_report">문의사항</span>
+        <ButtonSmall className={"logout"} onClick={handleLogout}>
+          로그아웃
+        </ButtonSmall>
+      </div>
+    </div>
+  );
+});
+
+const MenuPage = React.forwardRef((props, ref) => {
+  const { isMenuPageVisible, onCloseMenuPage, naviMenuPageAccordionContent, handleLogin, isLoggedIn } = props;
+
+  return (
+    <div ref={ref} className={isMenuPageVisible ? "menu_page flex" : "menu_page hidden"}>
+      <div className="close_wrap">
+        <ButtonIcon onClick={onCloseMenuPage} className="close">
+          <img src="/ezdomath/img/Multiply.webp" alt="닫기 버튼" />
+        </ButtonIcon>
+      </div>
+      <div className={isLoggedIn ? "login_wrap hidden" : "login_wrap visible"}>
+        <div className="button_wrapper">
+          <ButtonMedium
+            className="small_btn font_small Login"
+            onClick={handleLogin}
+            to={"/login"}
+          >
+            로그인
+          </ButtonMedium>
+          <ButtonMedium
+            className="small_btn font_small register"
+            to={"/register"}
+          >
+            회원가입
+          </ButtonMedium>
+        </div>
+      </div>
+      <div className="page_wrap">
+        <ul className="page_btn">
+          {naviMenuPageAccordionContent.map((item, index) => (
+            <li key={index} className="accordion_menu flex">
+              <ButtonMedium className="menu_page_btn" to={item.to}>
+                <p>{item.text}</p>
+                <img
+                  className="accordion_arrow"
+                  src={item.imgSrc}
+                  alt="마이페이지 화살표"
+                />
+              </ButtonMedium>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex User_etc">
+        <span className="flex bug_report">문의사항</span>
+      </div>
+    </div>
+  );
+});
+
+const CallMessage = React.forwardRef((props, ref) => {
+  const { isCallMessageVisible, callMessageContents, onCloseMessage, user } = props;
+
+  return (
+    <div ref={ref} className={isCallMessageVisible ? "callUser" : "hidden callUser"}>
+      {callMessageContents.map((content, index) => (
+        <div key={index} className={`flex call_message_wrap message${index}`}>
+          <ButtonMedium
+            className={"message_txt call_message"}
+            to={"/my/community/invitation"}
+          >
+            {content.content}
+          </ButtonMedium>
+          <ButtonIcon
+            className={"message_btn"}
+            onClick={() => onCloseMessage(content.index)}
+          >
+            <img src="/ezdomath/img/Multiply.webp" alt="닫기 버튼" />
+          </ButtonIcon>
+        </div>
+      ))}
+    </div>
+  );
+});

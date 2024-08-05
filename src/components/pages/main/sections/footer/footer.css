@@ -112,8 +112,10 @@ footer {
 }
 
 .foot_cont_btn .foot_btn:hover {
-    background-color: #FFE68D;
-    color: var(--color_darkest);
+    background-color: #FFE68D !important;
+    color: var(--color_darkest) !important;
+    border: 2px solid var(--color_subtitle);
+    
 }
 
 .foot_under_txt {

@@ -17,22 +17,48 @@ export function PageLogin({}) {
   const [stringId, setStringId] = useState("");
   const [password, setPassword] = useState("");
   const [tabed, setTabed] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const login = () => {
-    const user = handleUserContext.login(stringId, password);
-    if (user) {
-      alert(`환영합니다. ${user.name}님!`);
-      navigate('/');
-    } else {
-      alert('아이디와 비밀번호를 다시 확인해주세요.');
+    let error = false;
+  
+    switch (true) {
+      case !stringId:
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          stringId: "아이디를 다시 확인해주세요",
+        }));
+        error = true;
+        break;
+      case !password:
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: "비밀번호를 다시 확인해주세요",
+        }));
+        error = true;
+        break;
+      default:
+        break;
     }
-  };
+  
+    if (!error && stringId && password) {
+      const user = handleUserContext.login(stringId, password);
+      if (user) {
+        alert(`환영합니다. ${user.name}님!`);
+        navigate('/');
+      } else {
+        alert('아이디와 비밀번호를 다시 확인해주세요.');
+      }
+    }
+  };  
 
   const clearInput = (inputType) => {
     if (inputType === "id") {
       setStringId("");
+      setErrors((prevErrors) => ({ ...prevErrors, stringId: "" }));
     } else if (inputType === "password") {
       setPassword("");
+      setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
     }
   };
 
@@ -103,7 +129,20 @@ export function PageLogin({}) {
                     <input
                       placeholder="아이디를 입력해주세요"
                       value={stringId}
-                      onChange={(e) => setStringId(e.target.value)}
+                      onChange={(e) => {
+                        setStringId(e.target.value);
+                        if (e.target.value) {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            stringId: "",
+                          }));
+                        } else {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            stringId: "아이디를 다시 확인해주세요",
+                          }));
+                        }
+                      }}
                     />
                   </div>
                   <ButtonIcon
@@ -113,6 +152,7 @@ export function PageLogin({}) {
                     <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
+                {errors.stringId && <p className="error_message">{errors.stringId}</p>}
                 <div className="flex user_pw">
                   <div className="flex input_wrap">
                     <label>비밀번호</label>
@@ -120,7 +160,20 @@ export function PageLogin({}) {
                       type="password"
                       placeholder="비밀번호를 입력해주세요"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (e.target.value) {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            password: "",
+                          }));
+                        } else {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            password: "비밀번호를 다시 확인해주세요",
+                          }));
+                        }
+                      }}
                     />
                   </div>
                   <ButtonIcon
@@ -130,8 +183,13 @@ export function PageLogin({}) {
                     <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
+                {errors.password && <p className="error_message">{errors.password}</p>}
               </div>
-              <ButtonLarge className={"user_login_btn"} onClick={login}>
+              <ButtonLarge
+                className={"user_login_btn"}
+                onClick={login}
+                disabled={!stringId || !password}
+              >
                 로그인
               </ButtonLarge>
             </div>
@@ -140,7 +198,7 @@ export function PageLogin({}) {
                 tabed ? "" : "invi"
               }`}
             >
-              <KakaoLogin handleUserContext={handleUserContext} user={user}/>
+              <KakaoLogin handleUserContext={handleUserContext} user={user} />
             </div>
             <div className="flex user_info_routing">
               <p>

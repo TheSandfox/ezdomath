@@ -163,7 +163,7 @@ export function PageKakaoRegisterDetail({}) {
             </table>
             <div className="flex btn_wrap">
               <ButtonSmall className={'detailRegisterBtn'} to={'/register'}>취소</ButtonSmall>
-              <ButtonSmall className={'detailRegisterBtn'} onClick={handleSave} to={'/'}>저장</ButtonSmall>
+              <ButtonSmall className={'detailRegisterBtn'} onClick={handleSave}>저장</ButtonSmall>
             </div>
           </div>
         </div>

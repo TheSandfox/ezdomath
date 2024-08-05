@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { PageMain } from "/src/components/pages/main/PageMain";
 import { PagePlay } from "/src/components/pages/play/PagePlay";
 import { PageIntro } from "/src/components/pages/intro/PageIntro";
@@ -15,15 +15,14 @@ import { usersDefault, usersReducer } from "./datas/users";
 import { friendsDefault, friendsReducer } from "./datas/friends";
 import { achievementsDefault, achievementsReducer } from "./datas/achievements";
 import { invitationsDefault, invitationsReducer } from "./datas/invitations";
-import {
-  notificationsDefault,
-  notificationsReducer,
-} from "./datas/notifications";
+import { notificationsDefault, notificationsReducer } from "./datas/notifications";
 import { qnasDefault, qnasReducer } from "./datas/qnas";
 
 export const userContext = createContext(null);
 
 function App() {
+  const navigate = useNavigate();
+  
   // 앱 전반적인 설정&핸들러
   const [userContextValue, setUserContextValue] = useState({
     user: null,
@@ -103,7 +102,6 @@ function App() {
           .then(response => {
             if (response.status === 200) {
               localStorage.removeItem('kakao_token');
-              localStorage.removeItem('kakao_user_info');
               alert('로그아웃 되었습니다.');
             } else {
               console.error('연결 해제 실패');
@@ -171,15 +169,6 @@ function App() {
     return () => {
       window.removeEventListener("keydown", cheat);
     };
-  }, []);
-
-  // 유저정보가져오기
-  useEffect(() => {
-    handleUserContext.setUser(
-      sessionStorage.getItem('currentUser')
-        ? JSON.parse(sessionStorage.getItem('currentUser'))
-        : null
-    );
   }, []);
 
   // 페이지가 변경될 때마다 스크롤 상태를 재설정
