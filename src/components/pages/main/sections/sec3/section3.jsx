@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function Section3() {
   const circle_cont = useRef([]);
   const circle_deco_cont = useRef([]);
+  const arrow = useRef([]);
 
 
   useEffect(() => {
@@ -32,21 +33,39 @@ export function Section3() {
     gsap.utils.toArray(circle_deco_cont.current).forEach((element, index) => {
       gsap.fromTo(
         element,
-        { y: 50 },
+        { y: 80 },
         {
-          y: -50,
+          y: -80,
           scrollTrigger: {
             trigger: element,
-            start: "top center",
-            end: "bottom center",
+            start: "bottom center",
+            end: "top center",
             scrub: 1,
-            duration: 0.6,
+            duration: 0.5,
             stagger: 0.2,
           },
         }
       );
     });
-  }, []);
+
+  gsap.utils.toArray(arrow.current).forEach((element, index) => {
+    gsap.fromTo(
+      element,
+      { y: 80 },
+      {
+        y: -80,
+        scrollTrigger: {
+          trigger: element,
+          start: "top center",
+          end: "bottom center",
+          scrub: 1,
+          duration: 1,
+          stagger: 0.3,
+        },
+      }
+    );
+  });
+}, []);
 
   const sec3_cont = [
     {
@@ -116,8 +135,10 @@ export function Section3() {
               ))}
             </tbody>
           </table>
+          <div className="subtitle_arrow">
+            <img ref={arrow} src="/ezdomath/img/rightG copy.svg" />
+          </div>
         </div>
-        <div></div>
       </article>
     </section>
   );

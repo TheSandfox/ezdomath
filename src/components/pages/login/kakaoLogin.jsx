@@ -4,7 +4,7 @@ import { ButtonLarge } from '../../generic/Buttons';
 
 const KakaoLogin = ({ handleUserContext }) => {
   const Rest_api_key = 'c339a4ce87068c73b60764a965f764f0';
-  const redirect_uri = 'http://localhost:5173/ezdomath/';
+  const redirect_uri = 'https://thesandfox.github.io/ezdomath/';
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);

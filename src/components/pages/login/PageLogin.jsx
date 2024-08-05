@@ -1,4 +1,5 @@
 import "./pageLogin.css";
+import Navigation from "../navigation/navigation";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../../App";
 import {
@@ -16,8 +17,9 @@ export function PageLogin({}) {
 
   const [stringId, setStringId] = useState("");
   const [password, setPassword] = useState("");
-  const [tabed, setTabed] = useState(false);
   const [errors, setErrors] = useState({});
+  
+  const [tabed, setTabed] = useState(false);
 
   const login = () => {
     let error = false;
@@ -70,6 +72,7 @@ export function PageLogin({}) {
 
   return (
     <>
+      <Navigation/>
       <div className="flex page_login">
         <div className="flex column_gap login_inner">
           <div className="flex column_gap_half login_main_top">

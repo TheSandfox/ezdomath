@@ -15,6 +15,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10em;
 }
 
 .main_page_sec3 table {
@@ -89,6 +90,18 @@
     width: 15em;
     flex-direction: column;
     gap: 0.75em;
+}
+
+.subtitle_arrow{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 100%;
+    img{
+        width: 7em; height: 7em;
+        transform: rotatez(115deg);
+        margin-right: 16em;
+    }
 }
 
 /* --------sec3 font--------- */

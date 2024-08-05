@@ -1,9 +1,11 @@
 import "./pageRegister.css"
+import Navigation from "../navigation/navigation";
 import { ButtonSmall } from "../../generic/Buttons";
 
 export function PageRegister({}) {
   return (
     <>
+      <Navigation/>
       <div className="flex page_register">
         <div className="flex column_gap register_inner">
           <div className="flex column_gap_half register_main_top">

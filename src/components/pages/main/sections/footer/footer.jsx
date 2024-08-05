@@ -37,7 +37,7 @@ export const Footer = () => {
         ease: "power1.in",
         onComplete: () => gsap.set(fill, { y: "100%" }),
       });
-      gsap.to([txt, wrap], { x: 0, y: 0, duration: 0.3 }); // Reset text position
+      gsap.to([txt, wrap], { x: 0, y: 0, duration: 0.3 });
     };
 
     const handleScrollToTop = () => {
