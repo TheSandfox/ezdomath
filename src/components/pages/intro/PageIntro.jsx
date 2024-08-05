@@ -83,7 +83,7 @@ export function PageIntro() {
                   <p className='colorbox_big_font'>마이 페이지에서 확인 할 수 있습니다.</p>
                   <p className='intro_small_p'>무료 회원가입으로 모든 기능을 이용하세요!</p>
                   <div className='intro_two_button'>
-                    <Link to="/my/*">
+                    <Link to="/my/info">
                       <button>마이페이지</button>
                     </Link>
                   </div>
