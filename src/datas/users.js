@@ -16,7 +16,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "노도초등학교",
         stringId: "abcd1234",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/teacher0.png",
       },
       {
         name: "김순탁",
@@ -25,7 +25,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "노도초등학교",
         stringId: "abcd1235",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/student0.png",
       },
       {
         name: "김관리",
@@ -34,7 +34,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "노도초등학교",
         stringId: "qwer1234",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/admin0.png",
       },
       {
         name: "박부모",
@@ -43,7 +43,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "",
         stringId: "qwer1235",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/parent0.png",
       },
       {
         name: "김학생",
@@ -52,7 +52,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "백탁초등학교",
         stringId: "zxcv0000",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/student1.png",
       },
       {
         name: "박학생",
@@ -61,7 +61,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "백탁초등학교",
         stringId: "zxcv0001",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/student0.png",
       },
       {
         name: "나학생",
@@ -70,7 +70,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "백탁초등학교",
         stringId: "zxcv0002",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/student1.png",
       },
       {
         name: "이학생",
@@ -79,7 +79,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "백탁초등학교",
         stringId: "zxcv0003",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/student0.png",
       },
       {
         name: "유학생",
@@ -88,7 +88,7 @@ const usersDefault = localStorage.getItem("users")
         schoolName: "백탁초등학교",
         stringId: "zxcv0004",
         password: "1q2w3e4r$",
-        profile: "/ezdomath/profile/dummy.png",
+        profile: "/ezdomath/profile/student1.png",
       },
     ];
 
