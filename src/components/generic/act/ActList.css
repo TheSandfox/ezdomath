@@ -1,6 +1,5 @@
 .act_list {
   padding: 1.25rem;
-  /* background-color: #f9f9f9; */
   border-radius: 0.5rem;
 }
 
@@ -19,8 +18,6 @@
   border-radius: 0.5rem;
 }
 
-
-/* 임시추가 */
 .act-list {
   padding: 0 0.9375rem;
 }

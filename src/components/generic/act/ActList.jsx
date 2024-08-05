@@ -1,5 +1,5 @@
 import React from "react";
-import { ACTS } from "../../../datas/acts"; // ACTS를 import합니다.
+import { ACTS } from "../../../datas/acts";
 import "./ActList.css";
 import ActItem from './ActItem';
 

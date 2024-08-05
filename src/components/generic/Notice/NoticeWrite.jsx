@@ -1,6 +1,8 @@
+// NoticeWrite.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addNotice } from '../../../datas/noti_data';
+import NoticeCreationModal from './NoticeCreationModal'; // Modal 컴포넌트 임포트
 import './NoticeWrite.css';
 
 export function NoticeWrite() {
@@ -9,16 +11,24 @@ export function NoticeWrite() {
     const [content, setContent] = useState('');
     const [titleError, setTitleError] = useState('');
     const [contentError, setContentError] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [important, setImportant] = useState('false');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
-            const confirmed = window.confirm('새 게시물을 등록하시겠습니까?');
-            if (confirmed) {
-                addNotice(title, content, event.target.important.value === 'true');
-                navigate('/notice');
-            }
+            setIsModalOpen(true); // 모달 열기
         }
+    };
+
+    const handleConfirm = () => {
+        addNotice(title, content, important === 'true');
+        setIsModalOpen(false);
+        navigate('/notice');
+    };
+
+    const handleClose = () => {
+        setIsModalOpen(false);
     };
 
     const validateForm = () => {
@@ -56,6 +66,10 @@ export function NoticeWrite() {
         }
     };
 
+    const handleImportantChange = (e) => {
+        setImportant(e.target.value);
+    };
+
     const handleCancel = () => {
         navigate('/notice');
     };
@@ -77,7 +91,7 @@ export function NoticeWrite() {
                 </div>
                 <div>
                     <label>중요 여부</label>
-                    <select name="important" required>
+                    <select name="important" value={important} onChange={handleImportantChange} required>
                         <option value="false">일반</option>
                         <option value="true">중요</option>
                     </select>
@@ -97,6 +111,12 @@ export function NoticeWrite() {
                     <button type="submit" className="submit_button">작성하기</button>
                 </div>
             </form>
+            <NoticeCreationModal
+                isOpen={isModalOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                message="새 게시물을 등록하시겠습니까?"
+            />
         </div>
     );
 }
