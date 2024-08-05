@@ -33,13 +33,14 @@ export function getUserTeacher(user,users,friends) {
 	if (!users) {return null;}
 	if (!friends) {return null;}
 	let newObj = users.find((userItem)=>{
-		return friends.find((friendItem)=>{
-			return (parseInt(friendItem.userId1)===parseInt(user.userId)
-				|| parseInt(friendItem.userId1)===parseInt(user.userId))
-				&& (parseInt(friendItem.userId2)===parseInt(userItem.userId)
+		return friends.some((friendItem)=>{
+			let bool = (parseInt(friendItem.userId1)===parseInt(user.userId)
+				|| parseInt(friendItem.userId2)===parseInt(user.userId))
+				&& (parseInt(friendItem.userId1)===parseInt(userItem.userId)
 				|| parseInt(friendItem.userId2)===parseInt(userItem.userId))
 				&& parseInt(userItem.userTypeId) === USER_TYPE_TEACHER
-		})
+			return bool;
+		}) && parseInt(userItem.userId)!==parseInt(user.userId)
 	})
 	return newObj?newObj:null;
 }

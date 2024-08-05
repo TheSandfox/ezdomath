@@ -27,6 +27,7 @@ export function SubjectDetail({subjectId}) {
 	const [answer,setAnswer] = useState(null);
 	const [hideZimoon,setHideZimoon] = useState(false);
 	const [correct,setCorrect] = useState([null]);
+	const [displayHint,setDisplayHint] = useState(false);
 	//핸들러
 	const handleSubjectState = {
 		set:(val)=>{
@@ -83,7 +84,11 @@ export function SubjectDetail({subjectId}) {
 	}
 	//선생유저
 	const myTeacher = useMemo(()=>{
-		return User.getUserTeacher(user,users,friends);
+		if (!user) {return null;}
+		if (!users) {return null;}
+		if (!friends) {return null;}
+		let newObj = User.getUserTeacher(user,users,friends)
+		return newObj;
 	},[user,users,friends]);
 	//타겟문제
 	const subject = useMemo(()=>{
@@ -119,12 +124,17 @@ export function SubjectDetail({subjectId}) {
 	},[adjustJSX]);
 	//이미 푼 문제인지 표시
 	const achievementCorrect = useMemo(()=>{
+		let checkId;
 		if (!achievements) {return false}
-		if (!user) {return false}
+		if (user) {
+			checkId = user.userId;
+		} else {
+			checkId = -1;
+		}
 		if (!subject) {return false}
 		return achievements.some((achievementItem)=>{
 			return (parseInt(achievementItem.subjectId) === parseInt(subject.subjectId))
-				&& (parseInt(achievementItem.userId) === parseInt(user.userId))
+				&& (parseInt(achievementItem.userId) === parseInt(checkId))
 				&& achievementItem.correct;
 		})
 	},[achievements,user,subject])
@@ -133,18 +143,17 @@ export function SubjectDetail({subjectId}) {
 		if (!subject) {return;}
 		if (correct[0]===null) {return;}
 		if (correct[0]) {
-			alert('골든 정답이다.');
+			alert('정답입니다!');
 		} else {
-			alert('형편없군, 오답이다.');
+			alert('오답입니다.');
 		}
 		let correctTemp = correct[0];
 		setAnswer(null);
 		setCorrect([null]);
-		if (!user) {return;}
 		// 진척도에 기록
 		dispatchAchievements({
 			type:'add',
-			userId:user.userId,
+			userId:user?user.userId:-1,
 			subjectId:subject.subjectId,
 			correct:correctTemp
 		})
@@ -224,7 +233,13 @@ export function SubjectDetail({subjectId}) {
 					{/* 신고버튼 */}
 					<ButtonIcon className={'report'} icon={<LuSiren/>}></ButtonIcon>
 					{/* 힌트버튼 */}
-					<ButtonIcon className={'hint'} icon={<GoQuestion/>}>힌트보기</ButtonIcon>
+					<ButtonIcon 
+						className={'hint'} 
+						icon={<GoQuestion/>}
+						onClick={()=>setDisplayHint(!displayHint)}
+					>
+						힌트보기
+					</ButtonIcon>
 					{/* QNA */}
 					{myTeacher
 						?<ButtonIcon 
@@ -232,8 +247,18 @@ export function SubjectDetail({subjectId}) {
 							icon={<FaRegEdit/>}
 							onClick={()=>{setDisplayModalQNA(true)}}
 						>
-							질문하기
+							Q&A
 						</ButtonIcon>
+						:<></>
+					}
+					{/* 힌트글귀 */}
+					{displayHint
+						?<div className='fontMain'>
+							{subject
+								?<>{subject.hint}</>
+								:<></>
+							}
+						</div>
 						:<></>
 					}
 				</div>

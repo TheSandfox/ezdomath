@@ -47,6 +47,7 @@ export function QNAWidget({friend}) {
 	},[myQNAs]);
 	//안읽힌 개수
 	const unwritten = useMemo(()=>{
+		return 0;
 		if (!myQNAs) {return 0;}
 		return myQNAs.filter((qnaItem)=>{
 			return !qnaItem.written
@@ -94,7 +95,7 @@ export function QNAWidget({friend}) {
 				{/* 문제이름 */}
 				{qnaSubject
 					?<div className='subjectName'>
-						{ACTS[parseInt(qnaSubject.subjectId)].name+qnaSubject.name}
+						{ACTS[parseInt(qnaSubject.actId)].name+qnaSubject.name}
 					</div>
 					:<></>
 				}

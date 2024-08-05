@@ -1,5 +1,5 @@
 import "./pageLogin.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../../App";
 import {
   ButtonLarge,
@@ -8,20 +8,21 @@ import {
   ButtonTab,
 } from "../../generic/Buttons";
 import { useNavigate } from "react-router-dom";
+import KakaoLogin from "./kakaoLogin";
 
 export function PageLogin({}) {
-  const { handleUserContext } = useContext(userContext); // userContext에서 로그인 함수를 불러옵니다.
+  const { handleUserContext, user } = useContext(userContext);
   const navigate = useNavigate();
 
   const [stringId, setStringId] = useState("");
   const [password, setPassword] = useState("");
-  const [tabed, setTabed] = useState(false); // 로그인 타입 선택 (false: 아이디 로그인, true: 카카오 로그인)
+  const [tabed, setTabed] = useState(false);
 
   const login = () => {
-    const user = handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
+    const user = handleUserContext.login(stringId, password);
     if (user) {
       alert(`환영합니다. ${user.name}님!`);
-      navigate('/'); // 메인 페이지로 이동
+      navigate('/');
     } else {
       alert('아이디와 비밀번호를 다시 확인해주세요.');
     }
@@ -34,6 +35,12 @@ export function PageLogin({}) {
       setPassword("");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <>
@@ -96,7 +103,7 @@ export function PageLogin({}) {
                     <input
                       placeholder="아이디를 입력해주세요"
                       value={stringId}
-                      onChange={(e) => setStringId(e.target.value)} // 입력값을 stringId 상태로 설정
+                      onChange={(e) => setStringId(e.target.value)}
                     />
                   </div>
                   <ButtonIcon
@@ -110,10 +117,10 @@ export function PageLogin({}) {
                   <div className="flex input_wrap">
                     <label>비밀번호</label>
                     <input
-                      type="password" // 비밀번호 입력 필드의 보안을 위해 type을 password로 설정
+                      type="password"
                       placeholder="비밀번호를 입력해주세요"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)} // 입력값을 password 상태로 설정
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <ButtonIcon
@@ -124,10 +131,7 @@ export function PageLogin({}) {
                   </ButtonIcon>
                 </div>
               </div>
-              <ButtonLarge
-                className={"user_login_btn"}
-                onClick={login}
-              >
+              <ButtonLarge className={"user_login_btn"} onClick={login}>
                 로그인
               </ButtonLarge>
             </div>
@@ -136,9 +140,7 @@ export function PageLogin({}) {
                 tabed ? "" : "invi"
               }`}
             >
-              <ButtonLarge>
-                <span>카카오로 로그인</span>
-              </ButtonLarge>
+              <KakaoLogin handleUserContext={handleUserContext} user={user}/>
             </div>
             <div className="flex user_info_routing">
               <p>

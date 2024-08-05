@@ -121,15 +121,18 @@ export function Main({handleTabIndex,index}) {
 						?<>
 							{/* 문제객체있음 */}
 							{/* 썸 */}
-							<div className="subjectImg">
+							<Link 
+								className="subjectImg"
+								to={`/play/${targetSubject.actId}/${targetSubject.subjectId}`}
+							>
 								<img src={targetSubject.thumb} alt={targetSubject.name}/>
-							</div>
+							</Link>
 							{/* 이름&버튼 */}
 							<div className="rightContext">
 								{/* 단원&문제이름 */}
 								<div className="actNameAndSubjectName ">
 									<div className="font_main actName">
-									{ACTS[targetSubject.subjectId].name}
+									{ACTS[targetSubject.actId].name}
 									</div>
 									<div className="font_main subjectName">
 									{targetSubject.name}
@@ -183,7 +186,7 @@ export function Main({handleTabIndex,index}) {
 						}}
 					/>
 					{/* 메세지 전송 */}
-					<ButtonIcon icon={<FaSearch/>}
+					<ButtonIcon icon={<FiSend/>}
 						onClick={()=>{
 							sendQNA();
 						}}
@@ -297,7 +300,7 @@ export function Main({handleTabIndex,index}) {
 				<div className="font_medium">
 					{mode==='dm'
 						?(targetUser?targetUser.name+User.getUserIdString(targetUser.userId):'')
-						:'Q&A목록'
+						:'Q&A(묻고 답하기)'
 					}
 				</div>
 			</div>

@@ -1,5 +1,5 @@
 import "./pageRegister.css"
-import { ButtonLarge, ButtonSmall } from "../../generic/Buttons";
+import { ButtonSmall } from "../../generic/Buttons";
 
 export function PageRegister({}) {
   return (
@@ -27,14 +27,14 @@ export function PageRegister({}) {
                     <img src="/ezdomath/img/Male _User_100.webp" alt="유저 이미지" />
                     <span>일반회원</span>
                   </div>
-                  <ButtonSmall className={'registet_btn'} to={'/detail'}>일반 회원으로 가입</ButtonSmall>
+                  <ButtonSmall className={'register_btn'} to={'/detail'}>일반 회원으로 가입</ButtonSmall>
                 </div>
                 <div className="flex column_gap_half user_register_routing">
                   <div className="flex user_register_explain">
                     <img src="/ezdomath/img/kakao_icon.webp" alt="카카오 이미지" />
                     <span>카카오회원</span>
                   </div>
-                  <ButtonSmall className={'registet_btn'}>카카오 계정으로 가입</ButtonSmall>
+                  <ButtonSmall className={'register_btn'} to={'/kakao-detail'}>카카오 계정으로 가입</ButtonSmall>
                 </div>
               </div>
             </div>

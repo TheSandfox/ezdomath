@@ -10,7 +10,7 @@ export function PageMain({}) {
   return (
     <>
       <Navigation />
-      <Header />
+      {/* <Header /> */}
       <Section1 />
       <Section2 />
       <Section3 />

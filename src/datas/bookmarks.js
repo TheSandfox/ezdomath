@@ -2,16 +2,16 @@ const bookmarksDefault = localStorage.getItem('bookmarks')
 	?JSON.parse(localStorage.getItem('bookmarks'))
 	:[
 		{
-			userId:0,
+			userId:1,
 			subjectId:100
 		},
 		{
-			userId:0,
-			subjectId:101
+			userId:1,
+			subjectId:200
 		},
 		{
-			userId:0,
-			subjectId:102
+			userId:1,
+			subjectId:300
 		}
 	];
 

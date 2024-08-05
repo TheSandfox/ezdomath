@@ -5,6 +5,7 @@ import * as User from '/src/utils/User'
 import { SUBJECTS } from '../../../datas/subjects';
 import { ACTS } from '../../../datas/acts';
 import { ButtonMedium } from '../../generic/Buttons';
+import { Link } from 'react-router-dom';
 
 export function QNAMessage({qna,my,containerRef}) {
 	const { users } = useContext(userContext);
@@ -59,14 +60,17 @@ export function QNAMessage({qna,my,containerRef}) {
 			<div className='balloon font_main'>
 				{/* 문제설명 */}
 				{subjectInfo
-					?<div className='subjectInfo font_small'>
+					?<Link 
+						className='subjectInfo font_small'
+						to={`/play/${subjectInfo.actId}/${subjectInfo.subjectId}`}
+					>
 						<p className='actName'>
 							{ACTS[parseInt(subjectInfo.actId)].name}
 						</p>
 						<p className='subjectName'>
 							{subjectInfo.name}
 						</p>
-					</div>
+					</Link>
 					:<></>
 				}
 				{/* 본문 */}

@@ -81,7 +81,7 @@ export function ReportAndError({
                 </div>
                 <div className="modal-footer">
                     <button className="cancel-button" onClick={closeCallback}>취소</button>
-                    <button className="submit-button" onClick={submitCallback}>제보하기</button>
+                    <button className="submit-button" onClick={submitCallback}>제출하기</button>
                 </div>
             </div>
         </div>

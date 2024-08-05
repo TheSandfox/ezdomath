@@ -1,6 +1,6 @@
 import "./navigation.css";
 import { userContext } from "../../../App";
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
 import {
   USER_TYPE_STUDENT,
@@ -42,11 +42,11 @@ export default function Navigation() {
       imgSrc: "/ezdomath/img/Arrow_darkest.webp",
       to: "/my/achievement/0",
     },
-    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/info" },
+    { text: "QnA", imgSrc: "/ezdomath/img/Arrow_darkest.webp", to: "/my/qna" },
     {
       text: "북마크",
       imgSrc: "/ezdomath/img/Arrow_darkest.webp",
-      to: "/my/qna",
+      to: "/my/bookmark/all",
     },
   ];
 
@@ -68,67 +68,54 @@ export default function Navigation() {
     },
   ];
 
-  const { handleUserContext, user, invitations, users } =
-    useContext(userContext);
-  const [isMyPageVisible, setIsMyPageVisible] = useState(false);
-  const [isMenuPageVisible, setIsMenuPageVisible] = useState(false);
-  const [isCallMessageVisible, setIsCallMessageVisible] = useState(false); // 초대 메세지 창 토글하려고 추가
-  const [callMessageContents, setCallMessageContents] = useState([]); // 초대 메세지에 관련 내용 띄우려고 추가
-  const [dismissedMessages, setDismissedMessages] = useState([]); // 메세지 닫으면 다시 안뜨게 추적하려고 추가
-  const location = useLocation(); // 로그인 되면 초대 메세지 띄울려고 추가
-  const navigate = useNavigate(); // 로그아웃 시 메인으로 돌아가게 하려고 추가
+  const { handleUserContext, user, invitations, users } = useContext(userContext);
+  const [activeComponent, setActiveComponent] = useState(null);
+  const [isCallMessageVisible, setIsCallMessageVisible] = useState(false);
+  const [callMessageContents, setCallMessageContents] = useState([]);
+  const [dismissedMessages, setDismissedMessages] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleLogin = () => setIsMenuPageVisible(false);
+  const myPageRef = useRef(null);
+  const menuPageRef = useRef(null);
+  const callMessageRef = useRef(null);
+
+  const handleLogin = () => setActiveComponent(null);
 
   const handleLogout = () => {
     const currentUser = handleUserContext.logout();
-    if (
-      currentUser &&
-      confirm(`${currentUser.name}님 정말로 로그아웃 하시겠습니까?`)
-    ) {
+    if (currentUser && confirm(`${currentUser.name}님 정말로 로그아웃 하시겠습니까?`)) {
       navigate("/");
     } else {
       handleUserContext.setUser(currentUser);
     }
-    setIsMyPageVisible(false);
+    setActiveComponent(null);
   };
 
-  // 토글 함수
-  const toggleMyPageVisibility = () => {
-    if (isMenuPageVisible) setIsMenuPageVisible(false);
-    setIsMyPageVisible(!isMyPageVisible);
-    setIsCallMessageVisible(false);
+  const toggleComponentVisibility = (component) => {
+    setActiveComponent((prev) => (prev === component ? null : component));
   };
-  const toggleMenuPageVisibility = () => {
-    if (isMyPageVisible) setIsMyPageVisible(false);
-    setIsMenuPageVisible(!isMenuPageVisible);
-    setIsCallMessageVisible(false);
-  };
-  const toggleCallMessageVisibility = () =>
-    setIsCallMessageVisible((prev) => {
-      if (!prev && callMessageContents.length > 0) {
-        return true;
-      }
-      return false;
-    });
 
-  // 닫기 함수
-  const onCloseMyPage = () => setIsMyPageVisible(false);
-  const onCloseMenuPage = () => setIsMenuPageVisible(false);
-  const onCloseMessage = (index) => {
-    const updatedDismissedMessages = [...dismissedMessages, index];
-    setDismissedMessages(updatedDismissedMessages);
-    const remainingMessages = callMessageContents.filter(
-      (msg) => !updatedDismissedMessages.includes(msg.index)
-    );
-    if (remainingMessages.length === 0) {
-      setIsCallMessageVisible(false);
+  const handleClickOutside = (event) => {
+    if (
+      myPageRef.current && !myPageRef.current.contains(event.target) &&
+      menuPageRef.current && !menuPageRef.current.contains(event.target) &&
+      callMessageRef.current && !callMessageRef.current.contains(event.target)
+    ) {
+      setActiveComponent(null);
     }
   };
 
   useEffect(() => {
-    setDismissedMessages([]); 
-    setCallMessageContents([]); 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setDismissedMessages([]);
+    setCallMessageContents([]);
 
     if (user) {
       const userInvitations = invitations.filter(
@@ -157,11 +144,13 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 600 && isMenuPageVisible) setIsMenuPageVisible(false);
+      if (window.innerWidth > 600 && activeComponent === "MenuPage") {
+        setActiveComponent(null);
+      }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isMenuPageVisible]);
+  }, [activeComponent]);
 
   useEffect(() => {
     setIsCallMessageVisible(false);
@@ -180,35 +169,48 @@ export default function Navigation() {
       <NavigationBar
         isLoggedIn={user !== null}
         handleLogin={handleLogin}
-        toggleMyPageVisibility={toggleMyPageVisibility}
+        toggleMyPageVisibility={() => toggleComponentVisibility("MyPage")}
         isCallMessageVisible={isCallMessageVisible}
-        toggleCallMessageVisibility={toggleCallMessageVisibility}
-        toggleMenuPageVisibility={toggleMenuPageVisibility}
+        toggleCallMessageVisibility={() => toggleComponentVisibility("CallMessage")}
+        toggleMenuPageVisibility={() => toggleComponentVisibility("MenuPage")}
         user={user}
       />
       {user && (
         <MyPage
-          isMyPageVisible={isMyPageVisible}
-          onCloseMyPage={onCloseMyPage}
+          isMyPageVisible={activeComponent === "MyPage"}
+          onCloseMyPage={() => setActiveComponent(null)}
           naviMyPageAccordionContent={naviMyPageAccordionContent}
           naviMenuPageAccordionContent={naviMenuPageAccordionContent}
           handleLogout={handleLogout}
           user={user}
+          ref={myPageRef}
         />
       )}
       <MenuPage
-        isMenuPageVisible={isMenuPageVisible}
-        onCloseMenuPage={onCloseMenuPage}
+        isMenuPageVisible={activeComponent === "MenuPage"}
+        onCloseMenuPage={() => setActiveComponent(null)}
         handleLogin={handleLogin}
         isLoggedIn={user !== null}
         naviMenuPageAccordionContent={naviMenuPageAccordionContent}
+        ref={menuPageRef}
       />
       {user && (
         <CallMessage
-          isCallMessageVisible={isCallMessageVisible}
+          isCallMessageVisible={activeComponent === "CallMessage"}
           callMessageContents={callMessageContents}
-          onCloseMessage={onCloseMessage}
+          onCloseMessage={(index) => {
+            const updatedDismissedMessages = [...dismissedMessages, index];
+            setDismissedMessages(updatedDismissedMessages);
+            const remainingMessages = callMessageContents.filter(
+              (msg) => !updatedDismissedMessages.includes(msg.index)
+            );
+            setCallMessageContents(remainingMessages);
+            if (remainingMessages.length === 0) {
+              setIsCallMessageVisible(false);
+            }
+          }}
           user={user}
+          ref={callMessageRef}
         />
       )}
     </>
@@ -330,15 +332,15 @@ const NavigationBar = ({
   </div>
 );
 
-const MyPage = ({
+const MyPage = React.forwardRef(({
   isMyPageVisible,
   onCloseMyPage,
   naviMyPageAccordionContent,
   naviMenuPageAccordionContent,
   handleLogout,
   user,
-}) => (
-  <div className={isMyPageVisible ? "myPage flex" : "myPage hidden"}>
+}, ref) => (
+  <div ref={ref} className={isMyPageVisible ? "myPage flex" : "myPage hidden"}>
     <div className="User_info_wrap">
       <div className="User_info">
         <p>
@@ -396,16 +398,16 @@ const MyPage = ({
       </ButtonSmall>
     </div>
   </div>
-);
+));
 
-const MenuPage = ({
+const MenuPage = React.forwardRef(({
   isMenuPageVisible,
   onCloseMenuPage,
   naviMenuPageAccordionContent,
   handleLogin,
   isLoggedIn,
-}) => (
-  <div className={isMenuPageVisible ? "menu_page flex" : "menu_page hidden"}>
+}, ref) => (
+  <div ref={ref} className={isMenuPageVisible ? "menu_page flex" : "menu_page hidden"}>
     <div className="close_wrap">
       <ButtonIcon onClick={onCloseMenuPage} className="close">
         <img src="/ezdomath/img/Multiply.webp" alt="닫기 버튼" />
@@ -432,7 +434,7 @@ const MenuPage = ({
       <ul className="page_btn">
         {naviMenuPageAccordionContent.map((item, index) => (
           <li key={index} className="accordion_menu flex">
-            <ButtonMedium className="menu_page_btn">
+            <ButtonMedium className="menu_page_btn" to={item.to}>
               <p>{item.text}</p>
               <img
                 className="accordion_arrow"
@@ -448,15 +450,15 @@ const MenuPage = ({
       <span className="flex bug_report">문의사항</span>
     </div>
   </div>
-);
+));
 
-const CallMessage = ({
+const CallMessage = React.forwardRef(({
   isCallMessageVisible,
   callMessageContents,
   onCloseMessage,
   user
-}) => (
-  <div className={isCallMessageVisible ? "callUser" : "hidden callUser"}>
+}, ref) => (
+  <div ref={ref} className={isCallMessageVisible ? "callUser" : "hidden callUser"}>
     {callMessageContents.map((content, index) => (
       <div key={index} className={`flex call_message_wrap message${index}`}>
         <ButtonMedium
@@ -474,4 +476,4 @@ const CallMessage = ({
       </div>
     ))}
   </div>
-);
+));
