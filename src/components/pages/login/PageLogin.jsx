@@ -20,19 +20,28 @@ export function PageLogin({}) {
   const [errors, setErrors] = useState({});
 
   const login = () => {
-    if (!stringId) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        stringId: "아이디를 다시 확인해주세요",
-      }));
+    let error = false;
+  
+    switch (true) {
+      case !stringId:
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          stringId: "아이디를 다시 확인해주세요",
+        }));
+        error = true;
+        break;
+      case !password:
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: "비밀번호를 다시 확인해주세요",
+        }));
+        error = true;
+        break;
+      default:
+        break;
     }
-    if (!password) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: "비밀번호를 다시 확인해주세요",
-      }));
-    }
-    if (stringId && password) {
+  
+    if (!error && stringId && password) {
       const user = handleUserContext.login(stringId, password);
       if (user) {
         alert(`환영합니다. ${user.name}님!`);
@@ -41,7 +50,7 @@ export function PageLogin({}) {
         alert('아이디와 비밀번호를 다시 확인해주세요.');
       }
     }
-  };
+  };  
 
   const clearInput = (inputType) => {
     if (inputType === "id") {

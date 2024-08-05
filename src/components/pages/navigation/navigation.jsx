@@ -2,12 +2,7 @@ import "./navigation.css";
 import { userContext } from "../../../App";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { ButtonIcon, ButtonMedium, ButtonSmall } from "../../generic/Buttons";
-import {
-  USER_TYPE_STUDENT,
-  USER_TYPE_PARENT,
-  USER_TYPE_TEACHER,
-  USER_TYPE_ADMIN,
-} from "../../../datas/usertypes";
+import { USER_TYPE_STUDENT, USER_TYPE_PARENT, USER_TYPE_TEACHER, USER_TYPE_ADMIN } from "../../../datas/usertypes";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const getUserTypeName = (userTypeId) => {
@@ -396,7 +391,6 @@ const MyPage = React.forwardRef((props, ref) => {
   );
 });
 
-
 const MenuPage = React.forwardRef((props, ref) => {
   const { isMenuPageVisible, onCloseMenuPage, naviMenuPageAccordionContent, handleLogin, isLoggedIn } = props;
 
@@ -446,7 +440,6 @@ const MenuPage = React.forwardRef((props, ref) => {
     </div>
   );
 });
-
 
 const CallMessage = React.forwardRef((props, ref) => {
   const { isCallMessageVisible, callMessageContents, onCloseMessage, user } = props;
