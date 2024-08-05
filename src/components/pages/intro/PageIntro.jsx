@@ -6,8 +6,12 @@ import TopBanner from '../../generic/Topbanner';
 import Navigation from '../navigation/navigation';
 import { Link } from 'react-router-dom'
 import { Footer } from '../main/sections/footer/footer';
+import { useEffect } from 'react';
 
 export function PageIntro() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="page-intro">
       <Navigation/>

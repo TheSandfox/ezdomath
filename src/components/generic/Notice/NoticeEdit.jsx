@@ -1,6 +1,8 @@
+// NoticeEdit.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
+import NoticeCreationModal from './NoticeCreationModal'; // Modal 컴포넌트 임포트
 import './NoticeWrite.css';
 
 export function NoticeEdit() {
@@ -14,6 +16,7 @@ export function NoticeEdit() {
     const [content, setContent] = useState('');
     const [titleError, setTitleError] = useState('');
     const [contentError, setContentError] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         if (notice) {
@@ -30,19 +33,24 @@ export function NoticeEdit() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
-            const confirmed = window.confirm('내용을 수정하여 등록하시겠습니까?');
-            if (confirmed) {
-                const updatedNotice = {
-                    ...notice,
-                    title,
-                    important,
-                    item: [{ type: "text", content }],
-                };
-                Noti[noticeIndex] = updatedNotice;
-                saveNoticesToLocalStorage(Noti);  // 로컬스토리지에 변경사항 저장
-                navigate('/notice');
-            }
+            setIsModalOpen(true); // 모달 열기
         }
+    };
+
+    const handleConfirm = () => {
+        const updatedNotice = {
+            ...notice,
+            title,
+            important,
+            item: [{ type: "text", content }],
+        };
+        Noti[noticeIndex] = updatedNotice;
+        saveNoticesToLocalStorage(Noti); // 로컬스토리지에 변경사항 저장
+        navigate('/notice');
+    };
+
+    const handleClose = () => {
+        setIsModalOpen(false);
     };
 
     const validateForm = () => {
@@ -126,6 +134,12 @@ export function NoticeEdit() {
                     <button type="submit" className="submit_button">수정하기</button>
                 </div>
             </form>
+            <NoticeCreationModal
+                isOpen={isModalOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                message="내용을 수정하여 등록하시겠습니까?"
+            />
         </div>
     );
 }
