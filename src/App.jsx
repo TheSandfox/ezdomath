@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { PageMain } from "/src/components/pages/main/PageMain";
 import { PagePlay } from "/src/components/pages/play/PagePlay";
 import { PageIntro } from "/src/components/pages/intro/PageIntro";
@@ -21,11 +21,10 @@ import { qnasDefault, qnasReducer } from "./datas/qnas";
 export const userContext = createContext(null);
 
 function App() {
-  const navigate = useNavigate();
   
   // 앱 전반적인 설정&핸들러
   const [userContextValue, setUserContextValue] = useState({
-    user: null,
+    user: JSON.parse(sessionStorage.getItem('currentUser')) || null,
   });
 
   // Kakao 사용자 정보 상태
@@ -60,9 +59,9 @@ function App() {
     );
     if (loginSuccess) {
       handleUserContext.setUser(loginSuccess);
-      return loginSuccess; // 로그인 성공 시 유저 정보를 반환
+      return loginSuccess;
     } else {
-      return null; // 로그인 실패
+      return null;
     }
   };
 
@@ -76,7 +75,7 @@ function App() {
         stringId: kakaoUserId,
         name: kakaoUserInfo.nickname,
         profile: kakaoUserInfo.profile_image,
-        userTypeId: 0, // 기본 회원 유형
+        userTypeId: 0,
       };
       handleUserContext.setUser(kakaoUser);
       return kakaoUser;
@@ -154,23 +153,6 @@ function App() {
     },
   };
 
-  // 유저 바꿔치기 치트(임시)
-  useEffect(() => {
-    const cheat = (e) => {
-      if (!e.shiftKey) {
-        return;
-      }
-      if (!e.code.includes("Digit")) {
-        return;
-      }
-      handleUserContext.setUserById(e.code.substring(5));
-    };
-    window.addEventListener("keydown", cheat);
-    return () => {
-      window.removeEventListener("keydown", cheat);
-    };
-  }, []);
-
   // 페이지가 변경될 때마다 스크롤 상태를 재설정
   const location = useLocation();
   useEffect(() => {
@@ -199,7 +181,7 @@ function App() {
           dispatchNotifications: dispatchNotifications,
           qnas: qnas,
           dispatchQnas: dispatchQnas,
-          kakaoUserInfo: kakaoUserInfo, // Kakao 사용자 정보 추가
+          kakaoUserInfo: kakaoUserInfo
         }}
       >
         <Routes>

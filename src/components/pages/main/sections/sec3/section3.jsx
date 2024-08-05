@@ -32,21 +32,21 @@ export function Section3() {
     gsap.utils.toArray(circle_deco_cont.current).forEach((element, index) => {
       gsap.fromTo(
         element,
-        { y: 50 },
+        { y: 80 },
         {
-          y: -50,
+          y: -80,
           scrollTrigger: {
             trigger: element,
-            start: "top center",
-            end: "bottom center",
+            start: "bottom center",
+            end: "top center",
             scrub: 1,
-            duration: 0.6,
+            duration: 0.5,
             stagger: 0.2,
           },
         }
       );
     });
-  }, []);
+}, []);
 
   const sec3_cont = [
     {
@@ -68,7 +68,7 @@ export function Section3() {
       description: "자녀 및 학생 등록을 통해 현재 진도를 직관적으로 확인 가능합니다.",
     },
     {
-      decoSrc: "/ezdomath/img/sec3_deco1.svg",
+      decoSrc: "",
       imgSrc: "/ezdomath/img/Teacher.webp",
       title: "피드백",
       description: "학생이 모르는 문제는 등록한 선생님을 통해 빠른 피드백을 받아볼 수 있습니다.",
@@ -117,7 +117,6 @@ export function Section3() {
             </tbody>
           </table>
         </div>
-        <div></div>
       </article>
     </section>
   );
