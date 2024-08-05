@@ -10,7 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { FaMinus } from "react-icons/fa6";
 import { userContext } from '../../../App';
-import { USER_TYPE_TEACHER } from '../../../datas/usertypes';
+import { USER_TYPE_PARENT, USER_TYPE_TEACHER } from '../../../datas/usertypes';
 
 export function Bookmark({subjectId}) {
 	const { bookmarks, dispatchBookmarks, user } = useContext(userContext);
@@ -50,7 +50,9 @@ export function Bookmark({subjectId}) {
 export function SubjectCard({
 	subjectId/*필수*/,
 	type/*0: 북마크 페이지에서, 1: 진척도페이지에서, 2:그외*/,
-	achievement/*진척도페이지에서만 사용(없어도됨)*/
+	achievement/*진척도페이지에서만 사용(없어도됨)*/,
+	onClick,
+	active
 }) {
 	const { user, friends, users } = useContext(userContext);
 	// 선생유저
@@ -71,11 +73,10 @@ export function SubjectCard({
 	},[user,friends,users])
 	// subjectId로 subject가져오기
 	const subject = useMemo(()=>{
-		if (SUBJECTS[subjectId]) {
-			return SUBJECTS[subjectId];
-		} else {
-			return null;
-		}
+		let newSubject = SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(subjectId)
+		})
+		return newSubject?newSubject:null;
 	},[subjectId]);
 	// 단원데이터 가져오기
 	const act = useMemo(()=>{
@@ -85,6 +86,13 @@ export function SubjectCard({
 			return null;
 		}
 	},[subject]);
+	// QNA버튼 보임
+	const displayQNA = useMemo(()=>{
+		if(!user){return false}
+		if(parseInt(user.userTypeId)===USER_TYPE_TEACHER){return false}
+		if(parseInt(user.userTypeId)===USER_TYPE_PARENT){return false}
+		return true;
+	},[user])
 	const typeValue = !type?0:parseInt(type);
 	let jsx = <></>
 	let newClass = null;
@@ -92,7 +100,7 @@ export function SubjectCard({
 	case 0 :
 		// 북마크용
 		jsx = <>
-			<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>질문하기</ButtonMedium>
+			{displayQNA?<ButtonMedium to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`}>질문하기</ButtonMedium>:null}
 			<ButtonMedium to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`}>바로가기</ButtonMedium>
 		</>
 		break;
@@ -116,7 +124,7 @@ export function SubjectCard({
 			</div>
 			<div className='buttons'>
 				{/* 질문하기 */}
-				<ButtonIcon to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>
+				{displayQNA?<ButtonIcon to={`/my/qna/${myTeacher?myTeacher.userId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaRegEdit className={'icon'}/>}></ButtonIcon>:null}
 				{/* 바로가기 */}
 				<ButtonIcon to={`/play/${subject?subject.actId:'0'}/${subject?subject.subjectId:'0'}`} icon={<FaChevronRight className={'icon'}/>}></ButtonIcon>
 			</div>
@@ -134,14 +142,16 @@ export function SubjectCard({
 	case 2 :
 		//단순표시
 		jsx = <div className='imgWrapper'>
-			<img src='/ezdomath/profile/dummy2.png' alt={subject?subject.name:''}/>
+			<img className='blur' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
+			<img className='img' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
 		</div>
+		newClass = active?'active':'';
 		break;
 	}
 	return <>
-		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`}>
+		<div className={`subjectCard${newClass?' '+newClass:''} type${typeValue}`} onClick={typeValue === 2 ? onClick : undefined}>
 			{
-				typeValue!==2
+				typeValue!==2&&subject
 				?<Bookmark subjectId={subject.subjectId}/>
 				:<></>
 			}
@@ -155,7 +165,8 @@ export function SubjectCard({
 				{
 					typeValue!==2
 					?<div className='imgWrapper'>
-						<img src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
+						<img className='blur' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
+						<img className='img' src={subject?subject.thumb:''} alt={subject?subject.name:''}/>
 					</div>
 					:<></>
 				}

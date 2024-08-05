@@ -40,13 +40,19 @@ export const Footer = () => {
       gsap.to([txt, wrap], { x: 0, y: 0, duration: 0.3 }); // Reset text position
     };
 
+    const handleScrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     wrap.addEventListener("mousemove", handleMouseMove);
     wrap.addEventListener("mouseleave", handleMouseLeave);
+    wrap.addEventListener("click", handleScrollToTop);
 
     // 컴포넌트 언마운트 시 이벤트 리스너 제거 및 초기 위치로 복구
     return () => {
       wrap.removeEventListener("mousemove", handleMouseMove);
       wrap.removeEventListener("mouseleave", handleMouseLeave);
+      wrap.removeEventListener("click", handleScrollToTop);
       gsap.set([txt, wrap], { x: 0, y: 0 });
       gsap.set(fill, { y: "100%" });
     };

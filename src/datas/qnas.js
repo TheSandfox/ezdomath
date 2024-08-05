@@ -101,13 +101,13 @@ const qnasReducer = (state,action)=>{
 		newState = [
 			...state,
 			{
+				qnaId:state.length,
 				fromUserId,
 				toUserId,
+				dateTime: dateFormat(new Date()),
 				subjectId,
 				content,
-				qnaId:state.length,
 				written:false,
-				dateTime: dateFormat(new Date())
 			}
 		];
 		localStorage.setItem('qnas',JSON.stringify(newState));

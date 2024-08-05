@@ -1,9 +1,9 @@
 import React from 'react';
 import './topbanner.css';
 
-const TopBanner = ({ pageName }) => {
+const TopBanner = ({ pageName, className }) => {
   return (
-    <div className="top-banner font_title">
+    <div className={`top-banner font_title${className ?' '+className:''}`}>
       {pageName}
     </div>
   );

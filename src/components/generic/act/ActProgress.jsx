@@ -6,8 +6,26 @@ import { ACTS } from '/src/datas/acts';
 
 import './actprogress.css'
 
-export function ActProgress({ to, onClick, active, actId }) {
-	const { user, achievements } = useContext(userContext);
+export function ActProgress({ to, onClick, active, actId, userId }) {
+	const { users, user, achievements, friends } = useContext(userContext);
+	// 대상유저
+	const targetUser = useMemo(()=>{
+		if (!user) {return undefined;}
+		if (!userId) {return user;}
+		// 친구아니면 나자신 리턴
+		if (!friends.some((friendItem)=>{
+			return (parseInt(friendItem.userId1)===parseInt(user.userId)
+				|| parseInt(friendItem.userId1)===parseInt(userId))
+				&& (parseInt(friendItem.userId2)===parseInt(user.userId)
+				|| parseInt(friendItem.userId2)===parseInt(userId))
+		})) {
+			return user;
+		}
+		// 리턴
+		return users.find((userItem)=>{
+			return parseInt(userItem.userId) === parseInt(userId)
+		})
+	},[userId,user,users,friends])
 	// 단원이름 가져오기
 	const actName = useMemo(() => {
 		if (!ACTS) { return '' }
@@ -25,22 +43,22 @@ export function ActProgress({ to, onClick, active, actId }) {
 	}, [actId, SUBJECTS]);
 	// 달성 갯수 세기
 	const counts = useMemo(() => {
-		if (!subjects || !user) {
+		if (!subjects || !targetUser) {
 			return 0;
 		}
 		return subjects.filter((subject) => {
 			let achievement = achievements.find((achievement) => {
-				return parseInt(achievement.userId) === parseInt(user.userId)
+				return parseInt(achievement.userId) === parseInt(targetUser.userId)
 					&& parseInt(achievement.subjectId) === parseInt(subject.subjectId)
 			})
 			return achievement && JSON.parse(achievement.correct);
 		}).length
-	}, [subjects, user]);
+	}, [subjects, targetUser, achievements]);
 	// 게이지 크기 계산
 	const gaugeWidth = useMemo(() => {
-		if (!user || !counts || !subjects || subjects.length <= 0) { return 0; }
+		if (!targetUser || !counts || !subjects || subjects.length <= 0) { return 0; }
 		return parseFloat(counts) / parseFloat(subjects.length)
-	}, [user, subjects, counts]);
+	}, [targetUser, subjects, counts]);
 	//클래스이름&JSX
 	let className = 'actProgress' + (active ? ' active' : '');
 	let jsx = <>

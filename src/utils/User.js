@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { USER_TYPE_NAMES } from '/src/datas/usertypes';
+import { USER_TYPE_NAMES, USER_TYPE_TEACHER } from '/src/datas/usertypes';
 import { userContext } from '../App';
 
 function removeZero(stringVal) {
@@ -26,4 +26,20 @@ export function getUserIdString(val) {
 
 export function getUserTypeName(val) {
 	return USER_TYPE_NAMES[val];
+}
+
+export function getUserTeacher(user,users,friends) {
+	if (!user) {return null;}
+	if (!users) {return null;}
+	if (!friends) {return null;}
+	let newObj = users.find((userItem)=>{
+		return friends.find((friendItem)=>{
+			return (parseInt(friendItem.userId1)===parseInt(user.userId)
+				|| parseInt(friendItem.userId1)===parseInt(user.userId))
+				&& (parseInt(friendItem.userId2)===parseInt(userItem.userId)
+				|| parseInt(friendItem.userId2)===parseInt(userItem.userId))
+				&& parseInt(userItem.userTypeId) === USER_TYPE_TEACHER
+		})
+	})
+	return newObj?newObj:null;
 }

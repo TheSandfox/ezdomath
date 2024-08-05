@@ -1,0 +1,115 @@
+.notice_content_wrap {
+    max-width: 90rem; /* 1440px */
+    padding: 4rem 0 8rem 0; /* 64px 0 128px 0 */
+    margin: 0 auto;
+    margin-top: 1rem
+}
+
+.noti_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.25rem; /* 20px */
+}
+
+.noti_table_head>tr>th {
+    padding: 1rem 0; /* 16px 0 */
+}
+
+.noti_table_head>tr {
+    background-color: var(--color_white);
+    border-top: 0.125rem solid var(--color_darkest); /* 2px */
+}
+
+.noti_table_box {
+    border-top: 0.0625rem solid var(--color_darkest); /* 1px */
+}
+
+.noti_table_box th,
+.noti_table_box td {
+    padding: 1rem 0; /* 16px 0 */
+    text-align: center;
+    border-bottom: 0.0625rem solid #ccc; /* 1px */
+}
+
+.noti_table th {
+    font-weight: bold;
+}
+
+.noti_table tbody tr.important td {
+    background-color: #fffbe5;
+}
+
+.noti_table tbody tr.unimportant td {
+    background-color: #fff;
+}
+
+.important_title {
+    color: var(--color_dark);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.unimportant_title {
+    color: var(--color_black);
+    cursor: pointer;
+}
+
+.important_time {
+    color: var(--color_dark);
+    font-weight: bold;
+}
+
+.unimportant_time {
+    color: var(--color_black);
+}
+
+.noti_td>img {
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+}
+
+.no_results {
+    text-align: center;
+    font-size: 1.125rem; /* 18px */
+    color: var(--color_black);
+    padding: 1.25rem 0; /* 20px 0 */
+}
+
+.notice_post_count {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* p 요소를 바닥에 붙이도록 설정 */
+}
+
+.notice_post_count p {
+    margin: 0;
+}
+
+.noti_write_btn {
+    margin-top: 1.75rem; /* 28px */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.noti_write_btn>button {
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    border: none;
+    border-radius: 0.3125rem; /* 5px */
+    background-color: var(--color_main);
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 1440px) {
+    .notice_content_wrap {
+        padding: 0 0.9375rem; /* 0 15px */
+    }
+}
+
+@media (max-width: 800px) { 
+    .noti_table_head>tr>th:nth-child(3),
+    .noti_table_box>tr>td:nth-child(3) {
+        display: none;
+    }
+}

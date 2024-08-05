@@ -1,0 +1,71 @@
+.notice_wrap {
+    max-width: 90rem; /* 1440px */
+    margin: 0 auto;
+    padding: 1.25rem; /* 20px */
+    background-color: #fff;
+    border-radius: 0.625rem; /* 10px */
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* 10px */
+}
+
+.notice_wrap h2 {
+    text-align: center;
+    margin-bottom: 1.25rem; /* 20px */
+}
+
+.notice_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.notice_form div {
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.notice_form label {
+    display: block;
+    margin-bottom: 0.3125rem; /* 5px */
+    font-weight: bold;
+}
+
+.notice_form input[type="text"],
+.notice_form select,
+.notice_form textarea {
+    width: 100%;
+    padding: 0.625rem; /* 10px */
+    border: 1px solid #ccc;
+    border-radius: 0.3125rem; /* 5px */
+    box-sizing: border-box;
+}
+
+.notice_form textarea {
+    height: 12.5rem; /* 200px */
+    resize: none;
+}
+
+.notice_form .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.625rem; /* 10px */
+}
+
+.notice_form .buttons button {
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    border: none;
+    border-radius: 0.3125rem; /* 5px */
+    cursor: pointer;
+}
+
+.notice_form .buttons .cancel_button {
+    background-color: #f0f0f0;
+}
+
+.notice_form .buttons .submit_button {
+    background-color: var(--color_main);
+    color: white;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.3125rem; /* 5px */
+}

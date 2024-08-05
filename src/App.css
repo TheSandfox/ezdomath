@@ -427,6 +427,9 @@ a {
     display: block;
     width: 100%;
 }
+.mobile_none{
+    display: block;
+}
 
 @media screen and (max-width: 1140px) {
     .card_footer>.card_check:first-child {
@@ -524,5 +527,8 @@ a {
         align-items: center;
         gap: 0.75rem;
         justify-content: space-between;
+    }
+    .mobile_none{
+        display: none !important;
     }
 }

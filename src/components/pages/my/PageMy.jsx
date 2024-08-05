@@ -9,8 +9,8 @@ import { HiUserGroup } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
 
 //hooks
-import { useContext, useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 //external components
 import { ProfileCard } from "./ProfileCard";
@@ -78,6 +78,7 @@ function MyTabs({flag,tabIndex}) {
 
 // 페이지
 export function PageMy({}) {
+	const navigate = useNavigate();
 	const { user } = useContext(userContext);
 	const [tabIndex,setTabIndex] = useState(0);
 	const handleTabIndex = {
@@ -91,10 +92,16 @@ export function PageMy({}) {
 			setTrigger(newVal);
 		}
 	}
+	// 로그인 안했으면 튕구기 
+	useEffect(()=>{
+		if(!user&&!sessionStorage.getItem('currentUser')) {
+			navigate('/main');
+		}
+	},[user])
 	return <>
 		<Navigation/>
 		{/* <탑배너> */}
-		<TopBanner pageName={'마이페이지'}/>
+		<TopBanner pageName={'마이페이지'} className="mobile_none" />
 		<div id={'pageMy'}>
 			{/* 상탭(탭) */}
 			<MyTabs flag={true} tabIndex={tabIndex}/>

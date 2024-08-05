@@ -16,6 +16,9 @@
 
 .login_inner{
     max-width: 31.25em;
+    @media screen and (max-width : 600px) {
+        max-width: 25em;
+    }
 }
 
 .main_top_tit{
@@ -38,9 +41,17 @@
     color: var(--color_darkest);
     .font_medium{
         font-weight: 600;
+        @media screen and (max-width : 600px) {
+            text-align: center;
+        }
     }
     .font_medium>span{
         color: var(--color_subtitle);
+    }
+    .font_small{
+        @media screen and (max-width : 600px) {
+            font-size: 0.8em;
+        }
     }
 }
 
@@ -53,10 +64,19 @@
 
 .login_select_tap{
     width: 100%;
+    .common_user_tap{
+        border-radius: 0.3125rem 0 0 0.3125rem;
+    }
+    .kakao_user_tap{
+        border-radius: 0 0.3125rem 0.3125rem 0;
+    }
 }
 
 .login_select_tap>.user_tap{
-    width: 100%;
+    width: 50%;
+    @media screen and (max-width : 600px) {
+        display: flex;
+    }
 }
 
 .login_select_tap>.user_tap>.icon{
@@ -108,6 +128,9 @@
     gap: 0.88em;
     align-items: center;
     justify-content: center;
+    .user_register{
+        border-radius: 0.3125rem;
+    }
 }
 
 .user_info_routing>p{
@@ -122,4 +145,15 @@
 .user_info_sub{
     color: var(--color_darkest);
     font-size: 0.88em;
+    @media screen and (max-width : 600px) {
+        font-size: 0.7em;
+    }
+}
+
+.login_user_info_input>.error_message{
+    color: var(--color_subtitle);
+}
+
+.login_user_info_input>.error_message:not(:last-child){
+    border-top: 1px solid var(--color_darkest);
 }

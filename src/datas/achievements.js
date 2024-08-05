@@ -3,15 +3,15 @@ const achievementsDefault = localStorage.getItem('achievements')
 	:[
 		{
 			userId:0,
-			subjectId:0,
+			subjectId:100,
 			date:'2024.11.11',
-			correct:'true',
+			correct:true,
 		},
 		{
 			userId:0,
-			subjectId:1,
+			subjectId:101,
 			date:'2024.11.11',
-			correct:'false',
+			correct:false,
 		},
 	];
 
@@ -49,13 +49,14 @@ const achievementsReducer = (state,action)=>{
 		// 진척도객체생성(중복시 덮어쓰기)
 		let target = get(state,userId,subjectId);
 		if (target===null) {
+			console.log(action);
 			newState = [
 				...state,
 				{
 					userId,
 					subjectId,
 					correct,
-					dateTime: dateFormat(new Date())
+					date: dateFormat(new Date())
 				}
 			]
 			localStorage.setItem('achievements',JSON.stringify(newState));
@@ -66,8 +67,8 @@ const achievementsReducer = (state,action)=>{
 					return  {
 						userId,
 						subjectId,
-						correct,
-						dateTime: dateFormat(new Date())
+						correct:stateItem.correct?stateItem.correct:correct,
+						date:stateItem.correct?stateItem.date:dateFormat(new Date())
 					};
 				} else {
 					return stateItem;

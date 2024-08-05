@@ -17,7 +17,9 @@ export function QNAMessage({qna,my,containerRef}) {
 		if (qna.subjectId === '') {
 			return null;
 		}
-		return SUBJECTS[parseInt(qna.subjectId)]
+		return SUBJECTS.find((subjectItem)=>{
+			return parseInt(subjectItem.subjectId) === parseInt(qna.subjectId)
+		})
 	},[qna])
 	const dateString = useMemo(()=>{
 		let today = new Date();
@@ -71,7 +73,7 @@ export function QNAMessage({qna,my,containerRef}) {
 				<div className='content'>{qna.content}</div>
 				{/* 답변버튼 */}
 				{subjectInfo&&!my
-					?<div className='bottom'><ButtonMedium className={'reply'}>
+					?<div className='bottom'><ButtonMedium className={'reply'} to={`/my/qna/${qna.fromUserId}/${qna.subjectId}`}>
 						답변하기
 					</ButtonMedium></div>
 					:<></>

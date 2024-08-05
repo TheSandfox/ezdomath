@@ -34,6 +34,9 @@
     background-color: var(--color_background);
     text-align: center;
     line-height: 5em;
+    @media screen and (max-width : 600px) {
+        width: 12em;
+    }
 }
 
 .table_cont{
@@ -53,11 +56,28 @@
             font-size: 0.75em;
         }
     }
+    @media screen and (max-width : 600px) {
+        padding: 0.5em 0.88em;
+    }
 }
 
 .radio_cont{
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
+    .radio_group{
+        width: 33.333%;
+        gap: 0.44em;
+        align-items: center;
+        justify-content: center;
+        @media screen and (max-width : 600px) {
+            gap: 0;
+        }
+    }
+    .font_small{
+        color: var(--color_subtitle);
+        font-size: 0.75em;
+    }
 }
 
 .btn_wrap{
@@ -67,4 +87,8 @@
     .detailRegisterBtn{
         width: 7.5em; height: 3.75em;
     }
+}
+
+.radio{
+    width: 1.5em; height: 1.5em;
 }

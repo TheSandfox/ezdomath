@@ -1,5 +1,5 @@
 import "./pageLogin.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../../App";
 import {
   ButtonLarge,
@@ -8,32 +8,56 @@ import {
   ButtonTab,
 } from "../../generic/Buttons";
 import { useNavigate } from "react-router-dom";
+import KakaoLogin from "./kakaoLogin";
 
 export function PageLogin({}) {
-  const { handleUserContext } = useContext(userContext); // userContext에서 로그인 함수를 불러옵니다.
+  const { handleUserContext, user } = useContext(userContext);
   const navigate = useNavigate();
 
   const [stringId, setStringId] = useState("");
   const [password, setPassword] = useState("");
-  const [tabed, setTabed] = useState(false); // 로그인 타입 선택 (false: 아이디 로그인, true: 카카오 로그인)
+  const [tabed, setTabed] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const login = () => {
-    const success = handleUserContext.login(stringId, password); // 아이디와 비밀번호를 이용해 로그인 시도
-    if (success) {
-      alert('로그인 성공!');
-      navigate('/'); // 메인 페이지로 이동
-    } else {
-      alert('로그인 실패. 아이디와 비밀번호를 확인하세요.');
+    if (!stringId) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        stringId: "아이디를 다시 확인해주세요",
+      }));
+    }
+    if (!password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "비밀번호를 다시 확인해주세요",
+      }));
+    }
+    if (stringId && password) {
+      const user = handleUserContext.login(stringId, password);
+      if (user) {
+        alert(`환영합니다. ${user.name}님!`);
+        navigate('/');
+      } else {
+        alert('아이디와 비밀번호를 다시 확인해주세요.');
+      }
     }
   };
 
   const clearInput = (inputType) => {
     if (inputType === "id") {
       setStringId("");
+      setErrors((prevErrors) => ({ ...prevErrors, stringId: "" }));
     } else if (inputType === "password") {
       setPassword("");
+      setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <>
@@ -58,7 +82,7 @@ export function PageLogin({}) {
           <div className="flex column_gap login_form">
             <div className="flex login_select_tap">
               <ButtonTab
-                className={`user_tap ${!tabed ? "active" : ""}`}
+                className={`user_tap common_user_tap ${!tabed ? "active" : ""}`}
                 onClick={() => setTabed(false)}
               >
                 <img
@@ -73,7 +97,7 @@ export function PageLogin({}) {
                 <span>아이디 로그인</span>
               </ButtonTab>
               <ButtonTab
-                className={`user_tap ${tabed ? "active" : ""}`}
+                className={`user_tap kakao_user_tap ${tabed ? "active" : ""}`}
                 onClick={() => setTabed(true)}
               >
                 <img
@@ -96,7 +120,20 @@ export function PageLogin({}) {
                     <input
                       placeholder="아이디를 입력해주세요"
                       value={stringId}
-                      onChange={(e) => setStringId(e.target.value)} // 입력값을 stringId 상태로 설정
+                      onChange={(e) => {
+                        setStringId(e.target.value);
+                        if (e.target.value) {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            stringId: "",
+                          }));
+                        } else {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            stringId: "아이디를 다시 확인해주세요",
+                          }));
+                        }
+                      }}
                     />
                   </div>
                   <ButtonIcon
@@ -106,14 +143,28 @@ export function PageLogin({}) {
                     <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
+                {errors.stringId && <p className="error_message">{errors.stringId}</p>}
                 <div className="flex user_pw">
                   <div className="flex input_wrap">
                     <label>비밀번호</label>
                     <input
-                      type="password" // 비밀번호 입력 필드의 보안을 위해 type을 password로 설정
+                      type="password"
                       placeholder="비밀번호를 입력해주세요"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)} // 입력값을 password 상태로 설정
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (e.target.value) {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            password: "",
+                          }));
+                        } else {
+                          setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            password: "비밀번호를 다시 확인해주세요",
+                          }));
+                        }
+                      }}
                     />
                   </div>
                   <ButtonIcon
@@ -123,10 +174,12 @@ export function PageLogin({}) {
                     <img src="/ezdomath/img/Multiply.webp" alt="cancel" />
                   </ButtonIcon>
                 </div>
+                {errors.password && <p className="error_message">{errors.password}</p>}
               </div>
               <ButtonLarge
                 className={"user_login_btn"}
                 onClick={login}
+                disabled={!stringId || !password}
               >
                 로그인
               </ButtonLarge>
@@ -136,9 +189,7 @@ export function PageLogin({}) {
                 tabed ? "" : "invi"
               }`}
             >
-              <ButtonLarge>
-                <span>카카오로 로그인</span>
-              </ButtonLarge>
+              <KakaoLogin handleUserContext={handleUserContext} user={user} />
             </div>
             <div className="flex user_info_routing">
               <p>
