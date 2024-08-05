@@ -50,7 +50,7 @@
     width: 6.25em;
     height: 2.19em;
     line-height: 1.1rem;
-    border: 2px solid var(--color_main);
+    border: 1px solid var(--color_main);
 }
 
 .navi_bar>.navi_left_cont>li>.button_wrapper>.small_btn:hover {

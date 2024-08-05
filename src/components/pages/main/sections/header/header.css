@@ -11,7 +11,7 @@
     .back{
         width: 50%;
         background-color: var(--color_main);
-        border-radius: 0 0 140px 0;
+        border-radius: 0 0 8.75em 0;
         align-items: center;
         justify-content: center;    
     }

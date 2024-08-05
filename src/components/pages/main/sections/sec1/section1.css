@@ -1,5 +1,5 @@
 .main_page_section{
-    width: 100%; height: calc(100vh - 4.38em);
+    width: 100%; height: 100vh;
     position: relative;
     z-index: 99;
     text-align: center;
@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 7em;
+    padding: 2em 0;
 }
 
 /* --------- sec1 font css ---------- */
