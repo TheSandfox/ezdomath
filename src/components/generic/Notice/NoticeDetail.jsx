@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
-import { userContext } from '../../../App'; // userContext 가져옴
+import { userContext } from '../../../App';
 import { USER_TYPE_ADMIN } from '../../../datas/usertypes'; // 관리자 유저만 작성하기 쓸 수 있게 가져옴
 import NoticeCreationModal from './NoticeCreationModal'; // Modal 컴포넌트 임포트
 import "./NoticeDetail.css"

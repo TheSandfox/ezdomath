@@ -1,8 +1,7 @@
-// NoticeEdit.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
-import NoticeCreationModal from './NoticeCreationModal'; // Modal 컴포넌트 임포트
+import NoticeCreationModal from './NoticeCreationModal';
 import './NoticeWrite.css';
 
 export function NoticeEdit() {
