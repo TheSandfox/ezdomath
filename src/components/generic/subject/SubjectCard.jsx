@@ -11,8 +11,10 @@ import { RiCloseLargeFill } from "react-icons/ri";
 import { FaMinus } from "react-icons/fa6";
 import { userContext } from '../../../App';
 import { USER_TYPE_PARENT, USER_TYPE_TEACHER } from '../../../datas/usertypes';
+import { useNavigate } from 'react-router-dom';
 
 export function Bookmark({subjectId}) {
+	const navigate = useNavigate();
 	const { bookmarks, dispatchBookmarks, user } = useContext(userContext);
 	// 액티브 판별
 	const active = useMemo(()=>{
@@ -27,7 +29,12 @@ export function Bookmark({subjectId}) {
 	// 버튼상호작용
 	const toggleBookmark = useCallback(()=>{
 		if (!bookmarks) {return}
-		if (!user) {return}
+		if (!user) {
+			if (confirm('[문제 북마크]\n로그인 후 이용 가능한 기능입니다.\n로그인 페이지로 이동하시겠습니까?')) {
+				navigate('/login');
+			}
+			return;
+		}
 		if (isNaN(parseInt(subjectId))) {return}
 		if (active) {
 			dispatchBookmarks({
