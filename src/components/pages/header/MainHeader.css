@@ -1,0 +1,130 @@
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+}
+
+.main_svg_animation {
+    display: flex;
+    justify-content: center;
+}
+
+.header-content {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 70px);
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    flex: 1;
+    background-color: #87CEEB;
+    border-radius: 0 0 25px 0;
+    margin-bottom: 70px;
+}
+
+.left>div>img {
+    max-width: 35rem;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.animated-text {
+    font-size: 2em;
+    font-weight: bold;
+    animation: rgbAnimation 3s infinite;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mega_bold{
+    font-size: 64px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #66ffaa , #42a5f5);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.main_top_btn{
+    padding: 15px 30px;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(45deg, #42a5f5 , #66ffaa );
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.main_top_btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+@keyframes rgbAnimation {
+    0% {
+        color: rgb(0, 0, 255);
+    }
+    33% {
+        color: #03b100
+    }
+    66% {
+        color: rgb(163, 0, 0);
+    }
+    100% {
+        color: rgb(0, 0, 255);
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .mega_bold{
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    .animated-text{
+        font-size: 1.75rem;
+    }
+    .mega_bold {
+        font-size: 38px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .animated-text{
+        font-size: 1.25rem;
+    }
+}
+@media screen and (max-width: 800px) {
+        .mega_bold{
+        font-size: 30px;
+    }
+    .header-content{
+        flex-direction: column;
+    }
+    .left{
+        padding-top: 50px;
+    }
+    .main_svg_animation{
+        padding: 50px 0;
+    }
+    .right{
+        padding-bottom: 50px;
+    }
+}
