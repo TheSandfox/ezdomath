@@ -104,7 +104,6 @@
     overflow-y: auto;
 }
 
-/* 스크롤 하이드 */
 .act_and_subject_wrap::-webkit-scrollbar {
     display: none;
 }
