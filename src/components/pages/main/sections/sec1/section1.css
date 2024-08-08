@@ -169,4 +169,7 @@
     .main_page_sec1 .sec1_play_btn{
         width: 9.38em;
     }
+    .main_page_section{
+        margin-top: 5rem;
+    }
 }

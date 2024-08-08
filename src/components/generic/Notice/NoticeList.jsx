@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Noti, saveNoticesToLocalStorage } from '../../../datas/noti_data';
+import { Noti } from '../../../datas/noti_data';
 import './NoticeList.css';
 import important from '/img/star.webp';
 import { NotiSearch } from '../../generic/Notice/NotiSearch';
 import Pagination from '../../generic/Notice/Pagination';
-import { userContext } from '../../../App'; // userContext 가져옴
+import { userContext } from '../../../App';
 import { USER_TYPE_ADMIN } from '../../../datas/usertypes'; // 관리자 유저만 작성하기 쓸 수 있게 가져옴
 
 export function NoticeList() {
